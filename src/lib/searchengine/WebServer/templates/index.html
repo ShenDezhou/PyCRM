@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>文章展示</title>
+    <link rel="stylesheet" href='{{ static_url("css/weui.css") }}'/>
+    <script src="{{ static_url('js/jquery-3.0.0.min.js') }}"></script>
+</head>
+<body>
+<div id="container">
+    <div class="weui_search_bar" id="search_bar">
+        <form class="weui_search_outer">
+            <div class="weui_search_inner">
+                <i class="weui_icon_search"></i>
+                <input type="search" class="weui_search_input" id="search_input" placeholder="搜索" required/>
+                <a href="javascript:" class="weui_icon_clear" id="search_clear"></a>
+            </div>
+            <label for="search_input" class="weui_search_text" id="search_text">
+                <i class="weui_icon_search"></i>
+                <span>搜索</span>
+            </label>
+        </form>
+        <a href="javascript:" class="weui_search_cancel" id="search_cancel">取消</a>
+    </div>
+</div>
+<div class="weui_panel weui_panel_access">
+    <input type="hidden" id="article_offset" value="{{ offset }}"/>
+    <div class="weui_panel_hd">文章列表</div>
+    <ul class="weui_panel_bd" id="article_list">
+        {% for article in articles %}
+        <a href="{{ article['link'] }}" class="weui_media_box weui_media_appmsg">
+            <div class="weui_media_hd">
+                <img class="weui_media_appmsg_thumb" src="{{ article['src'] }}"/>
+            </div>
+            <div class="weui_media_bd">
+                <h4 class="weui_media_title">{{article['title']}}</h4>
+                <p class="weui_media_desc">{{article['desc']}}</p>
+            </div>
+        </a>
+        {% end %}
+    </ul>
+    <a class="weui_panel_ft" href="#" id="view_more">查看更多</a>
+</div>
+</body>
+
+<script src="{{ static_url('js/main.js') }}"></script>
+
+</html>

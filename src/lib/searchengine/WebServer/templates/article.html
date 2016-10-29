@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <!--Import Google Icon Font-->
+    <link href="//fonts.css.network/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{ static_url('css/materialize.min.css') }}"
+          media="screen,projection"/>
+    <!--Import WeUI-->
+    <link rel="stylesheet" href='{{ static_url("css/weui.css") }}'/>
+    <!-- article_improve -->
+    <link rel="stylesheet" href='{{ static_url("css/article_improve.css") }}'/>
+    <link media="screen and (min-width:1023px)" rel="stylesheet" type="text/css"
+          href="{{ static_url('css/article_pc.css') }}"/>
+    <!--Import tag css-->
+    <link type="text/css" rel="stylesheet" href="{{ static_url('css/jquery.taghandler.css') }}"
+          media="screen,projection"/>
+    <title>{{ title }}</title>
+</head>
+<body>
+
+<!-- Article main -->
+<article class="weui_article">
+    <h1><b>{{ title }}</b></h1>
+    <div id="article">
+        {% raw content %}
+    </div>
+</article>
+
+<!-- Action buttons -->
+<div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large waves-effect waves-light red" id="menu">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a class="btn-floating btn-large orange" id="format">
+            <i class="material-icons">favorite_border</i>
+        </a></li>
+        <li><a class="btn-floating btn-large green" id="publish">
+            <i class="material-icons">comment</i>
+        </a></li>
+        <li><a class="btn-floating btn-large modal-trigger blue" data-target="modal1" id="edit">
+            <i class="material-icons">mode_edit</i>
+        </a></li>
+    </ul>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+        <p style="font-size: 1.5em; font-weight: bold; line-height: 2em;">关键词</p>
+        <ul id="tag-cloud"></ul>
+    </div>
+</div>
+
+<!-- Javascript Source -->
+<script type="text/javascript" src="{{ static_url('js/jquery-3.0.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('js/article_main.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('js/jquery.mark.min.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('js/jquery.taghandler.min.js') }}"></script>
+
+<!-- Mark keyword -->
+<script type="text/javascript">
+    var article_id = '{{ id }}';
+    var tags;
+    $(document).ready(function () {
+        tags = [{% for keyword in keywords %}'{{ keyword }}', {% end %}];
+
+        var article = $('#article');
+        article.mark(tags);
+        $('#tag-cloud').tagHandler({
+            assignedTags: tags,
+            onAdd: tag_add,
+            onDelete: tag_delete
+        });
+    });
+</script>
+
+</body>
+</html>
