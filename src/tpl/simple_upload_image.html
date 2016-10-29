@@ -1,0 +1,18 @@
+<div id="upload-image-row" style="display:none">
+    <input id="upload-images" name="attachment" type="hidden"/>
+    <div class="row">
+        <div class="col-md-12">
+            <form enctype="multipart/form-data">
+                <div class="form-group">
+                    <input id="ticket-files" name="ticket-files" type="file" multiple class="file" data-overwrite-initial="false">
+                </div>
+            </form>
+            <!-- <p class="text-muted">请上传分辨率大于800x600像素的图片。</p> -->
+        </div>
+    </div>
+</div>
+<div class="row" id="upload-image-previews">
+</div>
+
+{% include 'simple_upload_image_pc.html' %}
+

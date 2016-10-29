@@ -1,0 +1,59 @@
+
+<style type="text/css">
+body.bg-white{
+    background: #ececec !important;
+}
+</style>
+
+<!-- begin row -->
+<div class="row" style="max-width:670px;margin: 20px auto;">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">登录</h4>
+            </div>
+            <div class="panel-body">
+               
+                <form action="/login" method="POST" data-parsley-validate="true" name="form-wizard" id="submit-form" class="form-horizontal">
+                
+                    <div id="wizard">
+                        <!-- begin wizard step-1 -->
+                        <div class="wizard-step-1">
+                            <fieldset>
+
+                               <div class="form-group">
+                                    <label class="col-md-4 control-label">用户手机号/邮箱/ID</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="uuid" placeholder="请输入">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">安全码</label>
+                                    <div class="col-md-8">
+                                        <input type="password" class="form-control" name="uupwd" placeholder="请输入">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-12 text-center m-t-10">
+                                                <button type="submit" id="btn-submit" class="btn btn-primary">马上登录</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-1 -->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>

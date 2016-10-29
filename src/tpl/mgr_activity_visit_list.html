@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">活动访问记录</h4>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group" style="margin-bottom:17px;">
+                    <button class="btn btn-danger btn-xs admin-btn-export" table-id="detail_list_table" filename="活动访问记录.xls" type="button" id="btn_export"><i class="fa fa-fw fa-download"></i> 导出Excel</button>
+                    <a class="btn btn-info btn-xs admin-btn-print" table-id="detail_list_table" filename="活动访问记录" type="button" id="btn_export" href="#" target="mgr-print"><i class="fa fa-fw fa-download"></i> 打印预览</a>
+                </div>
+                <table id="detail_list_table" class="table table-bordered display responsive nowrap table-striped" style="overflow: auto; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>活动名称</th>
+                                <th>微信用户</th> 
+                                <th>访问次数</th>
+                                <th>首次访问</th>  
+                                <th>最后访问</th> 
+                                <th>活动链接</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
+

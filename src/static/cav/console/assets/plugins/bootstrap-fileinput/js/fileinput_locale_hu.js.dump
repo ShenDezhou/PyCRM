@@ -1,0 +1,58 @@
+/*!
+ * FileInput Hungarian Translations
+ *
+ * This file must be loaded after 'fileinput.js'. Patterns in braces '{}', or
+ * any HTML markup tags in the messages must not be converted or translated.
+ *
+ * @see http://github.com/kartik-v/bootstrap-fileinput
+ *
+ * NOTE: this file must be saved in UTF-8 encoding.
+ */
+(function ($) {
+    "use strict";
+
+    $.fn.fileinputLocales['hu'] = {
+        fileSingle: 'f谩jl',
+        filePlural: 'f谩jl',
+        browseLabel: 'B枚ng茅sz &hellip;',
+        removeLabel: 'Elt谩vol铆t',
+        removeTitle: 'Kijel枚lt f谩jlok t枚rl茅se',
+        cancelLabel: 'M茅gse',
+        cancelTitle: 'Felt枚lt茅s megszak铆t谩sa',
+        uploadLabel: 'Felt枚lt茅s',
+        uploadTitle: 'Kijel枚lt f谩jlok felt枚lt茅se',
+        msgZoomTitle: 'R茅szletek megtekint茅se',
+        msgZoomModalHeading: 'R茅szletes Preview',
+        msgSizeTooLarge: '"{name}" f谩jl (<b>{size} KB</b>) m茅rete nagyobb a megengedettn茅l <b>{maxSize} KB</b>.',
+        msgFilesTooLess: 'Legal谩bb <b>{n}</b> {files} ki kell v谩lasztania a felt枚lt茅shez.',
+        msgFilesTooMany: 'A felt枚lteni k铆v谩nt f谩jlok sz谩ma <b>({n})</b> el茅rte a megengedett maximumot <b>{m}</b>.',
+        msgFileNotFound: '"{name}" f谩jl nem tal谩lhat贸!',
+        msgFileSecured: 'Biztons谩gi be谩ll铆t谩sok nem engedik olvasni a f谩jlt "{name}".',
+        msgFileNotReadable: '"{name}" f谩jl nem olvashat贸',
+        msgFilePreviewAborted: '"{name}" f谩jl felt枚lt茅se megszak铆tva.',
+        msgFilePreviewError: 'Hiba l茅pett fel a "{name}" f谩jl olvas谩sa k枚zben.',
+        msgInvalidFileType: 'Nem megengedett f谩jl "{name}". Csak a "{types}" f谩jl t铆pusok t谩mogatottak.',
+        msgInvalidFileExtension: 'Nem megengedett kiterjeszt茅s / f谩jlt铆pus "{name}". Csak a "{extensions}" kiterjeszt茅s(ek) / f谩jlt铆pus(ok) t谩mogatottak.',
+        msgUploadAborted: 'A f谩jl felt枚lt茅s megszak铆tva',
+        msgValidationError: 'F谩jl ellen枚rz茅si hiba.',
+        msgLoading: '{index} / {files} t枚lt茅se &hellip;',
+        msgProgress: 'Felt枚lt茅s: {index} / {files} - {name} - {percent}% k茅sz.',
+        msgSelected: '{n} {files} kiv谩lasztva.',
+        msgFoldersNotAllowed: 'Csak f谩jlokat h煤zzon ide! Kihagyva {n} k枚nyvt谩r.',
+        msgImageWidthSmall: 'Sz茅less茅ge image file "{name}" legal谩bb {size} px.',
+        msgImageHeightSmall: 'Magass谩ga image file "{name}" legal谩bb {size} px.',
+        msgImageWidthLarge: 'Sz茅less茅ge image file "{name}" nem haladhatja meg a {size} px.',
+        msgImageHeightLarge: 'Magass谩ga image file "{name}" nem haladhatja meg a {size} px.',
+        msgImageResizeError: 'Nem lehet megszerezni a k茅p m茅retei 谩tm茅retezni.',
+        msgImageResizeException: 'Hiba t枚rt茅nt a m茅retez茅s.<pre>{errors}</pre>',
+        dropZoneTitle: 'F谩jlok h煤z谩sa ide &hellip;',
+        fileActionSettings: {
+            removeTitle: 'A f谩jl elt谩vol铆t谩sa',
+            uploadTitle: 'f谩jl felt枚lt茅se',
+            indicatorNewTitle: 'Nem felt枚ltve',
+            indicatorSuccessTitle: 'Felt枚lt枚tt',
+            indicatorErrorTitle: 'Felt枚lt茅s Error',
+            indicatorLoadingTitle: 'Felt枚lt茅se ...'
+        }
+    };
+})(window.jQuery);

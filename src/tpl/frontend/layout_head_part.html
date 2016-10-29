@@ -1,0 +1,34 @@
+<meta charset="UTF-8">
+<title>
+    {% if 'context' in globals() and context and 'title' in context %}
+        {{ context['title'] }}
+    {% end %}
+    {% if 'page' in globals() and 'title' in page %}
+        {{ page['title'] }}
+    {% end %}
+</title>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="baidu-site-verification" content="57IfYtNnfd" />
+<meta name="renderer" content="webkit">
+
+<!-- ================== BEGIN BASE CSS STYLE ================== -->
+<link href="{{ static_url("cav/console/fonts.googleapis.com/cssff98.css") }}" rel="stylesheet" />
+
+<link href="{{ static_url("cav/frontend/one-page-parallax/assets/plugins/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/frontend/one-page-parallax/assets/plugins/font-awesome/css/font-awesome.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/frontend/one-page-parallax/assets/css/animate.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/console/assets/css/style.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/console/assets/css/style-responsive.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/frontend/one-page-parallax/assets/css/style.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/frontend/one-page-parallax/assets/css/style-responsive.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/frontend/one-page-parallax/assets/css/theme/blue.css") }}" id="theme" rel="stylesheet" />
+<!-- ================== END BASE CSS STYLE ================== -->
+
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="{{ static_url("cav/frontend/one-page-parallax/assets/plugins/pace/pace.min.js") }}"></script>
+
+<!-- ================== END BASE JS ================== -->
+
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>投票公示</title>
+   <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+   <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h4 class="text-center" style="padding: 30px 0px 0px 0px">投票公示</h4>
+<h4 class="text-center" style="padding: 10px 0px 0px 0px">目前共有3人赞成，2人反对，1人弃权</h4>
+<form role="form" style="padding: 20px 50px 10px 50px;">
+   <div class="input-group">
+         <span class="input-group-addon">姓名</span>
+         <input type="text" class="form-control" id="name" placeholder="{{context['fullname']}}" readonly="true">
+      </div>
+     <br>
+     <div class="input-group">
+         <span class="input-group-addon">申请类别</span>
+         <input type="text" class="form-control" id="type" placeholder="个人{{context['type']}}会员" readonly="true">
+      </div>
+    <br>
+    <div class="input-group">
+         <span class="input-group-addon">性别</span>
+         <input type="text" class="form-control" id="sex" placeholder="{{context['sex']}}" readonly="true">
+      </div>
+      <br>
+    <div class="input-group" >
+         <span class="input-group-addon" >手机号</span>
+         <input type="text" class="form-control" id="phone" placeholder="{{context['cellphone']}}" readonly="true">
+    </div>
+    <br>
+   <div class="input-group" >
+    <span class="input-group-addon">电子邮箱</span>
+         <input type="text" class="form-control" id="email" value="{{context['email']}}" readonly="true">
+      </div>
+      <br>
+   <div class="form-group">
+    <label for="name">个人地址</label>
+    <textarea class="form-control" rows="3" id="address" readonly="true">{{context['address']}}</textarea>
+  </div>
+     <div class="form-group">
+    <label for="name">加入目的</label>
+    <textarea class="form-control" rows="3" id="goal" readonly="true">{{context['goal']}}</textarea>
+  </div>
+     <div class="form-group">
+    <label for="name">能做的贡献</label>
+    <textarea class="form-control" rows="3" id="contribution" readonly="true">{{context['contribution']}}</textarea>
+  </div>
+
+
+    <button class="btn btn-default" name="btn" value="0">赞成</button>
+    <button class="btn btn-default" name="btn" value="1">反对</button>
+    <button class="btn btn-default" name="btn" value="2">弃权</button>
+</form>
+</body>
+<script type="text/javascript">
+$(function() {
+    $("button[name='btn']").click(function() {
+        $.ajax({
+            type: "POST",
+            url: '/rest/appvote',
+            data: {
+                vote: $(this).val(),
+                id: "{{context['id']}}"
+            },
+            success: function(data) {
+                $("button[name='btn']").attr("disabled", true);
+                if (data.error) {
+                    return alert( data.error || '修改失败！');
+                }
+            },
+            error: function() {
+                alert('网络错误！');
+            },
+            dataType: 'json'
+        });
+        return false;
+    });
+});
+</script>
+</html>

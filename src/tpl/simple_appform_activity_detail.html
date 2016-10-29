@@ -1,0 +1,43 @@
+    <div class="row">
+        <div class="col-md-12">
+            <div class="news-content">
+                <h3 class="news-title news-indent">
+                {{ context['activity']['title'] }}</h3>
+                <div class="news-date news-indent">发布日期：{{ context['activity']['published'] }} <span class="m-l-20">
+                {% if context['activity']['data_source'] %}
+                数据链接：{{ context['activity']['data_source'] }}
+                {% end %}</span></div>
+                <div class="news-date news-indent">活动时间：{{ context['activity']['activity_start_time'] }} ~ {{ context['activity']['activity_end_time'] }}
+                </div>
+                {% if context['activity']['activity_sponsor'] %}
+                <div class="news-date news-indent">活动主办：{{ context['activity']['activity_sponsor'] }}
+                </div> 
+                {% end %}
+                {% if context['activity']['activity_undertake'] %}
+                <div class="news-date news-indent">活动承办：{{ context['activity']['activity_undertake'] }}
+                </div>
+                {% end %}
+                <div class="news-indent">
+                    <p class="">
+                    {% raw context['activity']['content'] %}
+                    </p>
+                </div>
+                <div>
+                {% if context['sign_up'] and not context['register'] %}
+                <div class="m-b-10">您已成功报名!</div>
+                <button type="button" id="register" class="btn btn-danger m-r-5 m-b-5" onclick="$._postData('register','{{context['activity']['id']}}')">签到</button>
+                {% elif not context['register'] %}
+                <button type="button" id="sign_up" class="btn btn-success m-r-5 m-b-5" onclick="$._postData('sign_up','{{context['activity']['id']}}')">报名</button>
+                {% end %}
+
+                {% if context['register'] %}
+                <div class="m-b-10">报名时间：{{context['sign_up']['created']}}</div>
+                <div>签到时间：{{context['register']['created']}}</div>
+                {% end %}
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>

@@ -1,0 +1,43 @@
+<div class="panel panel-inverse" data-sortable-id="ui-media-object-2">
+    
+    <div class="panel-body">
+        <ul class="media-list" id="list-items">
+            
+        </ul>
+    </div>
+</div>
+
+
+<a class="btn btn-link btn-block" id="btn-check-more">查看更多</a>
+
+
+
+
+<script type="tpl-script" id="tpl-list-item">
+<li class="media media-sm" data-id="{id}">
+    <a class="media-left" href="/page/event/{id}" target="event">
+        <img src="{pictures}" alt="" class="media-object">
+    </a>
+    <div class="media-body">
+        <h5 class="media-heading">
+            {title}<br/>
+            <span class="badge badge-default m-t-3">{sign_up_status}</span>
+        </h5>
+        <p class="location">
+            <i class="fa fa-clock-o fa-lg"></i> 
+            {activity_start_date} 
+            {activity_start_hm}
+             ~
+            {activity_end_date}
+            {activity_end_hm}
+        </p>
+        <p class="location" style="position:relative;left:3px;">
+            <i class="fa fa-map-marker fa-lg"></i>
+            {general_place}
+        </p>
+         <a href="/page/event/{id}" target="event" class="btn btn-info btn-xs m-t-2">查看详情</a>
+    </div>
+    <hr/>
+</li>
+
+</script>

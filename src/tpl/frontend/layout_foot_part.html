@@ -1,0 +1,24 @@
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="{{ static_url("cav/frontend/one-page-parallax/assets/plugins/jquery/jquery-1.9.1.min.js") }}"></script>
+<script src="{{ static_url("cav/frontend/one-page-parallax/assets/plugins/jquery/jquery-migrate-1.1.0.min.js") }}"></script>
+<script src="{{ static_url("cav/frontend/one-page-parallax/assets/plugins/bootstrap/js/bootstrap.min.js") }}"></script>
+<!--[if lt IE 9]>
+    <script src="{{ static_url("cav/console/assets/crossbrowserjs/html5shiv.js") }}"></script>
+    <script src="{{ static_url("cav/console/assets/crossbrowserjs/respond.min.js") }}"></script>
+    <script src="{{ static_url("cav/console/assets/crossbrowserjs/excanvas.min.js") }}"></script>
+<![endif]-->
+<script src="{{ static_url("cav/frontend/one-page-parallax/assets/plugins/jquery-cookie/jquery.cookie.js") }}"></script>
+<script src="{{ static_url("cav/frontend/one-page-parallax/assets/plugins/scrollMonitor/scrollMonitor.js") }}"></script>
+<script src="{{ static_url("cav/frontend/one-page-parallax/assets/js/apps.min.js") }}"></script>
+<script src="{{ static_url("cav/js/common.js") }}"></script>
+<!-- ================== END BASE JS ================== -->
+
+<script>    
+    $(document).ready(function() {
+        App.init();
+    });
+</script>
+
+
+
+{% include "../stats_track.html" %}

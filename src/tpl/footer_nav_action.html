@@ -1,0 +1,54 @@
+<!-- begin navbar-collapse -->
+<!-- Action buttons -->
+<div class="fixed-action-btn {% if handler.is_wechat() %}click-to-toggle{% end %}" style="bottom: 25px; right: 24px;">
+    <a class="btn-floating btn-large waves-effect waves-light red" id="menu">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        {% if handler.current_user %}
+        <!-- <li><a class="btn-floating btn-large modal-trigger blue  lighten-3" href="/logout"><i class="material-icons">exit_to_app</i>退出登录</a></li> -->
+        <li><a class="btn-floating btn-large modal-trigger blue  lighten-3" href="/common/usercenter"><span class="semi-bold">我</span></a></li>
+        <!-- {% if handler.is_member() %}
+            <li><a class="btn-floating btn-large modal-trigger blue  lighten-3" href="/common/memberinfo"><i class="material-icons">verified_user</i>会员信息</a></li>
+            {% else %}
+            <li><a class="btn-floating btn-large modal-trigger blue  lighten-2" href="/page/joinmember" target="_blank"><i class="material-icons">add</i>加入会员</a></li>
+            {% end %} -->
+        {% else %}
+        <li><a class="btn-floating btn-large modal-trigger blue  lighten-3" href="/common"><i class="material-icons">perm_identity</i>登录</a></li>
+        {% end %}
+        <!-- {% if 'article' not in page['id'] %}
+            <li>
+                <a class="btn-floating btn-large modal-trigger blue  lighten-3" href="/common/articles" data-target="modal1" id="edit">
+                    <span class="semi-bold">文章</span>
+                </a>
+            </li>
+            {% end %}  -->
+        {% if 'discussion_' in page['id'] or 'discussion' not in page['id'] %}
+        <li>
+            <a class="btn-floating btn-large modal-trigger blue  lighten-2" href="/common/discussion" id="discuss">
+                <span class="semi-bold">讨论</span>
+            </a>
+        </li>
+        {% end %}
+        
+        {% if 'discussion' in page['id'] %}
+        <li>
+            <a class="btn-floating btn-large modal-trigger blue  lighten-2" href="/common/discussion_new" id="discuss">
+                <span class="semi-bold">发起</span>
+            </a>
+        </li>
+        {% end %}
+
+
+        {% if 'events' not in page['id'] %}
+        <li>
+            <a class="btn-floating btn-large modal-trigger blue  lighten-1" href="/common/events" id="format">
+                <span class="semi-bold">活动</span>
+            </a>
+        </li>
+        {% end %} {% if handler.is_admin() %}
+        <li><a class="btn-floating btn-large modal-trigger green" href="/console" target="dlab-console"><span class="semi-bold">管理</span></a></li>
+        {% end %}
+    </ul>
+</div>
+<!-- end navbar-collapse -->

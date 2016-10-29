@@ -1,0 +1,111 @@
+<div class="row" style="position:relative">
+    <div class="col-md-12 news-content">
+        <h3 class="m-b-20 m-t-10">{{ context['title'] }}</h3>
+        <div class="news-date news-indent">
+            <i class="fa fa-adjust fa-lg"></i> 当前状态： {{ context['status_name'] }}
+        </div>
+        <div class="news-date news-indent">
+            <i class="fa fa-clock-o fa-lg"></i> 更新日期： {{ context['updated'] }}
+        </div>
+        <div class="news-date news-indent m-b-20">
+            <i class="fa fa-volume-up fa-lg"></i> 发布日期：{{ context['published'] or "" }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="news-content m-b-20">
+            <h4 class="m-t-30">TA的合作需求</h4>
+            <hr class="m-t-1" />
+            <p class="">
+                {% raw context['content'] %}
+            </p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="news-content m-b-20">
+            <h4 class="m-t-30">TA是谁</h4>
+            <hr class="m-t-1" />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="profile-highlight m-b-10">
+                        <i class="fa fa-user"></i> 联系人 <strong> {{ context['contact_name'] }}</strong>
+                        <br/>
+                        <i class="fa fa-phone"></i> 手机 <strong> {{ context['contact_wechatid'] }}</strong>
+                        <br/>
+                        <i class="fa fa-wechat"></i> 微信号 <strong> {{ context['contact_wechatid'] }}</strong>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <p class="">
+                        {% raw context['intro_content'] %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="news-content m-b-20">
+            <h4 class="m-t-30">TA承诺回报</h4>
+            <hr class="m-t-1" />
+            <p class="">
+                {% raw context['repay_content'] %}
+            </p>
+        </div>
+    </div>
+</div>
+{% if context['attachments'] %}
+<div class="row bg-white">
+    <div class="news-content">
+        <h4 class="m-l-10">附件下载</h4> {% for a in context['attachments'].split(',') %}
+        <a class="btn btn-link" href="/assets/news/doc/{{ a }}">{{ a.split('/')[-1] }}</a> {% end %}
+    </div>
+</div>
+{% end %} 
+{% if handler.is_admin() and context['allow_reply'] %}
+
+<div class="panel panel-danger" data-sortable-id="index-2">
+    <div class="panel-heading">
+        <h4 class="panel-title">回复历史(仅限需求对接管理员) <span class="label label-warning pull-right">{{len(context['comments'])}}个回复</span></h4>
+    </div>
+    <div class="panel-body bg-silver">
+        <div class="slimScrollDiv" style=""><div data-scrollbar="true" data-height="225px" data-init="true" style="">
+            <ul class="chats">
+                {% for item in context['comments'] %}
+                <li class="left">
+                    <span class="date-time">{{item['created']}}</span>
+                    <a href="javascript:;" class="name">{{item['nick_name']}}</a>
+                    <a href="javascript:;" class="image"><img alt="" src="{{item['head_img_url']}}"></a>
+                    <div class="message">
+                        {{item['comments']}}
+                    </div>
+                    <a href="javascript:;" class="m-l-20 m-t-10" onclick=$._deleteComment("{{item['id']}}")>删除</a>
+                </li>
+                {% end %}
+            </ul>
+        </div></div>
+    </div>
+    <div class="panel-footer bg-silver-lighter">
+        <div class="row" style="margin-left:-3px;">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <textarea type="text" rows='4' id="comments" class="form-control" value="" placeholder="请输入回复内容"></textarea>
+                    <input type="hidden" id="requirement_id" value="{{context['id']}}">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger btn-sm" id="save"> 提交回复 </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% end %}

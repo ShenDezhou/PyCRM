@@ -1,0 +1,5 @@
+{% if context.data_type == 'external' %}
+    {% include 'simple_article_detail_external.html' %}
+{% else %}
+    {% include 'simple_article_detail_internal.html' %}
+{% end %}

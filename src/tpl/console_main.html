@@ -1,0 +1,180 @@
+{% if context['roles']!='eventmgr_ygzx' %} 
+<div class="row">
+    <!-- begin col-3 -->
+    <div class="col-md-3 col-xs-6">
+        <div class="widget widget-stats bg-red">
+            <div class="stats-icon"><i class="fa fa-certificate"></i></div>
+            <div class="stats-info">
+                <h4>个人会员数</h4>
+                <p>{{ context['person_member_count']['count'] }}</p>
+            </div>
+            <div class="stats-link">
+                <a href="/console/member_person_list">查看全部 <i class="fa fa-arrow-circle-o-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-md-3 col-xs-6">
+        <div class="widget widget-stats bg-blue">
+            <div class="stats-icon"><i class="fa fa-university"></i></div>
+            <div class="stats-info">
+                <h4>企业会员数</h4>
+                <p>{{ context['org_member_count']['count'] }}</p>
+            </div>
+            <div class="stats-link">
+                <a href="/console/member_org_list">查看全部 <i class="fa fa-arrow-circle-o-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-md-3 col-xs-6">
+        <div class="widget widget-stats bg-purple">
+            <div class="stats-icon"><i class="fa fa-users"></i></div>
+            <div class="stats-info">
+                <h4>微信注册用户数</h4>
+                <p>{{ context['authorized_user_count']['count'] }}</p>
+            </div>
+            <div class="stats-link">
+                <a href="/console/authorized_list">查看全部 <i class="fa fa-arrow-circle-o-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-md-3 col-xs-6">
+        <div class="widget widget-stats bg-green">
+            <div class="stats-icon"><i class="fa fa-wechat"></i></div>
+            <div class="stats-info">
+                <h4>微信群友数</h4>
+                <p>{{ context['wechat_member_count']['count'] }}</p>
+            </div>
+            <div class="stats-link">
+                <a href="/console/weixin_list">查看全部 <i class="fa fa-arrow-circle-o-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- end col-3 -->
+</div>
+<div class="row">
+    <div class="col-md-4 ui-sortable">
+        <div class="panel panel-danger" data-sortable-id="index-1">
+            <div class="panel-heading">
+               <!--  <div class="btn-group pull-right">
+                    <a type="button" class="btn btn-success btn-xs" href="/console/article_list">查看全部 (共{{context['articles_count']['count']}}篇)</a>
+                </div> -->
+                <h4 class="panel-title">
+                    最新文章
+                </h4>
+            </div>
+            <div id="visitors-map" class="" style="max-height:175px;overflow:hidden;">
+                {% if context['latest_articles'] %}
+                <a href="/page/article/{{context['latest_articles'][0]['id']}}" target="article">
+                    {% if context['latest_articles'][0]['pictures'] %}
+                    <img class="media-object" src="/assets/ticket/image/{{ context['latest_articles'][0]['pictures'].split(',')[0] }}" alt="" style="width:100%"/>
+                    {% else %}
+                    <img src="/static/cav/img/default-u.png" alt="" style="width:100%"/>
+                    {% end %}
+                </a>
+                {% end %}
+            </div>
+            <div class="list-group">
+                
+                {% for i in context['latest_articles'] %}
+                <a href="/page/article/{{i['id']}}" target="article" class="list-group-item text-ellipsis">
+                    <span class="badge badge-success">
+                        <i class="fa fa-clock-o fa-lg"></i> {{str(i['published']).split(' ')[0]}}
+                    </span> 
+                    {{ i['title'] }}
+                </a>
+                {% end %}
+            </div>
+            <div class="panel-footer text-center">
+                <a href="/console/article_list" class="text-inverse"><i class="fa fa-arrow-circle-o-right"></i> 查看全部文章 (共{{context['articles_count']['count']}}篇) </a>
+            </div>
+        </div>
+    </div>
+    {% end %}  
+    <div class="col-md-4 ui-sortable">
+        <!-- begin panel -->
+        <div class="panel panel-info" data-sortable-id="ui-media-object-3">
+            <div class="panel-heading">
+                <!-- <div class="btn-group pull-right">
+                    <a type="button" class="btn btn-info btn-xs" href="/console/activity_list">查看全部 (共{{context['events_count']['count']}}个)</a>
+                </div> -->
+                <h4 class="panel-title">近期活动</h4>
+            </div>
+            <div class="panel-body">
+                <ul class="media-list media-list-with-divider" id="list-items">
+                    
+                    {% for i in context['latest_events'] %}
+                    <li class="media media-sm m-t-10" data-id="{{ i['id'] }}">
+                        <a href="/page/event/{{ i['id'] }}" target="event" class="pull-left">
+                            {% if i['pictures'] %}
+                            <img class="media-object" src="/assets/ticket/image/{{ i['pictures'].split(',')[0] }}" alt=""  style="max-width:100px"/>
+                            {% else %}
+                            <img class="media-object" src="/static/cav/img/default-u.png" alt="" />
+                            {% end %}
+                        </a>
+                        <div class="media-body">
+                            <a href="/page/event/{{ i['id'] }}" target="event">
+                                <h5 class="media-heading m-b-10">{{ i['title'] }}</h5> 
+                                <div class="location">
+                                    <i class="fa fa-clock-o fa-lg"></i> 
+                                    {{ i['activity_start_date'] }} 
+                                    {{ i['activity_start_hm'] }}
+                                     ~
+                                    {% if i['activity_start_date'] != i['activity_end_date']%}
+                                        {{ i['activity_end_date'] }}
+                                    {% end %}
+                                    {{ i['activity_end_hm'] }}
+                                </div>
+                                <div class="location" style="position:relative;left:3px;">
+                                    <i class="fa fa-map-marker fa-lg"></i> 
+                                    {{ i['general_place'] or i['activity_place'] }}
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    {% end %}
+
+                </ul>
+            </div>
+            <div class="panel-footer text-center">
+                <a href="/console/activity_list" class="text-inverse"><i class="fa fa-arrow-circle-o-right"></i> 查看全部活动 (共{{context['events_count']['count']}}个) </a>
+            </div>
+        </div>
+{% if context['roles']!='eventmgr_ygzx' %}
+
+        <!-- end panel -->
+    </div>
+    <div class="col-md-4 ui-sortable">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" data-sortable-id="index-4">
+            <div class="panel-heading">
+                <!-- <div class="btn-group pull-right">
+                    <a type="button" class="btn btn-warning btn-xs" href="/console/authorized_list">查看全部 </a>
+                </div> -->
+                <h4 class="panel-title">最近活跃的注册用户 
+                </h4>
+            </div>
+            <ul class="registered-users-list clearfix">
+                {% for i in context['latest_authorized_users'] %}
+                <li>
+                    <a href="javascript:;"><img src="{{i['head_img_url']}}" alt="" style="width:75.25px;height:75.25px;"/></a>
+                    <h4 class="username text-ellipsis">
+                        {{i['nick_name']}}
+                        <!-- <small>Algerian</small> -->
+                    </h4>
+                </li>
+                {% end %}
+            </ul>
+            <div class="panel-footer text-center">
+                <a href="/console/authorized_list" class="text-inverse"><i class="fa fa-arrow-circle-o-right"></i> 查看全部注册用户 (共{{context['authorized_user_count']['count']}}个) </a>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+</div>
+{% end %}  

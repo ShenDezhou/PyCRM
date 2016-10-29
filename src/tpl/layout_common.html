@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"> {% include "layout_head_part.html" %}
+</head>
+
+
+
+<body class="boxed-layout">
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    
+    <!-- begin #page-container -->
+    <div id="page-container" class="page-container fade in page-without-sidebar white-page">
+        
+        <!-- begin #header -->
+        <div id="header" class="header navbar navbar-default">
+            <!-- begin container -->
+            <div class="container-fluid">
+                {% include 'header_nav_collapse.html' %}
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end #header -->
+
+        <!-- begin #content -->
+        <div id="content" class="content">
+            <!-- begin page-header -->
+            {% if not handler.is_wechat() %}
+                <h1 class="page-header">{{ page['title'] }} </h1>
+            {% end %}
+            <!-- end page-header -->
+            
+            {% module CommonMainEntry(entry = entry, page = page, page_config = page_config, context = context) %}
+            
+        </div>
+        <!-- end #content -->
+        
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+    
+    <!-- REQUIRED JS SCRIPTS -->
+    {% include "layout_foot_part.html" %}
+</body>
+
+</html>

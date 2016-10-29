@@ -1,0 +1,116 @@
+<style type="text/css">
+.result-info {
+    width: 654px;
+}
+
+.for_detail {
+    height: 50px;
+}
+
+.result-image img {
+    max-height: 240px;
+}
+
+.invoice a {
+    color: black;
+    margin: 10px;
+}
+
+.choose {
+    color: #348fe2 !important;
+}
+
+.content.has-bg .content-bg:before {
+    background: none;
+}
+
+.result-list .data-info {
+    margin-bottom: 20px;
+    max-height: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 16px;
+}
+</style>
+<div id="datalab" class="content has-bg" data-scrollview="true">
+    <!-- begin content-bg -->
+    <div class="content-bg">
+        <img src="{{ static_url('cav/img/frontend/images/banner.jpg') }}" alt="" />
+    </div>
+    <!-- end content-bg -->
+    <!-- begin container -->
+    <div class="container p-t-40 m-t-30" data-animation="true" data-animation-type="fadeInLeft">
+        <!-- begin row -->
+        <div class="row">
+            <!-- begin col-12 -->
+            <div class="col-md-12 quote">
+                <h1>
+                    清数实验数据共享平台
+                    <small>最受信赖的数据创新生态</small>
+                </h1>
+            </div>
+            <!-- end col-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<div id="datalab" class="content bg-silver" data-scrollview="true">
+    <div class="container" data-animation="true" data-animation-type="fadeInDown">
+        <div class="invoice m-b-20">
+            <span class="label label-default">数据类别</span> {% if not context['data_type'] or context['data_type']=='None' %}
+            <a href="/datalab" class="choose">全部</a> {% else %}
+            <a href="/datalab">全部</a> {% end %} {% for item in context['tag_type'] %} {% if context['data_type'] and context['data_type'] == item['tag_id'] %}
+            <a href="/datalab?data_type={{item['tag_id']}}" class="choose">{{item['tag_name']}}</a> {% else %}
+            <a href="/datalab?data_type={{item['tag_id']}}">{{item['tag_name']}}</a> {% end %} {% end %}
+        </div>
+        <h2 class="content-title">共享数据集<br/>
+            <small></small>
+        </h2>
+        <div class="row" style="max-width:1140px;margin-left:auto;margin-right:auto;">
+            <!-- begin col-12 -->
+            <div class="col-md-12">
+                <div class="result-container">
+                    <ul class="result-list">
+                        {% for item in context['result'] %}
+                        <li>
+                            <div class="result-image">
+                                <a href="javascript:;"><img src="/assets/ticket/image/{{item['pictures'].split(',')[0]}}" alt="" /></a>
+                            </div>
+                            <div class="result-info">
+                                <h4 class="title">{{item['title']}}<small> ( {{item['org_name']}} ) </small></a></h4>
+                                <p class="location"><i class="fa fa-database fa-lg"></i>  <span class="badge badge-primary normal-font">{{item['data_type']}}</span> <span class='m-l-10'><i class="fa fa-cubes fa-lg"></i> {{item['industry']}}</span> </p>
+                                <p class="location"><i class="fa fa-user fa-lg"></i> {{item['connect_person']}} </p>
+                                <p class="location"><i class="fa fa-mobile-phone fa-lg"></i> {{item['connect_cellphone']}} </p>
+                                <div class="desc" style="max-height:60px;margin-bottom:5px;!important">
+                                    {{ item['data_describle'] }}
+                                </div>
+                            </div>
+                            <div class="result-price">
+                                <div class="show-lg m-b-40"></div>
+                                <a href="/page/datalab/{{item['id']}}" class="btn btn-info btn-block for_detail">查看详情</a>
+                            </div>
+                        </li>
+                        {% end %}
+                    </ul>
+                    <div class="clearfix">
+                        <ul class="pagination pagination-without-border pull-right">
+                            {% if context['currentPage'] == context['minPage']%}
+                            <li class="disabled"><a href="">«</a></li>
+                            {% else %}
+                            <li><a href="/datalab?draw={{context['currentPage']-1}}&data_type={{context['data_type']}}">«</a></li>
+                            {% end %} {% for item in context['pagingIndexes']%}
+                            <li class="active"><a href="/datalab?draw={{item}}&data_type={{context['data_type']}}">{{item+1}}</a></li>
+                            {% end %} {% if context['currentPage'] == context['maxPage']%}
+                            <li class="disabled"><a href="javascript:;">»</a></li>
+                            {% else %}
+                            <li><a href="/datalab?draw={{context['currentPage']+1}}&data_type={{context['data_type']}}">»</a></li>
+                            {% end %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- end col-12 -->
+        </div>
+    </div>
+</div>

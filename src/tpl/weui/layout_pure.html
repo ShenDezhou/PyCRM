@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"> {% include "layout_head_part.html" %}
+</head>
+
+
+
+<body>
+    
+    {% module CommonMainEntry(entry = entry, page = page, page_config = page_config, context = context) %}
+    
+    <!-- REQUIRED JS SCRIPTS -->
+    {% include "layout_foot_part.html" %}
+</body>
+
+</html>

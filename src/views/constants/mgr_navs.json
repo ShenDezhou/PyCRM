@@ -1,0 +1,205 @@
+[
+    {
+        "title": "概况",
+        "id": "mgr_console_section",
+        "icon": "fa-dashboard",
+        "child": ["mgr_console"]
+    }, 
+    {
+        "title": "平台概况",
+        "id": "mgr_console",
+        "icon2": "fa-dashboard",
+        "href": "console"
+    }, 
+    {
+        "title": "会员管理",
+        "id": "mgr_person_section",
+        "icon": "fa-users",
+        "child": ["mgr_merge_org_list","mgr_member_person_list","mgr_member_org_list","mgr_form_list","mgr_org_form_list","mgr_member_app_links","mgr_authorized_list","mgr_weixin_apply_list","mgr_weixin_list","mgr_pass_form_list","mgr_charge_detail_list"]
+    }, {
+        "title": "企业合并",
+        "id": "mgr_merge_org_list",
+        "icon2": "fa-picture-o",
+        "href": "merge_org_list"
+    }, {
+        "title": "人员管理",
+        "id": "mgr_member_person_list",
+        "icon2": "fa-code-fork",
+        "href": "member_person_list"
+    }, {
+        "title": "企业管理",
+        "id": "mgr_member_org_list",
+        "icon2": "fa-picture-o",
+        "href": "member_org_list"
+    }, {
+        "title": "个人申请管理",
+        "id": "mgr_form_list",
+        "icon2": "fa-male",
+        "href": "form_list"
+    },{
+        "title": "企业申请管理",
+        "id": "mgr_org_form_list",
+        "icon2": "fa-thumbs-up",
+        "href": "org_form_list"
+    },{
+        "title": "会员申请表",
+        "id": "mgr_member_app_links",
+        "icon2": "fa-comment",
+        "href": "member_app_links"
+    }, {
+        "title": "收费明细表",
+        "id": "mgr_charge_detail_list",
+        "icon2": "fa-comment",
+        "href": "charge_detail_list"
+    }, {
+        "title": "活动管理",
+        "id": "mgr_activity_section",
+        "icon": "fa-calendar",
+        "child": ["mgr_activity_list", "mgr_activity_new"]
+    },{
+        "title": "新建活动",
+        "id": "mgr_activity_new",
+        "icon2": "fa-comment",
+        "href": "activity_new"
+    }, {
+        "title": "活动列表",
+        "id": "mgr_activity_list",
+        "icon2": "fa-comment",
+        "href": "activity_list"
+    },{
+        "title": "讨论管理",
+        "id": "mgr_discussion_section",
+        "icon": "fa-calendar",
+        "child": ["mgr_discussion_list"]
+    }, {
+        "title": "讨论列表",
+        "id": "mgr_discussion_list",
+        "icon2": "fa-comment",
+        "href": "discussion_list"
+    },{
+        "title": "文章管理",
+        "id": "mgr_news_section",
+        "icon": "fa-file-text",
+        "child": ["mgr_article_list", "mgr_article_new"]
+    }, {
+        "title": "新建文章",
+        "id": "mgr_article_new",
+        "icon2": "fa-comment",
+        "href": "article_new"
+    }, {
+        "title": "文章列表",
+        "id": "mgr_article_list",
+        "icon2": "fa-comment",
+        "href": "article_list"
+    }, {
+        "title": "数据源管理",
+        "id": "mgr_dataset_section",
+        "icon": "fa-database",
+        "child": ["mgr_dataset_list", "mgr_dataset_new"]
+    },{
+        "title": "新建数据源",
+        "id": "mgr_dataset_new",
+        "icon2": "fa-comment",
+        "href": "dataset_new"
+    }, {
+        "title": "数据源列表",
+        "id": "mgr_dataset_list",
+        "icon2": "fa-comment",
+        "href": "dataset_list"
+    }, {
+        "title": "需求管理",
+        "id": "mgr_requirement_section",
+        "icon": "fa-random",
+        "child": ["mgr_requirement_list", "mgr_requirement_new"]
+    },{
+        "title": "新建需求",
+        "id": "mgr_requirement_new",
+        "icon2": "fa-comment",
+        "href": "requirement_new"
+    }, {
+        "title": "需求列表",
+        "id": "mgr_requirement_list",
+        "icon2": "fa-comment",
+        "href": "requirement_list"
+    },{
+        "title": "表单管理",
+        "id": "mgr_survey_section",
+        "icon": "fa-lightbulb-o",
+        "child": ["mgr_survey_list", "mgr_survey_new", "mgr_survey_result"]
+    },{
+        "title": "新建表单",
+        "id": "mgr_survey_new",
+        "icon2": "fa-comment",
+        "href": "survey_new"
+    },{
+        "title": "表单列表",
+        "id": "mgr_survey_list",
+        "icon2": "fa-comment",
+        "href": "survey_list"
+    }, {
+        "title": "内部管理",
+        "id": "mgr_admin_section",
+        "icon": "fa-bank",
+        "child": ["mgr_manager_list","mgr_tag_list","mgr_role_list","mgr_group_tree"]
+    }, {
+        "title": "权限组织架构",
+        "id": "mgr_group_tree",
+        "icon2": "fa-comment",
+        "href": "group_tree"
+    },{
+        "title": "内部人员管理",
+        "id": "mgr_manager_list",
+        "icon2": "fa-comment",
+        "href": "manager_list"
+    }, {
+        "title": "页面授权管理",
+        "id": "mgr_role_list",
+        "icon2": "fa-comment",
+        "href": "role_list"
+    }, {
+        "title": "标签管理",
+        "id": "mgr_tag_list",
+        "icon2": "fa-comment",
+        "href": "tag_list"
+    }, {
+        "title": "渠道管理",
+        "id": "mgr_channel_section",
+        "icon": "fa-anchor",
+        "child": ["mgr_channel_new","mgr_channel_list"]
+    },{
+        "title": "新建渠道",
+        "id": "mgr_channel_new",
+        "icon2": "fa-exchange",
+        "href": "channel_new"
+    },{
+        "title": "渠道名单管理",
+        "id": "mgr_channel_list",
+        "icon2": "fa-exchange",
+        "href": "channel_list"
+    }, {
+        "title": "微信公众平台",
+        "id": "mgr_wechat_section",
+        "icon": "fa-cog",
+        "child": ["mgr_wechat_contact"]
+    },{
+        "title": "微信客服管理",
+        "id": "mgr_wechat_contact",
+        "icon2": "fa-comment",
+        "href": "wechat_contact"
+    },{
+        "title": "通用",
+        "id": "mgr_settings_section",
+        "icon": "fa-cog",
+        "child": ["mgr_settings_normal","mgr_settings_logout"]
+    }, {
+        "title": "个人用户界面",
+        "id": "mgr_settings_normal",
+        "icon2": "fa-user",
+        "href": "/common/usercenter"
+    }, {
+        "title": "注销登录",
+        "id": "mgr_settings_logout",
+        "icon2": "fa-sign-out",
+        "href": "/logout"
+    }
+]

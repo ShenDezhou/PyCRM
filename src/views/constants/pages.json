@@ -1,0 +1,492 @@
+[
+    {
+        "id": "home",
+        "title": "清数D-Lab",
+        "description": "",
+        "layout": "frontend/layout_home.html",
+        "tpl": "frontend/home.html"
+    },
+    {
+        "id": "datalab",
+        "title": "清数实验数据共享平台",
+        "description": "",
+        "layout": "frontend/layout_home.html",
+        "tpl": "frontend/datalab_list.html"
+    },
+    {
+        "id": "datalab_detail",
+        "title": "数据集详情",
+        "description": "",
+        "showTitleBar": false,
+        "layout": "frontend/layout_home.html",
+        "tpl": "frontend/datalab_detail.html",
+        "css":[],
+        "js":[]
+    },
+    {
+        "id": "login",
+        "title": "用户登录",
+        "description": "请您登录",
+        "layout": "layout_login.html",
+        "tpl": "simple_login.html"
+    }, {
+        "id": "logout",
+        "title": "用户登录",
+        "description": "",
+        "layout": "layout_login.html",
+        "tpl": "simple_login.html"
+    }, {
+        "id": "wechatlogin",
+        "title": "微信授权登录成功",
+        "description": "",
+        "layout": "layout_simple.html",
+        "tpl": "simple_wechat_login_success.html"
+    }, 
+    {
+        "id": "comingsoon",
+        "title": "即将上线",
+        "description": "期待你的参与！",
+        "layout": "layout_empty.html",
+        "tpl": "simple_comingsoon.html",
+        "css": [
+            "cav/console/assets/plugins/jquery.countdown/jquery.countdown.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/jquery.countdown/jquery.plugin.js",
+            "cav/console/assets/plugins/jquery.countdown/jquery.countdown.js",
+            "cav/js/comingsoon.js"
+        ]
+    }, 
+    {
+        "id": "joinmember",
+        "title": "申请加入清华大数据产业联合会会员",
+        "description": "会员申请表格",
+        "layout": "layout_simple.html",
+        "tpl": "simple_appform_links.html",
+        "showTitleBar": false,
+        "js": [
+            "cav/js/mgr_member_app_links.js"
+        ]
+    }, {
+        "id": "form_weixin",
+        "title": "微信群友申请表",
+        "description": "请填写清华大数据产业联合会微信群友申请表格",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_person_weixin.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-wizard/css/bwizard.min.css",
+            "cav/console/assets/plugins/parsley/src/parsley.css",
+            "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+            "cav/console/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/parsley/dist/parsley.js",
+            "cav/console/assets/plugins/bootstrap-wizard/js/bwizard.js",
+            "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "cav/console/assets/plugins/combodate-1.0.7/combodate.js",
+            "cav/console/assets/plugins/combodate-1.0.7/moment.min.js",
+            "cav/console/assets/js/jquery.check.js",
+            "cav/console/assets/plugins/jquery-cookie/jquery.cookie.js",
+            "cav/console/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js",
+            "cav/js/mgr_upload_image.js",
+            "cav/console/assets/plugins/masked-input/masked-input.min.js",
+            "cav/js/mgr_form_weixin.js"
+        ]
+    }, {
+        "id": "form_requirement",
+        "title": "我要找合作",
+        "description": "请填写你的合作需求",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_requirement.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-wizard/css/bwizard.min.css",
+            "cav/console/assets/plugins/parsley/src/parsley.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/parsley/dist/parsley.js",
+            "cav/console/assets/plugins/bootstrap-wizard/js/bwizard.js",
+            "cav/console/assets/js/jquery.check.js",
+            "cav/js/mgr_upload_doc.js",
+            "cav/js/form_requirement.js"
+        ]
+    }, {
+        "id": "requirement_unauth",
+        "title": "合作发布",
+        "description": "合作发布会员未登录",
+        "layout": "layout_common.html",
+        "showTitleBar": true,
+        "tpl": "simple_appform_requirement_unauth.html",
+        "css": [
+            
+        ],
+        "js": [
+           
+        ]
+    }, 
+    {
+        "id": "requirement_detail",
+        "title": "合作意向详情",
+        "description": "",
+        "showTitleBar": false,
+        "layout": "layout_article.html",
+        "tpl": "simple_requirement_detail.html",
+        "css":[],
+        "js":["cav/js/requirement_detail.js"]
+    }, {
+        "id": "requirement_edit",
+        "title": "修改合作意向",
+        "description": "",
+        "layout": "layout_simple.html",
+        "tpl": "simple_requirement_edit.html",
+        "css":["cav/console/assets/plugins/summernote/summernote.css"],
+        "js":["cav/js/simple_requirement_edit.js","cav/js/mgr_upload_doc.js","cav/console/assets/plugins/summernote/summernote.min.js"]
+    }, {
+        "id": "survey_detail",
+        "title": "调查问卷",
+        "description": "",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "showTitle": false,
+        "tpl": "simple_appform_survey.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-wizard/css/bwizard.min.css"
+        ],
+        "js": [
+            "cav/console/assets/js/jquery.check.js",
+            "cav/js/survey.js"
+        ]
+    },{
+        "id": "form_normal",
+        "title": "个人普通会员申请表",
+        "description": "请填写清华大数据产业联合会个人普通会员申请表格",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_person_normal.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-wizard/css/bwizard.min.css",
+            "cav/console/assets/plugins/parsley/src/parsley.css",
+            "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+            "cav/console/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/parsley/dist/parsley.js",
+            "cav/console/assets/plugins/bootstrap-wizard/js/bwizard.js",
+            "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "cav/console/assets/plugins/combodate-1.0.7/combodate.js",
+            "cav/console/assets/plugins/combodate-1.0.7/moment.min.js",
+            "cav/console/assets/js/jquery.check.js",
+            "cav/console/assets/plugins/jquery-cookie/jquery.cookie.js",
+            "cav/console/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js",
+            "cav/js/mgr_upload_image.js",
+            "cav/console/assets/plugins/masked-input/masked-input.min.js",
+            "cav/js/mgr_form_normal.js"
+        ]
+    },{
+        "id": "form_advanced",
+        "title": "个人理事会员申请表",
+        "description": "请填写清华大数据产业联合会个人理事会员申请表格",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_person_normal.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-wizard/css/bwizard.min.css",
+            "cav/console/assets/plugins/parsley/src/parsley.css",
+            "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+            "cav/console/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/parsley/dist/parsley.js",
+            "cav/console/assets/plugins/bootstrap-wizard/js/bwizard.js",
+            "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "cav/console/assets/plugins/combodate-1.0.7/combodate.js",
+            "cav/console/assets/plugins/combodate-1.0.7/moment.min.js",
+            "cav/console/assets/js/jquery.check.js",
+            "cav/console/assets/plugins/jquery-cookie/jquery.cookie.js",
+            "cav/console/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js",
+            "cav/js/mgr_upload_image.js",
+            "cav/console/assets/plugins/masked-input/masked-input.min.js",
+            "cav/js/mgr_form_normal.js"
+        ]
+    },  {
+        "id": "org_form_normal",
+        "title": "企业普通会员申请表",
+        "description": "请填写清华大数据产业联合会企业普通会员申请表格",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_org_normal.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-wizard/css/bwizard.min.css",
+            "cav/console/assets/plugins/parsley/src/parsley.css",
+            "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+            "cav/console/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/parsley/dist/parsley.js",
+            "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "cav/console/assets/plugins/combodate-1.0.7/combodate.js",
+            "cav/console/assets/plugins/combodate-1.0.7/moment.min.js",
+            "cav/console/assets/js/jquery.check.js",
+            "cav/console/assets/plugins/jquery-cookie/jquery.cookie.js",
+            "cav/console/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js",
+            "cav/console/assets/plugins/masked-input/masked-input.min.js",
+            "cav/console/assets/plugins/parsley/dist/parsley.js",
+            "cav/console/assets/plugins/bootstrap-wizard/js/bwizard.js",
+            "cav/js/mgr_upload_image.js",
+            "cav/js/mgr_org_form_normal.js"
+        ]
+    }, {
+        "id": "org_form_advanced",
+        "title": "企业理事会员申请表",
+        "description": "请填写清华大数据产业联合会企业理事会员申请表格",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_org_normal.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-wizard/css/bwizard.min.css",
+            "cav/console/assets/plugins/parsley/src/parsley.css",
+            "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+            "cav/console/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/parsley/dist/parsley.js",
+            "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "cav/console/assets/plugins/combodate-1.0.7/combodate.js",
+            "cav/console/assets/plugins/combodate-1.0.7/moment.min.js",
+            "cav/console/assets/js/jquery.check.js",
+            "cav/console/assets/plugins/jquery-cookie/jquery.cookie.js",
+            "cav/console/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js",
+            "cav/console/assets/plugins/masked-input/masked-input.min.js",
+            "cav/console/assets/plugins/parsley/dist/parsley.js",
+            "cav/console/assets/plugins/bootstrap-wizard/js/bwizard.js",
+            "cav/js/mgr_upload_image.js",
+            "cav/js/mgr_org_form_normal.js"
+        ]
+    },{
+        "id": "form_submitted",
+        "title": "申请表提交成功",
+        "description": "会员申请表格已成功提交",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_submitted.html",
+        "css": [
+        ],
+        "js": [
+        ]
+    },{
+        "id": "form_action",
+        "title": "操作结果",
+        "description": "操作结果",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_action.html",
+        "css": [
+        ],
+        "js": [
+        ]
+    },{
+        "id": "form_fail",
+        "title": "会员申请提交失败",
+        "description": "",
+        "layout": "layout_simple.html",
+        "showTitleBar": false,
+        "tpl": "simple_appform_fail.html",
+        "css": [
+        ],
+        "js": [
+        ]
+    }, {
+        "id": "form_vote",
+        "title": "会员申请公示及投票",
+        "description": "会员申请的公式及投票情况",
+        "layout": "layout_simple.html",
+        "tpl": "simple_appform_vote.html",
+        "css": [
+            "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css", 
+            "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css",
+            "cav/console/assets/plugins/materialize/css/icon.css"
+        ],
+        "js": [
+        "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+        "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+        "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+        "cav/console/assets/plugins/materialize/js/materialize.js",
+        "cav/js/simple_appform_vote.js",
+        "cav/js/simple_appform_vote_detail_modal.js"
+        ]
+    },{
+        "id": "logs_view",
+        "title": "日志查看",
+        "description": "日志查看",
+        "layout": "layout_empty.html",
+        "tpl": "logs_view.html",
+        "css": [
+            "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+            "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+        ],
+        "js": [
+        "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+        "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+        "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+        "cav/console/assets/plugins/materialize/js/materialize.js",
+        "cav/js/logs_view.js"
+        ]
+    }, {
+        "id": "form_paid",
+        "title": "会员付费",
+        "description": "请为会员申请付费",
+        "layout": "layout_simple.html",
+        "tpl": "simple_appform_paid.html",
+        "css": [
+        ],
+        "js": [
+        ]
+    },
+     {
+        "id": "article_detail",
+        "title": "文章",
+        "description": "",
+        "showTitleBar": false,
+        "layout": "layout_common_materialize.html",
+        "tpl": "simple_article_detail.html",
+        "css":[
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+            ],
+        "js":[
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_materialize.js"
+        ]
+    }, 
+    {
+        "id": "event_detail",
+        "title": "活动详情",
+        "description": "",
+        "showTitleBar": false,
+        "layout": "layout_common_materialize.html",
+        "tpl": "simple_event_detail.html",
+        "css":[
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+            ],
+        "js":[
+            "cav/js/simple_appform_activity_detail.js",
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_materialize.js"
+        ]
+    }, 
+    {
+        "id": "discussion_detail",
+        "title": "讨论详情",
+        "description": "",
+        "showTitleBar": false,
+        "layout": "layout_common_materialize.html",
+        "tpl": "simple_discussion_detail.html",
+        "css":[
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+            ],
+        "js":[
+            "cav/js/simple_discussion_detail.js",
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_materialize.js"
+        ]
+    }, {
+        "id": "corplogin",
+        "title": "二维码登录",
+        "description": "",
+        "layout": "layout_nothing.html",
+        "tpl": "common_corplogin.html",
+        "css":"cav/css/common.css",
+        "js": [
+            "cav/js/common_corplogin.js"
+        ]
+    },{
+        "id": "mockuplogin",
+        "title": "测试登录",
+        "description": "",
+        "layout": "layout_empty.html",
+        "tpl": "common_mockuplogin.html",
+        "css":"cav/css/common.css",
+        "js": [
+            
+        ]
+    },
+    {
+        "id": "delivery_info",
+        "title": "个人名片",
+        "description": "",
+        "showTitleBar": false,
+        "layout": "weui/layout_pure.html",
+        "tpl": "weui/simple_delivery_info.html",
+        "css":[],
+        "js":[]
+    },
+    {
+        "id": "wechat_info",
+        "title": "微信名片",
+        "description": "",
+        "showTitleBar": false,
+        "layout": "layout_common.html",
+        "tpl": "simple_wechat_info.html",
+        "css":[],
+        "js":[]
+    },
+    {
+        "id": "appform",
+        "title": "清华大数据产业联合会申请表",
+        "description": "",
+        "layout": "layout_common.html",
+        "showTitleBar": false,
+        "tpl": "common_appform.html"
+    }, {
+        "id": "appvoteperson",
+        "title": "个人会员公示",
+        "description": "",
+        "layout": "layout_common.html",
+        "tpl": "common_appvote_person.html"
+    }, {
+        "id": "appvoteorg",
+        "title": "组织会员公示",
+        "description": "",
+        "layout": "layout_common.html",
+        "tpl": "common_appvote_org.html"
+    }, {
+        "id": "apppay",
+        "title": "会员支付",
+        "description": "",
+        "layout": "layout_common.html",
+        "tpl": "common_apppay.html"
+    },
+    {
+        "id": "unauth",
+        "title": "您访问了未经授权的页面！",
+        "description": "",
+        "layout": "layout_simple.html",
+        "tpl": "simple_unauth.html"
+    },
+    {
+        "id": "404",
+        "title": "页面不存在",
+        "description": "",
+        "layout": "layout_common.html",
+        "tpl": "common_404.html"
+    }, {
+        "id": "500",
+        "title": "页面出错了",
+        "description": "",
+        "layout": "layout_common.html",
+        "tpl": "common_500.html"
+    }, {
+        "id": "coderain",
+        "title": "MATRIX",
+        "description": "",
+        "layout": "layout_common.html",
+        "tpl": "common_coderain.html",
+        "js": [
+            "cav/js/common_coderain.js"
+        ]
+    }
+]

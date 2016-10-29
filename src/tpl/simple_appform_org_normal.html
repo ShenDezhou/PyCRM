@@ -1,0 +1,394 @@
+{% include 'simple_appform_desc.html' %}
+
+<style xmlns="http://www.w3.org/1999/html">
+.combodate .parsley-errors-list {
+    display: none;
+}
+</style>
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        {% if entry == 'org_form_normal' %}
+        <div class="panel panel-primary">
+        {% else %}
+        <div class="panel panel-warning">
+        {% end %}
+
+            <div class="panel-heading">
+                <h4 class="panel-title">只需四步，完成会员注册</h4>
+            </div>
+            <div class="panel-body">
+                {% if entry == 'org_form_normal' %}
+                <form action="/page/normal_org_member" method="POST" data-parsley-validate="true" name="form-wizard" id="submit-form">
+                {% else %}
+                <form action="/page/advanced_org_member" method="POST" data-parsley-validate="true" name="form-wizard" id="submit-form">
+                {% end %}
+                    <div id="wizard">
+                        <ol>
+                            <li>
+                                个人基本信息
+                                <small>你是谁？</small>
+                            </li>
+                            <li>
+                                公司及职业信息
+                                <small>你所专注的行业和工作经历？</small>
+                            </li>
+                            <li>
+                                资源共享
+                                <small>你希望在联合会获取和提供何种服务或者资源？</small>
+                            </li>
+                            <li>
+                                提交申请
+                                <small>一切OK，等待审核！</small>
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div class="wizard-step-1">
+                            <fieldset>
+                                <legend class="pull-left width-full">基本信息</legend>
+                                <!-- begin row -->
+                                <div id="person">
+                                    <div id = "person0">
+                                        <div class="row">
+                                            <!-- begin col-4 -->
+                                            <input id="counts" name="counts" value="1" class="hide" />
+                                            <div class="col-md-4">
+                                                <div class="form-group block1">
+                                                    <label>姓名 *</label>
+                                                    <input type="text" id="fullname0" name="fullname0" placeholder="请填写姓名" class="form-control" data-parsley-group="wizard-step-1" required value="" data-parsley-error-message="姓名不能使用除中、英、空格之外的字符,位数在2-20位" pattern="^[\u4e00-\u9fa5 a-zA-Z]{2,20}$" maxlength="20" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group block1">
+                                                    <label>手机号 *</label>
+                                                    <input type="text" id="cellphone0" name="cellphone0" placeholder="请填写手机号" class="form-control" data-parsley-group="wizard-step-1" data-parsley-type="number" required value="" data-parsley-error-message="请填写合法的手机号" pattern="^1[3|4|5|7|8]\d{9}$" maxlength="11" />
+                                                    <!-- <a class="btn btn-info btn-xs m-t-10" id="bind1" onclik="$._bindCellphone()">绑定</a>
+                                                    <span style="margin-top:5px;">通过手机号码绑定已录入过的个人信息</span> -->
+                                                </div>
+                                            </div>
+                                            <!-- end col-4 -->
+                                            <!-- begin col-4 -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>性别 *</label>
+                                                    <select class="form-control" id="gender0" name="gender0" data-parsley-group="wizard-step-1" required data-parsley-error-message="请选择性别">
+                                                        <option value="">请选择</option>
+                                                        <option value="1">男</option>
+                                                        <option value="2">女</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <!-- begin col-4 -->
+                                            <div class="col-md-4">
+                                                <label>出生日期 * (1980/06/15) </label>
+                                                <div class="form-inline">
+                                                    <input type="text" id="birthday0" name="birthday0" data-format="YYYY-MM-DD" data-template="YYYY MM DD" value="1980-06-15" class="form-inline" required data-parsley-error-message="请填写出生日期"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group block1">
+                                                    <label>毕业院校 *</label>
+                                                    <input type="text" id="school0" name="school0" placeholder="请填写毕业院校" class="form-control autocomplete" data-parsley-group="wizard-step-1" required value="" data-parsley-error-message="请填写毕业院校" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>入学年份 * (请填写最高学历入学年份)</label>
+                                                <div class="form-inline">
+                                                    <!--<label>入学年份 * (2000/09/01)</label>-->
+                                                    <!--<input type="text" id= "school_start" name="school_start" placeholder="请填写最高学历入学年份" class="form-control" data-parsley-group="wizard-step-1" required/>-->
+                                                    <input type="text" id="school_start0" name="school_start0" data-format="YYYY-MM-DD" data-template="YYYY MM DD" value="2000-09-01" class="form-inline" required data-parsley-error-message="请填写入学年份" />
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>学历 *</label>
+                                                    <select type="text" id="education0" name="education0" placeholder="请填写最高学历" class="form-control" data-parsley-group="wizard-step-1" required value="" data-parsley-error-message="请填写学历" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group block1">
+                                                    <label>个人通讯地址 *</label>
+                                                    <input class="form-control" id="address0" name="address0" placeholder="请留下准确的个人通讯地址" data-parsley-group="wizard-step-1" required value="" data-parsley-error-message="请填写个人通讯地址" />
+                                                    <span style="margin-top:5px;">请留下准确的个人通讯地址，以便联合会可以将证书等邮寄给您</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>申请加入的微信群 *</label>
+                                                    <select class="form-control" id="weixin_group0" name="weixin_group0" data-parsley-group="wizard-step-1" required data-parsley-error-message="请选择微信群">
+                                                    <option value="">请选择</option>
+                                                    {% for item in context %}
+                                                        <option value="{{item['tag_name']}}">{{item['tag_name']}}</option>
+                                                    {% end %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label>微信号 *</label>
+                                                    <input type="text" id="wechatid0" name="wechatid0" placeholder="请留下正确的微信ID号【注意，是微信唯一ID，不是微信昵称】" class="form-control" data-parsley-group="wizard-step-1" required value="" data-parsley-error-message="请填写微信号" />
+                                                    <span style="margin-top:5px;">以便联合会秘书小数点可以搜索到您并添加您为好友。您也可主动添加小数点（ID: decimal_point）为好友，注明“单位+姓名+群友/会员申请”</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>所在城市 *</label>
+                                                    <input id="city0" name="city0" class="form-control autocomplete" placeholder="如：北京" data-parsley-group="wizard-step-1" required value="" data-parsley-error-message="请填写城市">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>邮箱 *</label>
+                                                    <input type="email" id="email0" name="email0" placeholder="例如: abc@yourdomain.com" class="form-control" data-parsley-group="wizard-step-1" data-parsley-type="email" required value="" data-parsley-error-message="请填写合法的邮箱地址" />
+                                                </div>
+                                            </div>
+                                            <!-- end col-4 -->
+                                            <!-- begin col-4 -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>公司职位 *</label>
+                                                    <input type="text" id="position0" name="position0" placeholder="请填写公司职位" class="form-control autocomplete" data-parsley-group="wizard-step-1" required value="" data-parsley-error-message="请填写职位名称" />
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- end col-4 -->
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group block1">
+                                                    <label>个人背景简介 *</label>
+                                                    <textarea class="form-control" id="person_info0" name="person_info0" placeholder="请填写个人背景" rows="3" data-parsley-group="wizard-step-1" required data-parsley-error-message="个人背景不能为空" maxlength="200"></textarea>
+                                                    <ul style="text-align: right" id="info_number"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    <button type="button" id="add_person" class="btn btn-success m-r-5 m-b-5">添加人员</button>
+                                    <button type="button" id="remove_person" class="btn btn-danger m-r-5 m-b-5">移除人员</button>
+                                </div>
+                                
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-1 -->
+                        <!-- begin wizard step-2 -->
+                        <div class="wizard-step-2">
+                            <fieldset>
+                                <legend class="pull-left width-full">公司及职业信息</legend>
+                                <!-- begin row -->
+                                <div class="row">
+                                    <!-- begin col-6 -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>公司名 *</label>
+                                            <input type="text" id="org_name" name="org_name" placeholder="请填写完整公司名称" class="form-control autocomplete" data-parsley-group="wizard-step-2" required value="" data-parsley-error-message="请填写公司名称" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-6 -->
+                                    <!-- begin col-6 -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>企业法人/责任人 *</label>
+                                            <input type="text" name="representative" placeholder="请填写企业法人/责任人" class="form-control" data-parsley-group="wizard-step-2" required value="" data-parsley-error-message="请填写企业法人/责任人名称" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-6 -->
+                                </div>
+                                <!-- end row -->
+                                <!-- begin row -->
+                                <div class="row">
+                                    <!-- begin col-6 -->
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>公司简介 *</label>
+                                            <textarea class="form-control" id="general_description" name="general_description" placeholder="请简要介绍单位基本情况，包括但不限于股东、注册资本、资质、业务范围、业务规模等反映公司基本情况的信息" rows="4" data-parsley-group="wizard-step-2" required value="info" maxlength="200" data-parsley-error-message="请填写公司简介"></textarea>
+                                            <ul style="text-align: right" id="general_description_number"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>业务范围 *</label>
+                                            <textarea type="text" id="domain_description" name="domain_description" placeholder="单位会员申请请介绍单位的主营业务或产品重点阐明单位的业务模式以及服务对象等信息；
+个人申请请简要介绍自己负责的业务范围。" rows="4" class="form-control" data-parsley-group="wizard-step-2" required maxlength="200" data-parsley-error-message="请填写业务范围"></textarea>
+                                                    <ul style="text-align: right" id="domain_description_number"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>所属行业 *</label>
+                                            <input type="text" id="industry" name="industry" placeholder="请填写所属行业" class="form-control autocomplete" data-parsley-group="wizard-step-2" required value="" data-parsley-error-message="请填写所属行业" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>办公地址 *</label>
+                                            <input type="text" id="office_address" name="office_address" placeholder="请填写公司办公地址" class="form-control autocomplete" data-parsley-group="wizard-step-2" required value="" data-parsley-error-message="请填写公司办公地址" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <!-- begin col-6 -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>是否是高新企业</label>
+                                            <select class="form-control" name="high_tech">
+                                                <option value=""></option>
+                                                <option value="是">是</option>
+                                                <option value="否">否</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>公司网址</label>
+                                            <input type="text" name="website" placeholder="请填写官网地址" class="form-control" data-parsley-group="wizard-step-2"  value="" />
+                                        </div>
+                                    </div>
+
+                                    <!-- end col-6 -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>备注</label>
+                                            <textarea type="text" id="comments" name="comments" placeholder="" rows="4" class="form-control" data-parsley-group="wizard-step-3" maxlength="200"></textarea>
+                                                    <ul style="text-align: right" id="comments_number"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="m-b-10">请上传企业的营业执照照片
+                                </label>
+                                {% include "simple_upload_image.html" %}
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-2 -->
+                        <!-- begin wizard step-3 -->
+                        <div class="wizard-step-3">
+                            <fieldset>
+                                <legend class="pull-left width-full">资源共享</legend>
+                                <!-- begin row -->
+                                 <div class="row">
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label>联合会普通会员推荐人1 *</label>
+                                            <input type="text" id="first_normal_recommend" name="first_normal_recommend" placeholder="请填写联合会普通会员推荐人" class="form-control" data-parsley-group="wizard-step-3" value="" required data-parsley-error-message="推荐人不能为空" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label>联合会普通会员推荐人2</label>
+                                            <input type="text" name="second_normal_recommend" placeholder="请填写联合会普通会员推荐人" class="form-control" data-parsley-group="wizard-step-3"  value="" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="form-group block1">
+                                            <label>联合会理事会员推荐人</label>
+                                            <input type="text" name="first_advanced_recommend" placeholder="请填写联合会普通会员推荐人" class="form-control" data-parsley-group="wizard-step-3" value="" />
+                                        </div>
+                                    </div>
+                                    <!-- end col-4 -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group block1">
+                                            <label>您希望通过联合会获取哪些服务或资源？ *</label>
+                                            <textarea class="form-control" id="expects" name="expects" placeholder="" rows="3" data-parsley-group="wizard-step-3" required maxlength="200" data-parsley-error-message="此选项不能为空"></textarea>
+                                                    <ul style="text-align: right" id="expects_number"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <!-- begin row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group block1">
+                                            <label>您能为联合会提供哪些服务或资源？或者可做什么贡献？ *</label>
+                                            <textarea class="form-control" id="wills" name="wills" placeholder="包括但不限于：组织讲座、组织培训、提供学生实习机会、组织企业参观访问、提供数据源和企业导师等。" rows="3" data-parsley-group="wizard-step-3" required maxlength="200" data-parsley-error-message="此选项不能为空"></textarea>
+                                                    <ul style="text-align: right" id="wills_number"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-3 -->
+                        
+                        <!-- begin wizard step-4 -->
+                        <div>
+                            <div class="jumbotron m-b-0 text-center">
+                                <h1>只差一步</h1>
+                                <p>请您确认以上所填信息，然后点击以下按钮提交申请。我们将尽快通知您会员审核情况！ </p>
+                                <div style="text-align: center;">
+                                        <div style="width: 100%">
+                                        <img class="img-thumbnail" style="width: 200px;height: 200px" src="/assets/ticket/image/5b815386a79b2cbfc63e7426cdc4beaa.jpg"/>
+                                        <p>扫码添加"小数点"的微信号</p>
+                                            </div>
+                                        <div style="width: 100%">
+                                        <img class="img-thumbnail" style="width: 200px;height: 200px" src="/assets/ticket/image/46886647a7775f0999dd634f5491e127.jpg"/>
+                                        <p>扫码关注"清数"的公众号</p>
+                                            </div>
+                                            </div>
+                                <p><button class="btn btn-warning btn-lg" role="button" id="btn-submit" type="button">确认并提交</button></p>
+                            </div>
+                        </div>
+                        <!-- end wizard step-4 -->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>
+
+<div class="modal fade" id="modal-bind-cellphone">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">绑定手机号码</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">验证码</label>
+                        <div class="col-md-5">
+                            <input class="form-control" placeholder="请输入您手机收到的验证码" id="vcode" value=""/>
+                        </div>
+                    </div>                   
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-white" id="bind-cellphone">确定绑定</a>
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- end row

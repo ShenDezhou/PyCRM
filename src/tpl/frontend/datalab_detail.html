@@ -1,0 +1,139 @@
+<style type="text/css">
+    .news-content{
+    padding: 0px 5px 10px;
+    font-size: 13px;
+    color: #000;
+    line-height: 18px;
+    letter-spacing: 0px;
+}
+.news-content h2{
+    font-size: 23px;
+    color: #0073e8;
+    font-weight: bold;
+}
+.news-content hr{
+    border-color: #c9c9c9;
+    margin-left: 0px;
+    margin-right: -15px;
+}
+.news-content .news-title{
+    font-size: 20px;
+    line-height: 28px;
+    color: #000;
+    font-weight: bold;
+}
+.news-content .news-indent{
+    padding-left:0px;
+}
+.news-content img{
+    max-width: 100%;
+}
+.news-content .news-date{
+    font-size: 14px;
+    color: #0000;
+    margin-bottom: 10px;
+}
+.news-content p{
+    margin-bottom: 20px;
+    /*text-indent: 32px;*/
+}
+.news-content img{
+    width: 100%;
+    max-width: 100%;
+}
+</style>
+<div id="datalab" class="content bg-black-darker has-bg" data-scrollview="true">
+    <!-- begin content-bg -->
+    <div class="content-bg">
+        <img src="/static/cav/frontend/one-page-parallax/assets/img/quote-bg.jpg" alt="Quote" />
+    </div>
+    <!-- end content-bg -->
+    <!-- begin container -->
+    <div class="container p-t-40 m-t-30" data-animation="true" data-animation-type="fadeInLeft">
+        <!-- begin row -->
+        <div class="row">
+            <!-- begin col-12 -->
+            <div class="col-md-12 quote">
+                <h1>
+                    <i class="fa fa-quote-left"></i> 
+                    清数实验数据共享平台
+                    <i class="fa fa-quote-right"></i>
+                    <small>最受信赖的数据创新生态</small>
+                </h1>
+            </div>
+            <!-- end col-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<div id="datalab" class="content bg-silver" data-scrollview="true">
+
+    <div class="container" >
+        <div class="row bg-white" style="position:relative;">
+            <h3 class="m-b-20 m-t-10 m-l-20">{{ context['datalab']['org_name'] }}</h3>
+            <div class="col-md-5">
+                {% if context['datalab']['pictures'] %}
+                <img src="/assets/ticket/image/{{ context['datalab']['pictures'].split(',')[0] }}" style="width:100%;"/>
+                {% else %}
+                <img src="/static/cav/img/default-u.png" alt="" style="width:100%;"/>
+                {% end %}
+                
+            </div>
+            <div class="col-md-6 col-md-offset-1 news-content">
+                <h4 class="m-b-20 m-t-10">单位简介</h4>
+                <div class="news-date news-indent">
+                    <h6 >{{ context['datalab']['org_describle'] }}</h6>
+                </div>
+                <div class="news-date news-indent">
+                    <i class="fa fa-tags fa-lg"></i> 单位性质:{{ context['datalab']['org_type'] }} 
+                </div>
+                <div class="news-date news-indent">
+                    <i class="fa fa-database fa-lg"></i> 数据类别:{{ context['datalab']['data_type'] }} 
+                </div>
+                <div class="news-date news-indent">
+                    <i class="fa fa-cubes fa-lg"></i> 所属行业:
+                     {{ context['datalab']['industry'] }}
+                </div>
+                
+                <div class="news-date news-indent m-b-20">
+                    <span class="prd-value">
+                      <a class="btn btn-inline-block btn-warning prd-phone" type="button" href="tel:{{ context["datalab"]["connect_cellphone"] }}">
+                        <i class="fa fa-fw fa-phone-square"></i> 
+                        {{ context["datalab"]["connect_cellphone"] }}
+                        ({{ context["datalab"]["connect_person"] }})
+                    </a>
+                    </span> 
+                </div>
+
+                    
+            </div>
+        </div>
+
+        <div class="row bg-white">
+            <div class="col-md-12">
+                <div class="news-content m-b-20">
+                    <h4 class="m-t-30">数据集说明</h4>
+                    <hr class="m-t-1"/>
+                    <p class="">
+                    {% raw context['datalab']['content'] %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% if context['datalab']['attachments'] %}
+        <div class="row bg-white">
+            <div class="news-content">
+                <h4 class="m-l-10">数据样例下载：</h4>
+                {% for a in context['datalab']['attachments'].split(',') %}
+                <a class="btn btn-link" href="/assets/news/doc/{{ a }}">{{ a.split('/')[-1] }}</a>
+                {% end %}
+            </div>
+        </div>
+        {% end %}
+    </div>
+</div>
+
+
+
+

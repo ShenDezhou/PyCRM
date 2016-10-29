@@ -1,0 +1,175 @@
+
+<style type="text/css">
+@media (max-width: 767px){
+    .bwizard-steps{
+        display: none !important;
+    }
+}
+</style>
+
+<!-- begin row -->
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-warning">
+
+            <div class="panel-heading">
+                <h4 class="panel-title">只需三步，提交你的合作需求</h4>
+            </div>
+            <div class="panel-body">
+                <form action="/rest/form/requirement" method="POST" data-parsley-validate="true" name="form-wizard" id="submit-form">
+                    <div id="wizard">
+                        <ol>
+                            <li>
+                                我是谁？
+                            </li>
+                            <li>
+                                合作需求是什么？
+                            </li>
+                            <li>
+                                承诺回报？
+                            </li>
+                        </ol>
+                        <!-- begin wizard step-1 -->
+                        <div class="wizard-step-1">
+                            <fieldset>
+                                <legend class="pull-left width-full">1、我是谁？</legend>
+                                <!-- begin row -->
+                                <div class="row">
+                                    <!-- begin col-4 -->
+                                    <div class="col-md-4">
+                                        <div class="row m-b-5">
+                                            <div class="col-xs-3">
+                                                <label>姓名*</label>
+                                            </div>
+                                            <div class="col-xs-9">
+                                                <input type="text" id="contact_name" name="contact_name" placeholder="请填写姓名" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row m-b-5">
+                                            <div class="col-xs-3">
+                                                <label>手机号*</label>
+                                            </div>
+                                            <div class="col-xs-9">
+                                                <input type="text" id="contact_cellphone" name="contact_cellphone" placeholder="请填写手机号" class="form-control" data-parsley-group="wizard-step-1" data-parsley-type="number" required value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row m-b-5">
+                                            <div class="col-xs-3">
+                                                <label>微信号*</label>
+                                            </div>
+                                            <div class="col-xs-9">
+                                                <input type="text" id="contact_wechatid" name="contact_wechatid" placeholder="请填写微信号" class="form-control" data-parsley-group="wizard-step-1" data-parsley-type-xx="number" required value="" />
+                                            </div>
+                                        </div>
+                                    </div>     
+                                </div>
+                                <!-- end row -->
+                                <!-- begin row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group block1">
+                                            <label>我的介绍*</label>
+                                            <textarea class="form-control" id="intro_content" name="intro_content" placeholder="" rows="4" data-parsley-group="wizard-step-1" required ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-1 -->
+                        <!-- begin wizard step-2 -->
+                        <div class="wizard-step-2">
+                            <fieldset>
+                                <legend class="pull-left width-full">2、我的合作需求是什么？</legend>
+                                <!-- <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group block1">
+                                            <label>需求来源*</label>
+                                            <select class="form-control" id="subject" name="subject">
+                                                {% for s in context %}
+                                                <option value="{{s['tag_id']}}">{{s['tag_name']}}</option>
+                                                {% end %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group block1">
+                                            <label>一句话概括我的需求*</label>
+                                            <input type="text" id="title" name="title" placeholder="请尽量用一句话说明" class="form-control" data-parsley-group="wizard-step-2" data-parsley-type-xx="number" required value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group block1">
+                                            <label>更详细的说明*</label>
+                                            <textarea class="form-control" id="mycontent" name="mycontent" placeholder="" rows="8" data-parsley-group="wizard-step-2" required ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-3 -->
+                        <!-- begin wizard step-3 -->
+                        <div class="wizard-step-3">
+                            <fieldset>
+                                <legend class="pull-left width-full">3、我承诺的回报是什么？</legend>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group block1">
+                                            <textarea class="form-control" id="repay_content" name="repay_content" placeholder="" rows="8" data-parsley-group="wizard-step-3" required ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <!-- end wizard step-3 -->
+                        <!-- begin wizard step-4 -->
+                        <div>
+                            <div class="jumbotron m-b-0 text-center">
+                                <p class="p-10">请您确认以上所填信息，然后点击以下按钮提交申请。我们将尽快通知您会员审核情况！ </p>
+                                <p><button class="btn btn-warning btn-lg" role="button" id="btn-submit" type="button">确认并提交</button></p>
+                            </div>
+                        </div>
+                        <!-- end wizard step-4 -->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>
+
+<div class="modal fade" id="modal-bind-cellphone">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">绑定手机号码</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">验证码</label>
+                        <div class="col-md-5">
+                            <input class="form-control" placeholder="请输入您手机收到的验证码" id="vcode" value=""/>
+                        </div>
+                    </div>                   
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-white" id="bind-cellphone">确定绑定</a>
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- end row -->

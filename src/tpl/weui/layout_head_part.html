@@ -1,0 +1,22 @@
+<meta charset="UTF-8">
+<title>
+    {% if 'context' in globals() and context and 'title' in context %}
+        {{ context['title'] }}
+    {% end %}
+
+    {% if 'page' in globals() and 'title' in page %}
+        {{ page['title'] }}
+    {% end %}
+    {% if 'page' in globals() and 'description' in page %}
+        {{ page['description'] }}
+    {% end %}
+</title>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="baidu-site-verification" content="57IfYtNnfd" />
+<meta name="renderer" content="webkit">
+
+<!-- head 中 -->
+<link href="{{ static_url("cav/weui/dist/lib/weui.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/weui/dist/css/jquery-weui.min.css") }}" rel="stylesheet" />
+<link href="{{ static_url("cav/weui/dist/demos/css/demos.css") }}" rel="stylesheet" />

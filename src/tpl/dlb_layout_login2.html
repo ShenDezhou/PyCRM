@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>微信扫描登陆</title>
+   <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+   <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+ <div class="input-group">
+         <span class="input-group-addon">用户id</span>
+         <input type="text" class="form-control" id="phone_number" placeholder="id">
+      </div>
+      <br>
+<button class="btn btn-default" id="btn-bind-member">登陆</button>
+</body>
+</html>
+<script type="text/javascript">
+$(function() {
+
+    $('#btn-bind-member').click(function() {
+        $.ajax({
+            type: "POST",
+            url: '/rest/mgr/login2',
+            data: {
+                id:$('#phone_number').val(),
+            },
+            success: function(data) {
+
+               location.href = "/mgr/console";
+            },
+            error: function() {
+                alert('网络错误！');
+            },
+            dataType: 'json'
+        });
+        return false;
+    });
+});
+</script>

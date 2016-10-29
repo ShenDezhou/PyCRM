@@ -1,0 +1,54 @@
+<style type="text/css">
+.navbar-header .navbar-brand{
+    height: 58px;
+    width: 200px;
+    background: url({{ static_url('cav/img/frontend/images/banner-logo.png') }}) 0 0 no-repeat;
+    background-size: auto 100%;
+}
+.navbar-small .navbar-header .navbar-brand{
+    height: 50px;
+    width: 200px;
+    background: url({{ static_url('cav/img/logo2.png') }}) 0 0 no-repeat;
+    background-size: auto 95%;
+}
+.header.navbar.navbar-transparent {
+    border-bottom: 1px solid #454545;
+}
+</style>
+
+<!-- begin #header -->
+<div id="header" class="header navbar navbar-transparent navbar-fixed-top">
+    <!-- begin container -->
+    <div class="container">
+        <!-- begin navbar-header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand m-t-5">
+            </a>
+        </div>
+        <!-- end navbar-header -->
+        <!-- begin navbar-collapse -->
+        <div class="collapse navbar-collapse" id="header-navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#home" data-click="scroll-to-target">首页</a></li>
+                <!-- <li><a href="#datalab" data-click="scroll-to-target">实验数据共享平台</a></li> -->
+                <!-- <li><a href="/invest/" data-click="scroll-to-target">清数资本</a></li> -->
+                <!-- <li><a href="#about" data-click="scroll-to-target">关于清数</a></li> -->
+                <li><a href="#about" data-click="scroll-to-target">运营模式</a></li>
+                <li><a href="#supported" data-click="scroll-to-target">支持单位</a></li>
+                <li><a href="#team" data-click="scroll-to-target">核心团队</a></li>
+                <li><a href="#work" data-click="scroll-to-target">最新活动</a></li>
+                <!-- <li><a href="#bp" data-click="scroll-to-target">合作伙伴</a></li> -->
+                <!-- <li><a href="#union" data-click="scroll-to-target">清华大数据产业联合会</a></li> -->
+                <li><a href="#contact" data-click="scroll-to-target">联系我们</a></li>
+            </ul>
+        </div>
+        <!-- end navbar-collapse -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end #header -->

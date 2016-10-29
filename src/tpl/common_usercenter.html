@@ -1,0 +1,332 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        我的个人信息
+    </div>
+    <div class="panel-body">
+        <div class="row m-b-30">
+            <div class="col-md-3">
+                {% if handler.is_wechat() %} {% if handler.current_user %} {% if handler.is_member() %}
+                <a href="/common/memberinfo" class="btn btn-primary m-r-5"><i class="fa fa-certificate fa-fw"></i> 会员信息</a>
+                {% else %}
+                <a href="/page/joinmember" target="_blank" class="btn btn-primary m-r-5"><i
+                        class="fa fa-certificate fa-fw"></i> 加入会员</a> {% end %} {% end %}
+            </div>
+            {% end %}
+        </div>
+        <div class="col-md-7">
+            <div class="row">
+                <div class="card">
+                    <div class="center">
+                        <img width="250px" height="250px"
+                             src="{{context['user_profile']['authorized']['head_img_url']}}"/>
+                    </div>
+                    <div class="card-content horizontal center">
+                        <h4 class="card-title">{{context['user_profile']['authorized']['nick_name']}}</h4>
+                        <h4>{{context['user_profile']['authorized']['country']}}
+                            {{context['user_profile']['authorized']['province']}}
+                            {{context['user_profile']['authorized']['city']}}</h4>
+                    </div>
+                </div>
+            </div>
+            {% if not context['user_profile']['authorized']['cellphone'] %}
+            <form class="row">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">绑定手机号</span>
+                        <p>您需要先绑定手机号才能填写个人信息。</p>
+                    </div>
+                    <div class="card-action">
+                        <a onclick="$._bindCellphone('{{context['user_profile']['authorized']['person_id']}}')"
+                           class="btn waves-effect waves-teal"><i class="material-icons">call</i><span
+                                style="padding-left:10px;padding-bottom:10px;">绑定</span></a>
+                    </div>
+                </div>
+            </form>
+            {% end %}
+            <div id="div_person">
+                <div class="row">
+                    <form class="col s12" id="userinfo" name="userinfo">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="fullname">真实姓名 *</label>
+                                <input id="fullname" name="fullname" type="text" data-error=".errorTxt1">
+                                <input id="person_id" type="hidden" value=""/>
+                                <div class="errorTxt1" style="color: red"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender" class="col-md-3 control-label">性别 *</label>
+                            <div class="input-field">
+                                <select id="gender" name="gender">
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="wechatid">微信号 *</label>
+                                <input id="wechatid" name="wechatid" type="text" data-error=".errorTxt2">
+                                <div class="errorTxt2" style="color: red"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="email">邮箱 *</label>
+                                <input id="email" name="email" type="text" data-error=".errorTxt3">
+                                <div class="errorTxt3" style="color: red"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="email1">邮箱 1</label>
+                                <input id="email1" name="email1" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="email2">邮箱 2</label>
+                                <input id="email2" name="email2" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 ">
+                                <label for="cellphone">手机号 *</label>
+                                <div style="text-align:left; height:50px;margin-left:15px;" class="btn btn-white "
+                                     onclick="$._bindCellphone('{{context['user_profile']['authorized']['person_id']}}')">
+                                    <input id="cellphone" name="cellphone" type="text"/>
+                                    <a onclick="$._bindCellphone('{{context['user_profile']['authorized']['person_id']}}')"
+                                       class="btn waves-effect waves-teal"
+                                       style="text-align:left;margin-left:15px;"><span>修改</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="cellphone1">手机号 1</label>
+                                <input id="cellphone1" name="cellphone1" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="cellphone2">手机号 2</label>
+                                <input id="cellphone2" name="cellphone2" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" id="birthday" name="birthday" placeholder="" class="form-control"
+                                       data-parsley-group="wizard-step-1" readonly data-template="YYYY MM DD"
+                                       value="1980-06-15"/>
+                                <label for="birthday" data-error="wrong" data-success="right" class="active"
+                                       style="top: 1px;">出生日期</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="school">毕业院校</label>
+                                <input id="school" name="school" type="text" data-error=".errorTxt6">
+                                <div class="errorTxt6" style="color: red"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <select id="education" name="education" type="text" class="select-dropdown" required=""
+                                        aria-required="true">
+                                </select>
+                                <label for="education" class="active" style="top: 1px;">学历</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" id="school_start" name="school_start" placeholder=""
+                                       class="form-control" data-parsley-group="wizard-step-1" readonly
+                                       data-template="YYYY MM DD" value="1980-06-15"/>
+                                <label for="school_start" data-error="wrong" data-success="right" class="active"
+                                       style="top: 1px;">入学年份</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="address" name="address" type="text" class="validate" required=""
+                                       aria-required="true">
+                                <label for="address" data-error="wrong" data-success="right" class="active">通讯地址</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="person_info" name="person_info" type="text" class="materialize-textarea"
+                                          length="120"></textarea>
+                                <label for="person_info">个人背景简介</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="expects" name="expects" type="text" class="materialize-textarea"
+                                          length="120"></textarea>
+                                <label for="expects">希望获取的服务或者资源</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="wills" name="wills" type="text" class="materialize-textarea"
+                                          length="120"></textarea>
+                                <label for="wills">可提供的资源或服务</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="checkbox" class="filled-in" id="check_student" hidden/>
+                                <label for="check_student">是否为清华在校学生</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 student">
+                                <label for="school_department">系部 </label>
+                                <input id="school_department" name="school_department" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 student">
+                                <label for="school_number">学号 </label>
+                                <input id="school_number" name="school_number" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12" style="text-align: center">
+                                <button id="save" class="btn waves-effect waves-light" type="submit" name="save">
+                                    保存个人信息
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr/>
+                    <div class="center">
+                        <h4>个人与企业关系信息</h4>
+                        <button class="btn waves-effect waves-light red lighten-1" id="add_op"> + 新增关系
+                        </button>
+                        <hr/>
+                    </div>
+                    <div id="op_info">
+                    </div>
+                    <div class="modal fade" id="modal-form-person">
+                        <div class="modal-dialog modal-large">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        ×
+                                    </button>
+                                    <h4 class="modal-title">新增个人和企业关系</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <!--<ul class="nav nav-pills">-->
+                                    <!--&lt;!&ndash; <li class="active"><a href="#edit_person" data-toggle="tab"><i class="fa fa-male m-r-5"></i> <span class="hidden-xs">个人信息</span></a></li> &ndash;&gt;-->
+                                    <!--<li class="active"><a href="#" data-toggle="tab"><i-->
+                                    <!--class="fa fa-cellphone m-r-5"></i>-->
+                                    <!--&lt;!&ndash;<span class="hidden-xs">新增</span>&ndash;&gt;-->
+                                    <!--</a></li>-->
+                                    <!--</ul>-->
+                                </div>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in">
+                                        <form id="add_op_info" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">学校或公司 *</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="add_org" name="add_org"
+                                                           placeholder="请填写公司或学校名称"
+                                                           class="form-control"
+                                                           data-parsley-group="wizard-step-1" required
+                                                           value=""/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">部门或系部</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="add_department" name="add_department"
+                                                           placeholder="请填写部门或系部信息(选填)"
+                                                           class="form-control"
+                                                           data-parsley-group="wizard-step-1" required
+                                                           value=""/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">职位 *</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" id="add_title" name="add_title"
+                                                           placeholder="请填写职位信息"
+                                                           class="form-control"
+                                                           data-parsley-group="wizard-step-1" required
+                                                           value=""/>
+                                                    <input type="hidden" value="0" id="is_primary"/>
+                                                </div>
+                                            </div>
+                                            <!--<div class="form-group">-->
+                                            <!--<label class="col-md-3 control-label">是否为代表 </label>-->
+                                            <!--<div class="col-md-9">-->
+                                            <!--<select class="form-control" id="is_primary" name="is_primary">-->
+                                            <!--<option value="0">否</option>-->
+                                            <!--<option value="1">是</option>-->
+                                            <!--</select>-->
+                                            <!--</div>-->
+                                            <!--</div>-->
+                                            <div class="modal-footer">
+                                                <a href="javascript:;" id="add_op_save" name="add_op_save"
+                                                   class="btn btn-sm btn-white"
+                                                   data-dismiss="modal">确定</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="center">
+                        <button id="showActivityRecords" class="btn waves-effect waves-light">
+                        查看参与活动记录
+                        </button>
+                    </div>
+
+                </div>
+                <!--测试-->
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-bind-cellphone">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">绑定手机号码</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">手机号码</label>
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="请输入您的手机号码" id="bind-cellphone" value=""/>
+                                <div class="input-group-btn">
+                                    <button type="button" id="btn-send-check-code" class="btn btn-success">
+                                        发送验证码
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">验证码</label>
+                        <div class="col-md-5">
+                            <input class="form-control" placeholder="请输入您手机收到的验证码" id="vcode" value=""/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-white" id="bind">确定绑定</a>
+            </div>
+        </div>
+    </div>
+</div>

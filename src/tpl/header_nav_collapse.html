@@ -1,0 +1,78 @@
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    {% if 'showTitleBar' not in page or page['showTitleBar'] %}
+    <a href="#" class="navbar-brand">
+        <img src="{{ handler.config['logo_default'] }}" />
+    </a>
+    {% else %} {% if handler.is_auth() %}
+    <a href="javascript:;" class="navbar-brand">
+                {% if not handler.current_user_profile['authorized'] %}
+                <img 
+                    src="{{ handler.current_user_profile['authorized']['head_img_url'] }}" 
+                    class="m-l-10" 
+                    alt="" style="width: 36px; height: 36px; border-radius: 36px;display:inline-block;border: 1px solid #eee;margin-top:-20px;"> 
+                <span style="display:inline-block;font-size:12px;margin-left:5px;padding-top:10px;">
+                    <div class="text-ellipsis" style="max-width:100px;">
+                        欢迎你, 
+                    {{ handler.current_user_profile['authorized']['nick_name'] }}
+                    </div>
+                
+                </span> 
+                {% end %}    
+            </a> {% else %}
+    <span style="display:inline-block;font-size:12px;line-height:60px;margin-left:15px;">
+                {% if 'page' in globals() and 'title' in page %}
+                    {{ page['title'] }}
+                {% else %}
+                    {% if 'page' in globals() and 'description' in page %}
+                        {{ page['description'] }}
+                    {% end %}
+                {% end %}
+            </span> {% end %} {% end %}
+</div>
+<!-- end header navigation  -->
+<!-- begin navbar-collapse -->
+<div class="collapse navbar-collapse" id="header-navbar">
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="/common/events">
+                <i class="fa fa-bullhorn fa-fw"></i> 活动
+            </a>
+        </li>
+        <li>
+            <a href="/common/requirements">
+                <i class="fa fa-random fa-fw"></i> 找合作
+            </a>
+        </li>
+        <li>
+            <a href="/common/articles">
+                <i class="fa fa-newspaper-o fa-fw"></i> 文章
+            </a>
+        </li>
+        {% if handler.is_admin() %}
+        <li><a href="/console" target="dlab-console"><i class="fa fa-dashboard fa-fw"></i> 内部管理</a></li>
+        {% end %} {% if handler.current_user %}
+        <li class="dropdown navbar-user">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-user fa-fw"></i> 我 <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="/common/usercenter"><i class="fa fa-info fa-fw"></i> 个人信息</a></li>
+                {% if handler.is_member() %}
+                <li><a href="/common/memberinfo"><i class="fa fa-certificate fa-fw"></i> 会员信息</a></li>
+                {% else %}
+                <li><a href="/page/joinmember" target="_blank"><i class="fa fa-certificate fa-fw"></i> 加入会员</a></li>
+                {% end %}
+                <li><a href="/logout"><i class="fa fa-level-down fa-fw"></i> 退出登录</a></li>
+            </ul>
+        </li>
+        {% else %}
+        <li><a href="/common">登录</a></li>
+        {% end %}
+    </ul>
+</div>
+<!-- end navbar-collapse -->

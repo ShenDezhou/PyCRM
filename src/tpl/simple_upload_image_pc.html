@@ -1,0 +1,68 @@
+<script type="text/javascript">
+function getFrameByName(name) {
+    for (var i = 0; i < frames.length; i++)
+        if (frames[i].name == name)
+            return frames[i];
+
+    return null;
+}
+
+/* Same as the one defined in OpenJS */
+function uploadDone(name) {
+    $('#modal-uploading').modal('hide');
+
+    var frame = getFrameByName(name);
+    if (frame) {
+        var ret = frame.document.getElementsByTagName("body")[0].innerHTML;
+
+        /* If we got JSON, try to inspect it and display the result */
+        if (ret.length) {
+            /* Convert from JSON to Javascript object */
+            var response = eval("(" + ret + ")");
+            for (var i = 0; i < response.files.length; i++) {
+                $.appendUploadedFile(response.files[i].url);
+            }
+
+        }
+
+        $('#input-upload-image').val('');
+    }
+}
+function onImageSelect(){
+    $('#btn-upload-image-start').click();
+    $('#modal-uploading').modal('show');
+}
+</script>
+
+<div class="modal fade" id="modal-uploading">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info m-b-0">
+                    <h4><i class="fa fa-cloud-upload"></i> 正在上传图片...</h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/fileupload/image" method="post" enctype="multipart/form-data" target="hidden_upload" id="form-upload-ie" style="display:" class="form-horizontal">
+    <div class="row">
+        <div class="col-md-6">
+            <input id="input-upload-image" type="file" name="files[]" class="file_upload btn btn-sm btn-success m-l-5 m-r-5 m-t-5" value="" style="max-width:98%;" onchange="onImageSelect()">
+        </div>
+        <div class="col-md-6">
+            <input id="btn-upload-image-start" type="submit" name="submit" value="上传" class="btn btn-sm btn-primary m-l-5 m-t-5" style="visibility:hidden;"/>
+        </div>
+    </div>
+    
+    <iframe id="hidden_upload" name="hidden_upload" src="" onLoad="uploadDone('hidden_upload')" style="width:0;height:0;border:0px solid #fff">
+    </iframe>
+    <!-- <p class="text-muted">请上传分辨率大于800x600像素的图片。</p> -->
+</form>

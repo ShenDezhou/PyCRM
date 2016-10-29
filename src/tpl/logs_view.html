@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网站日志</title>
+</head>
+<style>
+    .fixed {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 200px;
+        background-color: white;
+
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+</style>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+              <li>
+                <button class="btn btn-lg btn-default" type="button" id="web_log" style="background-color: black">
+                Tornado网站日志
+                    </button>
+            </li>
+            <li>
+                <button class="btn btn-lg btn-default" type="button" id="mysql" style="background-color: black">
+                MySQL日常日志
+                    </button>
+            </li>
+            <li>
+                <button class="btn btn-lg btn-default" type="button" id="error" style="background-color: black">
+                MySQL错误日志
+                    </button>
+            </li>
+            <li>
+                <button class="btn btn-lg btn-default" type="button" id="mysql-slow" style="background-color: black">
+                MySQL慢查询日志
+                    </button>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<!--<a href="#bottom" class="btn btn-lg btn-default" type="hidden" id="click" style="background-color: black">-->
+                <!--最底部-->
+                    <!--</a>-->
+<div class="panel-body" style="background-color: black">
+            <div class="content">
+                <div class="col-xs-12">
+                    <div class="box box-danger">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive" id="logs">
+                                {% for line in range(-len(context['logs']),-1) %}
+                                <div style="font-style: normal;color:white;font-family: 'Courier New';width: auto">{{
+                                    context['logs'][line] }}
+                                </div>
+                                {% end %}
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+
+</body>
+</html>

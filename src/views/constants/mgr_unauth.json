@@ -1,0 +1,8 @@
+[{
+    "id": "mgr_login",
+    "title": "银行用户登录",
+    "description": "",
+    "tpl": "mgr_login.html",
+    "css": [],
+    "js": []
+}]

@@ -1,0 +1,252 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-inverse">
+            <!-- /.box-header -->
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">新建活动</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>标题</label>
+                            <input type="text" placeholder="请输入标题" id="title" class="form-control " value="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>发布日期</label>
+                            <input type="text" placeholder="" id="published" class="form-control " value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" id="div_subject">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>活动类型</label>
+                            <select class="form-control" id="activity_online_offline">
+                                <option value="online">线上活动</option>
+                                <option value="offline">线下活动</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="div_subject">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>活动形式</label>
+                            <select class="form-control" id="activity_type">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>报名费用</label>
+                            <input type="text" placeholder="请输入报名费用" id="paid" class="form-control " value="0">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>活动地点</label>
+                            <input type="text" placeholder="请输入活动地点" id="activity_place" class="form-control " value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>范围地址</label>
+                            <input type="text" placeholder="请输入范围地址" id="general_place" class="form-control " value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>活动开始时间</label>
+                            <input type="text" placeholder="" id="activity_start_time" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>活动结束时间</label>
+                            <input type="text" placeholder="" id="activity_end_time" class="form-control " value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">指导单位</label>
+                            <input type="text" placeholder="" id="activity_guider" class="form-control " value="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">活动主办</label>
+                            <input type="text" placeholder="" id="activity_sponsor" class="form-control " value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">活动承办</label>
+                            <input type="text" placeholder="" id="activity_undertake" class="form-control " value="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">活动协办</label>
+                            <input type="text" placeholder="" id="activity_organizer" class="form-control " value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="event_corp_auth"/>是否需要企业号登录
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="sign_up_check" checked="true" />是否需要报名确认
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">选择报名必填项</label>
+                            <div class="col-md-10">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-fullname" class="sign-up-field"> 姓名
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-cellphone" class="sign-up-field"> 手机号
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-wechatid" class="sign-up-field"> 微信号
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-email" class="sign-up-field"> Email
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-org_name" class="sign-up-field"> 单位名称
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-position" class="sign-up-field"> 职位
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-person_info" class="sign-up-field"> 个人背景简介
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-contribution" class="sign-up-field"> 相关性
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="signup-check-is_volunteer" class="sign-up-field"> 志愿者
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-t-5">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">选择使用嵌入表单</label>
+                            <div class="col-md-10">
+                                <a href="javascript:;" class="btn btn-default btn-block" id="sur_id_btn"><i class="fa fa-list pull-right"></i> 未选择 </a>
+                                <input type="hidden" id="sur_id" value="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>内容</label>
+                            <textarea type="text" rows='20' id="mycontent" class="form-control" value=""></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="div_cover">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>缩略图</label>
+                            <div class="row" id="magazine_image" style="margin-top:10px;"></div>
+                            {% include "simple_upload_image.html" %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>报名成功后显示内容</label>
+                            <textarea type="text" rows='10' id="signup_content" class="form-control" value="">
+                                请扫描图中的二维码进入活动微信群；若不成功，请添加小数点微信（decimal_point）并备注“0310入群），小数点将会把您手动添加到微信群中。
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-danger" id="save"> 保存 </button>
+                <button type="submit" class="btn btn-warning" id="save_and_publish"> 保存并发布 </button>
+                <a type="submit" class="btn btn-default" id="return"> 返回 </a>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<div class="modal fade modal-wide" id="event-select-survey-modal" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#f5f5f5;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">选择一个表单</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="survey-keyword">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-success" id="event-select-survey-search">搜索</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>表单标题</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="survey-select-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-inverse" id="event-select-survey-remove">不需要表单</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

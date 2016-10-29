@@ -1,0 +1,791 @@
+[
+  {
+    "id": "mgr_unauth",
+    "title": "用户访问未授权的网页",
+    "is_shared": true,
+    "description": "",
+    "tpl": "mgr_unauth.html"
+  },
+  {
+    "id": "mgr_print",
+    "title": "打印预览",
+    "is_shared": true,
+    "description": "",
+    "layout": "layout_empty.html",
+    "tpl": "mgr_print.html"
+  },
+  {
+    "id": "mgr_console",
+    "title": "平台概况",
+    "description": "实时概要统计",
+    "layout": "layout_console.html",
+    "tpl": "console_main.html"
+  },
+  {
+    "id": "mgr_merge_org_list",
+    "title": "企业合并",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_merge_org_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/select2/dist/css/select2.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/masked-input/masked-input.min.js",
+      "cav/console/assets/plugins/select2/dist/js/select2.min.js",
+      "cav/js/mgr_merge_org_list.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_paid_detail.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_member_person_list",
+    "title": "人员管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_member_person_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/select2/dist/css/select2.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/select2/dist/js/select2.min.js",
+      "cav/js/mgr_member_person_list.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_paid_detail.js",
+      "cav/js/mgr_person_detail.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_member_org_list",
+    "title": "企业管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_member_org_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/select2/dist/css/select2.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/masked-input/masked-input.min.js",
+      "cav/console/assets/plugins/select2/dist/js/select2.min.js",
+      "cav/js/mgr_member_org_list.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_paid_detail.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_form_list",
+    "title": "个人申请管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_form_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_form_list.js",
+      "cav/js/mgr_person_detail.js",
+      "cav/js/simple_appform_vote_detail_modal.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_org_form_list",
+    "title": "企业申请管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_org_form_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_org_form_list.js",
+      "cav/js/mgr_person_detail.js",
+      "cav/js/simple_appform_vote_detail_modal.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_pass_form_list",
+    "title": "已通过会员申请管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_pass_form_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/js/mgr_pass_form_list.js",
+      "cav/js/mgr_person_detail.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_charge_detail_list",
+    "title": "会员收费明细表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_charge_detail_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/bootstrap-datetimepicker/css/datetimepicker.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/masked-input/masked-input.min.js",
+      "cav/js/mgr_charge_detail_list.js",
+      "cav/js/mgr_person_detail.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_merge_org_info",
+    "title": "企业信息合并",
+    "description": "企业信息合并",
+    "layout": "layout_console.html",
+    "tpl": "mgr_merge_org_info.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/masked-input/masked-input.min.js",
+      "cav/js/mgr_merge_org_info.js",
+      "cav/js/jquery.check.js"
+    ]
+  },
+  {
+    "id": "mgr_edit_member_info",
+    "title": "个人/企业信息修改",
+    "description": "个人/企业信息修改",
+    "layout": "layout_console.html",
+    "tpl": "mgr_edit_member_info.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/masked-input/masked-input.min.js",
+      "cav/js/mgr_edit_member_info.js",
+      "cav/js/jquery.check.js"
+    ]
+  },
+  {
+    "id": "mgr_edit_person_info",
+    "title": "个人会员申请信息修改",
+    "description": "个人会员申请信息修改",
+    "layout": "layout_console.html",
+    "tpl": "mgr_edit_person_info.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/masked-input/masked-input.min.js",
+      "cav/js/mgr_edit_person_info.js",
+      "cav/js/jquery.check.js"
+    ]
+  },
+  {
+    "id": "mgr_edit_org_info",
+    "title": "企业信息修改",
+    "description": "企业信息修改",
+    "layout": "layout_console.html",
+    "tpl": "mgr_edit_org_info.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/masked-input/masked-input.min.js",
+      "cav/js/mgr_edit_org_info.js",
+      "cav/js/jquery.check.js"
+    ]
+  },
+  {
+    "id": "mgr_member_app_links",
+    "title": "会员申请表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_member_app_links.html",
+    "css": [],
+    "js": [
+      "cav/js/mgr_member_app_links.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_authorized_list",
+    "title": "微信授权用户",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_authorized_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_authorized_list.js",
+      "cav/js/mgr_person_detail.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_weixin_apply_list",
+    "title": "微信群友申请管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_weixin_apply_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_weixin_apply_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_weixin_list",
+    "title": "微信群友管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_weixin_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_weixin_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_article_list",
+    "title": "文章管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_news_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_news_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_article_new",
+    "title": "文章新建/修改",
+    "description": "",
+    "tpl": "mgr_news_new.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-fileinput/css/fileinput.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/summernote/summernote.css"
+    ],
+    "js": [
+      "cav/console/assets/js/jquery.check.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/bootstrap-fileinput/js/fileinput.min.js",
+      "cav/console/assets/plugins/bootstrap-fileinput/js/fileinput_locale_zh.js",
+      "cav/console/assets/plugins/summernote/summernote.min.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_news_new.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_requirement_list",
+    "title": "需求管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_requirement_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_requirement_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_requirement_new",
+    "title": "需求新建/修改",
+    "description": "",
+    "tpl": "mgr_requirement_new.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-fileinput/css/fileinput.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/summernote/summernote.css"
+    ],
+    "js": [
+      "cav/console/assets/js/jquery.check.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/bootstrap-fileinput/js/fileinput.min.js",
+      "cav/console/assets/plugins/bootstrap-fileinput/js/fileinput_locale_zh.js",
+      "cav/console/assets/plugins/summernote/summernote.min.js",
+      "cav/js/mgr_upload_doc.js",
+      "cav/js/mgr_requirement_new.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_survey_list",
+    "title": "表单管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_survey_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_survey_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_survey_new",
+    "title": "表单新建/修改",
+    "description": "",
+    "tpl": "mgr_survey_new.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-fileinput/css/fileinput.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/summernote/summernote.css"
+    ],
+    "js": [
+      "cav/console/assets/js/jquery.check.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/bootstrap-fileinput/js/fileinput.min.js",
+      "cav/console/assets/plugins/bootstrap-fileinput/js/fileinput_locale_zh.js",
+      "cav/console/assets/plugins/summernote/summernote.min.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/math_uuid.js",
+      "cav/js/mgr_survey_new.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_survey_result",
+    "title": "表单提交结果",
+    "description": "",
+    "tpl": "mgr_survey_result.html",
+    "is_shared": true,
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Buttons/css/buttons.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Buttons/js/buttons.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Buttons/js/buttons.print.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Buttons/js/buttons.flash.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Buttons/js/buttons.html5.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Buttons/js/buttons.colvis.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_survey_result.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_dataset_list",
+    "title": "数据源管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_dataset_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_dataset_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_dataset_new",
+    "title": "数据源新建/修改",
+    "description": "",
+    "tpl": "mgr_dataset_new.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-fileinput/css/fileinput.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/summernote/summernote.css"
+    ],
+    "js": [
+      "cav/console/assets/js/jquery.check.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/bootstrap-fileinput/js/fileinput.min.js",
+      "cav/console/assets/plugins/bootstrap-fileinput/js/fileinput_locale_zh.js",
+      "cav/console/assets/plugins/summernote/summernote.min.js",
+      "cav/js/mgr_upload_doc.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_dataset_new.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_activity_list",
+    "title": "活动列表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_activity_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/bootstrap-combobox/css/bootstrap-combobox.css",
+      "cav/console/assets/plugins/switchery/switchery.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js",
+      "cav/console/assets/plugins/bootstrap-daterangepicker/moment.js",
+      "cav/console/assets/plugins/switchery/switchery.min.js",
+      "cav/js/mgr_activity_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_activity_new",
+    "title": "活动新建/修改",
+    "description": "",
+    "tpl": "mgr_activity_new.html",
+    "css": [
+      "cav/console/assets/plugins/bootstrap-fileinput/css/fileinput.min.css",
+      "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+      "cav/console/assets/plugins/bootstrap-datetimepicker/css/datetimepicker.css",
+      "cav/console/assets/plugins/summernote/summernote.css"
+    ],
+    "js": [
+      "cav/console/assets/js/jquery.check.js",
+      "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+      "cav/console/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+      "cav/console/assets/plugins/summernote/summernote.min.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_activity_new.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_activity_visit_list",
+    "title": "活动访问列表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_activity_visit_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_activity_visit_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_sign_up_list",
+    "title": "活动报名列表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_sign_up_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_sign_up_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_wechat_contact",
+    "title": "客服列表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_contact_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/parsley/src/parsley.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/parsley/dist/parsley.js",
+      "cav/js/mgr_contact_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_register_list",
+    "title": "活动签到列表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_register_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_register_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_discussion_list",
+    "title": "讨论列表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_discussion_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/bootstrap-combobox/css/bootstrap-combobox.css",
+      "cav/console/assets/plugins/switchery/switchery.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/console/assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js",
+      "cav/console/assets/plugins/bootstrap-daterangepicker/moment.js",
+      "cav/console/assets/plugins/switchery/switchery.min.js",
+      "cav/js/mgr_discussion_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_discussion_sign_up_list",
+    "title": "讨论报名列表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_discussion_sign_up_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_discussion_sign_up_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_discussion_visit_list",
+    "title": "讨论访问列表",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_discussion_visit_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_discussion_visit_list.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_manager_list",
+    "title": "内部人员管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_manager_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+      "cav/console/assets/plugins/jstree/dist/themes/default/style.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/jstree/dist/jstree.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_manager_list.js",
+      "cav/js/mgr_person_detail.js",
+      "cav/console/assets/js/jquery.check.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_channel_list",
+    "title": "渠道管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_channel_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_channel_list.js",
+      "cav/console/assets/js/jquery.check.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_channel_new",
+    "title": "渠道管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_channel_new.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_upload_image.js",
+      "cav/js/mgr_channel_new.js",
+      "cav/console/assets/js/jquery.check.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_group_tree",
+    "title": "权限组织架构",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_group_tree.html",
+    "css": [
+      "cav/console/assets/plugins/font-awesome/css/font-awesome.min.css",
+      "cav/console/assets/plugins/jstree/dist/themes/default/style.css"
+    ],
+    "js": [
+      "cav/weui/dist/lib/jquery-2.1.4.min.js",
+      "cav/console/assets/js/jquery.check.js",
+      "cav/console/assets/plugins/jstree/dist/jstree.js",
+      "cav/js/mgr_group_tree.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_role_list",
+    "title": "角色授权页面管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_role_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_role_list.js",
+      "cav/console/assets/js/jquery.check.js"
+    ],
+    "embedded_js": ""
+  },
+  {
+    "id": "mgr_tag_list",
+    "title": "标签管理",
+    "description": "",
+    "layout": "layout_console.html",
+    "tpl": "mgr_tag_list.html",
+    "css": [
+      "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css"
+    ],
+    "js": [
+      "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+      "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+      "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+      "cav/js/mgr_tag_list.js"
+    ],
+    "embedded_js": ""
+  }
+]

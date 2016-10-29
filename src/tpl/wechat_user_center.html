@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>{{name}}</title>
+   <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+   <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h4 class="text-center" style="padding: 50px 0px 0px 0px">{{name}}，欢迎你</h4>
+<div class="panel panel-default" style="margin:30px 20px 15px 20px">
+   <div class="panel-body" onclick="window.location.href= 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7b99c93336fb97ce&redirect_uri=http%3A%2F%2Fapp.tsingdata.com%2Fwechat%2Fusercenter%2Finfo&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'">
+      个人信息
+   </div>
+</div>
+<div class="panel panel-default" style="margin:30px 20px 15px 20px">
+   <div class="panel-body">
+      安全
+   </div>
+</div>
+<div class="panel panel-default" style="margin:30px 20px 15px 20px">
+   <div class="panel-body">
+      联系人
+   </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!-- begin login -->
+<div class="login login-with-news-feed">
+    <!-- begin news-feed -->
+    <div class="news-feed">
+        <div class="news-image">
+            <img src="/static/cav/console/assets/img/login-bg/bg-7.jpg" data-id="login-cover-image" alt="" />
+        </div>
+        <div class="news-caption">
+            <h4 class="caption-title"><i class="fa fa-diamond text-success"></i> {{ handler.config['app_welcome'] }}</h4>
+            <p>
+                
+            </p>
+        </div>
+    </div>
+    <!-- end news-feed -->
+    <!-- begin right-content -->
+    <div class="right-content">
+        <!-- begin login-header -->
+        <div class="login-header">
+            <div class="brand">
+                <img src="{{ static_url('cav/img/logo2.png') }}"/>
+                <hr/>
+                <p>请点击以下按钮登录</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sign-in"></i>
+            </div>
+        </div>
+        <!-- end login-header -->
+        <!-- begin login-content -->
+        <div class="login-content">
+            <form action="" method="POST" class="margin-bottom-0">
+                <div class="login-buttons">
+                    <a type="button" class="btn btn-warning btn-block btn-lg" href="/login">我要马上登录</a>
+                </div>
+                <br/><br/>
+                <hr />
+                <p class="text-center text-inverse">
+                    版权所有 © {{ handler.config['app_name'] }} 未经许可不得复制、转载或者摘编，违者必究
+
+                    备案/许可证编号：{{ handler.config['app_icp'] }}
+                </p>
+            </form>
+        </div>
+        <!-- end login-content -->
+    </div>
+    <!-- end right-container -->
+</div>
+<!-- end login -->

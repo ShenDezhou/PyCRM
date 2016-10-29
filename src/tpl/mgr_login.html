@@ -1,0 +1,83 @@
+<div class="login-box">
+    <div class="login-logo">
+        <!-- <a href="/"><img src="/static/lte/img/page1/logo_red.png?v=2.0" width="270" style="position:relative;top:-3px;" /></a> -->
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">联合会秘书处登录</p>
+        <form action="" method="post" id="login-form">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" id="username" placeholder="请输入登录用户名" />
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="password" placeholder="请输入密码" />
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" id="captcha" placeholder="请输入4位验证码(不分大小写)" />
+                <span class="glyphicon glyphicon-certificate form-control-feedback"></span>
+                <img src="" style="margin-top:6px;" id="captcha-img" />
+                <button class="btn btn-default btn-xs" id="captcha-btn">换一张</button>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                </div>
+                <div class="col-xs-6">
+                    <button type="submit" class="btn btn-danger btn-block" id="mgr-login-btn"> 登 录 </button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+        <div class="social-auth-links text-center">
+            <a class="btn-link btn-block btn" type="button" href="/home">返回首页</a>
+        </div>
+        <!-- /.social-auth-links -->
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+<script type="text/javascript">
+$(function() {
+    var refreshCaptcha = function() {
+        $('#captcha-img').attr('src', '/captcha?_=' + Math.random());
+        return false;
+    };
+    refreshCaptcha();
+
+    $('#captcha-btn').click(refreshCaptcha);
+    $('#mgr-login-btn').click(function() {
+        console.log($.cookie("_xsrf"));
+        $.ajax({
+            type: "POST",
+            url: '/rest/mgr/login',
+            data: {
+                _xsrf: $.cookie("_xsrf"),
+                name: $('#username').val(),
+                password: $('#password').val(),
+                captcha: $('#captcha').val()
+            },
+            success: function(data) {
+                if (data.error) {
+                    refreshCaptcha();
+                    return alert(data.error || '登录失败！');
+                }
+                alert(data.message);
+                location.href = "/mgr/console";
+            },
+            error: function() {
+                refreshCaptcha();
+                alert('网络错误！');
+            },
+            dataType: 'json'
+        });
+        return false;
+    });
+    $("#login-form input").keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            $('#mgr-login-btn').click();
+        }
+    });
+});
+</script>

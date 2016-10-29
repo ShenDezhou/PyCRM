@@ -1,0 +1,134 @@
+<!-- #modal-alert -->
+<div class="modal fade" id="modal-form-detail">
+    <div class="modal-dialog modal-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">申请表详情</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#person" data-toggle="tab"><i class="fa fa-male m-r-5"></i> <span class="hidden-xs">个人信息</span></a></li>
+                    <li class=""><a href="#org" data-toggle="tab"><i class="fa fa-suitcase m-r-5"></i> <span class="hidden-xs">公司信息</span></a></li>
+                    <li id="images"><a href="#image" data-toggle="tab"><i class="fa fa-picture-o m-r-5"></i> <span class="hidden-xs">图片信息</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="person">
+                        <div class="table-responsive" id="div_person">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="org">
+                        <div class="table-responsive">
+                            <table id="org_info_table" class="table table-bordered display responsive nowrap table-striped">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="image">
+                        <div class="table-responsive">
+                            <table id="image_table" class="table table-bordered display responsive nowrap table-striped">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-member-detail">
+    <div class="modal-dialog modal-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">会员详情</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills">
+                    <li id="member_info" class="active"><a href="#member" data-toggle="tab"><i class="fa fa-cc-paypal m-r-5"></i> <span class="hidden-xs">会员信息</span></a></li>
+                    <li id="person_info" class=""><a href="#member_person" data-toggle="tab"><i class="fa fa-male m-r-5"></i> <span class="hidden-xs">个人信息</span></a></li>
+                    <li class=""><a href="#member_org" data-toggle="tab"><i class="fa fa-suitcase m-r-5"></i> <span class="hidden-xs">公司信息</span></a></li>
+                    <li class="" id="member_control"><a href="#control" data-toggle="tab"><i class="fa fa-wrench m-r-5"></i> <span class="hidden-xs">管理</span></a></li>
+                    <li id="member_images"><a href="#member_image" data-toggle="tab"><i class="fa fa-picture-o m-r-5"></i> <span class="hidden-xs">图片信息</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade  active in" id="member">
+                        <div class="">
+                            <table id="member_info_table" class="table table-bordered display responsive nowrap table-striped">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="member_person">
+                        <div class="" id="div_member_person">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="member_org">
+                        <div class="">
+                            <table id="member_org_info_table" class="table table-bordered display responsive nowrap table-striped">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="control">
+                        <div class="row">
+                            <div id="person_member">
+                                <div class="col-md-12">
+                                    <div class="form-group block1">
+                                        <label>分配的微信群 <small>(多个微信群可用,隔开)</small></label>
+                                        <select id="weixin_groups" name="weixin_groups" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group block1">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="certificate"> 是否已发放证书
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group block1">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="if_in_member_group"> 是否加到会员群
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group block1">
+                                    <label>标签 <small>(多个标签可用,隔开)</small></label>
+                                    <select id="tag_group" name="tag_group" class="form-control" style="width: 100%" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                            <a id="save" class="btn btn-info m-l-10">保存修改</a>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="member_image">
+                        <div class="">
+                            <table id="member_image_table" class="table table-bordered display responsive nowrap table-striped">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>

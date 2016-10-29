@@ -1,0 +1,57 @@
+{
+    "land": {
+        "land_type": "*",
+        "address": "",
+        "remain_years": "*",
+        "square": "*"
+    },
+    "factory": {
+        "factory_type": "*",
+        "address": "",
+        "used_years": "*",
+        "square": "*"
+    },
+    "commercial_house": {
+        "bizhouse_type": "*",
+        "address": "",
+        "floors": "*",
+        "square": "*",
+        "constructed_year": "*"
+    },
+    "house": {
+        "house_type": "*",
+        "house_category": "*",
+        "floors": "*",
+        "address": "",
+        "constructed_year": "*",
+        "square": "*"
+    },
+    "machine": {
+        "machine_industry": "*",
+        "machine_type": "*",
+        "brand": "*",
+        "model": "*",
+        "service_years": "*",
+        "used_years": "*"
+    },
+    "transportation": {
+        "drive_distance": "*",
+        "brand": "*",
+        "model": "*",
+        "used_years": "*"
+    },
+    "stock": {
+        "name": "",
+        "stock_type": "*",
+        "stock_amount": "*"
+    },
+    "remainder": {
+        "name": "",
+        "goods_type": "*",
+        "goods_amount": "*",
+        "goods_store_type": "*"
+    },
+    "others": {
+        "descriptions": "*"
+    }
+}

@@ -1,0 +1,232 @@
+[
+    {
+        "id": "common_usercenter",
+        "title": "个人中心",
+        "description": "用户个人信息中心",
+        "layout": "layout_materialize.html",
+        "tpl": "common_usercenter.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css",
+            "cav/console/assets/plugins/jquery-validate/style.min.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "cav/console/assets/plugins/combodate-1.0.7/combodate.js",
+            "cav/console/assets/plugins/combodate-1.0.7/moment.min.js",
+            "cav/console/assets/js/jquery.check.js",
+            "cav/console/assets/plugins/jquery-validate/jquery.validate.min.js",
+            "cav/js/mgr_upload_image.js",
+            "cav/js/common_usercenter.js",
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_materialize.js"
+        ]
+    },
+    {
+        "id": "common_memberinfo",
+        "title": "会员信息",
+        "description": "会员信息",
+        "layout": "layout_materialize.html",
+        "tpl": "common_memberinfo.html",
+        "css": [
+            "cav/console/assets/plugins/bootstrap-datepicker/css/datepicker.css",
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+            
+        ],
+        "js": [
+            "cav/console/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "cav/js/common_memberinfo.js",
+            "cav/js/jquery.check.js",
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_materialize.js"
+        ]
+    },
+    {
+        "id": "common_events",
+        "title": "活动预告",
+        "description": "活动，期待您的关注",
+        "layout": "layout_materialize.html",
+        "tpl": "common_events.html",
+        "css": [
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_events.js",
+            "cav/js/common_materialize.js"
+        ]
+    },
+    {
+        "id": "common_events_history",
+        "title": "往期活动记录",
+        "description": "活动，期待您的关注",
+        "layout": "layout_simple.html",
+        "tpl": "common_events_history.html",
+        "css": [
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+        ],
+        "js": [
+            "cav/js/common_events_history.js",
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_materialize.js"
+        ]
+    },
+    {
+        "id": "common_discussion",
+        "title": "",
+        "description": "讨论，从现在开始",
+        "layout": "layout_materialize.html",
+        "tpl": "common_discussion.html",
+        "css": [
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css",
+            "cav/console/assets/plugins/materialNote/css/materialNote.css",
+            "cav/console/assets/plugins/materialNote/css/codeMirror/codemirror.css",
+            "cav/console/assets/plugins/materialNote/css/codeMirror/monokai.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/console/assets/plugins/materialNote/js/ckMaterializeOverrides.js",
+            "cav/console/assets/plugins/materialNote/js/codeMirror/codemirror.js",
+            "cav/console/assets/plugins/materialNote/js/codeMirror/xml.js",
+            "cav/console/assets/plugins/materialNote/js/materialNote.js",
+            "cav/js/common_discussion.js",
+            "cav/js/common_materialize.js"
+        ]
+    },
+    {
+        "id": "common_discussion_new",
+        "title": "发起讨论",
+        "description": "新建讨论",
+        "layout": "layout_materialize.html",
+        "tpl": "common_discussion_new.html",
+        "css": [
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css",
+            "cav/console/assets/plugins/materialNote/css/materialNote.css",
+            "cav/console/assets/plugins/materialNote/css/codeMirror/codemirror.css",
+            "cav/console/assets/plugins/materialNote/css/codeMirror/monokai.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/console/assets/plugins/combodate-1.0.7/combodate.js",
+            "cav/console/assets/plugins/combodate-1.0.7/moment.min.js",
+            "cav/console/assets/js/jquery.check.js",
+            "cav/console/assets/plugins/jquery-validate/jquery.validate.min.js",
+            "cav/console/assets/plugins/materialNote/js/ckMaterializeOverrides.js",
+            "cav/console/assets/plugins/materialNote/js/codeMirror/codemirror.js",
+            "cav/console/assets/plugins/materialNote/js/codeMirror/xml.js",
+            "cav/console/assets/plugins/materialNote/js/materialNote.js",
+            "cav/js/common_discussion_new.js",
+            "cav/js/common_materialize.js",
+            "cav/js/mgr_upload_image.js"
+        ]
+    },
+    {
+        "id": "common_requirements",
+        "title": "",
+        "description": "找合作，期待您的参与",
+        "layout": "layout_materialize.html",
+        "tpl": "common_requirements.html",
+        "css": [
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_requirements.js",
+            "cav/js/common_materialize.js"
+        ]
+    },
+    {
+        "id": "common_requirements_person",
+        "title": "",
+        "description": "找合作，期待您的参与",
+        "layout": "layout_materialize.html",
+        "tpl": "common_requirements_person.html",
+        "css": [
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_requirements_person.js",
+            "cav/js/common_materialize.js"
+        ]
+    },
+    {
+        "id": "common_articles",
+        "title": "文章",
+        "description": "文章，期待您的关注",
+        "layout": "layout_common_materialize.html",
+        "tpl": "common_articles.html",
+        "css": [
+            "cav/console/assets/plugins/materialize/css/icon.css",
+            "cav/console/assets/plugins/materialize/css/materialize.css"
+        ],
+        "js": [
+            "cav/console/assets/plugins/materialize/js/materialize.js",
+            "cav/js/common_articles.js",
+            "cav/js/common_materialize.js"
+        ]
+    },
+
+{
+    "id": "home",
+    "title": "",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_home.html"
+},{
+    "id": "home",
+    "title": "",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_home.html"
+},{
+    "id": "appform",
+    "title": "清华大数据产业联合会申请表",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_appform.html"
+},{
+    "id": "appvoteperson",
+    "title": "个人会员公示",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_appvote_person.html"
+}, {
+    "id": "appvoteorg",
+    "title": "组织会员公示",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_appvote_org.html"
+}, {
+    "id": "apppay",
+    "title": "会员支付",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_apppay.html"
+}, {
+    "id": "404",
+    "title": "页面不存在",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_404.html"
+}, {
+    "id": "500",
+    "title": "页面出错了",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_500.html"
+}, {
+    "id": "statement",
+    "title": "用户协议",
+    "description": "",
+    "layout": "layout_common.html",
+    "tpl": "common_statement.html"
+}]

@@ -1,0 +1,48 @@
+<input type="hidden" id="sur_id" name="sur_id" class="form-control"  value="{{context['survey']['id']}}" />
+{% for q in context['survey']['quizs'] %}
+    <div class="form-group block1">
+        <label class="col-md-4 control-label">
+            <span class="f-s-14 f-w-600">
+            {% if q['required'] %}
+            [必填]
+            {% else %}
+            [选填]
+            {% end %}
+            {{q['title']}}
+            </span>
+        </label>
+        <div class="col-md-8">
+        {% if q['type'] == 'text' %}
+
+            <input type="text" id="{{q['id']}}" name="{{q['id']}}" placeholder="请填写" class="form-control sur-control"  value="" />
+
+        {% elif q['type'] == 'textarea' %}
+
+            <textarea id="{{q['id']}}" name="{{q['id']}}" class="form-control sur-control" placeholder="请填写" rows="5"></textarea>
+
+        {% elif q['type'] == 'select' %}
+
+            {% for o in q['opts'] %}
+            <div class="radio sur-control" id="{{o['id']}}">
+                <label>
+                    <input type="radio" id="{{q['id']}}" name="{{q['id']}}" value="{{o['id']}}">
+                    {{o['title']}}
+                </label>
+            </div>
+            {% end %}
+
+        {% elif q['type'] == 'checkbox' %}
+        
+            {% for o in q['opts'] %}
+            <div class="checkbox sur-control" id="{{o['id']}}">
+                <label>
+                    <input type="checkbox" name="{{q['id']}}" value="{{o['id']}}">
+                    {{o['title']}}
+                </label>
+            </div>
+            {% end %}
+
+        {% end %}
+        </div>
+    </div>
+{% end %}

@@ -1,0 +1,557 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-success">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="btn-group" style="margin-bottom:17px;">
+                    <button class="btn btn-danger btn-xs" type="button" id="add_group"><i class="fa fa-fw fa-plus"></i>新建机构</button>
+                    <button class="btn btn-danger btn-xs admin-btn-export" table-id="data-table" filename="机构列表.xls" type="button" id="btn_export"><i class="fa fa-fw fa-download"></i> 导出Excel</button>
+                </div>
+                <div class="table-responsive">
+                    <table id="data-table" class="table table-bordered display responsive nowrap table-striped">
+                        <thead>
+                            <tr>
+                                <th>机构ID</th>
+                                <th>机构名称</th>
+                                <th>机构类别</th>
+                                <th>所属分管局</th>
+                                <th>创建时间</th>
+                                <th>维护</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <dl>
+                    <dt>提示：</dt>
+                    <dd>本页面显示所有辖内直接授权机构，可以管理、修改和删除机构。</dd>
+                    <dd>机构ID一般为授权机构的名称小写缩写，例如：浙江省银行业协会简称 zjabank。</dd>
+                </dl>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<div class="modal" id="new-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加授权机构</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="box-body" id="group_body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>机构ID<small> (生成后不能修改,仅允许小写字母和数字,6~12位)</small></label>
+                            <input type="text" class="form-control" id="group_id" placeholder="建议为机构名称缩写，如：zjabank" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>机构名称</label>
+                            <input type="text" class="form-control" id="group_name" placeholder="请输入机构名称，例如，中国工商银行浙江省分行" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>机构类别</label>
+                            <select class="form-control" id="bank_category">
+                                {% for menu in page_config.BANK_CATEGORY %}
+                                <option value="{{ menu['id'] }}">{{ menu["name"] }}</option>
+                                {% end %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>所属分管局</label>
+                            <select class="form-control" id="cbrc_type">
+                                {% for menu in page_config.CBRC_TYPE %}
+                                <option value="{{ menu['id'] }}">{{ menu["name"] }}</option>
+                                {% end %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>管理员账号<small>  (生成后不能修改,仅允许小写字母和数字,6~12位)</small></label>
+                            <input type="text" class="form-control" id="new_name" placeholder="建议为机构ID加后缀，如录入员: zjabank_lr" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>管理员账号密码<small>  (仅允许字母和数字,6~22位)</small></label>
+                            <input type="password" class="form-control" id="new_password" placeholder="请填写账号密码" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>管理员姓名</label>
+                            <input type="text" class="form-control" id="new_fullname" placeholder="请填写管理员姓名，例如，张三" value="">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>管理员手机号码</label>
+                            <input type="tel" class="form-control" id="new_phone" placeholder="请输入手机号码,如13800000000">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>管理员座机号码</label>
+                            <input type="tel" class="form-control" id="new_telephone" placeholder="请输入座机号码,如 0571-87189503">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">管理员邮箱地址(选填)</label>
+                            <input type="email" class="form-control" id="new_mail" placeholder="请填写邮箱地址，如 public@zjabank.org">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="exam"> 分配审批权限
+                            </label>
+                        </div>
+                        <dl>
+                            <dt>提示：</dt>
+                            <dd>添加授权机构成功，即生成一个新的授权机构（子机构）及其管理员（管理子机构内人员）账号。</dd>
+                        </dl>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-danger" id="save_group">保 存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edit-modal" data-backdrop="static">
+    <div class="modal-dialog modal-large" style="position:static">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#f5f5f5;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">编辑机构信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tab_1"><i class="fa fa-fw fa-info-circle"></i>修改名称</a></li>
+                        <li><a data-toggle="tab" href="#tab_2"><i class="fa fa-fw fa-sitemap"></i> 修改管理员密码</a></li>
+                        <li><a data-toggle="tab" href="#tab_3"><i class="fa fa-fw fa-sitemap"></i> 修改审批权限</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab_1" class="tab-pane active">
+                            <div class="box-body" id="group_body">
+                                <table id="ticket_detail_table" class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>机构ID</td>
+                                            <td id="edit_group_id" style="padding-left:20px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td> 机构名称</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="edit_group_name" placeholder="请输入机构名称">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 机构类别</td>
+                                            <td>
+                                                <select class="form-control" id="edit_bank_category">
+                                                    {% for menu in page_config.BANK_CATEGORY %}
+                                                    <option value="{{ menu['id'] }}">{{ menu["name"] }}</option>
+                                                    {% end %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 所属分管局</td>
+                                            <td>
+                                                <select class="form-control" id="edit_cbrc">
+                                                    {% for menu in page_config.CBRC_TYPE %}
+                                                    <option value="{{ menu['id'] }}">{{ menu["name"] }}</option>
+                                                    {% end %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-danger" id="save_edit_group" style="margin-top:20px;"> 保存修改 </button>
+                            </div>
+                        </div>
+                        <div id="tab_2" class="tab-pane">
+                            <table id="ticket_detail_table" class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>管理员登录账号</td>
+                                        <td id="edit_admin_id" style="padding-left:20px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>管理员姓名</td>
+                                        <td id="edit_admin_name" style="padding-left:20px;"></td>
+                                        <td id="admin_id" class="hide"></td>
+                                    </tr>
+                                    <tr>
+                                        <td> 修改密码</td>
+                                        <td id="district">
+                                            <input type="password" class="form-control" id="edit_password" placeholder="请输入密码">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 再次确认</td>
+                                        <td id="district">
+                                            <input type="password" class="form-control" id="edit_password_again" placeholder="请输入密码">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-danger" id="save_edit_password" style="margin-top:20px;"> 保存修改 </button>
+                        </div>
+                        <div id="tab_3" class="tab-pane">
+                            <table id="ticket_detail_table" class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>管理员登录账号</td>
+                                        <td id="edit_admin_id_role" style="padding-left:20px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>管理员姓名</td>
+                                        <td id="edit_admin_name_role" style="padding-left:20px;"></td>
+                                        <td id="admin_id" class="hide"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="checkbox" style="margin-left:10px;">
+                                <label>
+                                    <input type="checkbox" id="exam_edit"> 分配审批权限
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-danger" id="save_edit_role" style="margin-top:20px;"> 保存修改 </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $('#add_group').click(function() {
+            $('#new-modal').modal('show');
+            $('#new_fullname').val("");
+            $('#new_password').val("");
+            return false;
+        });
+        $('#save_group').click(function() {
+            if (!check_add_input())
+                return false;
+            var data = getData();
+            data._xsrf = $.cookie("_xsrf");
+            $.ajax({
+                type: "POST",
+                url: '/rest/mgr/group/add',
+                data: data,
+                success: function(data) {
+                    if (data.error) {
+                        return alert(data.error || '添加失败！');
+                    }
+                    alert(data.message);
+                    $('#new-modal').modal('hide');
+                    if(hasStateSave())
+                        location.reload();
+                    else
+                        $.reloadLocation({bstatesave: true});
+                },
+                error: function() {
+                    alert('网络错误！');
+                },
+                dataType: 'json'
+            });
+            return false;
+        });
+
+        $('#save_edit_group').click(function() {
+            if (!check_edit_group_input())
+                return false;
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: '/rest/mgr/group/name/edit',
+                data: {
+                    _xsrf: $.cookie("_xsrf"),
+                    id: $('#edit_group_id').html(),
+                    name: $('#edit_group_name').val(),
+                    bank_category: $("#edit_bank_category").find("option:selected").val(),
+                    cbrc: $("#edit_cbrc").find("option:selected").val()
+                },
+                success: function(data) {
+                    if (data.error) {
+                        return alert(data.error || '修改失败！');
+                    }
+                    alert(data.message);
+                    $('#edit-modal').modal('hide');
+                    if(hasStateSave())
+                        location.reload();
+                    else
+                        $.reloadLocation({bstatesave: true});
+                },
+                error: function() {
+                    alert('网络错误！');
+                },
+                dataType: 'json'
+            });
+            return false;
+        });
+$('#save_edit_role').click(function() {
+    $.ajax({
+        type: "POST",
+        url: '/rest/mgr/group/edit/roles',
+        data: {
+            _xsrf: $.cookie("_xsrf"),
+            admin_id: $('#admin_id').html(),
+            exam: $('#exam_edit').is(":checked")
+        },
+        success: function(data) {
+            if (data.error) {
+                return alert(data.error || '添加失败！');
+            }
+            alert(data.message);
+            $('#edit-modal').modal('hide');
+
+        },
+        error: function() {
+            alert('网络错误！');
+        },
+        dataType: 'json'
+    });
+    return false;
+});
+$('#save_edit_password').click(function() {
+    var password = $('#edit_password').val();
+    var password_again = $('#edit_password_again').val();
+    if (!check_password_input(password, password_again))
+        return false;
+    $.ajax({
+        type: "POST",
+        url: '/rest/mgr/group/admin/password/edit',
+        data: {
+            _xsrf: $.cookie("_xsrf"),
+            id: $('#admin_id').html(),
+            password: password_again
+        },
+        success: function(data) {
+            if (data.error) {
+                return alert(data.error || '添加失败！');
+            }
+            alert(data.message);
+            $('#edit-modal').modal('hide');
+
+        },
+        error: function() {
+            alert('网络错误！');
+        },
+        dataType: 'json'
+    });
+    return false;
+});
+var getData = function() {
+    var group_body = document.getElementById("group_body").getElementsByTagName("input");
+
+    var data = {};
+    for (var i = 0; i < group_body.length; i++) {
+        data[group_body[i].id] = $(group_body[i]).val();
+    }
+    data.bank_category = $("#bank_category").find("option:selected").val();
+    data.cbrc = $("#cbrc_type").find("option:selected").val();
+    if($('#exam').is(":checked"))
+        data.exam = true;
+    else
+        data.exam = false;
+    return data;
+};
+var check_add_input = function() {
+    if (!$('#group_id').check().notNull() || !$('#group_name').check().notNull() || !$('#new_name').check().notNull() || !$('#new_fullname').check().notNull() || !$('#new_phone').check().notNull()|| !$('#new_telephone').check().notNull() || !$('#new_password').check().notNull()) {
+        alert("红色*号标识均为必填项");
+        return false;
+    }
+    if (!$('#group_id').check().numberChar()) {
+        alert("机构ID仅允许小写字母和数字,6~12位");
+        return false;
+    }
+    if (!$('#new_name').check().numberChar()) {
+        alert("管理员登录名仅允许小写字母和数字,6~12位");
+        return false;
+    }
+    if (!$('#new_password').check().password()) {
+        alert("您输入的不符合密码格式");
+        return false;
+    }
+    if (!$('#new_phone').check().tel()) {
+        alert("手机号码格式错误");
+        return false;
+    }
+    if (!$('#new_telephone').check().cell()) {
+        alert("座机号码格式错误");
+        return false;
+    }
+    if ($('#new_mail').check().notNull() && !$('#new_mail').check().email()) {
+        alert("email格式错误");
+        return false;
+    }
+    return true;
+}
+
+var check_edit_group_input = function() {
+    if (!$('#edit_group_name').check().notNull()) {
+        alert("请输入机构名称");
+        return false;
+    }
+    return true;
+}
+
+var check_password_input = function(password, password_again) {
+    if (!$('#edit_password').check().notNull() || !$('#edit_password_again').check().notNull()) {
+        alert("请输入密码");
+        return false;
+    }
+
+    if (!$('#edit_password').check().password()) {
+        alert("您输入的不符合密码格式");
+        return false;
+    }
+    if (password != password_again) {
+        alert("输入的密码前后不一致");
+        return false;
+    }
+
+    return true;
+
+}
+$('#data-table').dataTable({
+    "dom": '<"clear">lfrtip',
+    "processing": true,
+    "serverSide": true,
+    "searching": true,
+    "responsive": true,
+    "bStateSave": hasStateSave(),
+    "tableTools": {
+        "sSwfPath": "/static/lte/plugins/data-tables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+        "aButtons": [{
+            "sExtends": "xls",
+            "sButtonText": "导出Excel",
+            "sFileName": "授权机构列表.xls"
+        }]
+    },
+    "ajax": "/rest/mgr/group/table",
+    "columns": [{
+        "data": "id"
+    }, {
+        "data": "fullname"
+    }, {
+        "data": "bank_category"
+    }, {
+        "data": "cbrc"
+    }, {
+        "data": "created"
+    }, {
+        "data": "code_id"
+    }],
+    "aaSorting": [4, 'desc'],
+    "columnDefs": [{
+        'bSortable': false,
+        'aTargets': [5]
+    },{
+        "mRender": function(data, type, full) {
+            return '<a class="btn btn-info btn-xs" onclick=delete_group("' + full['id'] + '") >' + '删除' + '</a>' + '<a class="btn btn-warning btn-xs" onclick=edit("' + full['id'] + '") style="margin-left:5px;">' + '修改' + '</a>';
+        },
+        "targets": 5
+    }],
+    "language": {
+        "emptyTable": "暂无数据",
+        "info": "当前显示 _START_ 到 _END_ 条记录, 共 _TOTAL_ 条",
+        "infoEmpty": "当前 0 到 0 / 共 0 条",
+        "infoFiltered": "",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "每页显示&nbsp; _MENU_ &nbsp;条",
+        "loadingRecords": "正在加载...",
+        "processing": "正在处理...",
+        "search": "搜索:",
+        "zeroRecords": "暂无数据",
+        "paginate": {
+            "first": "首页",
+            "last": "末页",
+            "next": "下一页",
+            "previous": "上一页"
+        },
+        "aria": {
+            "sortAscending": ": 顺序排序",
+            "sortDescending": ": 反序排序"
+        }
+    }
+});
+});
+var delete_group = function(group_id) {
+    if (confirm("你确定要删除该机构吗?\n将删除机构的辖内机构及创建的押品信息也都将会被删除")) {
+        $.ajax({
+            type: "get",
+            cache: false,
+            url: '/rest/mgr/group/delete',
+            data: {
+                id: group_id
+            },
+            success: function(data) {
+                if (data.error) {
+                    return alert(data.error || '删除失败！');
+                }
+                alert(data.message);
+                if(hasStateSave())
+                    location.reload();
+                else
+                    $.reloadLocation({bstatesave: true});
+            },
+            error: function() {
+                alert('网络错误！');
+            },
+            dataType: 'json'
+        });
+    }
+
+};
+
+var edit = function(id) {
+    $.ajax({
+        type: "get",
+        url: '/rest/mgr/group/detail',
+        cache: false,
+        data: {
+            group_id: id
+        },
+        success: function(data) {
+            if (data.error) {
+                return alert(data.error || '添加失败！');
+            }
+            // console.log(data);
+            $('#edit-modal').modal('show');
+            $('#edit_password').val("");
+            $('#edit_password_again').val("");
+            $('#edit_group_id').html(id);
+            $('#edit_group_name').val(data.group_info['fullname']);
+            if(data.roles_info['id']!=null)
+                $('#exam_edit').prop("checked", true);
+            else
+                $('#exam_edit').prop("checked", false);
+
+            $('#edit_cbrc').val(data.group_info['cbrc']);
+            $('#edit_bank_category').val(data.group_info['bank_category']);
+
+            $('#edit_admin_name').html(data.admin_info['fullname']);
+            $('#edit_admin_id').html(data.admin_info['name']);
+            $('#edit_admin_name_role').html(data.admin_info['fullname']);
+            $('#edit_admin_id_role').html(data.admin_info['name']);
+            $('#admin_id').html(data.admin_info['id']);
+
+
+        },
+        error: function() {
+            alert('网络错误！');
+        },
+        dataType: 'json'
+    });
+};
+</script>

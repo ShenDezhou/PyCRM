@@ -1,0 +1,72 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box box-danger">
+			<!-- /.box-header -->
+			<div class="box-body">
+
+				<div class="form-body person-inner-pading">
+				
+					<!-- <div class="row" style="margin-bottom:10px;margin-top:10px;">
+						<label class="col-md-2 control-label">修改密码</label>
+						<div class="col-md-8">
+							<input id="old_password" name="old_password" type="password" class="form-control" placeholder="请输入修改的密码" value="">
+						</div>
+
+					</div>
+ -->
+					<div class="row" style="margin-bottom:10px;margin-top:10px;">
+						<label class="col-md-2 control-label">新密码</label>
+						<div class="col-md-8">
+							<input id="new_password" name="new_password" type="password" class="form-control" placeholder="请输入修改的密码" value="">
+						</div>
+
+					</div>
+
+					<div class="row" style="margin-bottom:10px;margin-top:10px;">
+						<label class="col-md-2 control-label">确认新密码</label>
+						<div class="col-md-8">
+							<input id="new_password2" name="new_password2" type="password" class="form-control" placeholder="请输入修改的密码" value="">
+						</div>
+
+					</div>
+
+				</div>
+				<button type="submit" class="btn btn-danger" id="save"> 保存修改 </button>
+			</div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /.box -->
+	</div>
+	<!-- /.col -->
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		$('#save').click(function(){
+			var data = {_xsrf: $.cookie("_xsrf")};
+			data.password=$('#new_password').val();
+			data.password2=$('#new_password2').val();
+			if(data.password != data.password2){
+				return alert("两次输入的密码不一致");
+			}
+			$.ajax({
+				type: "POST",
+				url: "/rest/mgr/person/init_pwd",
+				data: data,
+				success: function(data) {
+					if(data.error){
+						return alert(data.error || '设置新密码失败！');
+					}
+					alert(data.message || "密码修改成功！");
+					location.href = '/mgr/console';
+				},
+				error: function(){
+					alert('网络错误！');
+				},
+				dataType: 'json'
+			});
+			return false;
+		});
+		
+	});
+</script>

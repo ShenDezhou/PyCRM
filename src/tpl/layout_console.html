@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    {% include "layout_head_part_console.html" %}
+</head>
+
+<body>
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+        <!-- begin #header -->
+        <div id="header" class="header navbar navbar-default navbar-fixed-top navbar-inverse">
+            <!-- begin container-fluid -->
+            <div class="container-fluid">
+                <!-- begin mobile sidebar expand / collapse button -->
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand">
+                        <img src="{{ handler.config['logo_console'] }}"/>
+                    </a>
+                    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- end mobile sidebar expand / collapse button -->
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end #header -->
+        
+        <!-- begin #sidebar -->
+        <div id="sidebar" class="sidebar">
+            <!-- begin sidebar scrollbar -->
+            <div data-scrollbar="true" data-height="100%">
+                <!-- begin sidebar user -->
+                <ul class="nav">
+                    <li class="nav-profile">
+                        <div class="image">
+                            <a href="javascript:;"><img src="{{ user['authorized']['head_img_url'] }}" alt="" /></a>
+                        </div>
+                        <div class="info">
+                            {% if user['authorized']['fullname'] %}
+                                {{ user['authorized']['fullname'] }}
+                            {% else %}
+                                {{ user['authorized']['nick_name'] }}
+                            {%end%}
+                            <small >
+                                <i class="fa fa-circle text-success"></i> 
+                                {% for item in user['roles'] %}
+                                    {% if 'role_name' in item %}
+                                        {{item['role_name']}} 
+                                    {% end %}
+                                {% end %}
+                            </small>
+                            
+                        </div>
+                        <div class="info">
+                           <small >
+                                <i class="fa fa-circle text-warning"></i> 
+                                {{user['org']['org_name']}}
+                            </small>
+                        </div>
+                    </li>
+                </ul>
+                <!-- end sidebar user -->
+                <!-- begin sidebar nav -->
+                <ul class="nav">
+                    <li class="nav-header">导航菜单</li>
+
+                    {% for section in navs %}
+                        {% if "child" in section %}
+                            {% if entry in section['child'] %}
+                            <li class="has-sub active">
+                            {% else %}
+                            <li class="has-sub">
+                            {% end %}
+                                <a href="javascript:;">
+                                    <b class="caret pull-right"></b>
+                                    <i class="fa {{ section['icon'] }}"></i>
+                                    <span>{{ section['title'] }}</span>
+                                </a>
+                                <ul class="sub-menu">
+                                {% for menu in navs %}
+                                    {% if menu['id'] in section['child'] %}
+                                        {% if entry == menu['id'] %}
+                                        <li class="active">
+                                        {% else %}
+                                        <li>
+                                        {% end %}
+                                            {% if not menu['href'].startswith('/') %}
+                                            <a href="/console/{{menu['href']}}">
+                                            {% else %}
+                                            <a href="{{menu['href']}}">
+                                            {% end %}
+                                                {% if 'icon' in menu %}
+                                                <i class="fa {{ menu['icon'] }}"></i>
+                                                {% end %}
+                                                {{ menu['title'] }}
+                                            </a>
+                                        </li>
+                                    {% end %}
+                                {% end %}     
+                                </ul>
+                            </li>                       
+                        {% end %}
+
+                    {% end %}
+
+                  
+                    <!-- begin sidebar minify button -->
+                    <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                    <!-- end sidebar minify button -->
+                </ul>
+                <!-- end sidebar nav -->
+            </div>
+            <!-- end sidebar scrollbar -->
+        </div>
+        <div class="sidebar-bg"></div>
+        <!-- end #sidebar -->
+        
+        <!-- begin #content -->
+        <div id="content" class="content">
+            <!-- begin breadcrumb -->
+            <ol class="breadcrumb pull-right">
+                <li><a href="/console">概况</a></li>
+                <li class="active">{{ page['title'] }}</li>
+            </ol>
+            <!-- end breadcrumb -->
+            <!-- begin page-header -->
+            <h1 class="page-header">{{ page['title'] }} <small>{{ page['description'] }}</small></h1>
+            <!-- end page-header -->
+            
+            {% module CommonMainEntry(entry = entry, page = page, page_config = page_config, context = context) %}
+
+        </div>
+        <!-- end #content -->
+        
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+
+    <!-- ./wrapper -->
+    <!-- REQUIRED JS SCRIPTS -->
+    {% include "layout_foot_part_console.html" %}
+    
+<script type="text/javascript">
+$(function(){
+    $('.hints-url').each(function(){
+        var target = $(this);
+        var url = target.attr('url');
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            data: {
+            },
+            success: function(data) {
+                if(data.hints){
+                    var html = target.html().replace('{hints}', data.hints);
+                    target.html(html);
+                    target.show();
+                    // $('.' + target.attr('ref-id') + '-hints').html(html.replace('pull-right', ''));
+                }
+            },
+            error: function() {
+            },
+            dataType: 'json'
+        });
+    });
+});
+$(function(){
+    $('.admin-btn-export').click(function(){
+        if(isIE(7) || isIE(8) || isIE(9) || isIE(10) || isIE(11)){
+            if(confirm("导出功能不能支持本浏览器，请改用360、火狐、谷歌Chrome等浏览器下载。点击确定转到浏览器下载页面，点击取消留在本页。")){
+                location.href = '/old_msie';
+            }
+            return;
+        }
+
+        var tableId = $(this).attr('table-id');
+        var filename = $(this).attr('filename');
+        var table = $('#' + tableId).DataTable();
+        var params = table.ajax.params();
+        params['export'] = true;
+        var aoCols = table.settings()[0].aoColumns;
+        var cols = [], headers = [];
+        for(var i = 0; i < aoCols.length; i++){
+            cols.push(aoCols[i].data);
+            headers.push(aoCols[i].sTitle);
+        }
+        params.cols = encodeURIComponent(cols.join(','));
+        params.headers = encodeURIComponent(headers.join(','));
+        params.filename = encodeURIComponent(filename);
+
+        var url = table.ajax.url();
+        if(url.indexOf('?') < 0) {
+            url += '?';
+        }else{
+            url += '&';
+        }
+
+        url += decodeURIComponent( $.param( params ) );
+        $.fileDownload(url, {
+            successCallback: function (url) {
+            },
+            failCallback: function (responseHtml, url) {
+                alert('下载失败');
+            }
+        });
+    });
+    $('.admin-btn-print').click(function(){
+        var tableId = $(this).attr('table-id');
+        var filename = $(this).attr('filename');
+        var table = $('#' + tableId).DataTable();
+        var params = table.ajax.params();
+        params['print'] = true;
+        var aoCols = table.settings()[0].aoColumns;
+        var cols = [], headers = [];
+        for(var i = 0; i < aoCols.length; i++){
+            cols.push(aoCols[i].data);
+            headers.push(aoCols[i].sTitle);
+        }
+        params.cols = encodeURIComponent(cols.join(','));
+        params.headers = encodeURIComponent(headers.join(','));
+        params.filename = encodeURIComponent(filename);
+
+        var url = table.ajax.url();
+        if(url.indexOf('?') < 0) {
+            url += '?';
+        }else{
+            url += '&';
+        }
+
+        url += decodeURIComponent( $.param( params ) );
+        $(this).attr('href', url);
+        return true;
+        // $.fileDownload(url, {
+        //     successCallback: function (url) {
+        //     },
+        //     failCallback: function (responseHtml, url) {
+        //         alert('下载失败');
+        //     }
+        // });
+    });
+});
+
+</script>
+</body>
+
+</html>

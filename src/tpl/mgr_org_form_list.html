@@ -1,0 +1,452 @@
+<!-- begin row -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+                       data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">企业会员申请列表</h4>
+                <input class="hide" id="roles" value="{{context['roles']}}"/>
+            </div>
+            <div class="panel-body">
+                <button class="btn btn-danger btn-xs admin-btn-export" table-id="data-table" filename="企业会员申请列表.xls"
+                        type="button" id="btn_export"><i class="fa fa-fw fa-download"></i> 导出Excel
+                </button>
+                <div class="modal-footer" style="text-align: left;margin-top: 10px">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="normal_org_member" name="normal_org_member" value=""> 企业普通会员申请
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="advanced_org_member" name="advanced_org_member" value=""> 企业理事会员申请
+                    </label>
+                </div>
+                <table id="data-table" class="table table-striped table-bordered nowrap" width="100%">
+                    <thead>
+                    <tr>
+                        <th>申请编号</th>
+                        <th>申请会员类型</th>
+                        <th>申请者信息</th>
+                        <th>申请时间</th>
+                        <th>审核通过时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+</div>
+<!-- end col-10 -->
+</div>
+<!-- end row -->
+
+
+{% include "mgr_person_detail.html" %}
+{% include "simple_appform_vote_detail_modal.html" %}
+<!-- #modal-alert -->
+<div class="modal fade" id="modal-link-form-vote">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">公示投票链接</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">微信扫码</label>
+                        <div class="col-md-9">
+                            <img src="/rest/qrcode?link="/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">复制链接</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" placeholder="" rows="2"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">查看投票页面</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-primary m-r-5 m-b-5" target="app_link" href="">点击查看</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-link-form-paid">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">付费链接</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">微信扫码</label>
+                        <div class="col-md-9">
+                            <img src="/rest/qrcode?link="/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">付费链接</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" placeholder="" rows="2"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">查看付费页面</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-primary m-r-5 m-b-5" target="app_link" href="">点击查看</a>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">修改状态</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-danger m-r-5 m-b-5" target="app_paid" href="">确定线下付费</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-offline-paid">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">确定线下付费</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">会员起始时间</label>
+                        <div class="col-md-9">
+                            <input class="form-control" id='start_time' placeholder="会员起始时间,日期格式为2016-03-13"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">会员有效期至</label>
+                        <div class="col-md-9">
+                            <input class="form-control" id='end_time' placeholder="会员有效期至,日期格式为2016-03-13"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">付费金额</label>
+                        <div class="col-md-9">
+                            <input class="form-control" id="paid_money" placeholder="付费金额"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">付费号码</label>
+                        <div class="col-md-9">
+                            <input class="form-control" id="paid_number" placeholder="付费号码"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">备注</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="paid_remark" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">请上传支付凭证</label>
+                        <div class="col-md-9">
+                            {% include "simple_upload_image.html" %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-danger" data-dismiss="modal" id="paid">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="examine-modal" data-backdrop="static">
+    <div class="modal-dialog modal-large" style="position:static">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#f5f5f5;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">审核结果</h4>
+            </div>
+            <div class="modal-body">
+                <label style="margin-bottom:10px;" id="exam_info">审核是否同意通过该申请</label>
+                <div class="row">
+                    <div class=" col-md-6">
+                        <button id="pass" class="btn btn-block btn-warning btn-lg">审核通过</button>
+                    </div>
+                    <div class=" col-md-6">
+                        <button id="not_pass" class="btn btn-block btn-danger btn-lg">退回</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-form-person">
+    <div class="modal-dialog modal-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">个人管理</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#edit_person" data-toggle="tab"><i class="fa fa-male m-r-5"></i> <span
+                            class="hidden-xs">个人信息</span></a></li>
+                    <li class=""><a href="#cellphone" data-toggle="tab"><i class="fa fa-cellphone m-r-5"></i> <span
+                            class="hidden-xs">通过手机号码添加</span></a></li>
+                    <li class=""><a href="#input" data-toggle="tab"><i class="fa fa-male m-r-5"></i> <span
+                            class="hidden-xs">录入成员信息</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="edit_person">
+                        <div class="table-responsive" id="div_edit_person">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="cellphone">
+                        <form id="cellphone_info" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">电话号码 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="add_cellphone" name="add_cellphone" placeholder="请填写电话号码"
+                                           class="form-control" data-parsley-group="wizard-step-1" required value=""/>
+                                    <input type="hidden" id="form_id" name="form_id" placeholder="" class="form-control"
+                                           data-parsley-group="wizard-step-1" required value=""/>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" id="add_person" class="btn btn-primary m-r-5 m-b-5">添加</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="input">
+                        <form id="form_info" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">真实姓名 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="fullname" name="fullname" placeholder="请填写真实姓名"
+                                           class="form-control" data-parsley-group="wizard-step-1" required value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">性别 *</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="gender" name="gender">
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">微信号 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="wechatid" id="wechatid"
+                                           placeholder="请留下正确的微信ID号【注意，是微信唯一ID，不是微信昵称】" class="form-control"
+                                           data-parsley-group="wizard-step-1" required value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Email *</label>
+                                <div class="col-md-9">
+                                    <input type="email" name="email" id="email" placeholder="例如: abc@yourdomain.com"
+                                           class="form-control" data-parsley-group="wizard-step-1"
+                                           data-parsley-type="email" required value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">电话号码 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="cellphone" id="cellphone" placeholder="请留下电话号码"
+                                           class="form-control" value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">出生日期 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="birthday" name="birthday" placeholder="" class="form-control"
+                                           data-parsley-group="wizard-step-1"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">毕业院校 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="school" id="school" placeholder="请填写毕业院校"
+                                           class="form-control" data-parsley-group="wizard-step-1" required value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">入学年份 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="school_start" name="school_start" placeholder="请填写最高学历入学年份"
+                                           class="form-control" data-parsley-group="wizard-step-1"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">学历 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="education" id="education" placeholder="请填写最高学历"
+                                           class="form-control" data-parsley-group="wizard-step-1" required value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">通讯地址 *</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="address" name="address"
+                                           placeholder="请留下准确的通讯地址，以便联合会可以将证书等邮寄给您" data-parsley-group="wizard-step-1"
+                                           required value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">公司职位 *</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="position" name="position" placeholder="请填写公司职位"
+                                           data-parsley-group="wizard-step-1" required value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">个人背景简介 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="person_info" name="person_info" placeholder=""
+                                              rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">希望获取的服务或者资源 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="expects" name="expects" placeholder=""
+                                              rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">可提供的资源或服务 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="wills" name="wills" placeholder=""
+                                              rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" id="save_person" class="btn btn-primary m-r-5 m-b-5">添加</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-link-delivery-info">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">个人名片链接</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">微信扫码</label>
+                        <div class="col-md-9">
+                            <img src="/rest/qrcode?link="/>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">复制链接</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" placeholder="" rows="2"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">查看个人名片页面</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-primary m-r-5 m-b-5" target="app_link" href="">点击查看</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-status-edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">修改状态</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">申请人</label>
+                        <div class="col-md-9 ">
+                            <input class="form-control person" readonly/>
+                            <input type="hidden" class="form-control" id="form_id" readonly/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">申请状态</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="form_status">
+                                {% for item in context['form_status'] %}
+                                <option value="{{item['code_id']}}">{{item['code_name']}}</option>
+                                {% end %}
+                            </select>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a id="status_submit" class="btn btn-sm btn-white" data-dismiss="modal">修改</a>
+            </div>
+        </div>
+    </div>
+</div>

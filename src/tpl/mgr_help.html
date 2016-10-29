@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-danger">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table id="question_list" class="table table-bordered display responsive nowrap table-striped">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>名称</th>
+                                <th>发布日期</th>
+                                <th>下载</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in range(0, len(page_config.MGR_DOCS)) %}
+                                <tr>
+                                    <td>{{ i + 1 }}</td>
+                                    <td>《{{ page_config.MGR_DOCS[i]['name'] }}》</td>
+                                    <td>{{ page_config.MGR_DOCS[i]['date'] }}</td>
+                                    <td><a class="btn btn-inline-block btn-danger btn-xs" href="{{ page_config.MGR_DOCS[i]['file'] }}" target="mgr-doc">下载文档</a></td>
+                                </tr>
+                            {% end %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+

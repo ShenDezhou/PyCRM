@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-inverse">
+            <!-- /.box-header -->
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">新建渠道</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>渠道名称</label>
+                            <input type="text" placeholder="" id="channel_name" class="form-control " value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>渠道图标</label>
+                            <img id="channel_picture" src="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="div_cover">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>缩略图</label>
+                            <div class = "row" id="sur_image" style="margin-top:10px;"></div>
+                            {% include "simple_upload_image.html" %}
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- /.box-body -->
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-danger" id="save"> 保存 </button>
+                <a type="submit" class="btn btn-default" id="return"> 返回 </a>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>

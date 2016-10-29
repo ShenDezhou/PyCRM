@@ -1,0 +1,453 @@
+<style type="text/css">
+.team img{
+    max-width: 100%;
+}
+.work .image{
+    max-height: 178px;
+    overflow: hidden;
+}
+.work .image img{
+    min-height: 178px;
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    .has-bg.home .content-bg,
+    .has-bg.bg-black-darker .content-bg{
+        display: none;
+    }
+    .has-bg.home{
+        background: url(/static/cav/img/frontend/images/banner.jpg) 50% 0 no-repeat;
+    }
+    .has-bg.bg-black-darker{
+        background: url("/static/cav/img/frontend/images/banner-strip.png") 50% 0 no-repeat #242a30 !important;
+        background-size: auto 100% !important;
+    }
+    h2 small{
+        font-size: 50%;
+    }
+}
+
+@media (min-width: 700px) {
+    .show-sm{
+        display: none;
+    }
+    .has-bg.home{
+        background: #eee;
+    }
+}
+
+@media (max-width: 700px) {
+    .show-lg{
+        display: none;
+    }
+}
+
+.content .content-title{
+    font-size: 36px;
+    color: #1774ff;
+    margin-top: 30px
+}
+
+.content .content-title:after{
+    background: url("{{ static_url('cav/img/frontend/images/line.png') }}") no-repeat 50% 0;
+    width: 230px;
+    margin-left: -114px;
+}
+
+.content.has-bg .content-bg:before{
+    background: none;
+}
+
+#work .image-desc{
+    background: #fff;
+    padding: 10px 10px;
+}
+#work .image-desc .title{
+    font-size: 15px;
+    color: #222;
+    height: 38px;
+    overflow: hidden;
+    display: block;
+}
+#work .image-desc .text{
+    font-size: 12px;
+    color: #1774ff;
+    display: block;
+    margin-top: 10px;
+}
+</style>
+
+
+
+<!-- begin #home -->
+<div id="home" class="content has-bg home">
+    <!-- begin content-bg -->
+    <div class="content-bg">
+        <img src="/static/cav/img/frontend/images/banner.jpg" alt="首页"/>
+    </div>
+    <!-- end content-bg -->
+    <!-- begin container -->
+    <div class="container home-content">
+        <img src="{{ static_url('cav/img/frontend/images/banner_logo.png') }}" class="" style="max-width:100%"/>
+        <!-- <h1>清数实验数据共享平台</h1>
+        <h3>大数据创新新尝试</h3>
+        <p>
+            我们整合校内和校外的教研数据、产业数据、政府数据，促进校内和校际大数据前沿研究，<br/>搭建全国领先的实验数据共享平台，建立最受信赖的数据创新生态。
+        </p> -->
+        <!-- <a href="#" class="btn btn-theme">进入数据平台</a> <a href="#" class="btn btn-outline">更多了解清数</a>
+        <br />
+        <br /> 欢迎关注 <a href="#">清数D-Lab</a> 微信公众号 -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end #home -->
+<!-- begin #about -->
+<div id="about" class="content" data-scrollview="true" style="background:#eee;">
+    <!-- begin container -->
+    <div class="container" data-animation="true" data-animation-type="fadeInDown">
+        <h2 class="content-title">运营模式<br/>
+            <small>建立最受信赖的数据创新生态</small>
+        </h2>
+        <div class="row">
+            <div class="row show-lg">
+                <div class="col-md-6" style="padding-top:82px;">
+                    <img src="{{ static_url('cav/img/frontend/images/operation-pattern-1.png') }}" class="width-full"/>
+                </div>
+                <div class="col-md-offset-1 col-md-5">
+                    <img src="{{ static_url('cav/img/frontend/images/operation-pattern-2.png') }}" class="width-full"/>
+                </div>
+            </div>
+            <div class="row show-sm">
+                <div class="col-md-12" style="padding-top:32px;">
+                    <img src="{{ static_url('cav/img/frontend/images/operation-pattern420.png') }}" class="width-full"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end container -->
+</div>
+<!-- end #about -->
+
+<!-- begin #quote -->
+<div id="quote" class="content bg-black-darker has-bg" data-scrollview="true">
+    <!-- begin content-bg -->
+    <div class="content-bg">
+        <img src="{{ static_url('cav/img/frontend/images/banner-strip.png') }}" alt="Quote" />
+    </div>
+    <!-- end content-bg -->
+    <!-- begin container -->
+    <div class="container" data-animation="true" data-animation-type="fadeInLeft">
+        <!-- begin row -->
+        <div class="row">
+            <!-- begin col-12 -->
+            <div class="col-md-12 quote">
+                <i class="fa fa-quote-left"></i> 
+                谁能抓住大数据的机遇,
+                <br class="show-lg"/> 谁就有可能成为下一个马云!
+                <i class="fa fa-quote-right"></i>
+                <small>韩亦舜, 清华数据科学研究院副院长</small>
+            </div>
+            <!-- end col-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end #quote -->
+
+<div id="supported" class="content" data-scrollview="true">
+    <!-- begin container -->
+    <div class="container" data-animation="true" data-animation-type="fadeInDown">
+        <h2 class="content-title">支持单位<br/>
+            <small>奠定了清数D-Lab成为最受信赖<br class="show-sm"/>的数据创新生态的基础</small>
+        </h2>
+        <div class="row" style="margin-top:90px;margin-bottom:60px;">
+            <div class="col-md-4 m-b-20">
+                <img src="{{ static_url('cav/img/frontend/images/supportcompany1.png') }}" class="width-full"/>
+            </div>
+            <div class="col-md-4 m-b-20">
+                <img src="{{ static_url('cav/img/frontend/images/supportcompany2.png') }}" class="width-full"/>
+            </div>
+            <div class="col-md-4 m-b-20">
+                <img src="{{ static_url('cav/img/frontend/images/supportcompany3.png') }}" class="width-full"/>
+            </div>
+        </div>
+    </div>
+    <!-- end container -->
+</div>
+
+<!-- begin #team -->
+<div id="team" class="content has-bg" data-scrollview="true" style="background:url({{ static_url('cav/img/frontend/images/background.png') }});">
+    <!-- begin container -->
+    <div class="container">
+        <h2 class="content-title">核心管理团队</h2>
+        <p class="content-desc">
+            
+        </p>
+        <!-- begin row -->
+        <div class="row" style="margin-top:60px;">
+            <!-- begin col-4 -->
+            <div class="col-md-3 col-sm-6 p-0">
+                <!-- begin team -->
+                <div class="team">
+                    <div class="image" data-animation="true" data-animation-type="flipInX">
+                        <img src="{{ static_url('cav/img/frontend/images/core-team-1.png') }}" />
+                    </div>
+                    <div class="info">
+                        <h3 class="name">王霞</h3>
+                        <div class="title text-theme">董事长</div>
+                        <p>清华大数据产业联合会秘书长<br/>清华大学数据科学研究院院长助理</p>
+                        <!-- div class="social">
+                            <a href="#"><i class="fa fa-facebook fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-google-plus fa-lg fa-fw"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- end team -->
+            </div>
+            <!-- end col-4 -->
+            <!-- begin col-4 -->
+            <div class="col-md-3 col-sm-6 p-0">
+                <!-- begin team -->
+                <div class="team">
+                    <div class="image" data-animation="true" data-animation-type="flipInX">
+                        <img src="{{ static_url('cav/img/frontend/images/core-team-2.png') }}" />
+                    </div>
+                    <div class="info">
+                        <h3 class="name">邱东晓</h3>
+                        <div class="title text-theme">主任</div>
+                        <p>清华大数据产业联合会常务副秘书长<br/>清华大学数据科学研究院案例研究室主任</p>
+                        <!-- <div class="social">
+                            <a href="#"><i class="fa fa-facebook fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-google-plus fa-lg fa-fw"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- end team -->
+            </div>
+            <!-- end col-4 -->
+            <!-- begin col-4 -->
+            <div class="col-md-3 col-sm-6 p-0">
+                <!-- begin team -->
+                <div class="team">
+                    <div class="image" data-animation="true" data-animation-type="flipInX">
+                        <img src="{{ static_url('cav/img/frontend/images/core-team-3.png') }}" />
+                    </div>
+                    <div class="info">
+                        <h3 class="name">梁京</h3>
+                        <div class="title text-theme">投资总监</div>
+                        <p>清华大数据产业联合会副秘书长<br/>清华校友投资行业协会副秘书长</p>
+                        <!-- <div class="social">
+                            <a href="#"><i class="fa fa-facebook fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-google-plus fa-lg fa-fw"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- end team -->
+            </div>
+            <!-- end col-4 -->
+            <div class="col-md-3 col-sm-6 p-0">
+                <!-- begin team -->
+                <div class="team">
+                    <div class="image" data-animation="true" data-animation-type="flipInX">
+                        <img src="{{ static_url('cav/img/frontend/images/core-team-4.png') }}" />
+                    </div>
+                    <div class="info">
+                        <h3 class="name">张芮祺</h3>
+                        <div class="title text-theme">运营总监</div>
+                        <p>清华大数据产业联合会副秘书长<br/>&nbsp;</p>
+                        <!-- <div class="social">
+                            <a href="#"><i class="fa fa-facebook fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-lg fa-fw"></i></a>
+                            <a href="#"><i class="fa fa-google-plus fa-lg fa-fw"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- end team -->
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end #team -->
+
+
+<!-- begin #about -->
+<div id="team2" class="content bg-silver" data-scrollview="true" style="display:none">
+    <!-- begin container -->
+    <div class="container" data-animation="true" data-animation-type="fadeInDown">
+        <h2 class="content-title">支持团队
+        </h2>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="{{ static_url('cav/img/frontend/team.png') }}" class="width-full"/>
+            </div>
+        </div>
+    </div>
+    <!-- end container -->
+</div>
+<!-- end #about -->
+
+
+<div id="bp" class="content" data-scrollview="true" style="display:none">
+    <!-- begin container -->
+    <div class="container">
+        <h2 class="content-title">战略合作伙伴（部分）<br/><small>多渠道的合作，广泛而深入</small></h2>
+        <p class="content-desc">
+            
+        </p>
+        <!-- begin row -->
+        <div class="row">
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="{{ static_url('cav/img/frontend/bp.png') }}" class="width-full"/>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+
+<div id="union" class="content has-bg" data-scrollview="true" style="display:none">
+    <!-- begin content-bg -->
+    <div class="content-bg">
+        <img src="/static/cav/frontend/one-page-parallax/assets/img/action-bg.jpg" alt="Action" />
+    </div>
+    <!-- end content-bg -->
+    <!-- begin container -->
+    <div class="container" data-animation="true" data-animation-type="fadeInRight">
+        <!-- begin row -->
+        <div class="row action-box">
+            <!-- begin col-9 -->
+            <div class="col-md-9 col-sm-9">
+                <div class="icon-large text-theme m-r-40">
+                    <img src="{{ static_url('cav/img/logo-u-2.png') }}" style="width:80px;"/>
+                </div>
+                <h3>加入清华大数据产业联合会，成为会员!</h3>
+                <p>
+                    关注并参加最新最热的大数据活动、阅读最新大数据干货文章、申请成为清华大数据产业联合会会员。
+                </p>
+            </div>
+            <!-- end col-9 -->
+            <!-- begin col-3 -->
+            <div class="col-md-3 col-sm-3">
+                <a href="#" class="btn btn-outline btn-block">马上加入</a>
+            </div>
+            <!-- end col-3 -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+
+<div id="work" class="content" data-scrollview="true" style="background:#dcdcdc;padding-top:50px;">
+    <!-- begin container -->
+    <div class="container" data-animation="true" data-animation-type="fadeInDown">
+        <h2 class="content-title">最新活动</h2>
+        <p class="content-desc">
+            
+        </p>
+        <!-- begin row -->
+        <div class="row row-space-10 m-t-20 p-t-20">
+
+            {% for e in context['events'] %}
+            <div class="col-md-3 col-sm-6">
+                <!-- begin work -->
+                <div class="work">
+                    <div class="image">
+                        <a href="/page/event/{{e['id']}}" target="dlab_event">
+                            <img src="http://app.tsingdata.com{{'/assets/ticket/image/' + e['pictures'].split(',')[0]}}" alt="" />
+                        </a>
+                    </div>
+                    <div class="image-desc">
+                        <span class="title">{{e['title']}}</span>
+                        <span class="text">
+                            <i class="fa fa-clock-o fa-lg"></i> 
+                            {{e['activity_start_date']}} 
+                            {{e['activity_start_hm']}}
+                        </span>
+                    </div>
+                </div>
+                <!-- end work -->
+            </div>
+            {% end %}
+
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end #work -->
+
+<!-- begin #contact -->
+<div id="contact" class="content bg-silver-lighter" data-scrollview="true">
+    <!-- begin container -->
+    <div class="container">
+        <h2 class="content-title">联系我们</h2>
+        <p class="content-desc">
+            
+        </p>
+        <!-- begin row -->
+        <div class="row m-t-20 p-t-20">
+            <!-- begin col-6 -->
+            <div class="col-md-6" data-animation="true" data-animation-type="fadeInLeft">
+                <h3>如果您有任何的想法和问题，欢迎随时跟我们联系</h3>
+                <p>
+                    
+                </p>
+                <p>
+                    <strong>清华数据创新基地(清数D-Lab)</strong>
+                    <br/>
+                    地址：北京市海淀区清华大学学研大厦B807
+                    <br/>
+                    <span class="phone">电话：010-62791988</span>
+                    <br />
+                    <a href="mailto:contact@tsingdata.com">邮箱：contact@tsingdata.com</a>
+                </p>
+                <p>
+                    <img src="{{ static_url('cav/img/frontend/images/map.jpg') }}" alt="Quote" class="width-full"/>
+                </p>
+            </div>
+            <!-- end col-6 -->
+            <!-- begin col-6 -->
+            <div class="col-md-6 form-col" data-animation="true" data-animation-type="fadeInRight" style="margin-top:60px;">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">姓名 <span class="text-theme">*</span></label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">邮箱 <span class="text-theme">*</span></label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">想法或问题 <span class="text-theme">*</span></label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3"></label>
+                        <div class="col-md-9 text-left">
+                            <button type="button" class="btn btn-theme btn-block">马上发送</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end col-6 -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end #contact -->

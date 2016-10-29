@@ -1,0 +1,424 @@
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-danger">
+            
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-2 col-xs-12">
+                    <h4 class="panel-title">会员类别： {{context['member']['member_type_name']}}
+                    </h4>  
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                    {% if context['member']['member_type'] =='normal_member' and not context['apply_form']  %}
+                        <span style="text-decoration:underline" id="apply" onclick="$._applyToBeAdvanced('{{context['member']['member_id']}}')"><em>申请成为个人理事会员</em><i class="fa fa-arrow-circle-o-right m-l-5"></i></span>
+                    {% end %}  
+                    {% if context['member']['member_type'] =='normal_member' and context['apply_form'] %}
+                        您已申请成为个人理事会员，进度为:{{context['apply_form']['code_name']}}
+                    {% end %}
+
+                    {% if context['member']['member_type'] =='normal_org_member' and not context['apply_form']  %}
+                        <span style="text-decoration:underline" id="apply" onclick="$._applyToBeAdvanced('{{context['member']['member_id']}}')"><em>申请成为企业理事会员</em><i class="fa fa-arrow-circle-o-right m-l-5"></i></span>
+                    {% end %}  
+                    {% if context['member']['member_type'] =='normal_org_member' and context['apply_form'] %}
+                        您已申请成为企业理事会员，进度为:{{context['apply_form']['code_name']}}
+                    {% end %}
+                    </div>
+                </div>
+                <h4 class="panel-title">有效期至：{{context['member']['due_date'][0:10]}}</h4>
+            </div>
+            <div class="panel-body">
+                <!-- begin profile-section -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- begin profile-info -->
+                    
+                        <div class="profile-info">
+                            <!-- begin table -->
+                            {% if context['member']['member_type'] =='normal_member' or context['member']['member_type'] =='advanced_member'%}
+
+                            <form id="form_info" class="form-horizontal">
+                            <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                        <h4>个人信息</h4>
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">真实姓名 *</label>
+                                <div class="col-md-9">
+                                <input type="text" id="fullname" name="fullname" placeholder="请填写真实姓名" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">性别 *</label>
+                                <div class="col-md-9">
+                                <select class="form-control" id="gender" name="gender">
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">微信号 *</label>
+                                <div class="col-md-9">
+                                 <input type="text" name="wechatid" id="wechatid" placeholder="请留下正确的微信ID号【注意，是微信唯一ID，不是微信昵称】" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Email *</label>
+                                <div class="col-md-9">
+                                    <input type="email" name="email" id="email" placeholder="例如: abc@you.com" class="form-control" data-parsley-group="wizard-step-1" data-parsley-type="email" required value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">电话号码 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="cellphone" id="cellphone" placeholder="请留下电话号码" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 alert alert-warning fade in" style="padding-top:8px;">
+                                若您修改了电话号码，那么您需要重新通过手机号码绑定会员信息
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">出生日期 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="birthday" name="birthday" placeholder="" class="form-control" data-parsley-group="wizard-step-1" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">毕业院校 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="school"  id="school" placeholder="请填写毕业院校" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">入学年份 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="school_start" name="school_start" placeholder="请填写最高学历入学年份" class="form-control" data-parsley-group="wizard-step-1" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">学历 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="education" id="education" placeholder="请填写最高学历" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">通讯地址 *</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="address" name="address" placeholder="请留下准确的通讯地址，以便联合会可以将证书等邮寄给您"  data-parsley-group="wizard-step-1" required value="" /> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">个人背景简介 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="person_info" name="person_info" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">希望获取的服务或者资源 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="expects" name="expects" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">可提供的资源或服务 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="wills" name="wills" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                             <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                        <h4>公司信息</h4>
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">公司名称 *</label>
+                                <div class="col-md-9">
+                                 <input type="text" name="org_name" id="org_name" placeholder="公司名称" class="form-control" value="" />
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">职位 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="position" id="position" placeholder="职位" class="form-control" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">所属行业 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="industry" id="industry" placeholder="所属行业" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">公司简介 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="general_description" name="general_description" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">业务范围 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="domain_description" name="domain_description" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">注册地址 </label>
+                                <div class="col-md-9">
+                                    <input type="text" name="reg_address" id="reg_address" placeholder="" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <input type="text" name="is_primary" id="is_primary" placeholder="" class="hide" value="" />
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">办公地址 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="office_address" id="office_address" placeholder="" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">公司网址</label>
+                                <div class="col-md-9">
+                                <input type="text" name="website" id="website" placeholder="公司网址" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" id="save" class="btn btn-primary m-r-5 m-b-5" >保存信息</button>
+                            </div>
+                            
+                        </form>
+                            {% end %}
+                            {% if context['member']['member_type'] =='normal_org_member' or context['member']['member_type'] =='advanced_org_member'%}
+                            <form id="form_info" class="form-horizontal">
+                            <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                        <h4>个人信息</h4>
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">真实姓名 *</label>
+                                <div class="col-md-9">
+                                <input type="text" id="fullname" name="fullname" placeholder="请填写真实姓名" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">性别 *</label>
+                                <div class="col-md-9">
+                                <select class="form-control" id="gender" name="gender">
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">微信号 *</label>
+                                <div class="col-md-9">
+                                 <input type="text" name="wechatid" id="wechatid" placeholder="请留下正确的微信ID号【注意，是微信唯一ID，不是微信昵称】" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Email *</label>
+                                <div class="col-md-9">
+                                    <input type="email" name="email" id="email" placeholder="例如: abc@you.com" class="form-control" data-parsley-group="wizard-step-1" data-parsley-type="email" required value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">电话号码 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="cellphone" id="cellphone" placeholder="请留下电话号码" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 alert alert-warning fade in" style="padding-top:8px;">
+                                若您修改了电话号码，那么您需要重新通过手机号码绑定会员信息
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">出生日期 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="birthday" name="birthday" placeholder="" class="form-control"  readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">毕业院校 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="school"  id="school" placeholder="请填写毕业院校" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">入学年份 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="school_start" name="school_start" placeholder="请填写最高学历入学年份" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">学历 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="education" id="education" placeholder="请填写最高学历" class="form-control" data-parsley-group="wizard-step-1" required value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">通讯地址 *</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" id="address" name="address" placeholder="请留下准确的通讯地址，以便联合会可以将证书等邮寄给您"  data-parsley-group="wizard-step-1" required value="" /> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">职位 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="position" id="position" placeholder="职位" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">个人背景简介 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="person_info" name="person_info" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            
+                             <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                        <h4>公司信息</h4>
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">公司名称 *</label>
+                                <div class="col-md-9">
+                                 <input type="text" name="org_name" id="org_name" placeholder="公司名称" class="form-control" value="" />
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">企业法人/责任人 *</label>
+                                <div class="col-md-9">
+                                 <input type="text" name="representative" id="representative" placeholder="公司名称" class="form-control" value="" />
+                                  
+                                </div>
+                            </div>
+                           
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">所属行业 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="industry" id="industry" placeholder="所属行业" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">公司简介 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="general_description" name="general_description" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">业务范围 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="domain_description" name="domain_description" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">注册地址 </label>
+                                <div class="col-md-9">
+                                    <input type="text" name="reg_address" id="reg_address" placeholder="" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <input type="text" name="is_primary" id="is_primary" placeholder="" class="hide" value="" />
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">办公地址 *</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="office_address" id="office_address" placeholder="" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">公司网址</label>
+                                <div class="col-md-9">
+                                <input type="text" name="website" id="website" placeholder="公司网址" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">希望获取的服务或者资源 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="expects" name="expects" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">可提供的资源或服务 *</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="wills" name="wills" placeholder="" rows="3" ></textarea>
+                                </div>
+                            </div>
+                            <div class="">
+                                <button type="button" id="save" class="btn btn-primary m-r-5 m-b-5" >保存信息</button>
+                            </div>
+                            
+                        </form>
+                            {% end %}
+                        </div>
+                    </div>
+                    
+                    <!-- end table -->
+                    </div>
+                </div>
+                <!-- end profile-info -->
+            </div>
+            <!-- end profile-right -->
+        </div>
+        <!-- end profile-section -->
+    </div>
+</div>
+<!-- end col-12 -->
+<div class="modal fade" id="modal-reason">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">填写原因</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">原因</label>
+                        <div class="col-md-9">
+                            <input class="form-control" placeholder="请输入您作出该选择的原因" id="reason" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-white" id="vote">投票</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "simple_appform_vote_detail_modal.html" %}
+

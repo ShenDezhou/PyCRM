@@ -1,0 +1,56 @@
+<style>
+span {
+    display: inline-block;
+    text-decoration: none
+}
+</style>
+<div class="row">
+    <div class="input-field search col s11">
+        <input type="text" placeholder='开始寻找合适的讨论组' id="search_content">
+    </div>
+    <!-- <div class="input-field search col s1" id="search">
+        <i class="material-icons surfix">search</i>
+    </div> -->
+    <div class="search-results"></div>
+</div>
+<div class="row">
+    <div id="quick_tag" class="chips"></div>
+</div>
+<ul class="result-list" id="list-items">
+</ul>
+<a class="btn btn-link btn-block" id="btn-check-more">查看更多</a>
+<script type="tpl-script" id="tpl-list-item">
+    <li data-id="{id}">
+        <div class="row">
+            <div class="col s12 m7">
+                <div class="card">
+                    <div class="card-image">
+                        <a href="/page/discussion/{id}" target="discussion">
+                            <img src="{pictures}" alt="" />
+                        </a>
+                        <a href="/page/discussion/{id}" target="discussion">
+                            <span class="card-title">{title}</span>
+                            <br/>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <span id="signup" class="badge badge-primary m-t-3" style="background-color:{color}">{sign_up_status}</span>
+                        <span class="badge badge-danger m-t-3">{sign_up}人报名</span>
+                        <span class="badge badge-info m-t-3">{visits}人查看 </span>
+                        <span class="badge badge-primary m-t-3">{subject}</span>
+                        <span class="badge badge-warning m-t-3"><a href="/common/discussion_new?id={id}" target="discussion" style="display:{can_modify}" class="badge badge-warning m-t-3">修改</a></span>
+                        <span class="badge badge-danger m-t-3"><a  onclick="$._changeStatus({id},'deleted')" target="discussion" style="display:{can_modify}" class="badge badge-danger m-t-3">删除</a></span>
+                        <span style="font-size:12px;color:red">{reason}</span>
+                        <p></p>
+                        <span> {activity_start_date} {activity_start_hm} ~ {activity_end_date} {activity_end_hm}</span>
+                        <p></p>
+                        <div id="content-{id}" class="materialnote disabled" value="">{content}</div>
+                    </div>
+                    <div class="card-action">
+                        <a href="/page/discussion/{id}" target="discussion" class="btn waves-effect waves-light ">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</script>

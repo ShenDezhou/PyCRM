@@ -1,0 +1,394 @@
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        {% if context['no_login'] %}
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4 class="panel-title">您处于未登录状态,请点击下面按钮进行登录。</h4>
+            </div>
+            </div>
+        <div style="height: 300px">
+            <a type="button" id="login-btn-for-action" class="btn btn-warning btn-block btn-lg m-r-5 m-b-5" href="/login?redirect_url=/page/form_vote_{{context['form_id']}}"> <i class="fa fa-sign-in"></i> 登录 </a>
+        </div>
+        {% elif context['no_cellphone'] %}
+        <form class="row">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">绑定手机号</span>
+                        <p>您需要先绑定手机号才能进行投票。</p>
+                    </div>
+                    <div class="card-action">
+                        <button type="button" onclick="$._bindCellphone('{{handler.current_user}}')" class="btn btn-info m-r-5 m-b-5"><span  style="padding-left:10px;padding-bottom:10px;">绑定</span></button>
+                    </div>
+                </div>
+            </form>
+        {% else %}
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4 class="panel-title">请审阅并投票以下申请</h4>
+            </div>
+            <div class="panel-body">
+                <!-- begin profile-section -->
+                <div class="row">
+                    <!-- begin profile-left -->
+                    <div class="col-md-4">
+                        <!--  <div class="profile-image">
+                                <img src="/static/cav/console/assets/img/profile-cover.jpg">
+                                <i class="fa fa-user hide"></i>
+                            </div> -->
+                        <!-- end profile-image -->
+                        <div class="m-b-10 m-l-10">
+                            <h4>申请成为{{context['form']['apply_member_type_name']}}</h4>
+                            <button type="button" class="btn btn-warning m-r-5 m-b-5" id="agree" onclick="$._vote('{{context['form']['form_id']}}','agree')">赞成加入</button>
+                            <button type="button" class="btn btn-danger m-r-5 m-b-5" id="oppose" onclick="$._vote('{{context['form']['form_id']}}','oppose')">反对加入</button>
+                            <button type="button" class="btn btn-info m-r-5 m-b-5" id="waive" onclick="$._vote('{{context['form']['form_id']}}','waive')">弃权</button>
+                        </div>
+                        <!-- begin profile-highlight -->
+                        {% if context['form']['apply_member_type'] =='normal_member' or context['form']['apply_member_type'] =='normal_org_member' %}
+                        <!--<div class="profile-highlight">-->
+                            <!--<h4><i class="fa fa-dashboard"></i> 当前投票情况-->
+                            <!--</h4>-->
+                            <!--&lt;!&ndash;<a style="float:right;" onclick="$._showVoteDetail('{{context['form']['form_id']}}')">查看投票详情</a>&ndash;&gt;-->
+                            <!--<label>联合会秘书处已有 <strong>{{context['number']['number']}} </strong>人赞成</label>-->
+                        <!--</div>-->
+                        {% elif context['form']['apply_member_type'] =='advanced_member' or context['form']['apply_member_type'] =='advanced_org_member' %}
+                        <!--<div class="profile-highlight">-->
+                            <!--<h4><i class="fa fa-dashboard"></i> 当前投票情况</h4>-->
+                            <!--<label>赞成</label>-->
+                            <!--<div class="progress">-->
+                                <!--<div class="progress-bar progress-bar-warning" style="width:{{context['number']['agree']}}">{{context['number']['agree']}}</div>-->
+                            <!--</div>-->
+                            <!--<label>反对</label>-->
+                            <!--<div class="progress">-->
+                                <!--<div class="progress-bar progress-bar-danger" style="width: {{context['number']['oppose']}}">{{context['number']['oppose']}}</div>-->
+                            <!--</div>-->
+                            <!--<label>弃权</label>-->
+                            <!--<div class="progress">-->
+                                <!--<div class="progress-bar progress-bar-inverse" style="width: {{context['number']['waive']}}">{{context['number']['waive']}}</div>-->
+                            <!--</div>-->
+                            <!--<label>未投票</label>-->
+                            <!--<div class="progress">-->
+                                <!--<div class="progress-bar progress-bar-info" style="width: {{context['number']['not_yet']}}">{{context['number']['not_yet']}}</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        {% end %}
+                        <!-- end profile-highlight -->
+                    </div>
+                    <!-- end profile-left -->
+                    <!-- begin profile-right -->
+                    <div class="col-md-8">
+                        <!-- begin profile-info -->
+                        <div class="profile-info">
+                            <!-- begin table -->
+                            {% if context['form']['apply_member_type'] =='normal_member' or context['form']['apply_member_type'] =='advanced_member'%}
+                            <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h4>个人信息</h4></th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <h4>{{ context['form']['fullname'] }}</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td class="field">性别</td>
+                                        <td>
+                                            {% if context['form']['gender']==1 %} 男 {% else %} 女 {% end %}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">毕业院校</td>
+                                        <td>
+                                            {{context['form']['school']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">入学年份</td>
+                                        <td>
+                                            {{context['form']['school_start']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">学历</td>
+                                        <td>
+                                            {{context['form']['education']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="divider">
+                                        <td colspan="2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="field">通讯地址</td>
+                                        <td>{{context['form']['address']}}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">个人背景简介</td>
+                                        <td>{{context['form']['person_info']}}</td>
+                                    </tr>
+
+                                    <tr class="highlight">
+                                        <td class="field">希望获取的服务或者资源</td>
+                                        <td>{{context['form']['expects']}}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">可提供的资源或服务</td>
+                                        <td>{{context['form']['wills']}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><h4>公司信息</h4></th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <h4>{{ context['form']['org_name'] }}</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td class="field">职位</td>
+                                        <td>
+                                            {{context['form']['position']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">所属行业</td>
+                                        <td>
+                                            {{context['form']['industry']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">公司简介</td>
+                                        <td>
+                                            {{context['form']['general_description']}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="field">业务范围</td>
+                                        <td>{{context['form']['domain_description']}}</td>
+                                    </tr>
+                                    <tr >
+                                        <td class="field">注册地址</td>
+                                        <td>{{context['form']['reg_address']}}</td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">办公地址</td>
+                                        <td>{{context['form']['office_address']}}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">公司网址</td>
+                                        <td><a target="_blank" href="{{context['form']['website']}}">{{context['form']['website']}}</a></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            {% end %}
+                            {% if context['form']['apply_member_type'] =='normal_org_member' or context['form']['apply_member_type'] =='advanced_org_member'%}
+                            {% for item in context['person'] %}
+                            <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                        {% if item['is_primary']==1 %}
+                                        <h4>个人信息</h4>
+                                        {% end %}
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>
+                                            <h4>{{ item['fullname'] }}</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td class="field">性别</td>
+                                        <td>
+                                            {% if item['gender']==1 %} 男 {% else %} 女 {% end %}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">毕业院校</td>
+                                        <td>
+                                            {{item['school']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">入学年份</td>
+                                        <td>
+                                            {{item['school_start']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">学历</td>
+                                        <td>
+                                            {{item['education']}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="field">通讯地址</td>
+                                        <td>{{item['address']}}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">职位</td>
+                                        <td>{{item['position']}}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">个人背景简介</td>
+                                        <td>{{item['person_info']}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {% end %}
+                            <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th><h4>公司信息</h4></th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <h4>{{ context['form']['org_name'] }}</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="highlight">
+                                        <td class="field">企业法人/责任人</td>
+                                        <td>
+                                            {{context['form']['representative']}}
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td class="field">所属行业</td>
+                                        <td>
+                                            {{context['form']['industry']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">公司简介</td>
+                                        <td>
+                                            {{context['form']['general_description']}}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="field">业务范围</td>
+                                        <td>{{context['form']['domain_description']}}</td>
+                                    </tr>
+
+                                    <tr class="">
+                                        <td class="field">办公地址</td>
+                                        <td>{{context['form']['office_address']}}</td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">注册地址</td>
+                                        <td>{{context['form']['reg_address']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="field">公司网址</td>
+                                        <td><a href="{{context['form']['website']}}">{{context['form']['website']}}</a></td>
+                                    </tr>
+                                    <tr class="divider">
+                                        <td colspan="2"></td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">希望获取的服务或者资源</td>
+                                        <td>{{context['form']['expects']}}</td>
+                                    </tr>
+                                    <tr class="highlight">
+                                        <td class="field">可提供的资源或服务</td>
+                                        <td>{{context['form']['wills']}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {% end %}
+                        </div>
+                    </div>
+
+                    <!-- end table -->
+                </div>
+                <!-- end profile-info -->
+            </div>
+            <!-- end profile-right -->
+        </div>
+        <!-- end profile-section -->
+    </div>
+</div>
+<!-- end col-12 -->
+<div class="modal fade" id="modal-reason">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">填写原因</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">原因</label>
+                        <div class="col-md-9">
+                            <input class="form-control" placeholder="请输入您作出该选择的原因" id="reason" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-white" id="vote">投票</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "simple_appform_vote_detail_modal.html" %}
+
+{% end %}
+<div class="modal fade" id="modal-bind-cellphone">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">绑定手机号码</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">手机号码</label>
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="请输入您的手机号码" id="bind-cellphone" value="" />
+                                <div class="input-group-btn">
+                                    <button type="button" id="btn-send-check-code" class="btn btn-success">
+                                        发送验证码
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">验证码</label>
+                        <div class="col-md-5">
+                            <input class="form-control" placeholder="请输入您手机收到的验证码" id="vcode" value="" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-white" id="bind">确定绑定</a>
+            </div>
+        </div>
+    </div>
+</div>

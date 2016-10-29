@@ -1,0 +1,51 @@
+<div class="panel panel-info m-b-20" data-sortable-id="ui-media-object-4">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+        </div>
+        <h4 class="panel-title">我发布的合作</h4>
+    </div>
+    <div class="panel-body">
+        <ul class="media-list media-list-with-divider " id="list-items">
+    
+        </ul>
+        <a class="btn btn-link btn-block" id="btn-check-more">查看更多</a>
+    </div>
+</div>
+
+<div class="primary-fix-button-area">
+    <div class="btn-group btn-group-justified m-t-5">
+        <a class="btn btn-primary" href="/page/form_requirement">找合作</a>
+        <a class="btn btn-warning" href="/common/requirements">所有合作</a>
+    </div>
+</div>
+
+
+<script type="tpl-script" id="tpl-list-item">
+<li data-id="{id}" class="media media-sm">
+    <a class="media-left" href="/page/requirement/{id}" target="requirement">
+        <img src="{head_img_url}" alt="" class="media-object rounded-corner">
+        <div class="text-center m-t-3">
+            <i class="fa fa-user"></i> <strong> {contact_name}</strong>
+        </div>
+    </a>
+    <div class="media-body">
+        <h5 class="media-heading">
+            <a href="/page/requirement/{id}" target="requirement">
+
+            {title} [{status_name}]
+            </a>
+        </h5>
+        <p>
+            <i class="fa fa-phone"></i> 手机 <strong> {contact_cellphone}</strong>
+            <br/>
+            <i class="fa fa-wechat"></i> 微信号 <strong> {contact_wechatid}</strong>
+        </p>
+        <p>
+            <a href="/page/requirement/{id}" class="btn btn-xs btn-info m-r-5">查看详情</a>
+            <a href="/page/form_requirement?id={id}" class="btn btn-xs btn-warning m-r-5">修改</a>
+            <a onclick=$._changeStatus('{id}','deleted') class="btn btn-xs btn-danger m-r-5">删除</a>
+        </p>
+    </div>
+</li>
+</script>

@@ -1,0 +1,163 @@
+
+{% include 'simple_appform_desc.html' %}
+
+<!-- begin row -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-inverse" data-sortable-id="ui-buttons-1" -="">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">申请清华大数据产业联合会会员</h4>
+            </div>
+            <div class="alert alert-warning fade in">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">×</span>
+                </button>
+                您可选择下面申请表类型，通过微信扫码或者复制粘贴来转发申请表格。
+            </div>
+            <div class="alert alert-danger fade in m-b-15" id="info">
+                <div id="detail">
+                </div>
+            </div>
+            <div class="panel-body">
+                <a class="btn btn-primary m-r-5 m-b-5" data-toggle="modal" href="#modal-link-person-app">申请个人普通会员</a>
+                <a class="btn btn-success m-r-5 m-b-5" data-toggle="modal" href="#modal-link-org-app">申请企业普通会员</a>
+                <a class="btn btn-danger m-r-5 m-b-5" data-toggle="modal" href="#modal-link-person-weixin">申请成为微信群友</a>
+            </div>
+            
+        </div>
+    </div>
+    <!-- end col-10 -->
+</div>
+<!-- end row -->
+
+
+
+<!-- #modal-alert -->
+<div class="modal fade" id="modal-link-person-app">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">申请个人普通会员</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">点击查看</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-primary m-r-5 m-b-5" target="app_link" href="/page/form_normal">查看申请表</a>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">微信扫码</label>
+                        <div class="col-md-9">
+                            <img src="/rest/qrcode?link=/page/form_normal"/>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">复制链接</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" placeholder="" rows="2">{{handler.config['site_host_url']}}page/form_normal</textarea>
+                        </div>
+                    </div>                   
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- #modal-alert -->
+<div class="modal fade" id="modal-link-org-app">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">申请企业普通会员</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">点击查看</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-primary m-r-5 m-b-5" target="app_link" href="/page/org_form_normal">查看申请表</a>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">微信扫码</label>
+                        <div class="col-md-9">
+                            <img src="/rest/qrcode?link=/page/org_form_normal"/>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">复制链接</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" placeholder="" rows="2">{{handler.config['site_host_url']}}page/org_form_normal</textarea>
+                        </div>
+                    </div>                   
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- #modal-alert -->
+<div class="modal fade" id="modal-link-person-weixin">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">申请成为微信群友</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">点击查看</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-primary m-r-5 m-b-5" target="app_link" href="/page/form_weixin">查看申请表</a>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">微信扫码</label>
+                        <div class="col-md-9">
+                            <img src="/rest/qrcode?link=/page/form_weixin"/>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">复制链接</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" placeholder="" rows="2">{{handler.config['site_host_url']}}page/form_weixin</textarea>
+                        </div>
+                    </div>                   
+                </form>
+                
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>

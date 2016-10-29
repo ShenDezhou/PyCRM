@@ -1,0 +1,115 @@
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-danger " style="background-color:#e2e7eb;">
+
+            <div class="panel-body">
+                <!-- begin profile-section -->
+                <div class="row">
+                    <!-- begin profile-left -->
+                    <div class="col-md-8">
+                        <!-- begin profile-info -->
+                        <div class="profile-info">
+                            <!-- begin table -->
+                            <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <h4>{{ context['form']['fullname'] }}</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="">
+                                        <td class="field">性别</td>
+                                        <td>
+                                            {% if context['form']['gender']==1 %} 
+                                                男 
+                                            {% elif context['form']['gender']==2 %} 
+                                                女 
+                                            {% else %} 
+                                                &nbsp;
+                                            {% end %}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">毕业院校</td>
+                                        <td>
+                                            {{context['form']['school']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">学历</td>
+                                        <td>
+                                            {{context['form']['education']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">所在微信群</td>
+                                        <td>
+                                            {{context['form']['weixin_group']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">微信号</td>
+                                        <td>
+                                            {{context['form']['wechatid'] or ''}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">公司名称</td>
+                                        <td>
+                                            {{context['form']['org_name']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">职位</td>
+                                        <td>
+                                            {{context['form']['position']}}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">公司简介</td>
+                                        <td>
+                                            {{context['form']['general_description']}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="field">业务范围</td>
+                                        <td>{{context['form']['domain_description']}}</td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">公司网址</td>
+                                        <td><a target="_blank" href="{{context['form']['website']}}">{{context['form']['website']}}</a></td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">个人背景简介</td>
+                                        <td>{{context['form']['person_info']}}</td>
+                                    </tr>
+
+                                    <tr class="">
+                                        <td class="field">希望获取的服务或者资源</td>
+                                        <td>{{context['form']['expects']}}</td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">可提供的资源或服务</td>
+                                        <td>{{context['form']['wills']}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- end table -->
+                </div>
+                <!-- end profile-info -->
+            </div>
+            <!-- end profile-right -->
+        </div>
+        <!-- end profile-section -->
+    </div>
+</div>
+

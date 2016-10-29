@@ -1,0 +1,37 @@
+<style>
+    span{
+        display:inline-block;
+        text-decoration:none
+    }
+    </style>
+<ul class="result-list" id="list-items">
+</ul>
+<a class="btn btn-link btn-block" id="btn-check-more">查看更多</a>
+<script type="tpl-script" id="tpl-list-item">
+    <li data-id="{id}">
+        <div class="result-image">
+            <a href="/page/event/{id}" target="event">
+                <img src="{pictures}" alt="" />
+            </a>
+        </div>
+        <div class="result-info">
+            <h4 class="title m-b-20"><a href="/page/event/{id}" target="event">
+            {title}<br/>
+            <span id="signup" class="badge badge-primary m-t-3" style="background-color:{color}">{sign_up_status}</span>
+            <p></p>
+            <span style="font-size:12px;color:red">{reason}</span>
+            <!--class="label label-danger" -->
+        </a></h4>
+            <p class="location">
+                <i class="fa fa-clock-o fa-lg"></i> {activity_start_date} {activity_start_hm} ~ {activity_end_date} {activity_end_hm}
+            </p>
+            <p class="location" style="position:relative;left:3px;">
+                <i class="fa fa-map-marker fa-lg"></i> {general_place}
+            </p>
+        </div>
+        <div class="result-price">
+            <div class="show-lg m-b-40"></div>
+            <a href="/page/event/{id}" target="event" class="btn btn-info btn-block m-t-2">查看详情</a>
+        </div>
+    </li>
+</script>

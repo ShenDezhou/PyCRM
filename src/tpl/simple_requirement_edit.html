@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-inverse">
+            <!-- /.box-header -->
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">修改合作意向</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        <input value="{{context['id']}}" type="hidden"  id="id"/>
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>姓名</label>
+                            <input type="text" placeholder="请输入发布人姓名" id="contact_name" class="form-control " value="{{context['contact_name']}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>手机号</label>
+                            <input type="text" placeholder="" id="contact_cellphone" class="form-control " value="{{context['contact_cellphone']}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>微信号</label>
+                            <input type="text" placeholder="" id="contact_wechatid" class="form-control " value="{{context['contact_wechatid']}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>一句话概括我的需求</label>
+                            <input type="text" placeholder="" id="title" class="form-control " value="{{context['title']}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="div_subject">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>需求来源</label>
+                            <select class="form-control" id="subject">
+                                {% for s in context['article_sources'] %}
+                                {% if context['subject'] ==s['tag_id'] %}
+                                <option value="{{s['tag_id']}}" selected="selected">{{s['tag_name']}}</option>
+                                {% else %}
+                                <option value="{{s['tag_id']}}">{{s['tag_name']}}</option>
+                                {% end %}
+                                    
+                                
+                                {% end %}
+                               <!--  <option value="_NEW_"> 添加新来源 </option> -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>我的介绍</label>
+                            <textarea type="text" rows='4' id="intro_content" class="form-control" value="">{{context['intro_content']}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>需求详细说明</label>
+                            <textarea type="text" rows='4' id="mycontent" class="form-control" value="">{% raw context['content'] %}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><span style="color:red;">* </span>承诺的回报</label>
+                            <textarea type="text" rows='4' id="repay_content" class="form-control" value="">{{context['repay_content']}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="div_cover">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                            <label for="exampleInputPassword1"><span style="color:red;">* </span>上传附件</label>
+                            <div class = "row" id = "upload_file" style="margin-top:10px;"></div>
+                            {% include "simple_upload_doc.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-danger" id="save"> 提交 </button>
+                <a type="submit" class="btn btn-default" id="return"> 返回 </a>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+<div class="modal fade" id="subject-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">增加新的需求来源</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">名称</label>
+                        <div class="col-md-9">
+                            <input class="form-control" placeholder="请输入名称" id="subject-tag-name" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-primary" id="subject-tag-save-btn">保存</a>
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+            </div>
+        </div>
+    </div>
+</div>

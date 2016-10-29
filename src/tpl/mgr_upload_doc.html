@@ -1,0 +1,59 @@
+<div id="upload-doc-row" style="display:none">
+    <!-- <input id="upload-doc" type="hidden"/> -->
+    <div class="row">
+        <div class="col-md-12">
+            <form enctype="multipart/form-data">
+                <div class="form-group">
+                    <input id="doc-files" type="file" multiple class="file" data-overwrite-initial="false">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+function getFrameByName(name) {
+    for (var i = 0; i < frames.length; i++)
+        if (frames[i].name == name)
+            return frames[i];
+
+    return null;
+}
+
+/* Same as the one defined in OpenJS */
+function uploadDone(name) {
+    var frame = getFrameByName(name);
+    if (frame) {
+        var ret = frame.document.getElementsByTagName("body")[0].innerHTML;
+
+        /* If we got JSON, try to inspect it and display the result */
+        if (ret.length) {
+            /* Convert from JSON to Javascript object */
+            var response = eval("(" + ret + ")");
+            for (var i = 0; i < response.files.length; i++) {
+                $.appendUploadedFile(response.files[i].url);
+            }
+
+        }
+    }
+}
+</script>
+<input type="text" id="attachment" name="attachment" data-parsley-group="wizard-step-3" />
+<form action="/fileupload/mgr/doc" method="post" enctype="multipart/form-data" target="hidden_upload" id="form-upload-ie" >
+    <div class="row">
+        <div class="col-md-12">
+            <input type="file" name="file_data" class="file_upload" value="">
+        </div>
+        <div class="col-md-12 m-t-10">
+            <input type="submit" name="submit"  value="上传" />
+        </div>
+    </div>
+    <iframe id="hidden_upload" name="hidden_upload" src="" onLoad="uploadDone('hidden_upload')" style="width:0;height:0;border:0px solid #fff">
+    </IFRAME>
+    <p class="text-muted"></p>
+</form>
+<div class="row" id="upload-image-previews">
+</div>
+<dl>
+    <dt>提示：</dt>
+    <dd>仅允许上传图片，请上传分辨率大于800x600像素的图片，以便达到清晰的展示效果。</dd>
+</dl>

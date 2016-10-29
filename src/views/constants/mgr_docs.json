@@ -1,0 +1,20 @@
+[
+    {
+        "id": "user_guide",
+        "name": "银行用户操作指南(PPT版)",
+        "date": "2015-10-14",
+        "file": "http://zyyp-zjabank.oss-cn-hangzhou.aliyuncs.com/mgrdoc%2Fuser_guide.pptx"
+    },
+    {
+        "id": "user_guide_pdf",
+        "name": "银行用户操作指南(PDF版)",
+        "date": "2015-10-14",
+        "file": "http://zyyp-zjabank.oss-cn-hangzhou.aliyuncs.com/mgrdoc%2Fuser_guide.pdf"
+    },
+    {
+        "id": "rule_docx",
+        "name": "浙江辖内银行业押品资产交易信息平台管理办法（暂行）",
+        "date": "2015-10-14",
+        "file": "http://zyyp-zjabank.oss-cn-hangzhou.aliyuncs.com/mgrdoc%2Frule.docx"
+    }
+]

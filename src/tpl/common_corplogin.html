@@ -1,0 +1,11 @@
+<div>
+
+    <div class="title">
+        扫码登录
+    </div>
+    <img width=282px height=282px src="{{context['url_for_qr']}}" />
+    <div class="info status status_browser js_status normal">
+        <p class=" text-info">请使用微信扫描二维码登录</p>
+        <p class=" text-info">“{{ handler.config['app_name'] }}”</p>
+    </div>
+</div>

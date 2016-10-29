@@ -1,0 +1,209 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="nav-tabs-custom" id="user-tabs">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_user_info" data-toggle="tab">个人信息</a></li>
+                <li><a href="#tab_user_phone" data-toggle="tab">手机</a></li>
+                <li><a href="#tab_user_mail" data-toggle="tab">邮箱</a></li>
+                <li><a href="#tab_user_password" data-toggle="tab">密码</a></li>
+                <li><a href="#tab_user_code" data-toggle="tab" style="display:none">登录名</a></li>
+                <li><a href="#tab_user_card" data-toggle="tab">个人头像</a></li>
+            </ul>
+            <div class="tab-content" style="padding-top:40px;min-height:400px;">
+                <div class="tab-pane active" id="tab_user_info">
+                    <form id="userinfo_form" class="form-horizontal" action="" method="POST">
+                        <div class="form-body person-inner-pading">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">用户类型</label>
+                                <div class="col-md-3">
+                                    <p class="form-control-static" id="user-type-name">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">真实姓名</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="username" name="username" type="text" class="form-control" placeholder="请输入真实姓名">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">公司名称</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="companyname" name="company" type="text" class="form-control" placeholder="请输入公司名称">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn_submit" type="submit" class="btn btn-danger person-button" onclick="">保存修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_user_mail">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body person-inner-pading">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">当前邮箱</label>
+                                <div class="col-md-3">
+                                    <p class="form-control-static" id="self-user-mail">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">修改邮箱</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="email" type="text" class="form-control" name="email" placeholder="请输入邮箱">
+                                    </div>
+                                </div>
+                                <label class="col-md-3"></label>
+                            </div>
+                        </div>
+                        <div class="form-actions fluid">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn_submit" type="submit" class="btn btn-danger person-button">保存修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_user_phone">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body person-inner-pading">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">当前手机号码</label>
+                                <div class="col-md-3">
+                                    <p class="form-control-static" id="self-user-phone">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">新手机号码</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="telephone" type="text" class="form-control" name="telephone" placeholder="仅限中国大陆手机号">
+                                    </div>
+                                </div>
+                                <label class="col-md-3"></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-9">
+                                    <button id="reset-get-code" type="button" class="btn btn-default">
+                                        <i class="m-icon-swapleft"></i> 获取验证码
+                                    </button>
+                                    <label id="alert_info"></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">验证码</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="code" type="text" class="form-control" name="code" placeholder="请输入验证码">
+                                    </div>
+                                </div>
+                                <label class="col-md-3"></label>
+                            </div>
+                        </div>
+                        <div class="form-actions fluid">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn_submit" type="submit" class="btn btn-danger person-button">保存修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="tab_user_password">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body person-inner-pading">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">当前密码</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="old_password" type="password" class="form-control" name="old_password">
+                                    </div>
+                                </div>
+                                <label class="col-md-3"></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">新密码</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="new_password" type="password" class="form-control" name="new_password">
+                                    </div>
+                                </div>
+                                <label class="col-md-3"></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">再次输入密码</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="again_password" type="password" class="form-control" name="again_password">
+                                    </div>
+                                </div>
+                                <label class="col-md-3"></label>
+                            </div>
+                        </div>
+                        <div class="form-actions fluid">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn_submit" type="submit" class="btn btn-danger person-button">保存修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="tab_user_code">
+                    <form id="usercode_form" class="form-horizontal" action="" method="POST">
+                        <div class="form-body person-inner-pading">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">用户名</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon">
+                                        <input id="user_code" name="user_code" type="text" class="form-control" placeholder="请输入用户名">
+                                    </div>
+                                    请注意! 用户名一旦设置后, 就不能再修改.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions fluid">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="set_user_code_button" type="submit" class="btn btn-danger person-button" onclick="">保存修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="tab_user_card">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body person-inner-pading">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">当前头像</label>
+                                <div class="col-md-4 thumbnail">
+                                    <img id='user-card-holder' alt='未上传头像' width='180' height="180" src="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-9">
+                                    <button id="btn-upload-user-card" type="button" class="btn btn-default">
+                                        <i class="m-icon-swapleft"></i> 上传
+                                    </button>
+                                    <label id="alert_info"></label>
+                                    <input id='user-card-input' name="user_card" type="file" style="display:none">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions fluid">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn_modify_submit" type="submit" class="btn btn-danger person-button">保存修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

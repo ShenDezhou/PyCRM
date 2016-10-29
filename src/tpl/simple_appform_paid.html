@@ -1,0 +1,70 @@
+<!-- begin row -->
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4 class="panel-title">您申请成为的是{{context['form']['apply_member_type_name']}}</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            开通成为{{context['form']['apply_member_type_name']}}: {{context['form']['fullname']}}
+                        </h4>
+                        <h4>
+                            公司名称: {{context['form']['org_name']}}
+                        </h4>
+                        <div style="border-style: solid; border-width:2px;border-color: green;width:300px;height:150px;line-height:150px;overflow:hidden;text-align:center;">
+                        <h3 style="margin-top:60px;">{{context['form']['apply_member_type_name']}}<span style="color:#ff6e1e"><strong>
+                        {% if context['form']['apply_member_type']=='normal_member' %}
+                        500
+                        {% elif context['form']['apply_member_type']=='advanced_member'%}
+                        10000
+                        {% elif context['form']['apply_member_type']=='advanced_org_member'%}
+                        20000
+                        {% elif context['form']['apply_member_type']=='normal_org_member'%}
+                        2000
+                        {% end %}
+                        </strong></span>元/年</h3>
+                        </div>     
+                        <h4 class="m-t-20">请选择以下方式付费:</h4>
+<!--                         <div style="height:100px;">
+                        <ul class="list-bank">
+                            <li onclick="bankSelect(this)" style="">
+                            <input id="pay_ALIPAY" type="radio" class="jdradio" value="ALIPAY" name="bankRadio">
+                            <label>
+                            <img src="/static/cav/img/alipay.png" width="100px" height="30px" style="margin-left:10px;" />
+                            </label>
+                            </li>
+                            <li onclick="bankSelect(this)">
+                            <input id="pay_WEIXIN" type="radio" class="jdradio" value="ALIPAY" name="bankRadio">
+                            <label>
+                            <img src="/static/cav/img/weixin.jpg" width="30px" height="30px" style="margin-left:10px;" /><strong class="m-l-10">微信支付</strong>
+                            </label>
+                            </li>
+                        </ul>
+                        </div> -->
+                        <a href="javascript:;" class="btn btn-primary btn-lg m-r-5">支付宝 </a>
+                        <a href="javascript:;" class="btn btn-success btn-lg m-r-5 m-l-10">微信支付</a>
+                        <div class="m-t-20">
+                            <div class="note note-warning">
+                                    <h4>提示：</h4>
+                                    <p>
+                                        一般会员：个人 500元 / 年，企业2000元 / 年
+                                    </p>
+                                    <p>
+                                        理事会员：个人 10000元 / 年，企业20000元 / 年
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->

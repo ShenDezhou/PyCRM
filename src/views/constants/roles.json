@@ -1,0 +1,26 @@
+[
+    {
+        "id": "super",
+        "name": "超级管理"
+    },
+    {
+        "id": "admin",
+        "name": "机构管理"
+    },
+    {
+        "id": "news",
+        "name": "文章发布"
+    },
+    {
+        "id": "exam",
+        "name": "信息审批"
+    },
+    {
+        "id": "record",
+        "name": "信息录入"
+    },
+    {
+        "id": "stats",
+        "name": "数据统计"
+    }
+]

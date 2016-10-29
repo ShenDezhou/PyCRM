@@ -1,0 +1,350 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-success">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table id="data-table" class="table table-bordered display responsive nowrap table-striped">
+                        <thead>
+                            <tr>
+                                <!-- <th>人员ID</th> -->
+                                <th>组织名称</th>
+                                <th>申请类型</th>
+                                <th>申请时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<div class="modal" id="new-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">扫描二维码</h4>
+            </div>
+            <div class="modal-body">
+                <img src="/qrcode/login/?uuid=1" style="vertical-align:middle;" width="300px" height="300px" />
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script type="text/javascript">
+$(function() {
+    $('#data-table').dataTable({
+        "dom": 'T<"clear">lfrtip',
+        "processing": true,
+        "serverSide": false,
+        "searching": true,
+        "bStateSave": hasStateSave(),
+        "responsive": true,
+        "ajax": "/rest/mgr/org_apply/table",
+        "tableTools": {
+            "sSwfPath": "/static/lte/plugins/data-tables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+            "aButtons": [{
+                "sExtends": "xls",
+                "sButtonText": "导出Excel",
+                "sFileName": "个人会员列表.xls"
+            }]
+        },
+        "columns": [{
+            "data": "name"
+        }, {
+            "data": "type",
+            "mRender": function(data, type, full) {
+                if (data == 0)
+                    return "普通";
+
+                if (data==1)
+                    return "理事";
+
+                    return "未知";
+            }
+        },
+        {
+            "data": "apply_date"
+        },
+         {
+            "data": "vote_url",
+            "mRender": function(data, type, full) {
+                var url=data
+                var html = "";
+                html='<button type="button" class="btn btn-info btn-xs" onclick="show_new_model()" title="Popover title" data-container="body" data-toggle="popover" data-placement="top" data-content="顶部的 Popover 中的一些内容">投票公示</button>';
+                //html += '<a class="btn btn-info btn-xs" href='+url+'>' + '投票公示' + '</a>'+'<br>';
+                //html += '<a class="btn btn-info btn-xs" href='+url+'>' + '通知缴费' + '</a>';
+                return html;
+            }
+        }],
+        "aaSorting": [1, 'asc'],
+        "language": {
+            "emptyTable": "暂无数据",
+            "info": "当前显示 _START_ 到 _END_ 条记录, 共 _TOTAL_ 条",
+            "infoEmpty": "当前 0 到 0 / 共 0 条",
+            "infoFiltered": "",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "每页显示&nbsp; _MENU_ &nbsp;条",
+            "loadingRecords": "正在加载...",
+            "processing": "正在处理...",
+            "search": "搜索:",
+            "zeroRecords": "暂无数据",
+            "paginate": {
+                "first": "首页",
+                "last": "末页",
+                "next": "下一页",
+                "previous": "上一页"
+            },
+            "aria": {
+                "sortAscending": ": 顺序排序",
+                "sortDescending": ": 反序排序"
+            }
+        }
+    });
+    $('#record').click(function() {
+        if ($('#record').is(":checked")) {
+            $('#exam').attr("checked", false);
+            $('#exam').attr("disabled", true);
+        } else {
+            $('#exam').attr("disabled", false);
+        }
+    });
+
+    initStrictOptions();
+    $('#stats').click(function() {
+        if ($('#stats').is(":checked")) {
+            if($('#select_cbrc option').length > 1){
+                $('#group_cbrc').show();
+                $('#select_cbrc').val('');
+            }
+        } else {
+            $('#group_cbrc').hide();
+            $('#select_cbrc').val('');
+        }
+    });
+
+    $('#new-submit').click(function() {
+
+        var checkboxs = document.getElementById("check_roles").getElementsByTagName("input");
+        var check = "";
+        for (var i = 0; i < checkboxs.length; i++) {
+            if ($(checkboxs[i]).is(":checked")) {
+                // check.push($(checkboxs[i]).attr("id"));
+                var id = $(checkboxs[i]).attr("id");
+                check += id + ',';
+            }
+        }
+        if (!check_input(check))
+            return false;
+
+
+        var url = "";
+        var data = {_xsrf: $.cookie("_xsrf")};
+        data.name = $('#new-name').val();
+        data.fullname = $('#new-fullname').val();
+        data.mail = $('#new-mail').val();
+        data.phone = $('#new-phone').val();
+        data.telephone = $('#new-telephone').val();
+        data.password = $('#new-password').val();
+        data.roles = check.substring(0, check.length - 1);
+        data.cbrc = $('#select_cbrc').val();
+        if ($('#member_id').val()) {
+            url = "/rest/mgr/member/edit";
+            data.id = $('#member_id').val();
+        } else {
+            if (!$('#new-password').check().notNull() && !$('#new-password').check().password()) {
+                alert("您输入的不符合密码格式。请包含字母和数字, 6~22位");
+                return false;
+            }
+            url = "/rest/mgr/member/add";
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function(data) {
+                if (data.error) {
+                    return alert(data.error || '添加失败！');
+                }
+                alert(data.message);
+
+                if (hasStateSave())
+                    location.reload();
+                else
+                    $.reloadLocation({
+                        bstatesave: true
+                    });
+            },
+            error: function() {
+                alert('网络错误！');
+            },
+            dataType: 'json'
+        });
+        return false;
+    });
+    var check_input = function(check_ids) {
+        if (!$('#new-name').check().notNull() || !$('#new-fullname').check().notNull()|| !$('#new-phone').check().notNull()||!$('#new-telephone').check().notNull()) {
+            alert("红色*号标识均为必填项");
+            return false;
+        }
+        if (!$('#new-name').check().numberChar()) {
+            alert("登录名仅允许小写字母和数字,6~12位");
+            return false;
+        }
+        if (!$('#new-phone').check().tel()) {
+            alert("手机号码格式错误");
+            return false;
+        }
+        if (!$('#new-telephone').check().cell()) {
+            alert("座机号码格式错误");
+            return false;
+        }
+        if ($('#new-mail').check().notNull() && !$('#new-mail').check().email()) {
+            alert("email格式错误");
+            return false;
+        }
+        if (check_ids == "") {
+            alert("请为该用户分配权限");
+            return false;
+        }
+        return true;
+    }
+});
+
+var delete_member = function(member_id ,roles) {
+    var info = "";
+    if(roles.indexOf('信息录入')>=0)
+        info = "你确定要删除该成员吗？\n若删除该成员则其所发布的押品信息也将会被删除";
+    else
+        info = "你确定要删除该成员吗？";
+    if (confirm(info)) {
+        $.ajax({
+            type: "get",
+            url: '/rest/mgr/member/delete',
+            cache: false,
+            data: {
+                id: member_id
+            },
+            success: function(data) {
+                if (data.error) {
+                    return alert(data.error || '删除失败！');
+                }
+                alert(data.message);
+                if (hasStateSave())
+                    location.reload();
+                else
+                    $.reloadLocation({
+                        bstatesave: true
+                    });
+            },
+            error: function() {
+                alert('网络错误！');
+            },
+            dataType: 'json'
+        });
+    }
+
+}
+
+var edit = function(member_id) {
+    $.ajax({
+        type: "get",
+        url: '/rest/mgr/member/detail',
+        cache: false,
+        data: {
+            id: member_id
+        },
+        success: function(data) {
+            if (data.error) {
+                return alert(data.error || '添加失败！');
+            }
+            $('#new-modal').modal('show');
+            $('.modal-title').html('修改机构人员');
+            $('#password_info').html('登录密码<small> ( 若不输入密码表示不修改密码，包含字母和数字, 6~22位)</small>');
+            var member_info = data.member_info;
+            $('#new-name').val(member_info['name']);
+            $('#new-fullname').val(member_info['fullname']);
+            $('#new-password').val("");
+            $('#new-phone').val(member_info['phone']);
+            $('#new-telephone').val(member_info['telephone']);
+            $('#new-mail').val(member_info['mail']);
+            $('#member_id').val(member_info['id']);
+            $("#new-modal input[type=checkbox]").removeAttr("checked");
+            $("#new-modal input[type=checkbox]").removeAttr("disabled");
+            for (var i = 0; i < data.roles_info.length; i++) {
+                var role = data.roles_info[i];
+                $('input#' + role['role_id']).prop("checked", true);
+                if (role['role_id'] == "record")
+                    $('#exam').prop("disabled", true);
+                if (role['role_id'] == "exam")
+                    $('#record').prop("disabled", true);
+                if (role['role_id'] == "stats"){
+                    for(var j = 0; j < data.strict_info.length; j++){
+                        if(data.strict_info[j].strict_type == 'cbrc'){
+                            $('#select_cbrc').val(data.strict_info[j].strict_value || '');
+                        }
+                    }
+                    if($('#select_cbrc option').length > 1){
+                        $('#group_cbrc').show();
+                    }
+                }
+            }
+        },
+        error: function() {
+            alert('网络错误！');
+        },
+        dataType: 'json'
+    });
+};
+
+var initStrictOptions = function() {
+    $.ajax({
+        type: "get",
+        url: '/rest/mgr/stricts',
+        cache: false,
+        data: {
+        },
+        success: function(data) {
+            if(data && data.strict_options){
+                var html = '<option value="">全省所有监管局</option>';
+                for(var j = 0; j < data.strict_options.length; j++){
+                    html += '<option value="' + data.strict_options[j].code_id + '">' + data.strict_options[j].code_name + '</option>';
+                }
+                $('#select_cbrc').html(html);
+            }
+        },
+        error: function() {
+            alert('网络错误！');
+        },
+        dataType: 'json'
+    });
+}
+
+var show_new_model = function() {
+    $('#new-name').val("");
+    $('#new-fullname').val("");
+    $('#new-password').val("");
+    $('#new-phone').val("");
+    $('#new-mail').val("");
+    $('.modal-title').html('扫描二维码，获得投票公示文章连接');
+    $('#member_id').val("");
+    $("input:checkbox").attr("checked", false);
+    $("input:checkbox").attr("disabled", false);
+    $('#password_info').html('<span style="color:red;">*</span>登录密码<small>  (仅允许字母和数字,6~22位)</small>');
+    $('#new-modal').modal('show');
+}
+</script>

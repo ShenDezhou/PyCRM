@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8"> {% include "layout_head_part.html" %}
+</head>
+
+<body class="pace-top bg-white">
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+
+    <!-- begin #page-container -->
+    <div id="page-container" class="page-container fade in page-without-sidebar ">
+        <!-- begin #content -->
+        <div id="content" class="content">
+            
+            {% module CommonMainEntry(entry = entry, page = page, page_config = page_config, context = context) %}
+            
+        </div>
+        <!-- end #content -->
+        
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+    <!-- end page container -->
+    {% include "layout_foot_part.html" %}
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-inverse">
+            <!-- /.box-header -->
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">表单结果</h4>
+            </div>
+            <div class="panel-body">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-warning overflow-hidden">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a class="accordion-toggle accordion-toggle-styled collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                                    <i class="fa fa-plus-circle pull-right"></i> 
+                                    {{context['survey']['title']}} 
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="collapseSix" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                发布日期： {{context['survey']['created']}} <br/>
+
+                                {% raw context['survey']['content'] or '【正文空白】' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if 'submits' in context['survey'] and context['survey']['submits'] %}
+                <table id="news_list" class="table table-striped table-bordered" width="100%">
+                    <thead>
+                        <tr>
+                            <th>提交人</th>
+                            <th>提交时间</th>
+                            {% for q in context['survey']['quizs'] %}
+                                <th>问题: {{q['title']}}</th>
+                            {% end %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in context['survey']['submits'] %}
+                        <tr>
+                            <td>
+                                {{s['nick_name']}}<br/>
+                                {{s['cellphone']}}
+                            </td>
+                            <td>
+                                {{s['created']}}
+                            </td>
+                            {% for qo in context['survey']['quizs'] %}
+                                <td>
+                                {% for q in s['quizs'] %}
+                                    {% if q['id'] == qo['id'] %}
+                                        {{ ','.join([a['label'] or a['value'] for a in q['answers']]) }}
+                                        {% break %}
+                                    {% end %}
+                                {% end %}
+                                </td>
+                            {% end %}
+                        </tr>
+                        {% end %}
+                    </tbody>
+                </table>
+                {% end %}
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="modal fade" id="new-quiz-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">添加新的问题</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">问题标题</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="请输入" id="new-quiz-title" />
+                            <input type="hidden" class="form-control" placeholder="请输入" id="new-quiz-id" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">问题类型</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="new-quiz-type">
+                                <option value="">请选择</option>
+                                <option value="text">单行填空题</option>
+                                <option value="textarea">多行填空题</option>
+                                <option value="select">单选题</option>
+                                <option value="checkbox">多选题</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="new-quiz-opts-section">
+                        <label class="col-md-3 control-label">答案选项</label>
+                        <div class="col-md-9">
+                            <div class="row text-center m-b-3">
+                                <div class="col-md-8">
+                                    选项说明
+                                </div>
+                                <div class="col-md-2">
+                                    排序
+                                </div>
+                                <div class="col-md-2">
+                                    操作
+                                </div>
+                            </div>
+                            <div id="new-quiz-opt-items">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder="请输入选项说明" id="new-quiz-opt-title" />
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control" id="new-quiz-opt-sort">
+                                        <option value="">排序</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-sm btn-primary" id="new-quiz-opt-btn">添加</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">是否必填</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="new-quiz-required">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">序号</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="new-quiz-sort">
+                                <option value="">请选择</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-primary" id="new-quiz-save-btn">保存</a>
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">取消</a>
+            </div>
+        </div>
+    </div>
+</div>

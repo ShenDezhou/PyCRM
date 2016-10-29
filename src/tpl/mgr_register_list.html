@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                </div>
+                <h4 class="panel-title">{{context[0]['title']}}</h4>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group" style="margin-bottom:17px;">
+                    <button class="btn btn-danger btn-xs admin-btn-export" table-id="detail_list_table" filename="{{context[0]['title']}}-报名列表.xls" type="button" id="btn_export"><i class="fa fa-fw fa-download"></i> 导出Excel</button>
+                    <a class="btn btn-info btn-xs admin-btn-print" table-id="detail_list_table" filename="{{context[0]['title']}}-签到列表" type="button" id="btn_export" href="#" target="mgr-print"><i class="fa fa-fw fa-download"></i> 打印预览</a>
+                </div>
+                <table id="detail_list_table" class="table table-bordered display responsive nowrap table-striped" style="overflow: auto; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>是否会员</th>     
+                                <th>电话</th>  
+                                <th>单位</th> 
+                                <th>职业</th> 
+                                <th>签到时间</th> 
+                                <th>邮箱</th> 
+                                <th>微信号</th>
+                                <th>电子签名</th> 
+                                <th>调查内容</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
+
+<div class="modal fade" id="modal-reason">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">填写报名失败原因</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">原因</label>
+                        <div class="col-md-9">
+                            <input class="form-control" placeholder="请输入该报名失败原因" id="reason" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-white" id="save">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-person-detail">
+    <div class="modal-dialog modal-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">个人信息</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills"> 
+                    <li class="active"><a href="#person" data-toggle="tab"><i class="fa fa-male m-r-5"></i> <span class="hidden-xs">基本信息</span></a></li>
+                    <li id="images"><a href="#image" data-toggle="tab"><i class="fa fa-picture-o m-r-5"></i> <span class="hidden-xs">个人签名照片</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="person">
+                         <div class="" id="div_person">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="image">
+                        <div class="table-responsive">
+                                <table id="image_table" class="table table-bordered display responsive nowrap table-striped">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>

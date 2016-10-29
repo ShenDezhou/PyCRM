@@ -1,0 +1,11 @@
+{
+    "land": ["land_type"],
+    "factory": ["factory_type"],
+    "commercial_house": ["bizhouse_type"],
+    "house": ["house_type"],
+    "machine": ["machine_type"],
+    "transportation": [],
+    "stock": ["stock_type"],
+    "remainder": [],
+    "others": []
+}

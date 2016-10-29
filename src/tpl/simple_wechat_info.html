@@ -1,0 +1,73 @@
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div class="panel panel-danger " style="background-color:#e2e7eb;">
+
+            <div class="panel-body">
+                <!-- begin profile-section -->
+                <div class="row">
+                    <!-- begin profile-left -->
+                    <div class="col-md-8">
+                        <!-- begin profile-info -->
+                        <div class="profile-info">
+                            <!-- begin table -->
+                            <table class="table table-profile">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <img src="{{ context['form']['head_img_url'] }}"/></h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="">
+                                        <td class="field">昵称</td>
+                                        <td>
+                                            {{ context['form']['nick_name']}} 
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">手机号</td>
+                                        <td>
+                                            {{ context['form']['cellphone'] or "无"}} 
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">性别</td>
+                                        <td>
+                                            {% if context['form']['gender']==1 %} 男 {% elif context['form']['gender']==1 %} %} 女  {% else %} 未知 {% end %}
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">地区</td>
+                                        <td>
+                                            {{ context['form']['country']}} 
+                                            {{ context['form']['province']}} 
+                                            {{ context['form']['city']}} 
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td class="field">授权时间</td>
+                                        <td>
+                                            {{ context['form']['auth_date']}} 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- end table -->
+                </div>
+                <!-- end profile-info -->
+            </div>
+            <!-- end profile-right -->
+        </div>
+        <!-- end profile-section -->
+    </div>
+</div>
+

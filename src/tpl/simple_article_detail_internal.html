@@ -1,0 +1,19 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="news-content">
+            <h3 class="news-title news-indent">
+            {{ context['title'] }}</h3>
+            <div class="news-date news-indent">发布日期：{{ context['published'] }} <span class="m-l-20">
+            {% if context['data_source'] %}
+                原文链接：<a href="{{ context['data_source'] or '#' }}" target="_blank">{{ context['data_source_name'] or '#' }}</a>
+            {% end %}</span></div>
+            <div class="news-indent">
+                <p class="">
+                {% raw context['content'] %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">  {% include "layout_head_part.html" %}
+</head>
+
+<body style="width=800px; background-color: rgb(51, 51, 51);">
+    <!-- begin #page-container -->
+    <div style="text-align:center" class="impowerBox">
+        {% module CommonMainEntry(entry = entry, page = page, page_config = page_config, context = context) %}
+    </div>
+    <!-- end container -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+    {% include "layout_foot_part.html" %}
+</body>
+
+</html>

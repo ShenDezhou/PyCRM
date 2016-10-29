@@ -1,0 +1,47 @@
+<div class="coming-soon">
+    <div class="coming-soon-header">
+        <div class="bg-cover"></div>
+        <div class="brand">
+            <img src="{{ handler.config['logo_console'] }}" height="200px" />
+        </div>
+        <div class="timer">
+            <div id="timer"></div>
+        </div>
+        <div class="desc">
+            <h4 style="color:#fff;font-weight:normal;">{{ handler.config['app_welcome'] }}</h4>
+        </div>
+    </div>
+    <div class="coming-soon-content">
+        {% if handler.config['wechat_corp_auth']=="1" or not handler.config['wechat_webid'] %}
+        <iframe src="/qr_corplogin" seamless frameborder=0 height=410px></iframe>
+        {% else %}
+        <iframe src="/login" seamless frameborder=0 height=500px></iframe>
+        {% end %}
+        <div class="desc">
+            如果您有任何问题，请用以下邮件地址告诉我们。
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Email Address" value="{{ handler.config['contact_mail'] }}" disabled>
+            <div class="input-group-btn">
+                <a type="button" class="btn btn-success" href="mailto:{{ handler.config['contact_mail'] }}">发邮件</a>
+            </div>
+        </div>
+        <p class="help-block m-b-25"><i>我们将尽快与您联系.</i></p>
+        
+        <p>&nbsp;</p>
+        
+    </div>
+</div>
+
+<style type="text/css">
+.footer {
+  margin-left: 25px;
+  text-align: center;
+}
+</style>
+
+<div id="footer" class="footer">
+    版权所有 © {{ handler.config['app_name'] }} 未经许可不得复制、转载或者摘编，违者必究
+
+    备案/许可证编号：{{ handler.config['app_icp'] }}
+</div>

@@ -1,0 +1,41 @@
+
+<div class="invoice">
+    <div class="invoice-company">
+        <span class="pull-right hidden-print">
+                    <!-- <a href="javascript:;" class="btn btn-sm btn-success m-b-10"><i class="fa fa-download m-r-5"></i> Export as PDF</a> -->
+                    <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-success m-b-10"><i class="fa fa-print m-r-5"></i> 打印</a>
+                    </span> {{context['title']}}
+    </div>
+
+    <div class="invoice-content">
+        <div class="table-responsive">
+            <table class="table table-invoice">
+                <thead>
+                    
+                    <tr>
+                        {% for i in context['items'][0][:-1] %}
+                        <th>{{ i }}</th>
+                        {% end %}
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    {% for r in context['items'][1:] %}
+                        <tr>
+                            {% for i in r[:-1] %}
+                            <th>
+                                {% if str(i).lower().endswith('.jpg') or str(i).endswith('.png') %}
+                                    <img src="/assets/ticket/image/{{i}}" style="height:40px;"/>
+                                {% else %}
+                                    {{ i }}
+                                {% end %}
+                            </th>
+                            {% end %}
+                        </tr>
+                    {% end %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+</div>

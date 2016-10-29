@@ -1,0 +1,17 @@
+<script type="text/javascript">
+var pageTitle, pageDesc, pageIcon, pageUrl;
+$(function(){
+    pageTitle = $('#wechatPageTitle').text();
+    pageDesc = $('#wechatPageDesc').text();
+    pageIcon = $('#wechatPageIcon').text();
+    pageUrl = location.href;
+});
+    
+</script>
+
+<div id="wechatPageTitle" style="display:none">{% if 'share_title' in page %}{{page["share_title"]}}{% else %}{{page["title"]}}{% end %}</div>
+<div id="wechatPageDesc" style="display:none">{% if 'share_description' in page %}{{page["share_description"]}}{% else %}{{page["description"]}}{% end %}</div>
+<div id="wechatPageIcon" style="display:none">{% if 'share_icon' in page %}{{page['share_icon']}}{% else %}{{handler.config["app_ico_png"]}}{% end %}</div>
+
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="{{ static_url("cav/js/wechat_js.js") }}"></script>

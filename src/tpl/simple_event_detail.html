@@ -1,0 +1,301 @@
+<div class="row" style="position:relative">
+    <div class="col-md-5">
+        {% if context['activity']['pictures'] %}
+        <img src="/assets/ticket/image/{{ context['activity']['pictures'].split(',')[0] }}" style="width:100%;" /> {% else %}
+        <img src="/static/cav/img/default-u.png" alt="" style="width:100%;" /> {% end %}
+    </div>
+    <div class="col-md-7 news-content">
+        {% if context['register']%}
+        <div class="row " id="signup-success">
+            <div class="widget bg-blue">
+                <p/>
+                <div class="text-center" style="font-size:350%">签到成功</div>
+                <p/>
+            </div>
+        </div>
+        {% end %}
+        <h3 class="m-b-20 m-t-10">{{ context['activity']['title'] }}</h3>
+        <div class="news-date news-indent">
+            <i class="fa fa-clock-o fa-lg"></i> {{ context['activity']['activity_start_date'] }} {{ context['activity']['activity_start_hm'] }} ~ {% if context['activity']['activity_start_date'] != context['activity']['activity_end_date']%} {{ context['activity']['activity_end_date'] }} {% end %} {{ context['activity']['activity_end_hm'] }}
+        </div>
+        <div class="news-date news-indent" style="position:relative;left:3px;">
+            <i class="fa fa-map-marker fa-lg"></i> {% if context['sign_up'] and context['sign_up']['status'] =='sign_up_success' %} {{ context['activity']['activity_place'] }} {% else %} {{ context['activity']['general_place'] }} {% end %}
+        </div>
+        {% if context['activity']['activity_guider'] %}
+        <div class="news-date news-indent">
+            <i class="fa fa-flag fa-lg"></i> {{ context['activity']['activity_guider'] }} (指导单位)
+        </div>
+        {% end %}
+        <div class="news-date news-indent">
+            <i class="fa fa-bullseye fa-lg"></i> {{ context['activity']['activity_sponsor'] }} (主办)
+        </div>
+        <div class="news-date news-indent">
+            <i class="fa fa-dot-circle-o fa-lg"></i> {{ context['activity']['activity_undertake'] }} (承办)
+        </div>
+        {% if context['activity']['activity_organizer'] %}
+        <div class="news-date news-indent">
+            <i class="fa fa-comments fa-lg"></i> {{ context['activity']['activity_organizer'] }} (协办)
+        </div>
+        {% end %}
+        <div class="news-date news-indent">
+            <i class="fa fa-toggle-off fa-lg"></i>{{ context[ 'activity'][ 'activity_online_offline'] }} (类型)
+        </div>
+        <div class="news-date news-indent">
+            <i class="fa fa-gears fa-lg"></i>{{ context[ 'activity'][ 'activity_type'] }} (形式)
+        </div>
+        {% if context['show_over_button'] %}
+        <div class="primary-fix-button-area-2">
+            <a type="button" id="sign_up" disabled="True" style="cursor: not-allowed" class="btn btn-primary btn-lg m-r-5 m-b-5" href="#"> <i class="fa fa-sign-in"></i> 活动已经结束 </a>
+        </div>
+        {% end %}
+        {% if context['activity']['paid'] and context['activity']['paid'] != '0' %}
+        <div class="news-date news-indent">
+            <i class="fa fa-jpy fa-lg"></i> {{ context['activity']['paid'] }} (费用)
+        </div>
+        {% end %}
+        {% if context['sign_up'] and not context['register'] %}
+        <div class="row">
+            <div class="col-xs-12 alert alert-warning fade in" style="height:75px;padding-top:8px;">
+                <strong>{{context['sign_up']['code_name']}}   <a type="button" id="quit" style="float:right;" onclick="$._quitData('{{context['activity']['id']}}')"> 取消报名</a></strong> {% if context['sign_up']['reason'] %} 原因：{{context['sign_up']['reason']}} {% end %}
+                <!--<strong>{{context['sign_up']['code_name']}}</strong>-->
+                <!--<p>-->
+                <!--{% if context['sign_up']['reason'] %}{{context['sign_up']['reason']}} {% end %}-->
+                <!--</p>-->
+            </div>
+            {% if context['sign_up']['contribution'] %}
+            <p class="text-danger p-l-10">
+                <b>备注：</b> {{context['sign_up']['contribution']}}
+            </p>
+            {% end %}
+        </div>
+        {% end %} {% if context['register'] %}
+        <div class="row">
+            <div class="col-xs-6" style="color: rgb(0, 102, 204);">报名时间：
+                <br/>{{context['sign_up']['created']}}</div>
+            <div class="col-xs-6" style="color: rgb(0, 102, 204);">签到时间：
+                <br />{{context['register']['created']}}</div>
+        </div>
+        {% end %}{% if not handler.is_auth() and context['status']['sign_up'] %}
+        {% if context['signin'] %}
+        <div class="primary-fix-button-area">
+            <a type="button" id="login-btn-for-action" class="btn btn-warning btn-block btn-lg m-r-5 m-b-5" href="/login?corp={{ context['activity']['event_corp_auth'] }}&amp;redirect_url=/page/event/{{context['activity']['id']}}?signin=true">  先登录，后报名 </a>
+        </div>
+        {% else %}
+        <div class="primary-fix-button-area">
+            <a type="button" id="login-btn-for-action" class="btn btn-warning btn-block btn-lg m-r-5 m-b-5" href="/login?corp={{ context['activity']['event_corp_auth'] }}&amp;redirect_url=/page/event/{{context['activity']['id']}}">  先登录，后报名 </a>
+        </div>
+        {% end %}
+        {% elif not handler.is_auth() %}
+        <div class="primary-fix-button-area">
+            <a type="button" id="login-btn-for-action" class="btn btn-warning btn-block btn-lg m-r-5 m-b-5" href="/login?corp={{ context['activity']['event_corp_auth'] }}&amp;redirect_url=/page/event/{{context['activity']['id']}}"> <i class="fa fa-sign-in"></i> 我要登录 </a>
+        </div>
+        {% elif context['sign_up'] and not context['register'] %} {% if context['status']['register'] and context['sign_up']['status'] =='sign_up_success' %}
+        <div class="primary-fix-button-area">
+            <button type="button" id="register" class="btn btn-danger btn-block btn-lg m-r-5 m-b-5" onclick="$._postData('register','{{context['activity']['id']}}')"> <i class="fa fa-pencil"></i> 我要签到 </button>
+        </div>
+        {% end %} {% elif not context['register'] %} {% if context['status']['sign_up'] %}
+        <div class="primary-fix-button-area-2">
+            <a type="button" id="sign_up" class="btn btn-primary btn-lg m-r-5 m-b-5" href="#sign-up-form"> <i class="fa fa-sign-in"></i> 我要报名 </a>
+        </div>
+        <!-- #modal-alert -->
+        <div class="modal fade" id="modal-sign-up-form">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">请填写信息，完成报名</h4>
+                    </div>
+                    <div class="modal-body">
+                        {% if 'user_profile' in context and context['user_profile'] %}
+                        <h3 class="modal-title text-center">请填写信息，完成报名</h3>
+                        <hr/>
+                        <form class="form-horizontal">
+                            <input type="hidden" value="{{context['activity']['sign_up_fields']}}" id="sign-up-fields" />
+                            <input type="hidden" value="{{ context['activity']['event_corp_auth'] }}" id="corp_auth" />
+                            <div id="form-extra-options">
+                            </div>
+                            <div class="form-group sign-up-form-fullname" style="display:none">
+                                <label class="col-md-4 control-label">
+                                    <span class="f-s-14 f-w-600">[必填] 姓名 </span>
+                                </label>
+                                <div class="col-md-8">
+                                    {% if context['user_profile']['person'] %}
+                                    <input type="text" id="fullname" name="fullname" placeholder="请填写真实姓名" class="form-control" data-parsley-group="wizard-step-1" required value="{{context['user_profile']['person']['fullname'] or ''}}" /> {% else %}
+                                    <input type="text" id="fullname" name="fullname" placeholder="请填写真实姓名" class="form-control" data-parsley-group="wizard-step-1" required value="" /> {% end %}
+                                </div>
+                            </div>
+                            <div class="form-group sign-up-form-cellphone" style="display:none">
+                                <label class="col-md-4 control-label">
+                                    <span class="f-s-14 f-w-600">[必填] 手机号 </span>
+                                </label>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-xs-7">
+                                            <div style="width:100%;text-align:left; height:34px;" class="btn btn-white" onclick="$._bindCellphone('{{context['user_profile']['authorized']['person_id']}}')">
+                                                <span id="cellphone_info">{{context['user_profile']['authorized']['cellphone'] or ''}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <a onclick="$._bindCellphone('{{context['user_profile']['authorized']['person_id']}}')" class="btn btn-success btn-inline-block btn-sm">
+                                                    {% if not context['user_profile']['authorized']['cellphone'] %}
+                                                        绑定
+                                                    {% else %}
+                                                        修改
+                                                    {% end %}
+                                                    </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group sign-up-form-wechatid" style="display:none">
+                                <label class="col-md-4 control-label">
+                                    <span class="f-s-14 f-w-600">[必填] 微信号 </span>
+                                </label>
+                                <div class="col-md-8">
+                                    {% if context['user_profile']['person'] %}
+                                    <input type="text" name="wechatid" id="wechatid" placeholder="请留下正确的微信ID号【注意，是微信唯一ID，不是微信昵称】" class="form-control" data-parsley-group="wizard-step-1" required value="{{context['user_profile']['person']['wechatid'] or ''}}" /> {% else %}
+                                    <input type="text" name="wechatid" id="wechatid" placeholder="请留下正确的微信ID号【注意，是微信唯一ID，不是微信昵称】" class="form-control" data-parsley-group="wizard-step-1" required value="" /> {% end %}
+                                </div>
+                            </div>
+                            <div class="form-group sign-up-form-email" style="display:none">
+                                <label class="col-md-4 control-label">
+                                    <span class="f-s-14 f-w-600">[必填] Email </span>
+                                </label>
+                                <div class="col-md-8">
+                                    {% if context['user_profile']['person'] %}
+                                    <input type="email" name="email" id="email" placeholder="例如: abc@yourdomin.com" class="form-control" data-parsley-group="wizard-step-1" data-parsley-type="email" required value="{{context['user_profile']['person']['email'] or ''}}" /> {% else %}
+                                    <input type="email" name="email" id="email" placeholder="例如: abc@yourdomain.com" class="form-control" data-parsley-group="wizard-step-1" data-parsley-type="email" required value="" /> {% end %}
+                                </div>
+                            </div>
+                            <div class="form-group sign-up-form-org_name" style="display:none">
+                                <label class="col-md-4 control-label">
+                                    <span class="f-s-14 f-w-600">[必填] 单位或学校名称 </span>
+                                </label>
+                                <div class="col-md-8">
+                                    {% if context['user_profile']['org'] %}
+                                    <input type="text" name="org_name" id="org_name" placeholder="请填写单位名称" class="form-control" data-parsley-group="wizard-step-1" required value="{{context['user_profile']['org']['org_name'] or ''}}" /> {% else %}
+                                    <input type="text" name="org_name" id="org_name" placeholder="请填写单位名称" class="form-control" data-parsley-group="wizard-step-1" required value="" /> {% end %}
+                                </div>
+                            </div>
+                            <div class="form-group sign-up-form-position" style="display:none">
+                                <label class="col-md-4 control-label">
+                                    <span class="f-s-14 f-w-600">[必填] 职位 </span>
+                                </label>
+                                <div class="col-md-8">
+                                    {% if context['user_profile']['person'] %}
+                                    <input type="text" name="position" id="position" placeholder="请填写职位" class="form-control" value="{{context['user_profile']['person']['position'] or ''}}" /> {% else %}
+                                    <input type="text" name="position" id="position" placeholder="请填写职位" class="form-control" value="" /> {% end %}
+                                </div>
+                            </div>
+                            <div class="form-group sign-up-form-person_info" style="display:none">
+                                <label class="col-md-4 control-label">
+                                    <span class="f-s-14 f-w-600">[必填] 个人工作与学习背景介绍 </span>
+                                </label>
+                                <div class="col-md-8">
+                                    {% if context['user_profile']['person'] %}
+                                    <textarea class="form-control" id="person_info" name="person_info" placeholder="" rows="3">{{context['user_profile']['person']['person_info'] or ''}}</textarea>
+                                    {% else %}
+                                    <textarea class="form-control" id="person_info" name="person_info" placeholder="" rows="3"></textarea>
+                                    {% end %}
+                                </div>
+                            </div>
+                            {% if 'survey' in context %} {% include 'simple_appform_survey_ctrls.html' %} {% end %}
+                            <div class="form-group sign-up-form-is_volunteer" style="display:none">
+                                <label class="col-md-4 control-label">
+                                    <span class="f-s-14 f-w-600">是否愿意成为本次活动的志愿者?</span>
+                                </label>
+                                <div class="col-md-8">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="" id="is_volunteer" name="is_volunteer"> 我愿意
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group sign-up-form-contribution" style="display:none">
+                                <label class="col-md-4 control-label"><span class="f-s-14 f-w-600">[必填] 请说明您与本次活动内容的相关性，我们将优先通过与本次活动相关性强的朋友参加活动：</span></label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" placeholder="" rows="5" id="contribution" name="contribution"></textarea>
+                                </div>
+                            </div>
+                            <input type="text" id="source" name="source" class="hide" />
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">&nbsp;</label>
+                                <div class="col-md-8">
+                                    <a href="javascript:;" class="btn btn-primary btn-lg" onclick="$._postData('sign_up','{{context['activity']['id']}}')">提交报名</a>
+                                </div>
+                            </div>
+                        </form>
+                        {% end %}
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary" onclick="$._postData('sign_up','{{context['activity']['id']}}')">确定报名</a>
+                        <a href="javascript:;" class="btn btn-white" data-dismiss="modal">取消</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-bind-cellphone">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">绑定手机号码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal form-bordered">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">手机号码</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="请输入您的手机号码" id="cellphone" value="" />
+                                        <div class="input-group-btn">
+                                            <button type="button" id="btn-send-check-code" class="btn btn-success">发送验证码</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">验证码</label>
+                                <div class="col-md-5">
+                                    <input class="form-control" placeholder="请输入您手机收到的验证码" id="vcode" value="" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-sm btn-white" id="bind">确定绑定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% end %} {% end %}
+    </div>
+</div>
+{% if context['sign_up'] and context['sign_up']['status'] =='sign_up_success' and context['activity']['signup_content'] %}
+<div class="row" style="margin-bottom:60px;">
+    <div class="col-md-12">
+        <div class="news-content m-t-20">
+            <h4 class="m-t-30">活动报名成功信息（仅供已报名成功用户查看）</h4>
+            <hr class="m-t-1" />
+            <p class="">
+                {% raw context['activity']['signup_content'] %}
+            </p>
+        </div>
+    </div>
+</div>
+{% end %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="news-content m-b-20">
+            <h4 class="m-t-30">活动内容</h4>
+            <hr class="m-t-1" />
+            <p class="">
+                {% raw context['activity']['content'] %}
+            </p>
+        </div>
+    </div>
+</div>
+<a name="sign-up-form"></a>
+<div class="row" id="sign-up-form">
+</div>

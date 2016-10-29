@@ -1,0 +1,122 @@
+<div class="modal fade" id="modal-link-paid-info">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">缴费记录</h4>
+            </div>
+            <div class="modal-body">
+                <a href="javascript:;" class="btn btn-sm btn-danger m-b-10" id="modal-paid">缴费</a>
+                <table id="paid_history_table" class="table table-bordered display responsive nowrap table-striped">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-link-form-paid">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">付费链接</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">微信扫码</label>
+                        <div class="col-md-9">
+                            <img src="/rest/qrcode?link="/>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">付费链接</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" placeholder="" rows="2"></textarea>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">查看付费页面</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-primary m-r-5 m-b-5" target="app_link">点击查看</a>
+                        </div>
+                    </div>                   
+                </form>
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">修改状态</label>
+                        <div class="col-md-9">
+                            <a class="btn btn-danger m-r-5 m-b-5" target="app_paid">确定线下付费</a>
+                        </div>
+                    </div>                   
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-offline-paid">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">确定线下付费</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">会员起始时间</label>
+                        <div class="col-md-9">
+                            <input class="form-control" id='start_time' placeholder="会员起始时间,日期格式为2016-03-13"/>
+                        </div>
+                    </div>   
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">会员有效期至</label>
+                        <div class="col-md-9">
+                            <input class="form-control" id='end_time' placeholder="会员有效期至,日期格式为2016-03-13"/>
+                        </div>
+                    </div>      
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">付费金额</label>
+                        <div class="col-md-9">
+                            <input class="form-control" id="paid_money" placeholder="付费金额"/>
+                        </div>
+                    </div>    
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">付费号码</label>
+                        <div class="col-md-9">
+                            <input class="form-control" id="paid_number" placeholder="付费号码"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">备注</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="paid_remark" rows="3"></textarea> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">请上传支付凭证</label>
+                        <div class="col-md-9">
+                            {% include "simple_upload_image.html" %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-sm btn-danger" data-dismiss="modal" id="paid">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
