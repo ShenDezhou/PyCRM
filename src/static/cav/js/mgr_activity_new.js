@@ -199,16 +199,10 @@ $(function() {
     }
     $("#published").val(new Date().Format("yyyy-MM-dd"));
     $('#save').click(function() {
-        //防止多次点击重复提交
-        $('#save').attr("disabled",true);
-        $("#save_and_publish").attr("disabled",true);
         commitData("draft");
         return false;
     });
     $('#save_and_publish').click(function() {
-        //防止多次点击重复提交
-        $('#save').attr("disabled",true);
-        $("#save_and_publish").attr("disabled",true);
         commitData("published");
         return false;
     });
@@ -229,8 +223,6 @@ $(function() {
         }
         if (!$('#published').check().notNull() || !$('#title').check().notNull() || !$('#mycontent').check().notNull() || !$('#paid').check().notNull() || !$('#activity_start_time').check().notNull() || !$('#activity_end_time').check().notNull() || !$('#activity_place').check().notNull()) {
             alert("红色*号标识均为必填项");
-            $('#save').attr("disabled",false);
-            $("#save_and_publish").attr("disabled",false);
             return;
         }
         postData.title = $('#title').val();
@@ -280,8 +272,6 @@ $(function() {
                 location.href = "/console/activity_list";
             },
             error: function() {
-                $('#save').attr("disabled",false);
-                $("#save_and_publish").attr("disabled",false);
                 alert('网络错误！');
             },
             dataType: 'json'

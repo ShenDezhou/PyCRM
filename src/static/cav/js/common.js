@@ -43,11 +43,7 @@ var personInfoTitle = function(){
     output += "<tr><td>微信号</td><td class='wechatid'></td></tr>";
     output += "<tr><td>微信群</td><td class='weixin_group'></td></tr>";
     output += "<tr><td>电话号码</td><td class='cellphone'></td></tr>";
-    output += "<tr><td>电话号码1</td><td class='cellphone1'></td></tr>";
-    output += "<tr><td>电话号码2</td><td class='cellphone2'></td></tr>";
     output += "<tr><td>E-mail</td><td class='email'></td></tr>";
-    output += "<tr><td>E-mail1</td><td class='email1'></td></tr>";
-    output += "<tr><td>E-mail2</td><td class='email2'></td></tr>";
     output += "<tr><td>地址</td><td class='address'></td></tr>";
     output += "<tr><td>职位</td><td class='position'></td></tr>";
     output += "<tr><td>个人背景简介</td><td class='person_info'></td></tr>";

@@ -1,11 +1,11 @@
-var g_detail_type = "";
-$(function () {
+var g_detail_type="";
+$(function() {
     var current_person_id = "";
     var g_tag_option_count = 0;
-    var personInfo = function (person_info) {
+    var personInfo = function(person_info) {
         var output = personInfoTitle();
         var tables = '';
-        for (i in person_info) {
+        for (var i in person_info) {
             tables += '<table id="person_info_table' + i + '" class="table table-bordered display responsive nowrap table-striped"><tbody></tbody></table>';
         }
         $('#div_person').html(tables);
@@ -24,7 +24,7 @@ $(function () {
         }
 
     };
-    var orgInfo = function (org_info, person_info) {
+    var orgInfo = function(org_info, person_info) {
         var output = orgInfoTitle() + willAndExpect();
         $('#org_info_table tbody').html(output);
         for (var key in org_info) {
@@ -49,8 +49,8 @@ $(function () {
     };
 
 
-    $('#save').click(function () {
-        var postData = {_xsrf: $.cookie("_xsrf")};
+    $('#save').click(function() {
+        var postData = { _xsrf: $.cookie("_xsrf") };
         if ($('#certificate').is(":checked")) {
             postData.certificate = 1;
         } else {
@@ -61,11 +61,11 @@ $(function () {
         } else {
             postData.if_in_member_group = 0;
         }
-        postData.weixin_group = $('#weixin_groups').val();
+        postData.weixin_group = $('#weixin_group').val();
         postData.person_id = current_person_id;
         postData.type = g_detail_type;
         var str = "";
-        $("#tag_group option:selected").each(function () {
+        $("#tag_group option:selected").each(function() {
             str += $(this).text() + ",";
         });
         postData.tag_group = str.substring(0, str.length - 1);
@@ -74,34 +74,27 @@ $(function () {
             cache: false,
             url: '/rest/mgr/member/edit',
             data: postData,
-            success: function (data) {
+            success: function(data) {
                 if (data.error) {
                     return alert(data.error);
                 }
                 window.location.reload();
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
     });
-    var getFormDetailInfo = function (form_id, type) {
-        var url = '';
-        if (type == "person") {
-            url = '/rest/mgr/person/form/detail'
-        }
-        else if (type == "org") {
-            url = '/rest/mgr/org/form/detail'
-        }
+    var getFormDetailInfo = function(form_id) {
         $.ajax({
             type: "get",
             cache: false,
-            url: url,
+            url: '/rest/mgr/form/detail',
             data: {
                 form_id: form_id
             },
-            success: function (data) {
+            success: function(data) {
                 if (data.error) {
                     return alert(data.error);
                 }
@@ -109,26 +102,26 @@ $(function () {
                 orgInfo(data['org'][0], data['person'][0]);
 
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
     };
 
-    $._showFormDetail = function (id, type) {
-        getFormDetailInfo(id, type);
+    $._showFormDetail = function(id) {
+        getFormDetailInfo(id);
         $('#modal-form-detail').modal('show');
-        $('#modal-form-detail .nav li').each(function () {
+        $('#modal-form-detail .nav li').each(function() {
             $(this).removeClass("active");
         });
-        $('#modal-form-detail .tab-content div').each(function () {
+        $('#modal-form-detail .tab-content div').each(function() {
             $(this).removeClass("active in");
         });
         $("#modal-form-detail .nav li:nth-child(1)").addClass("active");
         $("#modal-form-detail .tab-content div:nth-child(1)").addClass("active in");
     };
-    var memberInfo = function (form_info, person_will, member_info) {
+    var memberInfo = function(form_info, person_will, member_info) {
         var output = "";
         output += "<tr><td>会员类型</td><td class='apply_member_type'></td></tr>";
         output += "<tr><td>缴费金额</td><td class='paid_money'></td></tr>";
@@ -148,7 +141,7 @@ $(function () {
         }
 
     };
-    var memberPersonInfo = function (person_info) {
+    var memberPersonInfo = function(person_info) {
         var output = personInfoTitle();
         var tables = '';
         for (var i in person_info) {
@@ -170,7 +163,7 @@ $(function () {
         }
 
     };
-    var memberOrgInfo = function (org_info, person_info, form_info) {
+    var memberOrgInfo = function(org_info, person_info, form_info) {
         var output = orgInfoTitle();
         $('#member_org_info_table tbody').html(output);
         for (var key in org_info) {
@@ -202,7 +195,7 @@ $(function () {
         }
 
     };
-    var tagInfo = function (tag_info) {
+    var tagInfo = function(tag_info) {
         $.ajax({
             url: "/rest/mgr/get/tagcode",
             dataType: 'json',
@@ -210,7 +203,7 @@ $(function () {
             data: {
                 type: 'tag_root'
             },
-            success: function (data, params) {
+            success: function(data, params) {
                 // parse the results into the format expected by Select2
                 // since we are using custom formatting functions we do not need to
                 // alter the remote JSON data, except to indicate that infinite
@@ -218,13 +211,13 @@ $(function () {
                 g_tag_option_count = data.length;
                 var output = "";
                 for (var index in data) {
-                    findpos = -1;
-                    // findpos = tag_info.indexOf(data[index]['tag_name'], 0);
+                    findpos = tag_info.indexOf(data[index]['tag_name'], 0);
                     if (findpos == -1)
                         output += "<option value='" + data[index]['tag_id'] + "'>" + data[index]['tag_name'] + "</option>";
                     else
                         output += "<option value='" + data[index]['tag_id'] + "' selected>" + data[index]['tag_name'] + "</option>";
                 }
+                console.log("success:" + output);
                 $('#tag_group').html(output);
                 $('#tag_group').select2({
                     placeholder: {
@@ -234,7 +227,8 @@ $(function () {
                     tags: true,
                     tokenSeparators: [',', ' ']
                 })
-                $('#tag_group').on('change', function (evt) {
+                $('#tag_group').on('change', function(evt) {
+                    console.log("%O", evt);
 
                     if (evt.target.length > g_tag_option_count) {
 
@@ -245,13 +239,13 @@ $(function () {
                                 tag_type: 'tag_root',
                                 tag_name: this.options[this.options.length - 1].text
                             },
-                            success: function (data, params) {
+                            success: function(data, params) {
                                 if (data.error) {
                                     return alert(data.error);
                                 }
 
                             },
-                            error: function () {
+                            error: function() {
                                 alert('网络错误！');
                             },
 
@@ -262,7 +256,7 @@ $(function () {
                 });
 
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
 
@@ -271,78 +265,62 @@ $(function () {
         });
     }
 
-    var memberHandleInfo = function (member, person) {
-        $('#weixin_groups').val(person[0]['weixin_group']);
-        if (member[0]['certificate'] == 1) {
+    var memberHandleInfo = function(member, person) {
+        $('#weixin_group').val(person['weixin_group']);
+        if (member['certificate'] == 1) {
             $('#certificate').prop("checked", true);
         } else {
             $('#certificate').prop("checked", false);
         }
-        if (person[0]['if_in_member_group'] == 1) {
+        if (person['if_in_member_group'] == 1) {
             $('#if_in_member_group').prop("checked", true);
         } else {
             $('#if_in_member_group').prop("checked", false);
         }
-        tagInfo(person[0]['tag_group']);
+        console.log(person['tag_group']);
+        tagInfo(person['tag_group']);
         // $('#tag_group').val(member['tag_group']);
 
     };
-    var initWeixinGroup = function (groups) {
-        var output = "<option value='none'>未分配微信群</option>";
+    var initWeixinGroup = function(groups) {
+        var output = "<option>未分配微信群</option>";
         for (var index in groups) {
-            output += '<option value="' + groups[index]['tag_id'] + '">' + groups[index]['tag_name'] + "</option>";
+            output += "<option value='" + groups[index]['tag_id'] + "'>" + groups[index]['tag_name'] + "</option>";
         }
-        $("#weixin_groups").html(output);
-    };
-    var getPersonDetailInfo = function (person_id) {
-        var url = '';
+        $('#weixin_group').html(output);
+    }
+    var getMemberDetailInfo = function(person_id) {
         current_person_id = person_id;
-        url = '/rest/mgr/person/info/detail';
         $.ajax({
             type: "get",
             cache: false,
-            url: url,
+            url: '/rest/mgr/member/detail',
             data: {
-                "person_id": person_id
+                person_id: person_id
             },
-            success: function (data) {
+            success: function(data) {
                 if (data.error) {
                     return alert(data.error);
                 }
-                console.log(data);
-                if (data['type'] == 'member') {
-                    initWeixinGroup(data['weixin_group']);
-                    memberPersonInfo(data['person']);
-                    memberOrgInfo(data['org'], data['person'], data['form']);
-                    memberInfo(data['form'], data['person'], data['member']);
-                    memberHandleInfo(data['member'], data['person']);
-                }
-                else if (data['type'] == 'not_member') {
-                    $("#member_info").remove();
-                    // $("#person_info").attr("","active");
-                    // memberPersonInfo(data['person']);
-                    // memberOrgInfo(data['org'], data['person'], data['form']);
-                    initWeixinGroup(data['weixin_group']);
-                    memberPersonInfo(data['person']);
-                    memberOrgInfo(data['org'], data['person'], data['form']);
-                    memberInfo(data['form'], data['person'], data['member']);
-                    memberHandleInfo(data['member'], data['person']);
-
-                }
+                initWeixinGroup(data['weixin_group']);
+                memberPersonInfo(data['person']);
+                memberOrgInfo(data['org'][0], data['person'], data['form_info'][0]);
+                memberInfo(data['form_info'][0], data['person'][0], data['member'][0]);
+                memberHandleInfo(data['member'][0], data['person'][0]);
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
     };
-    $._showPersonDetail = function (person_id) {
-        getPersonDetailInfo(person_id);
+    $._showMemberDetail = function(id) {
+        getMemberDetailInfo(id);
         $('#modal-member-detail').modal('show');
-        $('#modal-member-detail .nav li').each(function () {
+        $('#modal-member-detail .nav li').each(function() {
             $(this).removeClass("active");
         });
-        $('#modal-member-detail .tab-content div').each(function () {
+        $('#modal-member-detail .tab-content div').each(function() {
             $(this).removeClass("active in");
         });
         $("#modal-member-detail .nav li:nth-child(1)").addClass("active");

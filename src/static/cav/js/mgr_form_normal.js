@@ -1,9 +1,9 @@
-$(function() {
+$(function () {
 
-    var handleBootstrapWizardsValidation = function() {
+    var handleBootstrapWizardsValidation = function () {
         "use strict";
         $("#wizard").bwizard({
-            'validating': function(e, t) {
+            'validating': function (e, t) {
                 if (t.index == 0 && t.nextIndex > t.index) {
                     if (false === $('form[name="form-wizard"]').parsley().validate("wizard-step-1")) {
                         return false
@@ -22,10 +22,10 @@ $(function() {
             nextBtnText: '下一步 &rarr;'
         });
     };
-    var FormWizardValidation = function() {
+    var FormWizardValidation = function () {
         "use strict";
         return {
-            init: function() {
+            init: function () {
                 handleBootstrapWizardsValidation()
             }
         }
@@ -51,24 +51,19 @@ $(function() {
         }
     );
     // start 从cookie读取表单信息
-    var GetCookie = function() {
+    var GetCookie = function () {
         var person_keys = ['fullname', 'cellphone', 'gender', 'birthday', 'school', 'school_start',
             'education', 'address', 'weixin_group', 'wechatid', 'city', 'email', 'position', 'person_info',
             'school_department', 'school_number'];
         for (i in person_keys) {
-            if ((person_keys[i] == 'school_start' || person_keys[i] == 'birthday') && $.cookie(person_keys[i]) == null) {
-                $("#school_start").val("2000-09-01");
-                $("#birthday").val("1980-09-01");
-            } else {
-                $("#" + person_keys[i]).val($.cookie(person_keys[i]));
-            }
-            // console.log(person_keys[i] + ":" + $.cookie(person_keys[i]));
+            console.log(person_keys[i] + ":" + $.cookie(person_keys[i]));
+            $("#" + person_keys[i]).val($.cookie(person_keys[i]));
         }
         var other_keys = ['org_name', 'representative', 'general_description', 'domain_description',
             'industry', 'office_address', 'high_tech', 'website', 'comments', 'first_normal_recommend',
             'second_normal_recommend', 'first_advanced_recommend', 'expects', 'wills'];
         for (i in other_keys) {
-            // console.log(other_keys[i] + ":" + $.cookie(other_keys[i]));
+            console.log(other_keys[i] + ":" + $.cookie(other_keys[i]));
             $("#" + other_keys[i]).val($.cookie(other_keys[i]));
         }
     };
@@ -76,13 +71,13 @@ $(function() {
     // end 从cookie读取表单信息
 
     //实现城市,学校,系部字段填写时,下拉提示功能
-    var callback_industry = function(data) {
+    var callback_industry = function (data) {
         var industry_list = data['industry'];
         $(".autocomplete").autocomplete({
             source: industry_list
         });
     };
-    $("#industry").focus(function() {
+    $("#industry").focus(function () {
         var industry_name = $("#industry").val();
         jQuery.ajax(
             {
@@ -102,13 +97,13 @@ $(function() {
         )
     });
 
-    var callback_city = function(data) {
+    var callback_city = function (data) {
         var city_list = data['city'];
         $(".autocomplete").autocomplete({
             source: city_list
         });
     };
-    $("#city").focus(function() {
+    $("#city").focus(function () {
         var city_name = $("#city").val();
         jQuery.ajax(
             {
@@ -127,14 +122,14 @@ $(function() {
             }
         )
     });
-    var callback_school = function(data) {
+    var callback_school = function (data) {
         var school_list = data['school'];
         // console.log(school_list);
         $(".autocomplete").autocomplete({
             source: school_list
         });
     };
-    $("#school").focus(function() {
+    $("#school").focus(function () {
         var school_name = $("#school").val();
         jQuery.ajax(
             {
@@ -154,13 +149,13 @@ $(function() {
         )
     });
 
-    var callback_school_department = function(data) {
+    var callback_school_department = function (data) {
         var school_department_list = data['school_department'];
         $(".autocomplete").autocomplete({
             source: school_department_list
         });
     };
-    $("#school_department").focus(function() {
+    $("#school_department").focus(function () {
         var school_department = $("#school_department").val();
         jQuery.ajax(
             {
@@ -179,14 +174,14 @@ $(function() {
             }
         )
     });
-    var callback_position = function(data) {
+    var callback_position = function (data) {
         var position_list = data['position'];
         $(".autocomplete").autocomplete({
             source: position_list
         });
 
     };
-    $("#position").focus(function() {
+    $("#position").focus(function () {
         var position = $("#position").val();
         jQuery.ajax(
             {
@@ -205,13 +200,13 @@ $(function() {
             }
         )
     });
-    var callback_org = function(data) {
+    var callback_org = function (data) {
         var org_list = data['org'];
         $(".autocomplete").autocomplete({
             source: org_list
         });
     };
-    $("#org_name").focus(function() {
+    $("#org_name").focus(function () {
         var org = $("#org_name").val();
         jQuery.ajax(
             {
@@ -231,7 +226,7 @@ $(function() {
         )
     });
     // 个人背景信息字数统计
-    $("#person_info").keyup(function() {
+    $("#person_info").keyup(function () {
         var info_number = $("#person_info").val().length;
         info_number = 200 - info_number;
         if (info_number > 0) {
@@ -241,7 +236,7 @@ $(function() {
             document.getElementById("info_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#expects").keyup(function() {
+    $("#expects").keyup(function () {
         var expects_number = $("#expects").val().length;
         expects_number = 200 - expects_number;
         if (expects_number > 0) {
@@ -251,7 +246,7 @@ $(function() {
             document.getElementById("expects_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#wills").keyup(function() {
+    $("#wills").keyup(function () {
         var wills_number = $("#wills").val().length;
         wills_number = 200 - wills_number;
         if (wills_number > 0) {
@@ -261,7 +256,7 @@ $(function() {
             document.getElementById("wills_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#general_description").keyup(function() {
+    $("#general_description").keyup(function () {
         var general_description_number = $("#general_description").val().length;
         general_description_number = 200 - general_description_number;
         if (general_description_number > 0) {
@@ -271,7 +266,7 @@ $(function() {
             document.getElementById("general_description_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#domain_description").keyup(function() {
+    $("#domain_description").keyup(function () {
         var domain_description_number = $("#domain_description").val().length;
         domain_description_number = 200 - domain_description_number;
         if (domain_description_number > 0) {
@@ -281,7 +276,7 @@ $(function() {
             document.getElementById("domain_description_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#comments").keyup(function() {
+    $("#comments").keyup(function () {
         var comments_number = $("#comments").val().length;
         comments_number = 200 - comments_number;
         if (comments_number > 0) {
@@ -293,7 +288,7 @@ $(function() {
     });
 
     //添加学历选项
-    $(function() {
+    $(function () {
         var educations = ['请选择', '中专', '大专', '本科', '硕士研究生', '博士研究生'];
         for (index in educations) {
             if (educations[index] == '请选择') {
@@ -321,14 +316,14 @@ $(function() {
     //     $('.datepicker').hide();
     // });
     $("#student").hide();
-    $("#check_student").click(function() {
+    $("#check_student").click(function () {
         if ($('#check_student').is(":checked")) {
             $("#student").show();
         } else {
             $("#student").hide();
         }
     });
-    $("#bind-cellphone").click(function() {
+    $("#bind-cellphone").click(function () {
         $.ajax({
             type: "get",
             url: "/rest/mgr/person/bind/cellphone",
@@ -336,7 +331,7 @@ $(function() {
                 cellphone: $("#cellphone").val(),
                 vcode: $("#vcode").val()
             },
-            success: function(data) {
+            success: function (data) {
                 if (data && data.error) {
                     return alert(data.error || '添加失败！');
                 }
@@ -363,7 +358,7 @@ $(function() {
                 }
 
             },
-            error: function() {
+            error: function () {
                 alert('网络错误！');
             },
             dataType: 'json'
@@ -372,7 +367,7 @@ $(function() {
     });
     var util = {
         wait: 0,
-        hsTime: function(that) {
+        hsTime: function (that) {
             _this = $(this);
             if (util.wait <= 0) {
                 $('#bind').removeAttr("disabled").text('绑定');
@@ -381,13 +376,13 @@ $(function() {
                 var _this = this;
                 $('#bind').attr("disabled", true).text('在' + util.wait + '秒后点此重发');
                 util.wait--;
-                setTimeout(function() {
+                setTimeout(function () {
                     util.hsTime(that);
                 }, 1000)
             }
         }
     };
-    $("#bind").click(function() {
+    $("#bind").click(function () {
         if (util.wait > 0) {
             return alert('请稍后再点击发送验证码！');
         }
@@ -409,7 +404,7 @@ $(function() {
                 'phone': $('#cellphone').val(),
                 'message_type': 'bind_phone_sms'
             },
-            success: function(data) {
+            success: function (data) {
                 if (data.error)
                     alert(data.error);
                 else {
@@ -417,7 +412,7 @@ $(function() {
                 }
 
             },
-            error: function() {
+            error: function () {
                 alert('网络错误！');
             },
             dataType: 'json'
@@ -426,24 +421,24 @@ $(function() {
         util.hsTime('#btn-send-check-code');
         return false;
     });
-    var SetCookie = function() {
+    var SetCookie = function () {
         var person_keys = ['fullname', 'cellphone', 'gender', 'birthday', 'school', 'school_start',
             'education', 'address', 'weixin_group', 'wechatid', 'city', 'email', 'position', 'person_info',
             'school_department', 'school_number'];
         for (i in person_keys) {
-            // console.log(person_keys[i] + ":" + $("#" + person_keys[i]).val());
+            console.log(person_keys[i] + ":" + $("#" + person_keys[i]).val());
             $.cookie(person_keys[i], $("#" + person_keys[i]).val(), {expires: 365})
         }
         var other_keys = ['org_name', 'representative', 'general_description', 'domain_description',
             'industry', 'office_address', 'high_tech', 'website', 'comments', 'first_normal_recommend',
             'second_normal_recommend', 'first_advanced_recommend', 'expects', 'wills'];
         for (i in other_keys) {
-            // console.log(other_keys[i] + ":" + $("#" + other_keys[i]).val());
+            console.log(other_keys[i] + ":" + $("#" + other_keys[i]).val());
             $.cookie(other_keys[i], $("#" + other_keys[i]).val(), {expires: 365})
         }
-        // console.log("setcookie");
+        console.log("setcookie");
     };
-    $('#btn-submit').click(function() {
+    $('#btn-submit').click(function () {
         $("#btn-submit").attr("disabled", true);
         if (!$("#submit-form").parsley().validate('step1')) {
             alert("请输入所有必填项");
@@ -457,7 +452,7 @@ $(function() {
             cache: false,
             url: $("#submit-form").attr('action'),
             data: $("#submit-form").serialize(),
-            success: function(data) {
+            success: function (data) {
                 $("#btn-submit").attr("disabled", false);
                 $.hideLoading();
                 if (data.error) {
@@ -468,7 +463,7 @@ $(function() {
                     location.href = data.page;
                 }
             },
-            error: function() {
+            error: function () {
                 $.hideLoading();
                 $("#btn-submit").attr("disabled", false);
             },

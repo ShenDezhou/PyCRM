@@ -1,10 +1,10 @@
-$(function() {
+$(function () {
     var counts = 1;
     var current = 1;
-    var handleBootstrapWizardsValidation = function() {
+    var handleBootstrapWizardsValidation = function () {
         "use strict";
         $("#wizard").bwizard({
-            'validating': function(e, t) {
+            'validating': function (e, t) {
                 if (t.index == 0 && t.nextIndex > t.index) {
                     if (false === $('form[name="form-wizard"]').parsley().validate("wizard-step-1")) {
                         return false
@@ -23,10 +23,10 @@ $(function() {
             nextBtnText: '下一步 &rarr;'
         })
     };
-    var FormWizardValidation = function() {
+    var FormWizardValidation = function () {
         "use strict";
         return {
-            init: function() {
+            init: function () {
                 handleBootstrapWizardsValidation()
             }
         }
@@ -44,23 +44,18 @@ $(function() {
     );
     // start 会员信息修改
 
-    var GetCookie = function() {
+    var GetCookie = function () {
         var person_keys = ['fullname', 'cellphone', 'gender', 'birthday', 'school', 'school_start',
             'education', 'address', 'weixin_group', 'wechatid', 'city', 'email', 'position', 'person_info'];
         for (i in person_keys) {
-            if ((person_keys[i] == 'school_start' || person_keys[i] == 'birthday') && $.cookie(person_keys[i] + '0') == null) {
-                $("#school_start0").val("2000-09-01");
-                $("#birthday0").val("1980-09-01");
-            } else {
-                $("#" + person_keys[i] + '0').val($.cookie(person_keys[i] + '0'));
-            }
-            // console.log(person_keys[i] + '0' + ":" + $.cookie(person_keys[i] + '0'));
+            console.log(person_keys[i] + '0' + ":" + $.cookie(person_keys[i]+'0'));
+            $("#" + person_keys[i] + '0').val($.cookie(person_keys[i]+'0'));
         }
         var other_keys = ['org_name', 'representative', 'general_description', 'domain_description',
             'industry', 'office_address', 'high_tech', 'website', 'comments', 'first_normal_recommend',
             'second_normal_recommend', 'first_advanced_recommend', 'expects', 'wills'];
         for (i in other_keys) {
-            // console.log(other_keys[i] + ":" + $.cookie(other_keys[i]));
+            console.log(other_keys[i] +  ":" + $.cookie(other_keys[i]));
             $("#" + other_keys[i]).val($.cookie(other_keys[i]));
         }
     };
@@ -79,13 +74,13 @@ $(function() {
     );
 
     //实现城市,学校,系部字段填写时,下拉提示功能
-    var callback_industry = function(data) {
+    var callback_industry = function (data) {
         var industry_list = data['industry'];
         $(".autocomplete").autocomplete({
             source: industry_list
         });
     };
-    $("#industry").focus(function() {
+    $("#industry").focus(function () {
         var industry_name = $("#industry").val();
         jQuery.ajax(
             {
@@ -105,13 +100,13 @@ $(function() {
         )
     });
 
-    var callback_city = function(data) {
+    var callback_city = function (data) {
         var city_list = data['city'];
         $(".autocomplete").autocomplete({
             source: city_list
         });
     };
-    $("#city0").focus(function() {
+    $("#city0").focus(function () {
         var city_name = $("#city0").val();
         jQuery.ajax(
             {
@@ -130,13 +125,13 @@ $(function() {
             }
         )
     });
-    var callback_school = function(data) {
+    var callback_school = function (data) {
         var school_list = data['school'];
         $(".autocomplete").autocomplete({
             source: school_list
         });
     };
-    $("#school0").focus(function() {
+    $("#school0").focus(function () {
         var school_name = $("#school0").val();
         jQuery.ajax(
             {
@@ -156,13 +151,13 @@ $(function() {
         )
     });
 
-    var callback_school_department = function(data) {
+    var callback_school_department = function (data) {
         var school_department_list = data['school_department'];
         $(".autocomplete").autocomplete({
             source: school_department_list
         });
     };
-    $("#school_department").focus(function() {
+    $("#school_department").focus(function () {
         var school_department = $("#school_department").val();
         jQuery.ajax(
             {
@@ -181,13 +176,13 @@ $(function() {
             }
         )
     });
-    var callback_position = function(data) {
+    var callback_position = function (data) {
         var position_list = data['position'];
         $(".autocomplete").autocomplete({
             source: position_list
         });
     };
-    $("#position0").focus(function() {
+    $("#position0").focus(function () {
         var position = $("#position0").val();
         jQuery.ajax(
             {
@@ -206,13 +201,13 @@ $(function() {
             }
         )
     });
-    var callback_org = function(data) {
+    var callback_org = function (data) {
         var org_list = data['org'];
         $(".autocomplete").autocomplete({
             source: org_list
         });
     };
-    $("#org_name").focus(function() {
+    $("#org_name").focus(function () {
         var org = $("#org_name").val();
         jQuery.ajax(
             {
@@ -232,7 +227,7 @@ $(function() {
         )
     });
     // 个人背景信息字数统计
-    $("#person_info0").keyup(function() {
+    $("#person_info0").keyup(function () {
         var info_number = $("#person_info0").val().length;
         info_number = 200 - info_number;
         if (info_number > 0) {
@@ -242,7 +237,7 @@ $(function() {
             document.getElementById("info_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#expects").keyup(function() {
+    $("#expects").keyup(function () {
         var expects_number = $("#expects").val().length;
         expects_number = 200 - expects_number;
         if (expects_number > 0) {
@@ -252,7 +247,7 @@ $(function() {
             document.getElementById("expects_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#wills").keyup(function() {
+    $("#wills").keyup(function () {
         var wills_number = $("#wills").val().length;
         wills_number = 200 - wills_number;
         if (wills_number > 0) {
@@ -262,7 +257,7 @@ $(function() {
             document.getElementById("wills_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#general_description").keyup(function() {
+    $("#general_description").keyup(function () {
         var general_description_number = $("#general_description").val().length;
         general_description_number = 200 - general_description_number;
         if (general_description_number > 0) {
@@ -272,7 +267,7 @@ $(function() {
             document.getElementById("general_description_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#domain_description").keyup(function() {
+    $("#domain_description").keyup(function () {
         var domain_description_number = $("#domain_description").val().length;
         domain_description_number = 200 - domain_description_number;
         if (domain_description_number > 0) {
@@ -282,7 +277,7 @@ $(function() {
             document.getElementById("domain_description_number").innerHTML = "<ul>" + "0/200" + "</ul>";
         }
     });
-    $("#comments").keyup(function() {
+    $("#comments").keyup(function () {
         var comments_number = $("#comments").val().length;
         comments_number = 200 - comments_number;
         if (comments_number > 0) {
@@ -294,7 +289,7 @@ $(function() {
     });
 
     //添加学历选项
-    $(function() {
+    $(function () {
         var educations = ['请选择', '中专', '大专', '本科', '硕士研究生', '博士研究生'];
         for (i in educations) {
             if (educations[i] == '请选择') {
@@ -305,7 +300,7 @@ $(function() {
             }
         }
     });
-    var initCellphone = function(code, counts) {
+    var initCellphone = function (code, counts) {
         $.ajax({
             type: "get",
             url: "/rest/mgr/person/bind/cellphone",
@@ -313,7 +308,7 @@ $(function() {
                 cellphone: $("#cellphone" + counts).val(),
                 vcode: code
             },
-            success: function(data) {
+            success: function (data) {
                 if (data && data.error) {
                     return alert(data.error || '添加失败！');
                 }
@@ -329,17 +324,17 @@ $(function() {
                 $("#modal-bind-cellphone").modal("hide");
 
             },
-            error: function() {
+            error: function () {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
     }
-    $("#bind-cellphone").click(function() {
+    $("#bind-cellphone").click(function () {
         initCellphone($('#vcode').val(), current);
 
     });
-    $("#bind1").click(function() {
+    $("#bind1").click(function () {
 
         if (!$('#cellphone1').check().notNull()) {
             alert("手机号码不可为空");
@@ -361,7 +356,7 @@ $(function() {
                 'phone': $('#cellphone1').val(),
                 'message_type': 'bind_phone_sms'
             },
-            success: function(data) {
+            success: function (data) {
                 if (data.error)
                     alert(data.error);
                 else {
@@ -369,14 +364,14 @@ $(function() {
                 }
 
             },
-            error: function() {
+            error: function () {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
         return false;
     });
-    var getInfo = function(counts) {
+    var getInfo = function (counts) {
         return '<div class="row">' +
             '<div class="col-md-4">' +
             '<div class="form-group block1">' +
@@ -485,21 +480,16 @@ $(function() {
             '</div>' +
             '</div>';
     };
-    $('#add_person').click(function() {
+    $('#add_person').click(function () {
         counts = counts + 1;
         $('#counts').val(counts);
         $('#person').append('<div id="person' + (counts - 1) + '"><hr>' + getInfo(counts - 1) + '</div>');
-        var GetCookie = function() {
+        var GetCookie = function () {
             var person_keys = ['fullname', 'cellphone', 'gender', 'birthday', 'school', 'school_start',
                 'education', 'address', 'weixin_group', 'wechatid', 'city', 'email', 'position', 'person_info'];
             for (i in person_keys) {
-                if ((person_keys[i] == 'school_start' || person_keys[i] == 'birthday') && $.cookie(person_keys[i] + (counts - 1)) == null) {
-                    $("#school_start" + (counts - 1)).val("2000-09-01");
-                    $("#birthday" + (counts - 1)).val("1980-09-01");
-                } else {
-                    $("#" + person_keys[i] + (counts - 1)).val($.cookie(person_keys[i] + (counts - 1)));
-                }
-                // console.log("#" + person_keys[i] + (counts - 1) + ":" + $.cookie(person_keys[i] + (counts - 1)));
+                console.log("#" + person_keys[i] + (counts-1) + ":" + $.cookie(person_keys[i] + (counts-1)));
+                $("#" + person_keys[i] + (counts-1)).val($.cookie(person_keys[i] + (counts-1)));
             }
         };
         GetCookie();
@@ -521,7 +511,7 @@ $(function() {
                 firstItem: "none"
             }
         );
-        $(function() {
+        $(function () {
             var educations = ['请选择', '中专', '大专', '本科', '硕士研究生', '博士研究生'];
             for (i in educations) {
                 if (educations[i] == '请选择') {
@@ -532,7 +522,7 @@ $(function() {
                 }
             }
         });
-        $("#person_info" + (counts - 1)).keyup(function() {
+        $("#person_info" + (counts - 1)).keyup(function () {
             var info_number = $("#person_info" + (counts - 1)).val().length;
             info_number = 200 - info_number;
             if (info_number > 0) {
@@ -542,13 +532,13 @@ $(function() {
                 document.getElementById("info_number").innerHTML = "<ul>" + "0/200" + "</ul>";
             }
         });
-        var callback_city = function(data) {
+        var callback_city = function (data) {
             var city_list = data['city'];
             $(".autocomplete").autocomplete({
                 source: city_list
             });
         };
-        $("#city" + (counts - 1)).focus(function() {
+        $("#city" + (counts - 1)).focus(function () {
             var city_name = $("#city" + (counts - 1)).val();
             jQuery.ajax(
                 {
@@ -567,13 +557,13 @@ $(function() {
                 }
             )
         });
-        var callback_school = function(data) {
+        var callback_school = function (data) {
             var school_list = data['school'];
             $(".autocomplete").autocomplete({
                 source: school_list
             });
         };
-        $("#school" + (counts - 1)).focus(function() {
+        $("#school" + (counts - 1)).focus(function () {
             var school_name = $("#school" + (counts - 1)).val();
             jQuery.ajax(
                 {
@@ -592,13 +582,13 @@ $(function() {
                 }
             )
         });
-        var callback_position = function(data) {
+        var callback_position = function (data) {
             var position_list = data['position'];
             $(".autocomplete").autocomplete({
                 source: position_list
             });
         };
-        $("#position" + (counts - 1)).focus(function() {
+        $("#position" + (counts - 1)).focus(function () {
             var position = $("#position" + (counts - 1)).val();
             jQuery.ajax(
                 {
@@ -617,7 +607,7 @@ $(function() {
                 }
             )
         });
-        $('#bind' + counts).click(function() {
+        $('#bind' + counts).click(function () {
             var id = $(this).attr("id");
             current = id.substring(4, id.length);
             if (!$('#cellphone' + counts).check().notNull()) {
@@ -639,7 +629,7 @@ $(function() {
                     'phone': $('#cellphone' + counts).val(),
                     'message_type': 'bind_phone_sms'
                 },
-                success: function(data) {
+                success: function (data) {
                     if (data.error)
                         alert(data.error);
                     else {
@@ -647,7 +637,7 @@ $(function() {
                     }
 
                 },
-                error: function() {
+                error: function () {
                     alert('网络错误！');
                 },
                 dataType: 'json'
@@ -657,7 +647,7 @@ $(function() {
         $('#weixin_group' + (counts - 1)).html($('#weixin_group0').html());
         datepickerFun();
     });
-    $('#remove_person').click(function() {
+    $('#remove_person').click(function () {
         if (counts == 1) {
             alert("无法再移除");
             return;
@@ -666,12 +656,12 @@ $(function() {
         counts = counts - 1;
         $('#counts').val(counts);
     });
-    var SetCookie = function() {
+    var SetCookie = function () {
         var person_keys = ['fullname', 'cellphone', 'gender', 'birthday', 'school', 'school_start',
             'education', 'address', 'weixin_group', 'wechatid', 'city', 'email', 'position', 'person_info'];
         for (i in person_keys) {
             for (var j = 0; j < counts; j++) {
-                // console.log(person_keys[i] + j + ":" + $("#" + person_keys[i] + j).val());
+                console.log(person_keys[i]+ j + ":" + $("#" + person_keys[i] + j).val());
                 $.cookie(person_keys[i] + j, $("#" + person_keys[i] + j).val(), {expires: 365})
             }
         }
@@ -679,17 +669,17 @@ $(function() {
             'industry', 'office_address', 'high_tech', 'website', 'comments', 'first_normal_recommend',
             'second_normal_recommend', 'first_advanced_recommend', 'expects', 'wills'];
         for (i in other_keys) {
-            // console.log(other_keys[i] + ":" + $("#" + other_keys[i]).val());
-            $.cookie(other_keys[i], $("#" + other_keys[i]).val(), {expires: 365})
+            console.log(other_keys[i] +  ":" + $("#" + other_keys[i]).val());
+            $.cookie(other_keys[i],$("#" + other_keys[i]).val(), {expires: 365})
         }
-        // console.log("setcookie");
+        console.log("setcookie");
     };
-    var datepickerFun = function() {
+    var datepickerFun = function () {
         $(".birthday").mask("9999/99/99");
         $(".school_start").mask("9999/99/99");
     };
     datepickerFun();
-    $('#btn-submit').click(function() {
+    $('#btn-submit').click(function () {
         $("#btn-submit").attr("disabled", true);
         if (!$("#submit-form").parsley().validate('step1')) {
             alert("请输入所有必填项");
@@ -703,7 +693,7 @@ $(function() {
             cache: false,
             url: $("#submit-form").attr('action'),
             data: $("#submit-form").serialize(),
-            success: function(data) {
+            success: function (data) {
                 $("#btn-submit").attr("disabled", false);
                 $.hideLoading();
                 if (data.error) {
@@ -713,7 +703,7 @@ $(function() {
                     location.href = data.page;
                 }
             },
-            error: function() {
+            error: function () {
                 $("#btn-submit").attr("disabled", false);
                 $.hideLoading();
             },

@@ -1,13 +1,12 @@
 $(function(){
-	$._editPaidInfo = function(id,apply_member_type){
-        var form_id = '';
+	$._editPaidInfo = function(form_id,apply_member_type){
         $('#modal-link-paid-info').modal('show');
         $.ajax({
             type: "get",
             cache: false,
             url: '/rest/mgr/paid/detail',
             data: {
-                id: id
+                form_id: form_id
             },
             success: function(data) {
                 if (data.error) {
@@ -22,9 +21,6 @@ $(function(){
                     else
                         output += '</td><td><a onclick="$._editLastPaid(\'' + data[index]['id'] + '\')" class="btn btn-inverse btn-xs m-l-5">修改</a></td></tr>';
                 }
-                // var form_id_html = '<input '+'value="'+data[0]['form_id']+'"' +' type="hidden"'+'>';
-                form_id = data[0]['form_id'];
-                console.log(form_id);
 
                 $('#paid_history_table tbody').html(output);
 
@@ -39,11 +35,11 @@ $(function(){
         });
     };
 
-    $._showFormPaid = function(form_id,apply_member_type){
+    $._showFormPaid = function(id,apply_member_type){
         $('#modal-link-form-paid').modal('show');
-        $('#modal-link-form-paid img').attr('src', '/rest/qrcode?link=' + '/page/form_paid_' + form_id);
-        $('#modal-link-form-paid a[target=app_link]').attr('href', '/page/form_paid_' + form_id);
-        $('#modal-link-form-paid textarea').val(location.protocol + '//' + location.hostname + '/page/form_paid_' + form_id);
+        $('#modal-link-form-paid img').attr('src', '/rest/qrcode?link=' + '/page/form_paid_' + id);
+        $('#modal-link-form-paid a[target=app_link]').attr('href', '/page/form_paid_' + id);
+        $('#modal-link-form-paid textarea').val(location.protocol + '//' + location.hostname + '/page/form_paid_' + id);
         $('#modal-link-form-paid a[target=app_paid]').click(function() {
             if($('#roles').val().indexOf('operator')<0)
             {
@@ -69,7 +65,7 @@ $(function(){
                 cache: false,
                 url: '/rest/mgr/form/paid',
                 data: {
-                    form_id: form_id,
+                    form_id: id,
                     _xsrf:$.cookie("_xsrf"),
                     start_time:$('#start_time').val(),
                     end_time:$('#end_time').val(),
@@ -96,7 +92,7 @@ $(function(){
             });
              return false;
         });
-    };
+    }
 
     function getNowFormatDate(year,month,day) {
         var date = new Date();

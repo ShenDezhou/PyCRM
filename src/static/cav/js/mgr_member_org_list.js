@@ -1,7 +1,6 @@
-$(function () {
-
+$(function() {
     var table;
-    var handleDataTableResponsive = function () {
+    var handleDataTableResponsive = function() {
         "use strict";
         if ($("#data-table").length !== 0) {
             table = $("#data-table").DataTable({
@@ -11,10 +10,10 @@ $(function () {
                 "serverSide": true,
                 "searching": true,
                 "bStateSave": false,
-                "fnStateSave": function (oSettings, oData) {
+                "fnStateSave": function(oSettings, oData) {
                     save_dt_view(oSettings, oData);
                 },
-                "fnStateLoad": function (oSettings) {
+                "fnStateLoad": function(oSettings) {
                     return load_dt_view(oSettings);
                 },
                 "tableTools": {
@@ -27,7 +26,7 @@ $(function () {
                 },
                 "ajax": "/rest/mgr/member/org/table?_xsrf=" + $.cookie('_xsrf'),
                 "columns": [{
-                    "data": "org_name"
+                    "data": "fullname"
                 }, {
                     "data": "apply_member_type"
                 }, {
@@ -39,25 +38,25 @@ $(function () {
                 }],
                 "aaSorting": [3, 'desc'],
                 "columnDefs": [{
-                    "mRender": function (data, type, full) {
-                        if (full.is_primary == 1 || full.is_primary == '1') {
-                            return '<div class="row">' +
-                                '<div class="col-xs-7">公司名称：' +
-                                full.org_name + '<br/>' +
-                                (full.primaries) +
-                                '</div>' +
-                                '</div>';
-                        }
-                        else {
-                            return '<div class="row">' +
-                                '<div class="col-xs-7">公司名称：' +
-                                full.org_name + '<br/>' +
-                                '</div>' + '</div>';
+                    "mRender": function(data, type, full) {
+                        if(full.is_primary == 1 || full.is_primary == '1'){
+                        return '<div class="row">' +
+                            '<div class="col-xs-7">公司名称：' +
+                            full.org_name + '<br/>' +
+                            (full.primaries) +
+                            '</div>' +
+                            '</div>';
+                            }
+                            else {
+                                return '<div class="row">' +
+                            '<div class="col-xs-7">公司名称：' +
+                            full.org_name + '<br/>' +
+                            '</div>' +  '</div>';
                         }
                     },
                     "targets": 0
                 }, {
-                    "mRender": function (data, type, full) {
+                    "mRender": function(data, type, full) {
                         if (full.apply_member_type == '企业普通会员') {
                             return '<span class="badge badge-success normal-font">' + full.apply_member_type + '</span>';
                         } else if (full.apply_member_type == '企业理事会员') {
@@ -68,10 +67,10 @@ $(function () {
                     },
                     "targets": 1
                 }, {
-                    "mRender": function (data, type, full) {
+                    "mRender": function(data, type, full) {
                         var html = '';
                         if (full.status != 'None') {
-                            html = '<span class="badge badge-info normal-font"' + ' id' + '=' + full.org_id + ' >' + full.status + '</span>';
+                            html = '<span class="badge badge-info normal-font"'+ ' id'+'=' +full.org_id +' >' + full.status + '</span>';
                         }
                         if (full.due_date != 'None') {
                             return '<p>' + html + '</p><small> 有效期至:' + (full.due_date || '暂无') + '</small>';
@@ -82,7 +81,7 @@ $(function () {
                     },
                     "targets": 2
                 }, {
-                    "mRender": function (data, type, full) {
+                    "mRender": function(data, type, full) {
                         if (data == 'None')
                             return "";
                         else
@@ -90,12 +89,12 @@ $(function () {
                     },
                     "targets": 3
                 }, {
-                    "mRender": function (data, type, full) {
+                    "mRender": function(data, type, full) {
                         var html = '';
-                        html += '<a onclick="$._showOrgDetail(\'' + full.org_id + '\',\'org\')" class="btn btn-info btn-xs m-r-5">详情</a>';
-                        if (full.apply_member_type != 'None') {
-                            html += '<a onclick="$._changeMemberStatus(\'' + full.org_id + '\')" class="btn btn-success btn-xs m-r-5">会员状态</a>';
-                        }
+                        html += '<a onclick="$._showMemberDetail(\'' + full.org_id + '\',\'org\')" class="btn btn-info btn-xs m-r-5">详情</a>';
+                        if(full.apply_member_type != 'None'){
+                        html += '<a onclick="$._changeMemberStatus(\'' + full.org_id + '\')" class="btn btn-success btn-xs m-r-5">会员状态</a>';
+                            }
                         // html += '<a onclick="$._deleteMember(\'' + full.org_id + '\')" class="btn btn-danger btn-xs m-r-5">删除</a>';
                         html += '<a href="edit_member_info?org_id=' + full.org_id + '&redirect_url=' + location.pathname + '" class="btn btn-xs btn-warning m-r-5">修改</a>';
                         html += '<a class="btn btn-primary btn-xs m-r-5" style="margin-left:5px;" href="/console/member_person_list?org_id=' + full['org_id'] + '">' + '人员管理' + '</a>';
@@ -108,7 +107,7 @@ $(function () {
             })
         }
     };
-    var data_reload = function (tag) {
+    var data_reload = function(tag) {
         IDs = ["normal_org_member", "advanced_org_member"];
         for (i in IDs) {
             tag = "#" + IDs[i];
@@ -118,36 +117,38 @@ $(function () {
             else {
                 $(tag).val("");
             }
+            console.log(tag + ":" + $(tag).val());
         }
         var normal_org_member = $("#normal_org_member").val();
         var advanced_org_member = $("#advanced_org_member").val();
         parameter = "&normal_org_member=" + normal_org_member + "&advanced_org_member=" + advanced_org_member;
         var url = "/rest/mgr/member/org/table?_xsrf=" + parameter;
+        console.log(url);
         table.ajax.url(url).load();
     };
-    $("#normal_org_member").click(function () {
+    $("#normal_org_member").click(function() {
         data_reload("normal_org_member")
     });
-    $("#advanced_org_member").click(function () {
+    $("#advanced_org_member").click(function() {
         data_reload("advanced_org_member")
     });
-    $._showDeliveryInfo = function (id) {
+    $._showDeliveryInfo = function(id) {
         $('#modal-link-delivery-info').modal('show');
         $('#modal-link-delivery-info img').attr('src', '/rest/qrcode?link=' + '/page/delivery_info_' + id);
         $('#modal-link-delivery-info a[target=app_link]').attr('href', '/page/delivery_info_' + id);
         $('#modal-link-delivery-info textarea').val(location.protocol + '//' + location.hostname + '/page/delivery_info_' + id);
     };
-    var TableManageResponsive = function () {
+    var TableManageResponsive = function() {
         "use strict";
         return {
-            init: function () {
+            init: function() {
                 handleDataTableResponsive();
             }
         }
     }();
 
     TableManageResponsive.init();
-    $._deleteMember = function (id) {
+    $._deleteMember = function(id) {
         if (confirm("你确定要删除该会员吗?")) {
             $.ajax({
                 type: "get",
@@ -156,20 +157,20 @@ $(function () {
                 data: {
                     member_id: id
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.error) {
                         return alert(data.error || '删除失败！');
                     }
                     window.location.reload();
                 },
-                error: function () {
+                error: function() {
                     alert('网络错误！');
                 },
                 dataType: 'json'
             });
         }
     };
-    $._removePerson = function (form_id, person_id) {
+    $._removePerson = function(form_id, person_id) {
         if (confirm("你确定移除该成员吗？")) {
             $.ajax({
                 type: "post",
@@ -179,21 +180,21 @@ $(function () {
                     form_id: form_id,
                     person_id: person_id
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.error) {
                         return alert(data.error);
                     }
                     alert(data.message);
                     location.reload();
                 },
-                error: function () {
+                error: function() {
                     alert('网络错误！');
                 },
                 dataType: 'json'
             });
         }
     };
-    var personEditInfo = function (form_id, person_info) {
+    var personEditInfo = function(form_id, person_info) {
         var output = personInfoTitle();
         var tables = '';
         for (var i in person_info) {
@@ -217,7 +218,7 @@ $(function () {
         }
 
     };
-    $("#add_person").click(function () {
+    $("#add_person").click(function() {
         $.ajax({
             type: "post",
             cache: false,
@@ -226,14 +227,14 @@ $(function () {
                 form_id: $("#form_id").val(),
                 cellphone: $("#add_cellphone").val()
             },
-            success: function (data) {
+            success: function(data) {
                 if (data.error) {
                     return alert(data.error);
                 }
                 alert(data.message);
                 location.reload();
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
             dataType: 'json'
@@ -241,7 +242,7 @@ $(function () {
     });
     $("#birthday").mask("9999/99/99");
     $("#school_start").mask("9999/99/99");
-    $._editPerson = function (form_id) {
+    $._editPerson = function(form_id) {
         $("#modal-form-person").modal("show");
         $("#form_id").val(form_id);
         $.ajax({
@@ -251,49 +252,42 @@ $(function () {
             data: {
                 form_id: form_id
             },
-            success: function (data) {
+            success: function(data) {
                 if (data.error) {
                     return alert(data.error);
                 }
                 personEditInfo(form_id, data['person']);
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
     };
 
-    $("#save_person").click(function () {
+    $("#save_person").click(function() {
         $.ajax({
             type: "post",
             cache: false,
             url: '/rest/mgr/org/add/person?form_id=' + $("#form_id").val(),
             data: $('#form_info').serialize(), // 你的formid
             dataType: 'json',
-            success: function (data) {
+            success: function(data) {
                 if (data.error)
                     alert(data.error);
                 if (data.message) {
                     location.reload();
                 }
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
 
     });
-    var memberInfo = function (form_info, person_will) {
+    var memberInfo = function(form_info, person_will) {
         var output = "";
-        // form_info =;
-        // person_will = person_will[0];
-        for(index in form_info){
-            for (var key in form_info[index]) {
-            $('#member_info_table .' + key).html(form_info[index][key]);
-        }
-        }
         output += "<tr><td>会员类型</td><td class='apply_member_type'></td></tr>";
         output += "<tr><td>缴费金额</td><td class='paid_money'></td></tr>";
         output += "<tr><td>有效期至</td><td class='paid_end_time'></td></tr>";
@@ -308,7 +302,7 @@ $(function () {
         }
 
     };
-    var memberPersonInfo = function (person_info) {
+    var memberPersonInfo = function(person_info) {
         var output = personInfoTitle();
         var tables = '';
         for (var i in person_info) {
@@ -330,7 +324,7 @@ $(function () {
         }
 
     };
-    var memberOrgInfo = function (org_info, person_info, form_info) {
+    var memberOrgInfo = function(org_info, person_info, form_info) {
         var output = orgInfoTitle();
         $('#member_org_info_table tbody').html(output);
         for (var key in org_info) {
@@ -363,7 +357,7 @@ $(function () {
         }
 
     };
-    var tagInfo = function (tag_info) {
+    var tagInfo = function(tag_info) {
         $.ajax({
             url: "/rest/mgr/get/tagcode",
             dataType: 'json',
@@ -371,7 +365,7 @@ $(function () {
             data: {
                 type: 'tag_root'
             },
-            success: function (data, params) {
+            success: function(data, params) {
                 // parse the results into the format expected by Select2
                 // since we are using custom formatting functions we do not need to
                 // alter the remote JSON data, except to indicate that infinite
@@ -379,13 +373,13 @@ $(function () {
                 g_tag_option_count = data.length;
                 var output = "";
                 for (var index in data) {
-                    findpos = -1;
-                    // findpos = tag_info.indexOf(data[index]['tag_name'], 0);
+                    findpos = tag_info.indexOf(data[index]['tag_name'], 0);
                     if (findpos == -1)
                         output += "<option value='" + data[index]['tag_id'] + "'>" + data[index]['tag_name'] + "</option>";
                     else
                         output += "<option value='" + data[index]['tag_id'] + "' selected>" + data[index]['tag_name'] + "</option>";
                 }
+                console.log("success:" + output);
                 $('#tag_group').html(output);
                 $('#tag_group').select2({
                     placeholder: {
@@ -395,7 +389,8 @@ $(function () {
                     tags: true,
                     tokenSeparators: [',', ' ']
                 })
-                $('#tag_group').on('change', function (evt) {
+                $('#tag_group').on('change', function(evt) {
+                    console.log("%O", evt);
 
                     if (evt.target.length > g_tag_option_count) {
 
@@ -406,13 +401,13 @@ $(function () {
                                 tag_type: 'tag_root',
                                 tag_name: this.options[this.options.length - 1].text
                             },
-                            success: function (data, params) {
+                            success: function(data, params) {
                                 if (data.error) {
                                     return alert(data.error);
                                 }
 
                             },
-                            error: function () {
+                            error: function() {
                                 alert('网络错误！');
                             },
 
@@ -423,7 +418,7 @@ $(function () {
                 });
 
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
 
@@ -432,7 +427,7 @@ $(function () {
         });
     };
     // 修改会员状态
-    $._changeMemberStatus = function (org_id) {
+    $._changeMemberStatus = function(org_id) {
         $.ajax({
             type: "post",
             cache: false,
@@ -440,16 +435,17 @@ $(function () {
             data: {
                 org_id: org_id
             },
-            success: function (data) {
+            success: function(data) {
                 // if(data.error){
                 //     return alert(data.error || '获取失败！');
                 // }
+                console.log(data);
                 $('#changeMemberStatus').modal('show');
                 var member_status = '<span class="badge badge-success normal-font">' + data.member_status + '</span>';
                 member_status += '<input ' + "type='hidden' " + 'value=' + org_id + ' id=' + "'click_org'" + ' />';
                 $('#member_status').html(member_status);
                 var html = '';
-                html += '<option' + ' ' + 'value' + '=' + data.member_status + '>' + data.member_status + '</' + 'option>';
+                html += '<option' + ' ' + 'value' + '=' + data.member_status + '>' + data.member_status +'</' + 'option>';
                 for (item in data.all_status) {
                     if (data.all_status[item] != data.member_status) {
                         html += '<option' + ' ' + 'value' + '=' + data.all_status[item] + '>' + data.all_status[item] + '</' + 'option>'
@@ -458,13 +454,13 @@ $(function () {
 
                 $('#select_status').html(html)
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
     };
-    $('#save_status').click(function () {
+    $('#save_status').click(function() {
         var org_id = $('#click_org').val();
         var member_status = $('#select_status').val();
         $.ajax({
@@ -475,21 +471,22 @@ $(function () {
                 org_id: org_id,
                 member_status: member_status
             },
-            success: function (data) {
-                var html = '<span class="badge badge-info normal-font"' + ' id' + '=' + org_id + ' >' + member_status + '</span>';
+            success: function(data) {
+                var html = '<span class="badge badge-info normal-font"'+ ' id'+'=' +org_id +' >' + member_status + '</span>';
                 $('#' + org_id).replaceWith(
                     html
                 )
             }
         })
     });
-    var memberHandleInfo = function (org, person) {
+    var memberHandleInfo = function(org, person) {
         $('#person_member').hide();
+        console.log("%O", org);
         tagInfo(org['tag_group']);
         // $('#tag_group').val(member['tag_group']);
 
     };
-    var getOrgDetailInfo = function (org_id) {
+    var getMemberDetailInfo = function(org_id) {
         $.ajax({
             type: "get",
             cache: false,
@@ -497,97 +494,60 @@ $(function () {
             data: {
                 org_id: org_id
             },
-            success: function (data) {
+            success: function(data) {
                 if (data.error) {
                     return alert(data.error);
                 }
-                // start --如果企业是会员
-                $("#person_info").remove();
-                if (data['type'] == 'member') {
-                    // memberPersonInfo(data['person']);
-                    memberOrgInfo(data['org'], data['person'], data['form']);
-                    memberInfo(data['form'], data['person']);
-                    // $("#member_control").hide();
-                    memberHandleInfo(data['org'], data['person']);
-                }
-                // end --如果企业是会员
-                else {
-
-                }
-
+                // memberPersonInfo(data['person']);
+                memberOrgInfo(data['org'][0], data['person'], data['form_info'][0]);
+                memberInfo(data['form_info'][0], data['person'][0]);
+                // $("#member_control").hide();
+                memberHandleInfo(data['org'][0], data['person'][0]);
             },
-            error: function () {
+            error: function() {
                 alert('网络错误！');
             },
             dataType: 'json'
         });
     };
-    $._showOrgDetail = function (org_id, detail_type) {
+    $._showMemberDetail = function(id, detail_type) {
         g_detail_type = detail_type;
-        getOrgDetailInfo(org_id);
+        getMemberDetailInfo(id);
         $('#modal-member-detail').modal('show');
-        $('#modal-member-detail .nav li').each(function () {
+        $('#modal-member-detail .nav li').each(function() {
             $(this).removeClass("active");
         });
-        $('#modal-member-detail .tab-content div').each(function () {
+        $('#modal-member-detail .tab-content div').each(function() {
             $(this).removeClass("active in");
         });
         $("#modal-member-detail .nav li:nth-child(1)").addClass("active");
         $("#modal-member-detail .tab-content div:nth-child(1)").addClass("active in");
-        $('#save').click(function () {
+        $('#save').click(function() {
             var postData = {_xsrf: $.cookie("_xsrf")};
             postData.form_id = id;
             var str = "";
-            $("#tag_group option:selected").each(function () {
+            $("#tag_group option:selected").each(function() {
                 str += $(this).text() + ",";
             });
+            console.log(str);
             postData.tag_group = str.substring(0, str.length - 1);
             $.ajax({
                 type: "post",
                 cache: false,
                 url: '/rest/mgr/org/edit',
                 data: postData,
-                success: function (data) {
+                success: function(data) {
                     if (data.error) {
                         return alert(data.error);
                     }
                     window.location.reload();
                 },
-                error: function () {
+                error: function() {
                     alert('网络错误！');
                 },
                 dataType: 'json'
             });
         });
     };
-    $('#btn_export').click(function(){
-        if(isIE(7) || isIE(8) || isIE(9) || isIE(10) || isIE(11)){
-            if(confirm("导出功能不能支持本浏览器，请改用360、火狐、谷歌Chrome等浏览器下载。点击确定转到浏览器下载页面，点击取消留在本页。")){
-                location.href = '/old_msie';
-            }
-            return;
-        }
-        var params=table.ajax.params();
-        var filename = $(this).attr('filename');
-        params['export']=true;
-        params.cols = encodeURIComponent("org_name,contacts,office_address,industry,general_description,domain_description,first_normal_recommend,paid_money,create_date,due_date");
-        params.headers = encodeURIComponent("企业名称,代表人,办公地址,行业,公司简介,业务范围,推荐人,缴费金额,入会日期,到期时间");
-        params.filename = encodeURIComponent(filename);
-        var url = "/rest/mgr/member/org/table/export?_xsrf=" + $.cookie('_xsrf')//table.ajax.url();
-        console.log(url);
-        if(url.indexOf('?') < 0) {
-            url += '?';
-        }else{
-            url += '&';
-        }
 
-        url += decodeURIComponent( $.param( params ) );
-        $.fileDownload(url, {
-            successCallback: function (url) {
-            },
-            failCallback: function (responseHtml, url) {
-                alert('下载失败');
-            }
-        });
-    });
 });

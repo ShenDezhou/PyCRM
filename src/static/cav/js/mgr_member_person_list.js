@@ -36,19 +36,18 @@ $(function() {
                 }, {
                     "data": "p_type"
                 }, {
-                    "data": "org_name"
+                    "data": "o_type"
                 }, {
                     "data": "certificate"
                 }, {
                     "data": "p_create_date"
                 }],
-                "aaSorting": [4, "DESC"],
+                "aaSorting": [0, "DESC"],
                 "columnDefs": [{
                     "mRender": function(data, type, full) {
                         var head_img_url = "http://www.soozhu.com/stac/cmstpl/default2015/public/images/default_head.jpg";
                         if (full.head_img_url != "None")
                             head_img_url = full.head_img_url;
-                            head_img_url.replace("http","https");
                         if (full.org_name == "None") {
                             return '<img style="width:100%;max-width:44px;border-radius:100px;margin-bottom:5px;" src="' + head_img_url + '"/>' +
                                 '<br/>' + full.fullname + '<br/>';
@@ -87,41 +86,38 @@ $(function() {
                 }, {
                     "mRender": function(data, type, full) {
                         var html = '';
-                         html = html + '<p style="font-size: 110%">' + "公司: " + '<strong>' + data + '</strong>' + '<p>';
-                        return html;
-                        // var html = '';
-                        // if (full.org_name != "None") {
-                        //     html = html + '<p style="font-size: 120%">' + "公司: " + '<strong>' + full.org_name + '</strong>' + '<p>';
-                        // }
-                        // else {
-                        //     html = html + '<p style="font-size: 100%">' + "公司: " + "无" + '<p>';
-                        // }
-                        // if (data == 'advanced_org_member') {
-                        //     html += "企业会员类型: " + '<span class="badge badge-danger normal-font">' + full.o_member_type + '</span>';
-                        // } else if (data == 'normal_org_member') {
-                        //     html += "企业会员类型: " + '<span class="badge badge-success normal-font">' + full.o_member_type + '</span>';
-                        // }
-                        // else {
-                        //     html += "企业会员类型: " + '无' + '</span>';
-                        // }
-                        // if (full.o_status != "None") {
-                        //     html += '<p>' + "状态: " + full.o_status + '</span>';
-                        // }
-                        // else {
-                        //     html += '<p>' + "状态: " + '无' + '</span>';
-                        // }
-                        // if (full.o_due_date == "None") {
-                        //     html = '<p>' + html + '</p><small> 有效期至: ' + '无' + '</small>';
-                        // }
-                        // else {
-                        //     html = '<p>' + html + '</p><small> 有效期至: ' + (full.o_due_date || '无') + '</small>';
-                        // }
-                        // if (full.is_primary == 1) {
-                        //     return html + '<p>' + "是否代表: " + "是"
-                        // }
-                        // else {
-                        //     return html + '<p>' + "是否代表: " + "否"
-                        // }
+                        if (full.org_name != "None") {
+                            html = html + '<p style="font-size: 120%">' + "公司: " + '<strong>' + full.org_name + '</strong>' + '<p>';
+                        }
+                        else {
+                            html = html + '<p style="font-size: 100%">' + "公司: " + "无" + '<p>';
+                        }
+                        if (data == 'advanced_org_member') {
+                            html += "企业会员类型: " + '<span class="badge badge-danger normal-font">' + full.o_member_type + '</span>';
+                        } else if (data == 'normal_org_member') {
+                            html += "企业会员类型: " + '<span class="badge badge-success normal-font">' + full.o_member_type + '</span>';
+                        }
+                        else {
+                            html += "企业会员类型: " + '无' + '</span>';
+                        }
+                        if (full.o_status != "None") {
+                            html += '<p>' + "状态: " + full.o_status + '</span>';
+                        }
+                        else {
+                            html += '<p>' + "状态: " + '无' + '</span>';
+                        }
+                        if (full.o_due_date == "None") {
+                            html = '<p>' + html + '</p><small> 有效期至: ' + '无' + '</small>';
+                        }
+                        else {
+                            html = '<p>' + html + '</p><small> 有效期至: ' + (full.o_due_date || '无') + '</small>';
+                        }
+                        if (full.is_primary == 1) {
+                            return html + '<p>' + "是否代表: " + "是"
+                        }
+                        else {
+                            return html + '<p>' + "是否代表: " + "否"
+                        }
                     },
                     "targets": 2
                 },
@@ -159,7 +155,7 @@ $(function() {
                     }, {
                         "mRender": function(data, type, full) {
                             var html = "";
-                            html += '<a onclick="$._showPersonDetail(\'' + full.person_id + '\')" class="btn btn-info btn-xs m-r-5">详情</a>';
+                            html += '<a onclick="$._showMemberDetail(\'' + full.person_id + '\')" class="btn btn-info btn-xs m-r-5">详情</a>';
                             if (full.p_type != 'None') {
                                 html += '<a onclick="$._changeMemberStatus(\'' + full.person_id + '\')" class="btn btn-success btn-xs">会员状态</a>';
                             }
@@ -170,8 +166,8 @@ $(function() {
                                 html += '<a href="edit_member_info?person_id=' + full.person_id + '&redirect_url=' + location.pathname + '" class="btn btn-xs btn-warning m-l-5">修改</a>';
                             }
                             html += '<a onclick="$._showDeliveryInfo(\'' + full.person_id + '\')" class="btn btn-inverse btn-xs m-l-5">个人名片</a>';
-                            if ((full.p_type != 'None' ) && $('#roles').val().indexOf('operator') > 0)
-                                html += '<a onclick="$._editPaidInfo(\'' + full.person_id + '\',\'' + full['type'] + '\')" class="btn btn-info btn-xs m-l-5">缴费管理</a>';
+                            if ((full['type'] == 'normal_member' || full['type'] == 'advanced_member') && $('#roles').val().indexOf('operator') > 0)
+                                html += '<a onclick="$._editPaidInfo(\'' + full.form_id + '\',\'' + full['type'] + '\')" class="btn btn-info btn-xs m-l-5">缴费管理</a>';
                             return html;
 
                             // '<a href="javascript:;" class="btn btn-warning btn-xs m-r-5">缴费</a>' +
@@ -194,6 +190,7 @@ $(function() {
             else {
                 $(tag).val("");
             }
+            console.log(tag + ":" + $(tag).val());
         }
         var weixin_group = $("#weixin_group").val();
         var normal_member = $("#normal_member").val();
@@ -206,6 +203,7 @@ $(function() {
             url = "/rest/mgr/member/person/table?org_id=" + getQueryString("org_id") + parameter + "&_xsrf=" + $.cookie('_xsrf');
         else
             url = "/rest/mgr/member/person/table?" + parameter.substr(1) + "&_xsrf=" + $.cookie('_xsrf');
+        console.log(url);
         table.ajax.url(url).load();
     };
 
@@ -358,6 +356,7 @@ $(function() {
                 // if(data.error){
                 //     return alert(data.error || '获取失败！');
                 // }
+                console.log(data);
                 $('#changeMemberStatus').modal('show');
                 var member_status = '<span class="badge badge-success normal-font">' + data.member_status + '</span>';
                 member_status += '<input ' + "type='hidden' " + 'value=' + person_id + ' id=' + "'click_person'" + ' />';

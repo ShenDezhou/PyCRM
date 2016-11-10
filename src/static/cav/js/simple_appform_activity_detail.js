@@ -151,7 +151,6 @@ $(function() {
             item_type: item_type,
             activity_id: activity_id
         };
-
         if (item_type == 'sign_up'){
             var formData = $('#sign-up-form form').serializeArray();
             for(var i = 0; i < formData.length; i++){
@@ -161,10 +160,6 @@ $(function() {
                 }else{
                     postData[k] = v;
                 }
-            }
-            if(location.href.indexOf('?signin=true') > -1)
-            {
-                postData['signin'] = 1;
             }
             postData['status'] = 'sign_up_wait';
             postData['cellphone'] = $('#cellphone_info').text();
@@ -176,7 +171,7 @@ $(function() {
             // postData['org_name'] = $('#org_name').val();
             // postData['position'] = $('#position').val();
             // postData['person_info'] = $('#person_info').val();
-            postData['is_volunteer'] = ($('#is_volunteer').attr("checked") ? 1 : 0);
+            // postData['is_volunteer'] = ($('#is_volunteer').attr("checked") ? 1 : 0);
             // postData['contribution'] = $('#contribution').val();
             // try{
             //     postData['contribution'] += getExtraOptions();
@@ -190,10 +185,9 @@ $(function() {
             success: function(data) {
                 if (data.error) {
                     if (confirm(data.error)) {
-                        if(data.error_name == 'access_need_login'){//如果没有登录，跳转到授权页
-                            location.href=$("#login-btn-for-action").attr("href");//用该元素的属性来控制跳转页面，不要将跳转地址写成hard code
-
-                        }else if(data.error_name == 'access_need_person_info'){//如果没有填写报名信息，跳转到锚点
+                        if(data.error_name == 'access_need_login'){
+                            window.location.href = "/login?corp=" + $('#corp_auth').val() + "&redirect_url=" + location.pathname;
+                        }else if(data.error_name == 'access_need_person_info'){
                             // $._showSignUpModal();
                             
                             location.href = '#sign-up-form';
@@ -219,7 +213,7 @@ $(function() {
         }
     }
 
-    if(location.href.indexOf('?signin=true') > -1){
+    if(location.href.indexOf('?signin=true') > 0){
         var href = location.href.substring(0,location.href.indexOf('?signin=true'));
         var array = href.split('/');
         var activity_id = array[array.length-1];

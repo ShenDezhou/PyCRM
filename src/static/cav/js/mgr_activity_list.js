@@ -81,30 +81,6 @@ $(function() {
             dataType: 'json'
         });
     };
-
-    $._changeAllowSignUpAndRegister = function(id, status) {
-        var statu = true;
-        $.ajax({
-            type: "POST",
-            url: '/rest/mgr/news/update/signupandregister/status',
-            data: {
-                _xsrf: $.cookie("_xsrf"),
-                id: id,
-                status: status
-            },
-            success: function(data) {
-                if (data.error) {
-                    return alert(data.error || '登录失败！');
-                }
-                window.location.reload();
-            },
-            error: function() {
-                alert('网络错误！');
-            },
-            dataType: 'json'
-        });
-    };
-
     $.change_qr_src = function(id) {
         src = $("#activity_source").val();
 ;
@@ -327,10 +303,6 @@ $(function() {
                             html += '<a class="btn btn-warning btn-xs" onclick=$._changeSignUpStatus(' + full['id'] + ',1) style="margin-left:5px;">' + '停止报名' + '</a>';
                         else if (full['sign_up_limit'] == 1)
                             html += '<a class="btn btn-warning btn-xs" onclick=$._changeSignUpStatus(' + full['id'] + ',0) style="margin-left:5px;">' + '开始报名' + '</a>';
-                        if (full['allow_onsite_checkin'] == 0)
-                            html += '<a class="btn btn-warning btn-xs" onclick=$._changeAllowSignUpAndRegister(' + full['id'] + ',1) style="margin-left:5px;">' + '开放签到' + '</a>';
-                        else if (full['allow_onsite_checkin'] == 1)
-                            html += '<a class="btn btn-warning btn-xs" onclick=$._changeAllowSignUpAndRegister(' + full['id'] + ',0) style="margin-left:5px;">' + '停止开放签到' + '</a>';
                         html += '<a class="btn btn-info btn-xs" target="ac_news" onclick=$.show_link_modal_signin("' + full['id'] + '") style="margin-left:5px;">' + '签到链接' + '</a>';
                         return html;
                     }

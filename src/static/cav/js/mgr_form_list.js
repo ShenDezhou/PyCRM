@@ -155,7 +155,7 @@ $(function() {
                 "columns": [{
                     "data": "form_code",
                     "mRender": function(data, type, full) {
-                        return '<a onclick="$._showFormDetail(\'' + full.form_id + '\', \''+"person"+'\')" class="btn btn-xs btn-link">' + data + '</a>';
+                        return '<a onclick="$._showFormDetail(\'' + full.form_id + '\')" class="btn btn-xs btn-link">' + data + '</a>';
                     }
                 }, {
                     "data": "apply_member_type",
@@ -181,15 +181,7 @@ $(function() {
                 }, {
                     "data": "apply_date"
                 }, {
-                    "data": "vote_success_time",
-                    "mRender": function (data, type, full) {
-                        if(data == "None"){
-                            return ""
-                        }
-                        else {
-                            return data
-                        }
-                    }
+                    "data": "vote_success_time"
                 }, {
                     "data": "form_status",
                     "mRender": function(data, type, full) {
@@ -202,7 +194,7 @@ $(function() {
                 }, {
                     "data": "form_id",
                     "mRender": function(data, type, full) {
-                        var html = '<a onclick="$._showFormDetail(\'' + full.form_id + '\' , \''+"person"+'\')" class="btn btn-xs btn-info m-l-5">' + '详情' + '</a>';
+                        var html = '<a onclick="$._showFormDetail(\'' + full.form_id + '\')" class="btn btn-xs btn-info m-l-5">' + '详情' + '</a>';
                         if ((full.form_status == 'submitted' || full.form_status == 'apply_weixin_group') && $('#roles').val().indexOf("operator") >= 0) {
                             html += '<a onclick="$._examineForm(\'' + full.form_id + '\')" class="btn btn-xs btn-warning m-l-5">初审</a>';
                         } else if (full.form_status == 'votedsuccess') {

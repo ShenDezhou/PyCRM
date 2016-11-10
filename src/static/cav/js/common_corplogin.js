@@ -16,7 +16,7 @@ $(function() {
                 }
                 if(data.error)
                 {
-                    // alert(data.error);
+                    alert(data.error);
                     clearInterval(refreshIntervalId);
                     location.reload();
                 }
@@ -31,7 +31,7 @@ $(function() {
             dataType: 'json'
         });
     };
-    var refreshIntervalId = setInterval(generate, 3000);
+    var refreshIntervalId = setInterval(generate, 1000);
 
 
 });

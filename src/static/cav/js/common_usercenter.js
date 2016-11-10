@@ -210,7 +210,7 @@ $(function() {
                     '</div>' +
                     '<a '+ ' onclick="$._deleteOp(\'' + op_data[item]['org_id'] + '\')"'+ ' class="btn waves-effect waves-light red lighten-1">' + '删除' +
                         '<input type="hidden" id="org_id'+op_count+'"'+' name="org_id'+op_count+'"'+' value="'+op_data[item]['org_id']+'"'+'/>' +
-                    '</a>' + '<a ' +' onclick="$._editOp(\'' + op_count + '\')"'+ ' class="btn waves-effect waves-light">' + '保存修改' +
+                    '</a>' + '<a ' +' onclick="$._editOp(\'' + op_count + '\')"'+ ' class="btn waves-effect waves-light">' + '保存' +
                     '</a>' +
                     '</div>' +
                     '</div>' + '</div>';
@@ -475,50 +475,3 @@ $._editOp = function(count) {
         dataType: 'json'
     });
 };
-$("#showActivityRecords").click(function () {
-    $.ajax({
-        type: "get",
-        cache: false,
-        url: '/rest/common/person/activity/records',
-        success: function(data) {
-            //console.log(data['activity_records']);
-            $("div").remove("#record_title").remove("#record_count").remove("#acitivity_records");
-            $("#record_count").remove();
-            $("#acitivity_records").remove();
-
-            sign_up_times=data['activity_records'].length
-            register_times=0;
-
-            if(sign_up_times>0){
-                record_title='<div class="center" id="record_title">\
-                                <h4>活动记录</h4>\
-                                </div>';
-
-                record_table='<div id="acitivity_records">\
-                        <table class="table table-bordered display responsive nowrap table-striped">\
-                            <tr>\
-                                <th>活动名称</th>\
-                                <th>报名时间</th>\
-                                <th>签到时间</th>\
-                            </tr>';
-                $.each(data['activity_records'],function(n,record){
-                    record_table+='<tr><td>'+record.title+'</td><td>'+record.sign_up_time+'</td><td>'+(record.register_time?record.register_time:"无")+'</td></tr>';
-                    if(record.register_time){
-                        register_times++;
-                    }
-                });
-                record_table+='</table></div>'
-                record_count='<div id="record_count">共报名'+sign_up_times+'次，签到' + register_times + '次</div>'
-                $("#div_person").append(record_title+record_count+record_table);
-            }
-            else{
-                $("#div_person").append('<div id="record_count" class="center">未查到活动报名或签到记录！</div>');
-            }
-
-        },
-        error: function() {
-            alert('网络错误！');
-        },
-        dataType: 'json'
-    });
-});

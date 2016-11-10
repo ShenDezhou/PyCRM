@@ -486,7 +486,9 @@
         "layout": "layout_common.html",
         "tpl": "common_coderain.html",
         "js": [
-            "cav/js/common_coderain.js"
+            "cav/console/assets/plugins/d3-4.0/d3.v4.js",
+            "cav/console/assets/plugins/d3-4.0/d3-force.v1.js",
+            "cav/js/sentenTree.js"
         ]
     }
 ]
