@@ -13,3 +13,8 @@ class TorrentItem(scrapy.Item):
     name = scrapy.Field()
     description = scrapy.Field()
     size = scrapy.Field()
+
+class WenshuItem(scrapy.Item):
+    url = scrapy.Field()
+    time = scrapy.Field()
+    wenshus = scrapy.Field()
