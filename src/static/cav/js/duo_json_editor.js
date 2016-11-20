@@ -31,6 +31,7 @@ $(function() {
         });
     $('#submit').click(function() {
         var data =JSON.stringify(editor.getValue());
+        data = data.replace(/null/g, "0");
         console.log(data);
         $.ajax({
             type: "POST",
