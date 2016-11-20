@@ -7,6 +7,8 @@ PAGES = json.loads(open(os.path.join(os.path.dirname(__file__), "constants/pages
 
 MGR_PAGES = json.loads(open(os.path.join(os.path.dirname(__file__), "constants/mgr_pages.json"), "rb").read())
 
+DUOHERO_PAGES = json.loads(open(os.path.join(os.path.dirname(__file__), "constants/duohero_pages.json"), "rb").read())
+
 COMMON_PAGES = json.loads(open(os.path.join(os.path.dirname(__file__), "constants/common_pages.json"), "rb").read())
 
 BODY_PAGES = []

@@ -3068,7 +3068,7 @@ def get_console_page_routes():
 
 def get_mgr_page_routes():
     return [('/(' + '|'.join([x['id'] for x in MGR_PAGES]) + ')', MgrMainPage)] + [
-        ('/(' + '|'.join([x['id'] for x in COMMON_PAGES]) + ')', CommonMainPage)]
+        ('/(' + '|'.join([x['id'] for x in COMMON_PAGES]) + ')', CommonMainPage)] 
 
 
 @Route(r"/old_msie")

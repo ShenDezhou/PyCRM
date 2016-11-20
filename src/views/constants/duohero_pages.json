@@ -1,0 +1,21 @@
+[{
+    "id": "json_editor",
+    "title": "关卡编辑器",
+    "description": "",
+    "layout": "layout_simple.html",
+    "tpl": "duo_json_editor.html",
+    "css": [
+        "cav/console/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css",
+        "cav/console/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css",
+        "cav/console/assets/plugins/select2/dist/css/select2.min.css"
+    ],
+    "js": [
+        "cav/console/assets/plugins/DataTables/media/js/jquery.dataTables.js",
+        "cav/console/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js",
+        "cav/console/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js",
+        "cav/console/assets/plugins/select2/dist/js/select2.min.js",
+        "cav/console/assets/plugins/json-editor/jsoneditor.js",
+        "cav/js/duo_json_editor.js"
+    ],
+    "embedded_js": ""
+}]

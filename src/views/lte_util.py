@@ -25,6 +25,10 @@ def get_mgr_page_by_entry(entry, mgr = None):
     page = copy.deepcopy(next((x for x in MGR_PAGES + LOGIN_PAGES if x['id'] == entry), MGR_PAGES[0]))
     return page 
 
+def get_duohero_page_by_entry(entry):
+    page = copy.deepcopy(next((x for x in DUOHERO_PAGES if x['id'] == entry), DUOHERO_PAGES[0]))
+    return page 
+
 def get_all_mgr_pages():
     return copy.deepcopy(MGR_PAGES)
 

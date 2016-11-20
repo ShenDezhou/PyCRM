@@ -11,8 +11,8 @@ from views.rest import *
 from views.frontend.page import *
 from views.page import *
 from views.corp_page import *
+from views.duohero import *
 from views.mgr import *
-from views.unit_test import *
 from util import session
 from config import settings
 import socket
@@ -34,7 +34,7 @@ class Application(tornado.web.Application):
 
 application = Application(
     Route.routes() + 
-    get_mgr_page_routes() + [
+    get_mgr_page_routes() + get_duohero_page_routes() + [
     (r"/(.*)", NotFoundPage),
 ], **settings)
 
