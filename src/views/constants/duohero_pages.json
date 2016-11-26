@@ -7,11 +7,9 @@
 		"tpl": "duo_json_editor.html",
 		"css": [
 			"cav/console/assets/plugins/materialize/css/icon.css",
-			"cav/console/assets/plugins/materialize/css/materialize.css",
-			"cav/console/assets/plugins/select2/dist/css/select2.min.css"
+			"cav/console/assets/plugins/materialize/css/materialize.css"
 		],
 		"js": [
-			"cav/console/assets/plugins/select2/dist/js/select2.min.js",
 			"cav/console/assets/plugins/json-editor/jsoneditor.js",
 			"cav/console/assets/plugins/materialize/js/materialize.js",
 			"cav/js/common_materialize.js",
