@@ -42,7 +42,7 @@ class DuoHeroMainPage(BasePage):
             pass
 
         page = get_duohero_page_by_entry(entry)
-        self.render("layout_common.html",
+        self.render(page['layout'],
                     user=None,
                     entry=entry,
                     page=page,
