@@ -63,7 +63,7 @@ for dir, _, files in os.walk(in_folder):
 
 
         with open(file_output, 'w') as f:
-            f.write(json.dumps(treedata).decode('unicode-escape'))
+            f.write(json.dumps(treedata)    )
 
 
 print 'job done'
