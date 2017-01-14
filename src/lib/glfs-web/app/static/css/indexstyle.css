@@ -1,0 +1,347 @@
+ul,ul li{
+	list-style: none;
+}
+
+div#sysM div.box {
+    border: none;
+    box-shadow : none;
+    padding: 10px;
+}
+
+div#sysM div#serversList {
+    /*padding : 0 15px;*/
+    padding: 4px 18px 10px 18px;
+}
+
+div#sysM div.box div.box-header {
+    padding : 0;
+}
+
+div#sysM div.box div.box-header h3.box-title {
+    font-weight : bold;
+    height : 70px;
+    line-height : 70px;
+    font-family : 'Microsoft Yahei';
+    font-size : 18px;
+    margin : 20px auto;
+    width : 100%;
+    background-color : #3c8dbc;
+    color : #FFFFFF;
+    padding-left : 20px;
+}
+
+div#sysM div.info-box {
+    margin-bottom : 20px;
+    border : 1px solid #3c8dbc;
+    min-height: 100px;
+}
+
+div#sysM div.info-box span.info-box-icon {
+    display : inline-block;
+    height:88px;
+    width:88px;
+    background-color : transparent;
+    line-height: 126px;
+}
+
+
+div#sysM div.info-box span i {
+    display : inline-block;
+    /**background-color : #65C3DF;**/
+    margin : 10px;
+    font-size:50px;
+}
+
+div#sysM div.info-box-content {
+    margin-left : 88px;
+    padding : 10px;
+    height : 88px;
+}
+
+div#sysM div.info-box-content span.info-box-text {
+    /*color : #f4f4f4;*/
+    position: relative;
+    top: 14px;
+}
+
+div#sysM div.info-box-content div.info-box-number {
+    margin-top : 10px;
+}
+
+div#sysM div.info-box-content div.info-box-number i.glyphicon-tasks {
+    margin-right : 10px;
+    /*font-size: 20px;*/
+    position: relative;
+    top: 16px;
+}
+@media only screen and (max-width:1920px ) {
+	div#sysM div.info-box-content div.info-box-number i.glyphicon-tasks {
+		font-size: 28px;
+	}
+}
+
+@media only screen and (max-width:1366px ) {
+	div#sysM div.info-box-content div.info-box-number i.glyphicon-tasks {
+		font-size: 22px;
+	}
+}
+@media only screen and (max-width:1100px ) {
+	div#sysM div.info-box-content div.info-box-number i.glyphicon-tasks {
+		font-size: 15px;
+	}
+}
+
+div#sysM div.info-box-content div.info-box-number button {
+   /* background-color : #3c8dbc;*/
+    color : #FFFFFF;
+    border : none;
+    display : inline-block;
+    font-size : 15px;
+    font-weight : bold;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.3);
+    position: relative;
+    bottom: -12px;
+}
+
+button#serverRestart {
+    margin-left:0;
+}
+
+
+div#sysM div.info-box-content div.info-box-number button i {
+    display : inline-block;
+    margin-right : 5px;
+}
+
+div#monitorM div#ServersMoni {
+    box-shadow : none;
+    border : none;
+}
+
+div#monitorM div#ServersMoni div.monitorTitle {
+    padding : 0;
+    /*overflow: hidden;*/
+}
+
+div#monitorM div#ServersMoni div.box-header {
+    border : none;
+
+}
+
+
+div#monitorM div#ServersMoni div.box-header h3:first-child {
+    font-weight : bold;
+    height : 40px;
+    line-height : 40px;
+    font-family : 'Microsoft Yahei';
+    font-size : 18px;
+    margin : 20px 0px 10px 0px;
+    /*width : 100%;*/
+    /*background-color : #3c8dbc;*/
+    /*color : #FFFFFF;*/
+    padding-left : 20px;
+    border-left: 6px solid #3C8DBC;
+}
+
+div#monitorM div#ServersMoni div.box.box-primary {
+    border : 1px solid #3C8DBC ;
+    border-radius : none;
+    margin : 16px 0 10px 0;
+}
+
+div#monitorM div#ServersMoni div.box.box-primary div.box-header.with-border {
+    background-color : #3C8DBC;
+    color : #FFFFFF;
+    font-size : 15px;
+    padding-left : 20px;
+    font-weight : bold;
+}
+
+div#monitorM div.PieChartlocalhost {
+    text-align : center;
+}
+
+div#monitorM div.pieChartShow {
+    display : inline-block;
+    width : 25%;
+    height : 200px;
+    margin : 0 auto;
+}
+
+/*存储卷管理下的小菜单*/
+div#volumeMNav{
+	height: 0;
+	overflow: hidden;
+	margin-top: 4px;
+}
+div ul#volumeTabs{
+	height: 0;
+	overflow: hidden;
+}
+div#volumeMNav ul li{
+	margin: 1px 0 1px -40%;
+    padding: 2px 0 4px 44%;
+}
+div#volumeMNav ul#volumeTabs{
+	padding-left: 60px;
+	font-size: 15px;	
+	color: #b8c7ce;	
+	cursor: pointer;
+}
+div#volumeMNav div{
+	padding: 4px 0 4px 0px;
+	font-size: 15px;
+}
+div#volumeMNav ul.nav-stacked li.active a{
+	color: white;
+	border: none;
+}
+div#volumeMNav ul.nav-stacked li.active{
+	background:#1e282c;
+}
+li div#volumeMNav div.active{
+	background:#1e282c;
+	color: white;
+}
+div#volumeMNav ul#volumeTabs li a{
+	display: block;
+	margin-left: -40%;
+    padding-left: 44%;
+}
+
+
+
+/*监控管理下的小菜单*/
+.fa.fa-chevron-down{
+	position: relative;
+	right: -60px;
+	-webkit-transition:all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+.fa-chevron-UP{
+	-webkit-transform:rotateX(180deg);
+	-moz-transform: rotateX(180deg);
+	-ms-transform: rotateX(180deg);
+	-moz-transform: rotateX(180deg);
+	transform: rotateX(180deg);
+	-webkit-transition:all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+ul#monitorMNav{
+	height: 0;
+	overflow: hidden;
+	margin-top: 4px;
+}
+ul#monitorMNav li,div#volumeMNav div{
+	padding-left:20%;
+	color: #b8c7ce;	
+	cursor: pointer;
+}
+ul#monitorMNav li{
+	padding: 4px 0 4px 35px;
+	font-size: 18px;
+}
+
+
+ul#monitorMNav li:hover,div#volumeMNav div:hover,div#volumeMNav ul#volumeTabs li:hover{
+	color: #fff;
+	background:#1e282c;
+	cursor: pointer;
+	-webkit-transition:all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+
+
+
+
+/*.with-border.monitorTitle #machine_name{
+	width:8px;
+	height:30px;
+	background: #3C8DBC;
+}
+.with-border.monitorTitle .box-title,.with-border.monitorTitle #machine_name{
+	float: left;
+}
+.with-border.monitorTitle .box-title{
+	font-family: "Microsoft Yahei";
+}*/
+
+.box-header.with-border.monitorTitle{
+	margin-left:-15px;
+}
+
+.box{
+	background: #ECF0F5;
+	border-left: 1px solid #D2D6DE;
+	border-right: 1px solid #D2D6DE;
+}
+
+.info-box {
+    background: #ECF0F5; 
+    border: 1px solid #D2D6DE;
+}
+#skin-black1,#skin-black2,#skin-black3{
+	background-color: #222D32;
+}
+/*.box-header{
+	color: #fff;
+}*/
+/*#skin-black4{
+	background-color: #1E282C;
+}
+.fixed-table-container tbody td{
+	border: 1px solid #5f5e5e;
+}
+.fixed-table-container tbody tr:hover{
+	color: #000;
+}
+.fixed-table-container thead th {
+    border-left: 1px solid #5f5e5e;
+}
+table{
+	color: #fff;
+	overflow: hidden;
+}*/
+/*.bootstrap-table .table thead>tr>th{
+	border-bottom:1px solid #ddd; 
+}*/
+/*.box-header>.fa, .box-header>.glyphicon, .box-header>.ion {
+    color: #43C2EC;
+} 
+.fixed-table-container tbody .selected td {
+     background-color: transparent; 
+}
+.text-success {
+    color: #5fb360;
+}
+.btn-app{
+	color: #ECF0F5;
+	background-color: #222D32;
+}
+.box.box-primary {
+    border-top-color: #43c2ec;
+}
+.main-footer {
+    background: #222D32; 
+    color: #fff; 
+    border-top: none;
+}*/
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+     border-top: 1px solid #ddd; 
+}
+.btn-bigger{
+	width: 100px;
+	height: 80px;
+}
+
+

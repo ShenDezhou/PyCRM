@@ -6,7 +6,7 @@ import sys
 
 input_folder =r"d:\1"
 output_folder = r"d:\\"
-def crop_(input_file,output_file,pattern = "RGB"):
+def crop_file(input_file,output_file,pattern = "RGB"):
     icon = Image.open(input_file).convert(pattern)
     base_ratio_x = 1.0 * 3840 / 2160
     base_ratio_y = 1.0 / base_ratio_x
@@ -39,7 +39,7 @@ def crop(input_folder, output_folder, pattern = "art"):
             _,file_ext = os.path.splitext(f)
             output_file = os.path.join(output_folder,"%s_%d.png"%(pattern,index))
             print input_file,output_file
-            crop_(input_file,output_file)
+            crop_file(input_file,output_file)
             index += 1
 
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
         input = sys.argv[1]
         if os.path.isfile(input):
             output = os.path.join(os.path.dirname(input),"out_"+os.path.basename(input))
-            crop_(input,output)
+            crop_file(input,output)
             sys.exit(0)
     output = os.path.join(input, "output")
     if len(sys.argv) > 2:
