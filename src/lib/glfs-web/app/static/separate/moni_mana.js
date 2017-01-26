@@ -17,12 +17,12 @@ $(document).ready(function(){
 	
 	setInterval( function () {
 		getClusterInfo();
+//		console.log((new Date()).getTime());
     }, 1000);
 	var serversinfo = clusterinfo["cluster"];
     var serversStatusinfo = getServerStatusInfo();
     var servers = serversStatusinfo["servers"];
     var cluster_info_wr = JSON.parse(localStorage.getItem('write_reads'));
-    console.log(cluster_info_wr)
     
     
     function highcarts_reflow(num){
@@ -310,6 +310,7 @@ $(document).ready(function(){
 	            		var Series = this.series;
 	            		var cnt = COUNT;
 		                setInterval(function () { 
+		                  	var x = (new Date()).getTime()-333000;
 		                  	var data_string = localStorage.getItem('clusterinfo');
 	    					if (!data_string){
 	    						alert("No use");
@@ -320,10 +321,7 @@ $(document).ready(function(){
 		                    var JsonDataWrite = eval('(' + valueTimeWrite + ')'); 
 		                    var valueTimeRead = data["cluster"][cnt]["init_disk_read_data"][Length];
 		                    var JsonDataRead = eval('(' + valueTimeRead + ')');
-		                    var jsCurrentTime = (new Date()).getTime();
-		                    var timeMius = jsCurrentTime - parseInt(JsonDataRead.time);
-		                    //var x = jsCurrentTime - timeMius;
-		                    var x = (new Date()).getTime();
+		                    //var x = parseInt(JsonData.time);
 		                    Series[0].addPoint([x, parseFloat(JsonDataRead.data)], true, true);
 		                    Series[1].addPoint([x, parseFloat(JsonDataWrite.data)], true, true);
 		                  },2000);//计时器结束
@@ -362,12 +360,11 @@ $(document).ready(function(){
 	                var s = '<b style="font-weight:300;">' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '</b>';
 	                $.each(this.points, function () {
 	                	if(this.y>=(1024*1024)){
-	                		var number = (this.y/(1024*1024)).toFixed(2)+"MB/s";
+	                		var number = (this.y/(1024*1024)).toFixed(2)+"MB";
 	                	}else if(this.y<(1024*1024)){
-	                		var number = (this.y/1024).toFixed(2)+"KB/s";
-	                	}else if(this.y<=0){
-	                	    this.y = 0;
-	                		var number = "0KB/s";
+	                		var number = (this.y/1024).toFixed(2)+"KB";
+	                	}else if(this.y==0){
+	                		var number = "0KB";
 	                	}
 	                    s += '<br/><span style="font-weight:800;color:'+this.series.color+';">'+this.series.name+'</span>: <b>'+number+'</b>';
 	                });
@@ -444,6 +441,7 @@ $(document).ready(function(){
 		                var Series = this.series;
 	            		var cnt = COUNT;
 		                setInterval(function () {
+		                  var x = (new Date()).getTime()-333000;
 		                  	var data_string = localStorage.getItem('clusterinfo');
 	    					if (!data_string){
 	    						alert("No use");
@@ -454,10 +452,6 @@ $(document).ready(function(){
 		                    var JsonDataIn = eval('(' + valueTimeIn + ')'); 
 		                    var valueTimeOut = data["cluster"][cnt]["init_network_out_data"][Length];
 		                    var JsonDataOut = eval('(' + valueTimeOut + ')');
-		                    var jsCurrentTime = (new Date()).getTime();
-		                    var timeMius = jsCurrentTime - parseInt(JsonDataOut.time);
-		                    //var x = jsCurrentTime - timeMius;
-		                    var x = (new Date()).getTime();
 		                    Series[0].addPoint([x, parseFloat(JsonDataIn.data)], true, true);
 		                    Series[1].addPoint([x, parseFloat(JsonDataOut.data)], true, true);
 		                  },2000);//计时器结束
@@ -496,12 +490,11 @@ $(document).ready(function(){
 	                var s = '<b style="font-weight:300;">' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '</b>';
 	                $.each(this.points, function () {
 	                	if(this.y>=(1024*1024)){
-	                		var number = (this.y/(1024*1024)).toFixed(2)+"MB/s";
+	                		var number = (this.y/(1024*1024)).toFixed(2)+"MB";
 	                	}else if(this.y<(1024*1024)){
-	                		var number = (this.y/1024).toFixed(2)+"KB/s";
-	                	}else if(this.y<=0){
-	                	    this.y = 0;
-	                		var number = "0KB/s";
+	                		var number = (this.y/1024).toFixed(2)+"KB";
+	                	}else if(this.y==0){
+	                		var number = "0KB";
 	                	}
 	                    s += '<br/><span style="font-weight:800;color:'+this.series.color+';">'+this.series.name+'</span>: <b>'+number+'</b>';
 	                });		
@@ -550,7 +543,7 @@ $(document).ready(function(){
 		            var JsonData = eval('(' + valueTime + ')'); 
 	          		var data = [],time = parseInt(JsonData.time),j;			
 	          		for (j = -359; j < 0; j += 1) {
-	          			var valueTime = cluster_info_wr[COUNT]["init_network_out_data"][20];
+	          			var valueTime = cluster_info_wr[COUNT]["init_network_out_data"][j+359];
 		            	var JsonData = eval('(' + valueTime + ')'); 
 	            		data.push([
 	               			time + j * 1000,
@@ -562,13 +555,12 @@ $(document).ready(function(){
 	        	color : '#6FDB4B'
 	      	}]
 	    });
-    									
+    							
 	
 		//磁盘使用率折线图
         var monitorPieChart = $('#PieChart' + serversinfo[COUNT]["hostname"]);
         monitorPieChart.append(getMonitorPieChartDiv(COUNT));
         for (var i = 0; i < serversinfo[COUNT]["disks"].length; i++) {
-			//console.log(parseFloat(serversinfo[COUNT]["disks"][i]["usage"]));
           	Highcharts.setOptions({
 	            colors: ['#ED561B','#058DC7','#64E572','#FF9655', '#FFF263', '#6AF9C4']
 	        });
@@ -589,7 +581,7 @@ $(document).ready(function(){
 	              text: serversinfo[COUNT]["disks"][i]["name"] + "使用率"
 	            },
 	            tooltip: {
-	              pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+	              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
 	            },
 	            plotOptions: {
 	              	pie: {
@@ -599,7 +591,7 @@ $(document).ready(function(){
 		                  	enabled: false,
 		                  	color: '#000000',
 		                  	connectorColor: '#000000',
-		                  	format: '<b>{point.name}</b>: {point.perce+ntage:.2f} %'
+		                  	format: '<b>{point.name}</b>: {point.perce+ntage:.1f} %'
 	                	},
 	                	showInLegend: true	
 	              	}
@@ -611,10 +603,8 @@ $(document).ready(function(){
 	              	type:'pie',
 	              	name:serversinfo[COUNT]["disks"][i]["name"],
 	              	data: [
-	               		{name:'使用',
-						 y:parseFloat(serversinfo[COUNT]["disks"][i]["usage"])},
-	                	{name:'未使用', 
-						 y:100 - parseFloat(serversinfo[COUNT]["disks"][i]["usage"])}
+	               		['使用', parseFloat(serversinfo[COUNT]["disks"][i]["usage"])],
+	                	['未使用', 100 - parseFloat(serversinfo[COUNT]["disks"][i]["usage"])]
 	              	]
 	            }]
 	        }); //磁盘使用率折线图结束
@@ -630,12 +620,14 @@ $(document).ready(function(){
     	$.ajaxSetup({async:false});
     	$.getJSON(url, null, function (data) {
       		serverStatusInfomat = data;
+      		console.log(data)
       		localStorage.setItem('init_write_reads', JSON.stringify(data["init_write_reads"]));
 			localStorage.setItem('write_reads', JSON.stringify(data["write_reads"]));
     	});
     	return serverStatusInfomat;
 	}
-            
+    
+        
     function getClusterInfo() {
 	    var url = $SCRIPT_ROOT + '/monitor/info';
 	    var clusterinfomat={
@@ -718,7 +710,6 @@ $(document).ready(function(){
 	    }
 	    return series;
     }
-    
     function monitorinfoFormat(serverId, i) {
 	    return '<div class="col-md-12">'+
 	            '<div class= "box-header with-border monitorTitle">' +
@@ -748,7 +739,7 @@ $(document).ready(function(){
 	            '</div>'+
 	            '<div class="col-md-12"><div class="box box-primary"><div class="box-header with-border">'+
 	            '<i class="fa fa-bar-chart-o"></i>'+
-	            '<h3 class="box-title">磁盘性能</h3>'+
+	            '<h3 class="box-title">DISK读写速度</h3>'+
 	            '</div>'+
 	            '<div class="box-body" id="rwSpeed'+ serverId+ '" >'+
 	            '<div id="RW'+ serverId+ '"style="height: 300px"></div>'+
@@ -756,7 +747,7 @@ $(document).ready(function(){
 	            '</div></div>'+
 	            '<div class="col-md-12"><div class="box box-primary"><div class="box-header with-border">'+
 	            '<i class="fa fa-bar-chart-o"></i>'+
-	            '<h3 class="box-title">网络性能</h3>'+
+	            '<h3 class="box-title">NETWORK读写速度</h3>'+
 	            '</div>'+
 	            '<div class="box-body" id="networkSpeed'+ serverId+ '" >'+
 	            '<div id="NETWORK'+ serverId+ '"style="height: 300px"></div>'+

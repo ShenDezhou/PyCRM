@@ -1,21 +1,14 @@
 from flask import Flask, request, jsonify, render_template
-
-from flask_cache import Cache
+from flask.ext.cache import Cache
 from redis_util import *
 from command import snapshot_create, snapshot_delete, volume_delete, volume_start, volume_stop, volume_create, \
-    volume_nfs, get_cluster_list, refresh_createvolume_status, enable_volume_quota, set_volume_quota, volume_samba
+    volume_nfs, get_cluster_list, refresh_createvolume_status, enable_volume_quota, set_volume_quota, volume_samba, test1
 import simplejson as json
 from config import CONFIG_MONITOR_LIST_LEN, CONFIG_PERF_LIST_LEN, CONFIG_REDUNDANCY_RATIO, CONFIG_LOCAL_IP
 from check_util import none, empty
 import logging
 import random
-#gevent
-# gevent
-from gevent import monkey
-from gevent.pywsgi import WSGIServer
-monkey.patch_all()
-# gevent end
-
+from time import sleep
 
 app = Flask(__name__)
 
@@ -33,67 +26,72 @@ cache = Cache(app,config={'CACHE_TYPE': 'redis',
 @app.route('/')
 def init():
     # try:
-        # Get the cluster capacity firstly
-        # capacity = Redis.hgetall(OVERALL_CAPACITY)
-        # if empty(capacity):
-        #     return jsonify(success=False, message=START_SNMP_SERVICE)
-        # volume_names_set = Redis.sget(VOLUME_NAMES)
-        # # There is no volume yet
-        # if empty(volume_names_set):
-        #     return render_template('/index.html')
-        # volume_names = list(volume_names_set)
-        # volumes = list()
-        # for volume_name in volume_names:
-        #     volume_info = Redis.hgetall(VOLUME_PREFIX + volume_name)
-        #     volume_info['name'] = volume_name
-        #     volume_info['usage'] = Redis.hget(VOLUME_PREFIX + volume_name, 'usage')
-        #     # frontend just check whether volume info has key 'nfs' 'samba' 'iscsi' 'swift'
-        #     # volume_info['nfs'] = 'on'
-        #
-        #     bricks = Redis.get(BRICK_PREFIX + volume_name)
-        #     if bricks is None:
-        #         bricks = []
-        #     else:
-        #         bricks = json.loads(bricks, 'utf-8')
-        #     volume_info['bricks'] = bricks
-        #
-        #     snapshots = Redis.get(SNAPSHOT_PREFIX + volume_name)
-        #     if snapshots is None:
-        #         snapshots = ''
-        #     else:
-        #         snapshots = json.loads(snapshots, 'utf-8')
-        #     volume_info['snapshots'] = snapshots
-        #
-        #     read = Redis.lrange(READ_SPEED_PREFIX + volume_name, -CONFIG_PERF_LIST_LEN, -1)
-        #     write = Redis.lrange(WRITE_SPEED_PREFIX + volume_name, -CONFIG_PERF_LIST_LEN, -1)
-        #     fill_list(read)
-        #     fill_list(write)
-        #     volume_info['read'] = read
-        #     volume_info['write'] = write
-        #     set_client_info(volume_info)
-        #     volumes.append(volume_info)
-        #
-        #     cluster_list = json.loads(Redis.get(CLUSTER_LIST), 'utf-8')
-        #     cluster_disks = json.loads(Redis.get(CLUSTER_DISKS), 'utf-8')
-        #     servers = list()
-        #     for machine in cluster_list:
-        #         server = dict()
-        #         server['serverId'] = machine['hostname']
-        #         server['serverStatus'] = machine['status']
-        #         disks = list()
-        #         if machine['status'] == 'Disconnected':
-        #             continue
-        #         raw_disks = cluster_disks[machine['hostname']]
-        #         for raw_disk in raw_disks:
-        #             disk = dict()
-        #             disk['diskId'] = raw_disk
-        #             disk['diskStatus'] = 'health'
-        #             disks.append(disk)
-        #         server['disks'] = disks
-        #         servers.append(server)
-    # except (TypeError, KeyError), e:
-    #     logging.warning("hello:"+ str(e))
+    #     # Get the cluster capacity firstly
+
+    #     capacity = Redis.hgetall(OVERALL_CAPACITY)
+
+    #     if empty(capacity):
+    #         return jsonify(success=False, message=START_SNMP_SERVICE)
+
+    #     volume_names_set = Redis.sget(VOLUME_NAMES)
+    #     # There is no volume yet
+    #     if empty(volume_names_set):
+    #         return render_template('/index.html')
+
+    #     volume_names = list(volume_names_set)
+
+    #     volumes = list()
+    #     for volume_name in volume_names:
+    #         volume_info = Redis.hgetall(VOLUME_PREFIX + volume_name)
+    #         volume_info['name'] = volume_name
+    #         volume_info['usage'] = Redis.hget(VOLUME_PREFIX + volume_name, 'usage')
+    #         # frontend just check whether volume info has key 'nfs' 'samba' 'iscsi' 'swift'
+    #         # volume_info['nfs'] = 'on'
+
+    #         bricks = Redis.get(BRICK_PREFIX + volume_name)
+    #         if bricks is None:
+    #             bricks = []
+    #         else:
+    #             bricks = json.loads(bricks, 'utf-8')
+    #         volume_info['bricks'] = bricks
+
+    #         snapshots = Redis.get(SNAPSHOT_PREFIX + volume_name)
+    #         if snapshots is None:
+    #             snapshots = ''
+    #         else:
+    #             snapshots = json.loads(snapshots, 'utf-8')
+    #         volume_info['snapshots'] = snapshots
+
+    #         read = Redis.lrange(READ_SPEED_PREFIX + volume_name, -CONFIG_PERF_LIST_LEN, -1)
+    #         write = Redis.lrange(WRITE_SPEED_PREFIX + volume_name, -CONFIG_PERF_LIST_LEN, -1)
+    #         fill_list(read)
+    #         fill_list(write)
+    #         volume_info['read'] = read
+    #         volume_info['write'] = write
+    #         set_client_info(volume_info)
+    #         volumes.append(volume_info)
+
+    #         cluster_list = json.loads(Redis.get(CLUSTER_LIST), 'utf-8')
+    #         cluster_disks = json.loads(Redis.get(CLUSTER_DISKS), 'utf-8')
+    #         servers = list()
+
+    #         for machine in cluster_list:
+    #             server = dict()
+    #             server['serverId'] = machine['hostname']
+    #             server['serverStatus'] = machine['status']
+    #             disks = list()
+    #             raw_disks = cluster_disks[machine['hostname']]
+    #             for raw_disk in raw_disks:
+    #                 disk = dict()
+    #                 disk['diskId'] = raw_disk
+    #                 disk['diskStatus'] = 'health'
+    #                 disks.append(disk)
+    #             server['disks'] = disks
+    #             servers.append(server)
     return render_template('/index.html')
+    # except (TypeError, KeyError), e:
+    #     logging.warning(e)
+    #     return jsonify(success=False, message=NO_INFORMATION)
 
 
 # To Do: Add Username and Password
@@ -184,14 +182,16 @@ def add_volume():
                 return jsonify(success=False, message=DIS_MATCH_INFORMATION)
             else:
                 max_dict_idx[node] = len(cluster_disks[node])
+        success, out, actual_capacity = volume_create(cluster_list, max_dict_idx, volume_name, capacity,
+                                                     redundancy_ratio)
 
-        # dict = {"01": "volume_create1", "cluster_list": cluster_list, "max_dict_idx": max_dict_idx,
-        #         "volume_name": volume_name, "capacity": capacity, "redundancy_ratio": redundancy_ratio}
-
-        Redis.lpush()
-
+        message1 = {"tag": "volume_create", "cluster_list": cluster_list, "max_dict_idx": max_dict_idx,
+                    "volume_name": volume_name, "capacity": capacity, "redundancy_ratio": redundancy_ratio}
+        print message1
+        Redis.lpush("test1", message1)
         success, out, actual_capacity = volume_create(cluster_list, max_dict_idx, volume_name, capacity,
                                                       redundancy_ratio)
+
         if success:
             volume_start(volume_name)
             # related configuration: enable quota and set redis
@@ -206,7 +206,6 @@ def add_volume():
             return jsonify(success=True, message=volume_info)
         else:
             return jsonify(success=False, message=out)
-
     except (KeyError, TypeError), e:
         return jsonify(success=False, message=str(e))
 
@@ -424,7 +423,6 @@ def stop_samba():
     volume_name = str(volume_name)
 
     volume_samba(volume_name, enable=False)
-
     Redis.hset(VOLUME_PREFIX + volume_name, VOLUME_SAMBA, 'off')
     return jsonify(succuss=True, message=None)
 
@@ -483,20 +481,19 @@ def get_cluster_info():
     write_reads = list()
     init_write_reads = list()
     cluster_list = json.loads(Redis.get(CLUSTER_LIST), 'utf-8')
+    cluster_disks = json.loads(Redis.get(CLUSTER_DISKS), 'utf-8')
     try:
         for machine in cluster_list:
             server = dict()
             server['serverId'] = machine['hostname']
             server['serverStatus'] = machine['status']
-            cluster_devices = json.loads(Redis.get(CLUSTER_DEVICE+machine['hostname']), 'utf-8')
             disks = list()
-            if machine['status'] == 'Connected':
-                raw_disks = cluster_devices
-                for raw_disk in raw_disks:
-                    disk = dict()
-                    disk['diskId'] = raw_disk
-                    disk['diskStatus'] = 'health'
-                    disks.append(disk)
+            raw_disks = cluster_disks[machine['hostname']]
+            for raw_disk in raw_disks:
+                disk = dict()
+                disk['diskId'] = raw_disk
+                disk['diskStatus'] = 'health'
+                disks.append(disk)
             server['disks'] = disks
             servers.append(server)
 
@@ -504,15 +501,14 @@ def get_cluster_info():
         while i < len(cluster_list):
             write_read = dict()
             hostname = cluster_list[i]["hostname"]
-            hoststatus = cluster_list[i]['status']
-            if hoststatus == 'Connected':
-                # machine_diskio
-                write_read["init_disk_write_data"] = Redis.lrange(DISK_NAME_WRITE + hostname, -360, -1)
-                write_read["init_disk_read_data"] = Redis.lrange(DISK_NAME_READ + hostname, -360, -1)
-                # machine_networkio
-                write_read["init_network_in_data"] = Redis.lrange(NETWORKIO_NAME_IN_INIT + hostname, -360, -1)
-                write_read["init_network_out_data"] = Redis.lrange(NETWORKIO_NAME_OUT_INIT + hostname, -360, -1)
-                write_reads.append(write_read)
+            # machine_diskio
+            write_read["init_disk_write_data"] = Redis.lrange(DISK_NAME_WRITE + hostname, -360, -1)
+            write_read["init_disk_read_data"] = Redis.lrange(DISK_NAME_READ + hostname, -360, -1)
+            # write_read["test_init_disk_write_data"] = Redis.lrange(TEST + hostname, -360, -1)
+            # machine_networkio
+            write_read["init_network_in_data"] = Redis.lrange(NETWORKIO_NAME_IN_INIT + hostname, -360, -1)
+            write_read["init_network_out_data"] = Redis.lrange(NETWORKIO_NAME_OUT_INIT + hostname, -360, -1)
+            write_reads.append(write_read)
             i += 1
         init_write_read = dict()
         # sum_diskio
@@ -522,7 +518,7 @@ def get_cluster_info():
         init_write_read["init_network_in_sum"] = Redis.lrange(NETWORKIO_IN_SUM_INIT, -360, -1)
         init_write_read["init_network_out_sum"] = Redis.lrange(NETWORKIO_OUT_SUM_INIT, -360, -1)
         init_write_reads.append(init_write_read)
-        return jsonify(success=True, servers=servers, write_reads=write_reads, init_write_reads = init_write_reads)
+        return jsonify(success=True, servers=servers, write_reads=write_reads, init_write_reads=init_write_reads)
     except (TypeError, KeyError):
         return jsonify(success=False, message=NO_INFORMATION)
 
@@ -536,12 +532,11 @@ def get_monitor_info():
         if cluster_resource == 'null':
             return jsonify(success=False)
         cluster_resource = json.loads(cluster_resource, 'utf-8')
+        # print type(cluster_resource)
 
         i = 0
         # sum_diskio
-        # print Redis.lrange(DISKWRITEALL, -20, -1)
         cluster_resource[i]["init_disk_write_sum"] = Redis.lrange(DISKWRITEALL, -2, -1)
-
         cluster_resource[i]["init_disk_read_sum"] = Redis.lrange(DISKREADALL, -2, -1)
         # sum_networkio
         cluster_resource[i]["init_network_in_sum"] = Redis.lrange(NETWORKIO_IN_SUM_INIT, -2, -1)
@@ -555,6 +550,7 @@ def get_monitor_info():
             # machine_diskio
             cluster_resource[i]["init_disk_write_data"] = Redis.lrange(DISK_NAME_WRITE + hostname, -2, -1)
             cluster_resource[i]["init_disk_read_data"] = Redis.lrange(DISK_NAME_READ + hostname, -2, -1)
+            # cluster_resource[i]["test_init_disk_write_data"] = Redis.lrange(TEST + hostname, -2, -1)
             # machine_networkio
             cluster_resource[i]["init_network_in_data"] = Redis.lrange(NETWORKIO_NAME_IN_INIT + hostname, -2, -1)
             cluster_resource[i]["init_network_out_data"] = Redis.lrange(NETWORKIO_NAME_OUT_INIT + hostname, -2, -1)

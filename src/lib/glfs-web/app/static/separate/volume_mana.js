@@ -12,7 +12,7 @@ $(document).ready(function(){
 	    });
 	    return volume_Data;
 	}//获取volume_Data
-	// 	get_volumedata();
+// 	get_volumedata();
  	var table = $('#volumeList');//系统概要里磁盘卷信息列表 	
 	var vCapacity;
 	var getCData = function(data){
@@ -37,7 +37,7 @@ $(document).ready(function(){
     			return false;//判断是否填写存储卷名称，如果没有填写结束函数
     		}          
 			////////    loading层
-			$("#loadingPage").css("display","block");//让loading层显示出来，表示正在加载
+  			$("#loading").css("display","block");//让loading层显示出来，表示正在加载
   			//alert('开始添加');
 			setTimeout(formSubmit,100);//点击确认按钮之后，延迟100毫秒发送ajax请求，否则会立即发送请求，没有loading的效果        		
 			function formSubmit(){
@@ -54,7 +54,7 @@ $(document).ready(function(){
 		  				var message = data["message"];
 		  				var volumeIData = message;
 			  			if (result){
-			  				$("#loadingPage").css("display","none");
+			  				$("#loading").css("display","none");
 			  				$('#cVolumeName').val("");
 			    			alert("添加成功");
 			    			//判断是否为唯一一个volume
@@ -108,8 +108,8 @@ $(document).ready(function(){
 		});//click事件结束
   		$("#vCapacity").ionRangeSlider({
 	  		min: 1,
-		  	max: 1344,
-		  	from: 15,
+		  	max: 20,
+		  	from: 3,
 		  	postfix: "TB",//设置数值后缀
 		  	onStart : function(data){
 		    	getCData(data);
@@ -130,13 +130,13 @@ $(document).ready(function(){
 			   //$('#removeVolume').prop("disabled", false);
 			   $("#"+volumeID+"remove").prop("disabled", false);
 			} //如果存储卷的状态不是停止状态，禁用删除按钮。
-//			var rwSpeedIDt = '#' + volumeID + 'rwSpeed';
-//			setTimeout(function(){$(rwSpeedIDt).highcharts().reflow();},1);
+			var rwSpeedIDt = '#' + volumeID + 'rwSpeed';
+			setTimeout(function(){$(rwSpeedIDt).highcharts().reflow();},1);
 		});//$('.nav-stacked').click函数结束
 
   		$('.menu-item.volume').click(function (e) {//左侧菜单栏tab切换	  	
 	  		var currentVolume = $('.nav-stacked .active').text();
-//	    	setTimeout(function(){$("#" + currentVolume + "rwSpeed").highcharts().reflow();}, 180);
+	    	setTimeout(function(){$("#" + currentVolume + "rwSpeed").highcharts().reflow();}, 180);
 	    	    
     		var monitorMNav_hide = $("#monitorMNav").css("height");
     		if(monitorMNav_hide != "0px"){
@@ -495,15 +495,7 @@ $(document).ready(function(){
   		for (var i = 0; i < bricksI.length; i++){
 		    var spliceB = bricksI[i]["address"].split('/');
 		    var brickName = spliceB[spliceB.length - 1];
-		    var brickStatus = bricksI[i]["online"];
-		    console.log();
-		    if(brickStatus == "Y"){
-		    	var formatBrick = '<a class="btn btn-app" rel="tooltip" title="地址: ' + bricksI[i]["address"] + '状态: ' + bricksI[i]["online"] + '使用(%): ' + bricksI[i]["usage"] + '" data-html="true"> '
-		    	+'<b style="font-weight:500;position:absolute;top:0px;left:18px;">'+bricksI[i]["address"].split(":")[0]+'</b><i class="fa fa-database text-success" style="padding-top:5px;"></i>' + brickName + ' </a>';
-		    }else if(brickStatus == "N"){
-		    	var formatBrick = '<a class="btn btn-app" rel="tooltip" title="地址: ' + bricksI[i]["address"] + '状态: ' + bricksI[i]["online"] + '使用(%): ' + bricksI[i]["usage"] + '" data-html="true"> '
-		    	+'<b style="font-weight:500;position:absolute;top:0px;left:18px;">'+bricksI[i]["address"].split(":")[0]+'</b><i class="fa fa-database text-danger" style="padding-top:5px;"></i>' + brickName + ' </a>';
-		    }		    
+		    var formatBrick = '<a class="btn btn-app" rel="tooltip" title="地址: ' + bricksI[i]["address"] + '状态: ' + bricksI[i]["online"] + '使用: ' + bricksI[i]["usage"] + '" data-html="true"> <i class="fa fa-database text-success"></i>' + brickName + ' </a>';
 		    bricksBox.append(formatBrick);
     	}
    
@@ -576,9 +568,8 @@ $(document).ready(function(){
 		//初始化饼图----------------------
 	    var volumeUsageID = '#' + volumeData["name"] + 'Usage';
 	    var usage = volumeData["usage"];
-		console.log(usage)
     	var usageData = [
-      		{label: "已使用", data: usage, color: "#980000"},
+      		{label: "已使用", data: usage, color: "#0073b7"},
       		{label: "未使用", data: 100 - usage, color: "#00c0ef"}
     	];
 		$.plot(volumeUsageID, usageData, {
@@ -601,59 +592,6 @@ $(document).ready(function(){
 		    }
     	});
 
-/*	setTimeout(function(){
-		 $(volumeUsageID).highcharts().reflow();
-	},180);
-	$(volumeUsageID).highcharts({
-        credits:{
-          enabled: false
-        }, 
-        exporting:{
-          enabled:false
-        },
-        chart: {
-          backgroundColor:"#ECF0F5",
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-        },
-        title: {
-          text:""
-        },
-        tooltip: {
-          //pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-   		  enabled: false
-        },
-        colors: ['#ED561B','#00C0EF','#64E572','#FF9655', '#FFF263', '#6AF9C4'],
-        plotOptions: {
-          	pie: {
-          		size:200,
-            	allowPointSelect: true,
-            	cursor: 'pointer',
-				innerSize:"50%",
-            	dataLabels: {
-                  	enabled: true,
-					distance:-40,
-                  	connectorColor: '#000000',
-                  	format: '<b>{point.name}</b>: {point.percentage:.2f} %',
-                  	style:{
-	            		color:"#fff",
-	            		fontWeight:"lighter",
-	            		textShadow:"none"
-	            	}
-            	}
-          	}
-        },
-        series:[{
-          	type:'pie',
-          	//name:"系统容量",
-          	data: [
-           		['使用', parseFloat(usage)],
-            	['未使用', parseFloat(100 - usage)]
-          	]
-        }]
-    });
-*/
 //		$(volumeUsageID).highcharts({
 //	        credits:{
 //	          enabled: false
@@ -705,117 +643,117 @@ $(document).ready(function(){
 		
 
 		//初始化曲线图
-//		var rwSpeedID = '#' + volumeData["name"] + 'rwSpeed';	
-//		$(rwSpeedID).highcharts({
-//		  credits: {
-//		    enabled: false
-//		  },
-//		  chart: {
-//		  	backgroundColor:"#ECF0F5",
-//		    type: 'line',
-//		    reflow:true,
-//		    animation: false, // don't animate in old IE
-//		    events: {
-//		      load: function (event) {
-//		        var series = this.series[0];
-//		        var series1 = this.series[1];
-//		        setInterval(function () {
-//		         var x = (new Date()).getTime(), // current time
-//		              y = Math.random()*10;//y get from background
-//		          series.addPoint([x, y], true, true);
-//		          series1.addPoint([x, Math.random()*10], true, true);
-//		          //setInterval(function () {
-//					//const x = (new Date()).getTime(); // current time
-//					//$.getJSON($SCRIPT_ROOT + '/volume/perf', {
-//						//volume_name: volumeData["name"]
-//						//}, function (data) {
-//				            //var result = data["success"];
-//				            //var message = data["message"];
-//				            //var toString = Object.prototype.toString;
-//							//if (result){
-//				                //var y = message[0];
-//				                //var y_1 = message[1];
-//				                //series.addPoint([x, y], true, true);
-//				                //series1.addPoint([x, y_1], true, true);
-//							//} else {
-//				                //series.addPoint([x, 0], true, true);
-//				                //series1.addPoint([x, 0], true, true);
-//							//}
-//						//}
-//					//);		          
-//		        }, 2000);
-//		      }
-//		    }
-//		  },
-//		  xAxis: {
-//		    type: 'datetime',
-//		    tickPixelInterval:150
-//		  },
-//	  	yAxis: {
-//	    	title: {
-//	      		text: 'MB/s'
-//	    	},
-//	    	plotLines: [{
-//	      	value: 0,
-//	      	width: 1,
-//	      	color: '#808080'
-//	    	}]
-//	  	},
-//	  	tooltip: {
-//	    	formatter: function () {
-//	      	return '<b>' + this.series.name + '</b><br/>' +
-//	              Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-//	              Highcharts.numberFormat(this.y, 2);
-//	    	},
-//	    	crosshairs: true
-//	  	},
-//	  	plotOptions: {
-//	    	series: {
-//	      		dataLabels: {
-//	        		allowOverlap: true
-//	      		}
-//	    	}
-//	  	},
-//		title : {
-//		   text : ""
-//		},
-//		legend: {
-//		   enabled: true
-//		},
-//		exporting: {
-//		   enabled: false
-//		},
-//	  	series: [{
-//	    	name: '读',
-//	    	pointInterval: 600000,
-//	    	data: (function () {
-//	      	// generate an array of random data
-//	      	var data = [],time = (new Date()).getTime(),i;		
-//	      	for (i = -19; i <= 0; i += 1) {
-//	        	data.push({
-//	          	x: time + i * 1000,
-//	          	y: Math.random()*10
-//	        	});
-//	      	}
-//	      	return data;
-//	    	}())
-//	  	}, {
-//	    	name: '写',
-//	    	pointInterval: 600000,
-//	    	data: (function () {
-//	      	// generate an array of random data
-//	      	var data = [], time = (new Date()).getTime(), i;		
-//	      	for (i = -19; i <= 0; i += 1) {
-//	        	data.push({
-//	          	x: time + i * 1000,
-//	          	y: Math.random()*10
-//	        	});
-//	      	}
-//	      	return data;
-//	    	}()),
-//	    	color : '#6FDB4B'
-//	 	 	}]
-//		});//$('#rwSpeed').highcharts函数结束	
+		var rwSpeedID = '#' + volumeData["name"] + 'rwSpeed';	
+		$(rwSpeedID).highcharts({
+		  credits: {
+		    enabled: false
+		  },
+		  chart: {
+		  	backgroundColor:"#ECF0F5",
+		    type: 'line',
+		    reflow:true,
+		    animation: false, // don't animate in old IE
+		    events: {
+		      load: function (event) {
+		        var series = this.series[0];
+		        var series1 = this.series[1];
+		        setInterval(function () {
+		         var x = (new Date()).getTime(), // current time
+		              y = Math.random()*10;//y get from background
+		          series.addPoint([x, y], true, true);
+		          series1.addPoint([x, Math.random()*10], true, true);
+		          //setInterval(function () {
+					//const x = (new Date()).getTime(); // current time
+					//$.getJSON($SCRIPT_ROOT + '/volume/perf', {
+						//volume_name: volumeData["name"]
+						//}, function (data) {
+				            //var result = data["success"];
+				            //var message = data["message"];
+				            //var toString = Object.prototype.toString;
+							//if (result){
+				                //var y = message[0];
+				                //var y_1 = message[1];
+				                //series.addPoint([x, y], true, true);
+				                //series1.addPoint([x, y_1], true, true);
+							//} else {
+				                //series.addPoint([x, 0], true, true);
+				                //series1.addPoint([x, 0], true, true);
+							//}
+						//}
+					//);		          
+		        }, 2000);
+		      }
+		    }
+		  },
+		  xAxis: {
+		    type: 'datetime',
+		    tickPixelInterval:150
+		  },
+	  	yAxis: {
+	    	title: {
+	      		text: 'MB/s'
+	    	},
+	    	plotLines: [{
+	      	value: 0,
+	      	width: 1,
+	      	color: '#808080'
+	    	}]
+	  	},
+	  	tooltip: {
+	    	formatter: function () {
+	      	return '<b>' + this.series.name + '</b><br/>' +
+	              Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+	              Highcharts.numberFormat(this.y, 2);
+	    	},
+	    	crosshairs: true
+	  	},
+	  	plotOptions: {
+	    	series: {
+	      		dataLabels: {
+	        		allowOverlap: true
+	      		}
+	    	}
+	  	},
+		title : {
+		   text : ""
+		},
+		legend: {
+		   enabled: true
+		},
+		exporting: {
+		   enabled: false
+		},
+	  	series: [{
+	    	name: '读',
+	    	pointInterval: 600000,
+	    	data: (function () {
+	      	// generate an array of random data
+	      	var data = [],time = (new Date()).getTime(),i;		
+	      	for (i = -19; i <= 0; i += 1) {
+	        	data.push({
+	          	x: time + i * 1000,
+	          	y: Math.random()*10
+	        	});
+	      	}
+	      	return data;
+	    	}())
+	  	}, {
+	    	name: '写',
+	    	pointInterval: 600000,
+	    	data: (function () {
+	      	// generate an array of random data
+	      	var data = [], time = (new Date()).getTime(), i;		
+	      	for (i = -19; i <= 0; i += 1) {
+	        	data.push({
+	          	x: time + i * 1000,
+	          	y: Math.random()*10
+	        	});
+	      	}
+	      	return data;
+	    	}()),
+	    	color : '#6FDB4B'
+	 	 	}]
+		});//$('#rwSpeed').highcharts函数结束	
 		
 		
 		//初始化clinetTable
@@ -904,10 +842,9 @@ $(document).ready(function(){
     	return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
             + label
             + "<br>"
-            + series.percent.toFixed(2) + "\%</div>";
+            + Math.round(series.percent) + "\%</div>";
 	}
 	function volumeTabFormat(volumeName, i){
-		console.log(i);
 	    if (i == 0){
 	      return '<li role="presentation" id ="tabList' + volumeName + '" class ="active"><a href="#tabContent' + volumeName + '" data-toggle="tab">' + volumeName + '</a></li>';
 	    }else {
@@ -917,17 +854,16 @@ $(document).ready(function(){
 	function volumeContentFormat(volumeData, i){
 	    if (i == 0){
 	     	//return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane active">' + contentFirstRow(volumeData) + contentSecondRow(volumeData) + contentThirdRow(volumeData["name"]) + contentForthRow(volumeData["name"]) + '</div>';
-	      	//return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane active">' + contentFirstRow(volumeData) + contentSecondRow(volumeData) + contentThirdRow(volumeData["name"]) + '</div>';
-	      	return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane active">' + contentFirstRow(volumeData) + contentThirdRow(volumeData["name"]) + '</div>';
+	      	return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane active">' + contentFirstRow(volumeData) + contentSecondRow(volumeData) + contentThirdRow(volumeData["name"]) + '</div>';
+	    	
 	    } else {
-	      	//return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane">' + contentFirstRow(volumeData) + contentSecondRow(volumeData) + contentThirdRow(volumeData["name"]) + contentForthRow(volumeData["name"]) + '</div>';
-	      	//return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane">' + contentFirstRow(volumeData) + contentSecondRow(volumeData) + contentThirdRow(volumeData["name"]) + '</div>';	    	
-	      	return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane">' + contentFirstRow(volumeData) + contentThirdRow(volumeData["name"]) + '</div>';
+//	      	return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane">' + contentFirstRow(volumeData) + contentSecondRow(volumeData) + contentThirdRow(volumeData["name"]) + contentForthRow(volumeData["name"]) + '</div>';
+	      	return '<div id="tabContent' + volumeData["name"] + '" class="tab-pane">' + contentFirstRow(volumeData) + contentSecondRow(volumeData) + contentThirdRow(volumeData["name"]) + '</div>';	    	
 	    }
 	}
 
   	function contentFirstRow(volumeData){
-    	var firstRow = '<div class="row"><div class="col-md-5">' + formatUsage(volumeData["name"]) + '</div>' + '<div class="col-md-7">' + formatOperation(volumeData["name"], volumeData["status"]) + '</div></div>';
+    	var firstRow = '<div class="row"><div class="col-md-3">' + formatUsage(volumeData["name"]) + '</div>' + '<div class="col-md-9">' + formatRWSpeed(volumeData["name"]) + '</div></div>';
     	return firstRow;
   	}
 
@@ -946,21 +882,21 @@ $(document).ready(function(){
   	function formatOperation(volumeName, status){
     	if (status == 'Started'){
       		return '<div class="box box-primary"><div class="box-header">'
-      			+'<i class="fa fa-bar-chart-o"></i><h3 class="box-title">存储卷操作</h3></div><div class="box-body table-responsive no-padding"  style="color: black;height: 170px">'
+      			+'<i class="fa fa-bar-chart-o"></i><h3 class="box-title">存储卷操作</h3></div><div class="box-body table-responsive no-padding"  style="color: black;height: 158px">'
   				+'<div class="row" style="text-align: center;margin-top: 39px;width: 100%;margin-left:-6px">'
-  				+'<button class="btn btn-app btn-bigger" id="' + volumeName +'Start" disabled><i class="fa fa-play"></i> 启动</button>'
-  				+'<button class="btn btn-app btn-bigger" id="' + volumeName + 'Restart"><i class="fa fa-repeat"></i> 重启</button>'
-  				+'<button class="btn btn-app btn-bigger" id="' + volumeName + 'Stop"><i class="fa fa-pause"></i> 停止</button>'
-  				+'<button class="btn btn-app btn-danger btn-bigger" id="' + volumeName + 'remove" data-toggle="modal" data-target="#removeConfirmM" disabled><i class="fa fa-remove"></i> 删除</button>'
+  				+'<button class="btn btn-app" id="' + volumeName +'Start" disabled><i class="fa fa-play"></i> 启动</button>'
+  				+'<button class="btn btn-app" id="' + volumeName + 'Restart"><i class="fa fa-repeat"></i> 重启</button>'
+  				+'<button class="btn btn-app" id="' + volumeName + 'Stop"><i class="fa fa-pause"></i> 停止</button>'
+  				+'<button class="btn btn-app btn-danger" id="' + volumeName + 'remove" data-toggle="modal" data-target="#removeConfirmM" disabled><i class="fa fa-remove"></i> 删除</button>'
   				+'</div></div></div>';
     	} else {
 		    return '<div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">存储卷操作'
-			    +'</h3></div><div class="box-body table-responsive no-padding" style="color: black;height: 170px">'
+			    +'</h3></div><div class="box-body table-responsive no-padding" style="color: black;height: 158px">'
 			    +'<div class="row" style="text-align: center;margin-top: 39px;width: 100%;margin-left:-6px">'
-			    +'<button class="btn btn-app btn-bigger" id="' + volumeName +'Start"><i class="fa fa-play"></i> 启动</button>'
-			    +'<button class="btn btn-app btn-bigger" id="' + volumeName + 'Restart" disabled><i class="fa fa-repeat"></i> 重启</button>'
-			    +'<button class="btn btn-app btn-bigger" id="' + volumeName + 'Stop" disabled><i class="fa fa-pause"></i> 停止</button>'
-			    +'<button class="btn btn-app btn-danger btn-bigger" id="' + volumeName + 'remove" data-toggle="modal" data-target="#removeConfirmM"><i class="fa fa-remove"></i> 删除</button>'
+			    +'<button class="btn btn-app" id="' + volumeName +'Start"><i class="fa fa-play"></i> 启动</button>'
+			    +'<button class="btn btn-app" id="' + volumeName + 'Restart" disabled><i class="fa fa-repeat"></i> 重启</button>'
+			    +'<button class="btn btn-app" id="' + volumeName + 'Stop" disabled><i class="fa fa-pause"></i> 停止</button>'
+			    +'<button class="btn btn-app btn-danger" id="' + volumeName + 'remove" data-toggle="modal" data-target="#removeConfirmM"><i class="fa fa-remove"></i> 删除</button>'
 			    +'</div></div></div>';
     	}
   	}

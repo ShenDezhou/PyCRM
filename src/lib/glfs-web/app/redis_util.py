@@ -25,7 +25,6 @@ CLUSTER_DISKS = 'cluster:disks'
 CLUSTER_LIST = 'cluster:list'
 CLUSTER_RESOURCE = 'cluster:resource'
 
-CLUSTER_DEVICE = 'cluster:devices'
 # list object
 MEMORY_USAGE_PREFIX = 'memory_usage:'  # memory_usage:192.168.1.150
 CPU_USAGE_PREFIX = 'cpu_usage:'  # cpu_usage:192.168.1.150:1 cpu_usage:192.168.1.150:2 etc
@@ -42,17 +41,17 @@ NETWORKIO_NAME_OUT_INIT = 'network_machine_out_init:'
 NETWORKIO_IN_SUM_INIT = 'networkio_in_sum_init:'
 NETWORKIO_OUT_SUM_INIT = 'networkio_out_sum_init:'
 
-TIMESTAMP = 'timestamp:'
 
 # Redis Value
 VOLUME_STATUS_STARTED = 'Started'
 VOLUME_STATUS_STOPPED = 'Stopped'
 VOLUME_CAPACITY = 'capacity'
 VOLUME_USAGE = 'usage'
-TIME = "time"
+TIMESTAMP = "timestamp"
+TEST = "test"
 DATA = "data"
-VIEW_MONITOR="VIEW_MONITOR"
-MONITOR_VIEW="MONITOR_VIEW"
+TIME = "time"
+
 
 # This class is wrapper for a redis instance
 class Redis:
@@ -121,24 +120,13 @@ class Redis:
     # append to list
     @staticmethod
     def lpush(name, key):
-        Redis.r.lpush(name, key)
+        Redis.r.rpush(name, key)
+
+    @staticmethod
+    def lrange(name, start, end):
+        return Redis.r.lrange(name, start, end)
+
 
     @staticmethod
     def lpop(name):
         return Redis.r.lpop(name)
-
-    @staticmethod
-    def blpop(name):
-        return Redis.r.blpop(name)
-
-    @staticmethod
-    def rpush(name, key):
-        Redis.r.rpush(name, key)
-
-    @staticmethod
-    def rpop(name):
-        return Redis.r.rpop(name)
-
-
-
-    

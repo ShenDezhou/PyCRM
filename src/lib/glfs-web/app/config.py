@@ -1,8 +1,8 @@
 # local hostname
-CONFIG_LOCAL_HOST = 'tstore00'
+CONFIG_LOCAL_HOST = 'tfs01'
 #CONFIG_LOCAL_HOST ='node150'
 
-CONFIG_LOCAL_IP = '192.168.50.10'
+CONFIG_LOCAL_IP = '192.168.50.11'
 
 # runtime log file location
 CONFIG_LOG_LOCATION = '/var/log/gf-management.log'
@@ -22,4 +22,4 @@ CONFIG_MONITOR_LIST_LEN = 20
 CONFIG_PERF_LIST_LEN = 20
 
 # redundancy ratio
-CONFIG_REDUNDANCY_RATIO = [50]
+CONFIG_REDUNDANCY_RATIO = [25]

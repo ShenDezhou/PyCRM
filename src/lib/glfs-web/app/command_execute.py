@@ -13,7 +13,6 @@ VOLUME_STATUS = 'gluster volume status '
 DETAIL = ' detail'
 VOLUME_INFO = 'gluster volume info'
 POOL_LIST = 'gluster pool list'
-PING = 'ping -c 1 -q -w 1 '
 
 
 # execute the command in which we have to send 'y' to confirm operation.
@@ -69,8 +68,6 @@ def generate_key_value_pair(dict, line):
         line = line.split(': ')
         if len(line) > 1 and line[1] != '':
             dict[line[0].strip()] = line[1].strip()
-            #debug
-
 
 
 def execute_pool_list():
@@ -86,16 +83,14 @@ def execute_pool_list():
             host = host.split('\t')
             host_dict['hostname'] = host[1].rstrip()
             # replace localhost with specific hostname
-            #if host_dict['hostname'] == 'tfs06':
-            #    continue
+            if host_dict['hostname'] == 'tfs06':
+                continue
             if not find_host and (host_dict['hostname'] == 'localhost'):
                 host_dict['hostname'] = CONFIG_LOCAL_HOST
                 find_host = True
             host_dict['status'] = host[2].strip()
-            if host_dict['status'] == "Connected":
-                success, out = local_executor.execute(PING+host_dict['hostname'] , False)
-                if len(out) != 5 or out[3].find('1 received') == -1:
-                    host_dict['status'] = "Disconnected"
+            if host_dict['status'] == "Disconnected":
+                continue
             host_list.append(host_dict)
         return True, host_list
     else:
@@ -123,8 +118,8 @@ def execute_pool_list():
 
 def execute_volume_status(volume_name='all'):
     success, datas = local_executor.execute(VOLUME_STATUS + volume_name + DETAIL, False)
+    # print datas
     if success:
-        # datas = datas.split('\n')
         volume_list = list()
         volume_stop_name = list()
         i = 0
@@ -134,7 +129,7 @@ def execute_volume_status(volume_name='all'):
                 # if datas[i] == ' \n':
                 if 'Status of volume' in datas[start]:
                     volume = volume_status_parse_volume(datas, start, i)
-                    # print volume
+                    #print volume
                     volume_list.append(volume)
                 elif 'not' in datas[start]:
                     if 'Volume detail does not exist' in datas[start]:

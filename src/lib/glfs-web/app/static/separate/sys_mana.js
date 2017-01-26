@@ -57,6 +57,9 @@ $(document).ready(function(){
       	$.ajaxSetup({async:false});
     	$.getJSON(url, null, function (data) {
       		serverStatusInfomat = data;
+//			var originData = data["write_reads"][0]["test"][0];
+//			var JsonData = eval('(' + originData + ')'); 
+//			console.log(JsonData);
     	});
     	return serverStatusInfomat;
 	}
