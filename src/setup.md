@@ -1,6 +1,6 @@
 一键安装:
 sudo apt-get update
-sudo apt-get install nginx python-pip python-dev build-essential git python-mysqldb unrar openjdk-8-jdk redis-server mysql-server mysql-client sshpass subversion
+sudo apt-get install python-pip python-dev build-essential git python-mysqldb unrar openjdk-8-jdk redis-server mysql-server  mysql-client sshpass  
 sudo pip install Cython
 sudo pip install openpyxl xlrd xlutils xlwt ujson qrcode short_url torndb pycrypto redis rarfile supervisor -Iv https://github.com/tornadoweb/tornado/archive/v4.4.3.tar.gz git+https://github.com/mayflaver/AsyncTorndb.git git+https://github.com/equeny/tornadomail.git git+https://github.com/kivy/pyjnius.git
 sudo pip install numpy requests pinyin urllib datetime pillow wechatpy wechat_sdk selenium bs4
@@ -8,6 +8,7 @@ curl -O https://raw.githubusercontent.com/ShenDezhou/PyCRM/master/sql/marsapp.sq
 mysql -uroot -pwwwsto < marsapp.sql
 set GLOBAL sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 set GLOBAL max_connections = 1000
+service mysql restart
 mkdir /var/local/marsapp
 svn export https://github.com/ShenDezhou/PyCRM.git/trunk/src
 ln -s /var/local/marsapp /search
