@@ -387,4 +387,14 @@ http {
 * * * * 1 truncate --size 0 /var/log/nginx/error.log
 * * * * 1 truncate --size 0 /var/log/nginx/access.log
 
+9												
+8	production			pillow	wechatpy	wechat_sdk	selenium	bs4	pinyin	numpy	requests	urllib
+7	application			openpyxl	xlrd	xlutils	xlwr	ujson	qrcode	short_url		
+6	project management			git	python-pip	sshpass	tornadomail					
+5	webserver			nginx	supervisor							
+4	language			openjdk-8-jdk	python-dev	build-essential	python-mysqldb	redis	tornado	asynctorndb	pyjnius	Cython
+3	database			redis-server	mysql-server	mysql-client	torndb					
+2	filesystem			ext4								
+1	compress			unrar	rarfile							
+0	os			ubuntu 16								
 
