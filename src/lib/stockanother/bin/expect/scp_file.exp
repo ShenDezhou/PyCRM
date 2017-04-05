@@ -1,0 +1,17 @@
+#!/usr/bin/expect
+
+set srcFile [ lindex $argv 0 ]
+set destPath [ lindex $argv 1 ]
+set password [ lindex $argv 2 ]
+set timeout 10
+
+
+spawn scp $srcFile $destPath
+expect {
+	"*yes/no" { send "yes\r"; exp_continue}
+	"*password:" { send "$password\r"; }
+}
+
+set timeout 300
+expect eof
+exit
