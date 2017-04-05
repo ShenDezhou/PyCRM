@@ -1,0 +1,472 @@
+﻿<!DOCTYPE html>
+<html class=" switch-vers-default" lang="zh-cn">
+  <head>
+        <meta charset="utf-8">
+        <title>美元汇率波动因素初探</title>
+        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://d3js.org/d3-array.v1.min.js"></script>
+    <style type="text/css">
+    </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+   
+   var priceset=[];
+   var dateset=[];
+   var numberset=[];
+   var averset=[];
+   var general=[];
+   var deviation=[];
+   var deviation_1p=[];
+   var deviation_1n=[];
+   var deviation_2p=[];
+   var deviation_2n=[];
+   var over_data=[];
+   var over_price=[];
+   var over_number=[];
+   var over=[];
+   var zip=[];
+   var zip4=[];
+   var nonagri_beforeset=[];
+   var nonagri_dateset=[];
+   var nonagri_predictset=[];
+   var nonagri_realset=[];
+   var nonagri_zip=[];
+   var sum ,aver,k;
+   var index=10,x0;
+   var l=0;
+   var i3=i5=i10=0;
+   var rate3=[];
+   var rate5=[];
+   var rate10=[];
+   var cg3=cg5=cg10=0;
+   var cgrate3=0;
+   var cgrate5=0;
+   var cgrate10=0;
+   var pos=[];
+   var xSdateset=[];
+   var xSnonagri_dateset=[];
+   var u=q=0;
+   var ucgrate10=ucg10=0;
+   var urate10=[];
+   var rate31=[];
+   var cg31=0;
+   var cgrate31=0;
+   var i31=0;
+   var rate101=[];
+   var cg101=0;
+   var cgrate101=0;
+   var i101=0;
+   
+   
+
+
+
+   var parseDate = d3.time.format("%Y-%m-%d").parse;
+
+
+       d3.csv("rate7.csv",function(error,data){
+    if(error){
+        console.log(error);
+    }else{
+
+        for(var i=0;i<data.length;i++){
+            priceset.push(parseFloat(data[i].price));
+            dateset.push(parseDate(data[i].date));
+            numberset.push(+data[i].number);
+
+         }}
+
+         
+       zip = d3.zip(dateset,priceset,numberset);
+
+       for(i=0;i<(zip.length)-22;i++){
+          for (var j=1;j<23;j++){
+             var k=i+j;
+             general[j-1]=priceset[k]}
+          averset[i]=d3.mean(general);
+          deviation[i]=d3.deviation(general);
+          deviation_1p[i]=averset[i]+deviation[i];
+          deviation_1n[i]=averset[i]-deviation[i];
+          deviation_2p[i]=averset[i]+deviation[i]+deviation[i];
+          deviation_2n[i]=averset[i]-deviation[i]-deviation[i];
+          }
+        
+        var zip1 = d3.zip(dateset,averset);
+        var zip2 = d3.zip(dateset,deviation_1p,deviation_1n);
+        var zip3 = d3.zip(dateset,deviation_2p,deviation_2n);
+
+
+
+       
+       d3.csv("non-agri.csv",function(error,nonagri){
+        if(error){
+        console.log(error);
+        }else{
+
+        for(var m=0;m<nonagri.length;m++){
+            nonagri_realset.push(parseFloat(nonagri[m].real));
+            nonagri_dateset.push(parseDate(nonagri[m].date));
+            nonagri_beforeset.push(parseFloat(nonagri[m].before));
+            nonagri_predictset.push(parseFloat(nonagri[m].predict));
+
+         }}
+
+       nonagri_zip = d3.zip(nonagri_dateset,nonagri_beforeset,nonagri_predictset,nonagri_realset);
+
+
+
+
+
+
+
+
+        var width = 1900;
+        var height = 1000;
+        var svg = d3.select("body").append("svg")
+                       .attr("width",width)
+                       .attr("height",height);
+
+
+        var padding = {left: 80, right: 50, top: 20, bottom: 20};
+
+        var height_up = 600;
+  
+        var height_down = 400;
+
+        var interval = 20 ;
+
+
+            
+        var xScale = d3.time.scale().domain(d3.extent(dateset)).range([0, width - padding.left - padding.right-180]);
+
+        var yScale = d3.scale.linear().domain([6, 8.4]).range([height - padding.top-padding.bottom,0 ]);
+        
+        var Scale0 = d3.scale.linear().domain([d3.max(numberset),0]).range([0, width - padding.left - padding.right-180]);
+
+        var y1Scale = d3.scale.linear().domain(d3.extent(nonagri_predictset)).range([height - padding.top-padding.bottom,0 ]);
+
+
+
+
+
+        var xAxis = d3.svg.axis().scale(xScale).orient("bottom").tickFormat(d3.time.format("%Y%m%d")).ticks(23);
+
+        var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(20);
+   
+        var y1Axis = d3.svg.axis().scale(y1Scale).orient("right").ticks(20);
+
+        var zoom = d3.behavior.zoom()  
+                     .x(xScale)
+                     .y(yScale)
+                     .scaleExtent([1, 100])  
+                     .on("zoom", function(d){
+                         d3.select(this).attr("transform","translate("+ d3.event.translate+")"+"scale("+d3.event.scale+")");  
+                                            } );  
+
+        var g = svg.append("g").call(zoom);
+        
+        var ng = svg.append("ng")
+
+        g.append("g").attr("class", "axis").attr("transform", "translate(" + padding.left + "," + (height - padding.bottom) + ")").call(xAxis);
+
+        g.append("g").attr("class", "axis").attr("transform", "translate(" + padding.left + "," + padding.top + ")").call(yAxis);
+ 
+        g.append("g").attr("class", "axis").attr("transform", "translate(" +  (width - padding.right-180) + "," + padding.top + ")").call(y1Axis);
+
+         
+        var linePath=d3.svg.line().x(function(d) { return xScale(d[0])}).y(function(d){ return yScale(d[1])}).interpolate("monotone");
+
+        var linePath1=d3.svg.line().x(function(d) { return xScale(d[0])}).y(function(d){ return y1Scale(d[3])}).interpolate("monotone");
+
+        var linePath2=d3.svg.line().x(function(d) { return xScale(d[0])}).y(function(d){ return y1Scale(d[2])}).interpolate("monotone");
+
+        g.append("path").attr("d",linePath(zip)).attr("stroke","red").attr("fill","none").attr("transform","translate("+padding.left+","+ padding.top +")");
+
+
+
+        g.append("path").attr("d",linePath1(nonagri_zip)).attr("stroke","brown").attr("fill","none").attr("transform","translate("+padding.left+","+ padding.top +")");
+
+        g.append("path").attr("d",linePath2(nonagri_zip)).attr("stroke","gold").attr("fill","none").attr("transform","translate("+padding.left+","+ padding.top +")");
+
+
+
+
+        var averPath=d3.svg.line().x(function(d) { return xScale(d[0])}).y(function(d){ return yScale(d[1])}).defined(function(d,i) {return i<2979;}).interpolate("monotone");
+         
+        
+        g.selectAll('circle')
+                   .data(zip)
+                   .enter()
+                   .append('circle')
+                   .attr('cx', function(d) {
+                          return xScale(d[0]);
+                     })
+                  .attr('cy', function(d) {
+                        return yScale(d[1]);
+                     })
+                  .attr('r', 0.5).attr("fill","blue").attr("transform","translate("+padding.left+","+padding.top+")");
+
+  
+      for(i=0;i<2979;i++){
+         if ((priceset[i]>deviation_2p[i])||(priceset[i]<deviation_2n[i])){
+            over_data[l]=dateset[i];
+            over_price[l]=priceset[i];
+            over_number[l]=numberset[i];
+            l++;
+          }}
+    
+       over = d3.zip(over_data,over_price,over_number);
+
+       g.selectAll('circle1')
+                   .data(over)
+                   .enter()
+                   .append('circle')
+                   .attr('cx', function(d) {
+                          return xScale(d[0]);
+                     })
+                  .attr('cy', function(d) {
+                        return yScale(d[1]);
+                     })
+                  .attr('r', 2).attr("fill","black").attr("transform","translate("+padding.left+","+padding.top+")");
+
+             var circle2 = g.selectAll('circle2')
+                   .data(nonagri_zip)
+                   .enter()
+                   .append('circle')
+                   .attr('cx', function(d) {
+                          return xScale(d[0]);
+                     })
+                  .attr('cy', function(d) {
+                        return y1Scale(d[3]);
+                     })
+                  .attr('r', 3)
+                  .attr("fill",function(d){
+                       if ((d[3]>=d[2])&&(d[3]>d[1])){ return "red"}
+                       else if ((d[3]>=d[2])&&(d[3]<d[1] )){ return "orange"}
+                       else if ((d[3] < d[2])&&(d[3] >= d[1] )) { return "blue" }
+                       else { return "green" }})
+                  .attr("transform","translate("+padding.left+","+padding.top+")")
+
+              
+            g.selectAll('text1')
+                   .data(nonagri_zip)
+                   .enter()
+                   .append('text').attr('x', function(d) {
+                          return xScale(d[0]);
+                     })
+                  .attr('y', function(d) {
+                        return y1Scale(d[3]);
+                     }).text ( function(d) { if ((d[3]>=d[2])&&(d[3]>d[1])) { return d[3] ; }}).attr("fill","black").attr("font-size","10px").attr("dx",50).attr("dy",20);
+
+       
+
+       
+      
+
+       var areaPath = d3.svg.area().x(function(d,i){ return xScale(d[0]);}).y1(function(d,i){ return yScale(d[1]);}).y0(function(d,i){ return yScale(d[2]);});
+         
+       g.append("path").attr("d",areaPath(zip2)).attr("stroke","black").attr("stroke-width","0.5px").attr("fill","orange").attr("transform","translate("+padding.left+","+padding.top+")").attr("opacity","0.6");
+
+       g.append("path").attr("d",areaPath(zip3)).attr("stroke","black").attr("stroke-width","0.5px").attr("fill","purple").attr("transform","translate("+padding.left+","+padding.top+")").attr("opacity","0.4");
+
+       g.append("path").attr("d",averPath(zip1)).attr("stroke","green").attr("fill","none").attr("transform","translate("+padding.left+","+padding.top+")");
+
+
+        var focusCircle = g.append("g").attr("class","focusCircle").style("display","none");
+        focusCircle.append("circle").attr("r",2);
+        
+        
+
+        var focusLine = g.append("g").attr("class","focusLine").style("display","none");
+        var vline = focusLine.append("line");
+        var hline = focusLine.append("line");
+
+        g.append("rect").attr("class","overlay").attr("fill","none").attr("pointer-events","all")
+         .attr("x",padding.left).attr("y",padding.top).attr("width",width - padding.left - padding.right).attr("height",height - padding.top - padding.bottom)
+         .on("mouseover",function(){ focusCircle.style("display",null);focusLine.style("display",null);})
+         .on("mouseout",function(){  focusCircle.style("display","none");focusLine.style("display","none");})
+         .on("mousemove",function(){ 
+              var mouseX = d3.mouse(this)[0]-padding.left;
+              var mouseY = d3.mouse(this)[1]-padding.top;
+              x0 = Scale0.invert(mouseX);
+              var y0 = yScale.invert(mouseY);
+              x0 = Math.round(x0);
+              index = d3.bisect(numberset, x0);
+
+              d = zip[index];
+        
+              
+
+
+              var focusX = xScale(d[0])+padding.left;
+              var focusY = yScale(d[1])+padding.top;
+               
+              focusCircle.attr("transform","translate("+ focusX +","+ focusY +")")
+                         .attr("r",2.5);
+
+             
+
+
+
+             focusCircle.append("text").attr("dx",10).attr("dy","1em")
+             focusCircle.select("text").text("日期 "+data[index].date +" 价格 "+d[1]);
+            
+             
+             
+
+
+              vline.attr("x1",focusX).attr("y1",focusY).attr("x2",focusX).attr("y2",height-padding.bottom).attr("stroke","black").attr("stroke-width","0.5px").attr("fill","none");
+              hline.attr("x1",focusX).attr("y1",focusY).attr("x2",padding.left).attr("y2",focusY).attr("stroke","black").attr("stroke-width","0.5px").attr("fill","none");
+               });
+
+            
+             g.append("text").attr("fill","black").attr("x",800).attr("y",100).text("美元汇率与非农数据图").attr("font-size","26px")
+             g.append("text").attr("fill","black").attr("x",300).attr("y",0).text("2005-2016年美元对人民币比价走势").attr("font-size","23px").attr("transform","rotate(50)");
+             g.append("text").attr("fill","black").attr("x",1100).attr("y",450).text("2009-2016年美国非农业就业人数").attr("font-size","23px")
+
+
+
+ 
+             for(i=0;i<averset.length;i++)
+             { 
+                 if ( priceset[i]>= deviation_2p[i] ){
+
+                     rate31[i31]=(priceset[i-10]-priceset[i])/priceset[i];   cg31 = cg31 + rate31[i31];  i31++;  
+
+                     if ( priceset[i] < priceset[i-3] ){
+                         rate3[i3]=(priceset[i-3]-priceset[i])/priceset[i];   cg3 = cg3 + rate3[i3];  i3++;  }
+                     if (priceset[i] < priceset[i-5] ) {
+                         rate5[i5]=(priceset[i-5]-priceset[i])/priceset[i];   cg5 = cg5 + rate5[i5];  i5++;}
+                     if (priceset[i] < priceset[i-10] ) {
+                         rate10[i10]=(priceset[i-10]-priceset[i])/priceset[i];   cg10 = cg10 + rate10[i10];  i10++;}
+                 }
+                  if  ( priceset[i]<= deviation_2n[i] ){
+
+                     rate31[i31]=(priceset[i]-priceset[i-10])/priceset[i];   cg31 = cg31 + rate31[i31];  i31++;  
+
+                     if ( priceset[i] > priceset[i-3] ){
+                         rate3[i3]=(priceset[i]-priceset[i-3])/priceset[i];  cg3 = cg3 + rate3[i3];  i3++; }
+                     if (priceset[i] > priceset[i-5] ) {
+                         rate5[i5]=(priceset[i]-priceset[i-5])/priceset[i];   cg5 = cg5 + rate5[i5];  i5++;;}
+                     if (priceset[i] > priceset[i-10] ) {
+                         rate10[i10]=(priceset[i]-priceset[i-10])/priceset[i];   cg10 = cg10 + rate10[i10];  i10++;}}
+             }
+              
+                cgrate3=cg3/i3;
+                cgrate31=cg31/i31;
+                cgrate5=cg5/i3;
+                cgrate10=cg10/i10;
+
+
+               var bisect = d3.bisector(function(d) { return d[0]; }).left;
+
+               for( i=0;i< dateset.length ; i++) {
+                  xSdateset[i] = xScale(dateset[i]);
+                 }           
+               
+               for( i=0;i< nonagri_dateset.length ; i++) {
+                  xSnonagri_dateset[i] = xScale(nonagri_dateset[i]);
+                      for( j=0; j< dateset.length ; j++) {
+                      if(( xSnonagri_dateset[i] <= xSdateset[j] )&&( xSnonagri_dateset[i] > xSdateset[j+1] ) ){
+                      pos[i]=j;
+                }}}
+
+              for( i=0;i< nonagri_dateset.length ; i++) {
+                    if ((nonagri_realset[i]>=nonagri_beforeset[i])&&(nonagri_realset[i]>=nonagri_predictset[i])){
+                        
+                         for(j=1;j<=3;j++){
+                           if( priceset[pos[i]-j]>deviation_2p[pos[i]-j] ){
+                                q++; 
+
+                                rate101[i101]=(priceset[i-10]-priceset[i])/priceset[i];   cg101 = cg101 + rate101[i101];  i101++;  
+
+                                if ( priceset[pos[i]-j] < priceset[pos[i]-j-10] )  {
+                                 urate10[u]=(priceset[pos[i]-j-10]-priceset[pos[i]-j])/priceset[pos[i]-j];   ucg10 = ucg10 + urate10[u];  u++;  }}}}
+
+                    else if ((nonagri_realset[i]< nonagri_beforeset[i])&&(nonagri_realset[i] < nonagri_predictset[i])){
+                        
+                         for(j=1;j<=3;j++){
+                           if( priceset[pos[i]-j] < deviation_2n[pos[i]-j] ){
+                                q++;
+                                rate101[i101]=(priceset[i]-priceset[i-10])/priceset[i];   cg101 = cg101 + rate101[i101];  i101++;  
+                                if ( priceset[pos[i]-j] > priceset[pos[i]-j-10] )  {
+                                 urate10[u]=(priceset[pos[i]-j]-priceset[pos[i]-j-10])/priceset[pos[i]-j];   ucg10 = ucg10 + urate10[u];  u++;  }}}}}
+
+                  
+
+                    ucgrate10=ucg10/u;
+                    cgrate101=cg101/i101;
+
+
+                       
+
+                    g.append("text").attr("fill","black").attr("x",200).attr("y",750).text("比价图图例").attr("font-size","14px")
+
+                    g.append("circle").attr("fill","black").attr("cx",180).attr("cy",770).attr("r",3)
+                    g.append("text").attr("fill","black").attr("x",220).attr("y",775).attr("font-size","14px").text("越过两倍标准方差线的汇率")
+
+                    g.append("circle").attr("fill","blue").attr("cx",180).attr("cy",785).attr("r",3)
+                    g.append("text").attr("fill","black").attr("x",220).attr("y",790).attr("font-size","14px").text("每日汇率")
+
+                    g.append("line").attr("stroke","green").attr("x1",175).attr("y1",805).attr("x2",185).attr("y2",805)
+                    g.append("text").attr("fill","black").attr("x",220).attr("y",810).attr("font-size","14px").text("22日均线")
+
+                    g.append("line").attr("stroke","red").attr("x1",175).attr("y1",825).attr("x2",185).attr("y2",825)
+                    g.append("text").attr("fill","black").attr("x",220).attr("y",830).attr("font-size","14px").text("汇率线")
+
+                    g.append("rect").attr("fill","orange").attr("x",175).attr("y",845).attr("width",10).attr("height",10)
+                    g.append("text").attr("fill","black").attr("x",220).attr("y",855).attr("font-size","14px").text("一倍标准方差范围")
+
+                    g.append("rect").attr("fill","purple").attr("x",175).attr("y",865).attr("width",10).attr("height",10)
+                    g.append("text").attr("fill","black").attr("x",220).attr("y",875).attr("font-size","14px").text("二倍标准方差范围")
+
+
+                    
+                    g.append("text").attr("fill","black").attr("x",1500).attr("y",470).text("非农就业人数图例").attr("font-size","14px")
+
+                    g.append("circle").attr("fill","red").attr("cx",1470).attr("cy",495).attr("r",3)
+                    g.append("text").attr("fill","black").attr("x",1510).attr("y",500).attr("font-size","14px").text("超过前值和预期的数据")   
+
+                    g.append("circle").attr("fill","orange").attr("cx",1470).attr("cy",510).attr("r",3)
+                    g.append("text").attr("fill","black").attr("x",1510).attr("y",515).attr("font-size","14px").text("高于预期，低于前值的数据")   
+
+                    g.append("circle").attr("fill","blue").attr("cx",1470).attr("cy",525).attr("r",3)
+                    g.append("text").attr("fill","black").attr("x",1510).attr("y",530).attr("font-size","14px").text("低于预期，高于前值的数据") 
+
+                    g.append("circle").attr("fill","green").attr("cx",1470).attr("cy",540).attr("r",3)
+                    g.append("text").attr("fill","black").attr("x",1510).attr("y",545).attr("font-size","14px").text("低于前值和预期的数据") 
+
+                    g.append("line").attr("stroke","gold").attr("x1",1465).attr("y1",555).attr("x2",1475).attr("y2",555)
+                    g.append("text").attr("fill","black").attr("x",1510).attr("y",560).attr("font-size","14px").text("预测数据线")
+
+                    g.append("line").attr("stroke","brown").attr("x1",1465).attr("y1",570).attr("x2",1475).attr("y2",570)
+                    g.append("text").attr("fill","black").attr("x",1510).attr("y",575).attr("font-size","14px").text("实际数据线")
+
+
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(95)).attr("y1",20).attr("x2",Scale0(95)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(356)).attr("y1",20).attr("x2",Scale0(356)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(617)).attr("y1",20).attr("x2",Scale0(617)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(878)).attr("y1",20).attr("x2",Scale0(878)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(1139)).attr("y1",20).attr("x2",Scale0(1139)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(1399)).attr("y1",20).attr("x2",Scale0(1399)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(1660)).attr("y1",20).attr("x2",Scale0(1660)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(1921)).attr("y1",20).attr("x2",Scale0(1921)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(2183)).attr("y1",20).attr("x2",Scale0(2183)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(2444)).attr("y1",20).attr("x2",Scale0(2444)).attr("y2",980).attr("stroke-width","0.3px")
+                    g.append("line").attr("stroke","black").attr("x1",Scale0(2714)).attr("y1",20).attr("x2",Scale0(2714)).attr("y2",980).attr("stroke-width","0.3px")
+
+                    g.append("text").attr("fill","black").attr("x",1710).attr("y",30).attr("font-size","14px").text("单位：万人")   
+                        
+             
+
+
+
+
+
+
+})})
+</script>
+
+</body>
+</html>

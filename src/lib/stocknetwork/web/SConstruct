@@ -1,0 +1,3 @@
+env = Environment( CXX = 'ccache g++' )
+Program('webserver', ['main.cpp'], LIBS=['ACE'], LIBPATH='.', CXXFLAGS=['-std=c++11'])
+Program('webtest', ['boost_main.cpp'], LIBS=['ACE','boost_unit_test_framework'], LIBPATH='.', CXXFLAGS=['-std=c++11'])
