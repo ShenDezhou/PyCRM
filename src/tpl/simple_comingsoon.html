@@ -12,11 +12,7 @@
         </div>
     </div>
     <div class="coming-soon-content">
-        {% if handler.config['wechat_corp_auth']=="1" or not handler.config['wechat_webid'] %}
         <iframe src="/qr_corplogin" seamless frameborder=0 height=410px></iframe>
-        {% else %}
-        <iframe src="/login" seamless frameborder=0 height=500px></iframe>
-        {% end %}
         <div class="desc">
             如果您有任何问题，请用以下邮件地址告诉我们。
         </div>
@@ -42,6 +38,5 @@
 
 <div id="footer" class="footer">
     版权所有 © {{ handler.config['app_name'] }} 未经许可不得复制、转载或者摘编，违者必究
-
     备案/许可证编号：{{ handler.config['app_icp'] }}
 </div>

@@ -60,12 +60,7 @@
                             </small>
                             
                         </div>
-                        <div class="info">
-                           <small >
-                                <i class="fa fa-circle text-warning"></i> 
-                                {{user['org']['org_name']}}
-                            </small>
-                        </div>
+                        
                     </li>
                 </ul>
                 <!-- end sidebar user -->
@@ -179,7 +174,7 @@ $(function(){
 $(function(){
     $('.admin-btn-export').click(function(){
         if(isIE(7) || isIE(8) || isIE(9) || isIE(10) || isIE(11)){
-            if(confirm("导出功能不能支持本浏览器，请改用360、火狐、谷歌Chrome等浏览器下载。点击确定转到浏览器下载页面，点击取消留在本页。")){
+            if(confirm("导出功能不能支持本浏览器，请改用360、火狐、谷歌Chrome等浏览器下载。点击确定转到浏览器下载页面，点击取消留在本页�?)){
                 location.href = '/old_msie';
             }
             return;

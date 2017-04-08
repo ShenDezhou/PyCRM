@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-  
-
 import sys
-
 DEBUG = True
 
 if 'tax' in sys.argv[0] or 'tax.queue' in ','.join(sys.argv):
@@ -25,22 +23,22 @@ if DEBUG:
 
     settings["apps"] = [
         {
-            # 应用唯一号
-            "app_id": "172.16.168.136",
-            # mysql 主服务器IP
+            # åºç¨å¯ä¸å·
+            "app_id": "wwwsto.com",
+            # mysql ä¸»æå¡å¨IP
             "mysql_host": '127.0.0.1',
-            # mysql 从服务器IP
+            # mysql ä»æå¡å¨IP
             "mysql_host_slaves": ['127.0.0.1'], 
-            # mysql 端口号
+            # mysql ç«¯å£å·
             "mysql_port": 3306,
-            # mysql 用户名
+            # mysql ç¨æ·å
             "mysql_user": 'root',
-            # mysql 密码
-            "mysql_password": "asiencredit",
-            # mysql 数据库名
-            "mysql_database": "marsapp",
+            # mysql å¯ç 
+            "mysql_password": "wwwsto",
+            # mysql æ°æ®åºå
+            "mysql_database": "fudan_it",
             "mysql_max_conn": 60,
-            # mysql 字符编码
+            # mysql å­ç¬¦ç¼ç 
             "mysql_charset": "utf8",
         }
     ]

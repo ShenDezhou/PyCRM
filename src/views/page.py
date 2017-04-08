@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-  
+# -*- coding: utf-8 -*-  
 from lib.tornadotools.route import Route
 from _base import BasePage, MgrPage, MgrHandler
 from config import settings
@@ -53,12 +53,6 @@ def track_visit(self, person_id, visit_target):
 class _(BasePage):
     def get(self):
         self.redirect('/page/comingsoon')
-
-#微信服务号回调
-@Route(r"/MP_verify_y947glvSRFN8krXb.txt")
-class _(BasePage):
-    def get(self):
-        self.write('y947glvSRFN8krXb')
 
 class CommonPage(BasePage):
     @coroutine
@@ -1042,7 +1036,7 @@ class _(BasePage):
         body = json.loads(resp.body)
         logging.info(body)
         openid = body['openid']
-        unionid = body.get('unionid')
+       # unionid = body.get('unionid')
 
         accesstoken = body['access_token']
 
@@ -1057,14 +1051,14 @@ class _(BasePage):
         resp = yield client.fetch(request)
         body = json.loads(resp.body)
         #判断有没有unionid,只有服务号用服务号登录
-        if unionid:
+        if openid:
             # 是否已经授权过
-            res = yield self.fetchone_db("""select * from t_person where auth_id=%s""", unionid)
+            res = yield self.fetchone_db("""select * from t_person where auth_id=%s""", openid)
             if not res:
                 # 尚未授权过，将用户信息插入授权用户表,同时跳到绑定会员页面
                 args = {
                     'person_id': generate_uuid(),
-                    'auth_id': unionid,
+                    'auth_id': openid,
                     'open_id': openid,
                     'nick_name': body['nickname'],
                     'head_img_url': body['headimgurl'],
@@ -1077,13 +1071,13 @@ class _(BasePage):
                 yield self.insert_db_by_obj('t_person', args)
             else:
                 yield self.update_db("""update t_person 
-                                        set open_id = %s, auth_date = %s,
+                                        set auth_id = %s, auth_date = %s,
                                         nick_name = %s, head_img_url = %s, province = %s, country = %s
-                                        where auth_id = %s""",
+                                        where open_id = %s""",
                                      openid, get_now_str(),
                                      body['nickname'], body['headimgurl'], body['province'], body['country'],
-                                     unionid)
-            yield auth.login_user(self, union_id=unionid)
+                                     openid)
+            yield auth.login_user(self, open_id=openid)
         else:
             # 是否已经授权过
             res = yield self.fetchone_db("""select * from t_person where open_id=%s""", openid)
@@ -2560,8 +2554,8 @@ class MgrMainPage(BasePage):
                 ctx['latest_events'] = yield self.query_db("""select id, title, pictures, published, 
                                                                     activity_start_time, activity_end_time,
                                                                     activity_sponsor,activity_undertake,activity_place,general_place,
-                                                                    DATE_FORMAT(activity_start_time, '%%Y年%%m月%%d日') as activity_start_date,
-                                                                    DATE_FORMAT(activity_end_time, '%%Y年%%m月%%d日') as activity_end_date,
+                                                                    DATE_FORMAT(activity_start_time, '%%Y-%%m-%%d') as activity_start_date,
+                                                                    DATE_FORMAT(activity_end_time, '%%Y-%%m-%%d') as activity_end_date,
                                                                     DATE_FORMAT(activity_start_time, '%%H:%%i') as activity_start_hm,
                                                                     DATE_FORMAT(activity_end_time, '%%H:%%i') as activity_end_hm,activity_online_offline
                                                                     from 

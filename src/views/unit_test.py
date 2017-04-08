@@ -1,9 +1,4 @@
-#!/usr/bin/env python
 #-*- coding:utf-8 -*-
-#python 2.7.10
-
-__author__ = 'AJ Kipper'
-
 from lib.tornadotools.route import Route
 from _base import MgrHandler, genenate_file_key
 from page import get_survey

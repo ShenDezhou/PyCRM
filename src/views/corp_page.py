@@ -253,7 +253,7 @@ class _(BasePage):
             self.set_cache("key_code", dump_json(cache_code), 60)
         
         ctx = {}  
-        ctx['url_for_qr'] = "/rest/qrcode?link=/verify_corplogin?key_code=%s" % cache_code['key_code']
+        ctx['url_for_qr'] = "/rest/qrcode?link=%sverify_corplogin?key_code=%s" % (self.config['site_host_url'],cache_code['key_code'])
         entry = 'corplogin'
         page = get_page_by_entry(entry)
         
