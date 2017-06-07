@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-  
 import sys
-DEBUG = True
+DEBUG = False 
 
 if 'tax' in sys.argv[0] or 'tax.queue' in ','.join(sys.argv):
 	print 'Using Tax Config Settings'
@@ -34,7 +34,7 @@ if DEBUG:
             # mysql ç¨æ·å
             "mysql_user": 'root',
             # mysql å¯ç 
-            "mysql_password": "wwwsto",
+            "mysql_password": "Wwwsto@2017",
             # mysql æ°æ®åºå
             "mysql_database": "fudan_it",
             "mysql_max_conn": 60,

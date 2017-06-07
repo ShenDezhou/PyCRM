@@ -10,7 +10,7 @@ settings = {
     "apps": [
         {
             # 应用唯一号
-            "app_id": "app.tsingdata.com",
+            "app_id": "wwwsto.com",
             # mysql 主服务器IP
             "mysql_host": '127.0.0.1',
             # mysql 从服务器IP
@@ -20,48 +20,10 @@ settings = {
             # mysql 用户名
             "mysql_user": 'root',
             # mysql 密码
-            "mysql_password": "marsadmin",
+            "mysql_password": "Wwwsto@2017",
             # mysql 数据库名
-            "mysql_database": "marsapp",
+            "mysql_database": "fudan_it",
             "mysql_max_conn": 60,
-            # mysql 字符编码
-            "mysql_charset": "utf8",
-        },
-        {
-            # 应用唯一号
-            "app_id": "hero.tsingdata.com",
-            # mysql 主服务器IP
-            "mysql_host": '127.0.0.1',
-            # mysql 从服务器IP
-            "mysql_host_slaves": ['127.0.0.1'], 
-            # mysql 端口号
-            "mysql_port": 3306,
-            # mysql 用户名
-            "mysql_user": 'root',
-            # mysql 密码
-            "mysql_password": "marsadmin",
-            # mysql 数据库名
-            "mysql_database": "hero",
-            "mysql_max_conn": 5,
-            # mysql 字符编码
-            "mysql_charset": "utf8",
-        },
-        {
-            # 应用唯一号
-            "app_id": "app.chinawearable.org",
-            # mysql 主服务器IP
-            "mysql_host": '127.0.0.1',
-            # mysql 从服务器IP
-            "mysql_host_slaves": ['127.0.0.1'], 
-            # mysql 端口号
-            "mysql_port": 3306,
-            # mysql 用户名
-            "mysql_user": 'root',
-            # mysql 密码
-            "mysql_password": "marsadmin",
-            # mysql 数据库名
-            "mysql_database": "wearable",
-            "mysql_max_conn": 5,
             # mysql 字符编码
             "mysql_charset": "utf8",
         }
