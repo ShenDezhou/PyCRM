@@ -1,2 +1,0 @@
-container_linux.go:247: starting container process caused "exec: \"/search/index.py\": permission denied"
-/usr/bin/docker-current: Error response from daemon: invalid header field value "oci runtime error: container_linux.go:247: starting container process caused \"exec: \\\"/search/index.py\\\": permission denied\"\n".
