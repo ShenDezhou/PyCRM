@@ -11,6 +11,7 @@ import tornado
 import urllib
 import base64
 import smtplib
+import json
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import thread, sys
@@ -211,9 +212,18 @@ if __name__ == '__main__':
 def send_message(phone, message, config):
     CDKET = config['noreply_sms_account']
     PASSWD = config['noreply_sms_password']
+    url="https://api.infobip.com/sms/1/text/single"
+    headers = {"Content-Type":"application/json","Accept":"application/json"}
+    data =json.dumps({"from":"106909001236282","to":"86%s" % phone,"text": message.encode('utf-8')})
+    print CDKET
+    print PASSWD
+    print url
+    print headers
+    print data
+    request = tornado.httpclient.HTTPRequest(url,method='POST',headers=headers, body=data, auth_username=CDKET,auth_password=PASSWD)
     http_client = tornado.httpclient.AsyncHTTPClient()
-    url = config['noreply_sms_url'] % {'account': CDKET, 'password': PASSWD, 'phone': phone, 'message': urllib.quote_plus(message.encode('utf-8'))}
-    response = yield http_client.fetch(url)
+    #url = config['noreply_sms_url'] % {'account': CDKET, 'password': PASSWD, 'phone': phone, 'message': urllib.quote_plus(message.encode('utf-8'))}
+    response = yield http_client.fetch(request)
     raise tornado.gen.Return(response)
 
 
