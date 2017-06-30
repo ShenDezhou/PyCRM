@@ -59,7 +59,7 @@
     }, 
     {
         "id": "joinmember",
-        "title": "申请加入清华大数据产业联合会会员",
+        "title": "申请加入复旦微董会会员",
         "description": "会员申请表格",
         "layout": "layout_simple.html",
         "tpl": "simple_appform_links.html",
@@ -70,7 +70,7 @@
     }, {
         "id": "form_weixin",
         "title": "微信群友申请表",
-        "description": "请填写清华大数据产业联合会微信群友申请表格",
+        "description": "请填写复旦微董会微信群友申请表格",
         "layout": "layout_simple.html",
         "showTitleBar": false,
         "tpl": "simple_appform_person_weixin.html",
