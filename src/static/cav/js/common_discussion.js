@@ -37,19 +37,18 @@ $(function() {
     }
     var tmpl = heredoc(function() {
         /*!
-        技术
-        医疗
-        金融
-        实践
-        交通
-        AI
-        深圳
-        长三角
-        营销
-        创新创业
-        应用
-        工业
-        */
+        复旦IT汇北京
+	复旦IT汇上海
+	大数据直播
+	信息安全
+	VR
+	区块链
+	AI
+	智能互联双创联盟
+	互联网+传统文化
+	云计算
+	私有云
+	*/
     });
     var tag_data = [];
     var tag_str_list = tmpl.split('\n');
