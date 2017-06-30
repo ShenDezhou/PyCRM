@@ -1,7 +1,7 @@
 [
     {
         "id": "home",
-        "title": "清数D-Lab",
+        "title": "复旦微董会",
         "description": "",
         "layout": "frontend/layout_home.html",
         "tpl": "frontend/home.html"
