@@ -54,9 +54,9 @@ var personInfoTitle = function(){
 
 var willAndExpect = function(){
     var output = "";
-    output += "<tr><td>联合会普通会员推荐人1</td><td class='first_normal_recommend'></td></tr>";
-    output += "<tr><td>联合会普通会员推荐人2</td><td class='second_normal_recommend'></td></tr>";
-    output += "<tr><td>联合会理事会员推荐人</td><td class='first_advanced_recommend'></td></tr>";
+    output += "<tr><td>微董会普通会员推荐人1</td><td class='first_normal_recommend'></td></tr>";
+    output += "<tr><td>微董会普通会员推荐人2</td><td class='second_normal_recommend'></td></tr>";
+    output += "<tr><td>微董会理事会员推荐人</td><td class='first_advanced_recommend'></td></tr>";
     output += "<tr><td>期望获取哪些服务或资源</td><td class='expects'></td></tr>";
     output += "<tr><td>可提供哪些服务或资源</td><td class='wills'></td></tr>";
     return output;

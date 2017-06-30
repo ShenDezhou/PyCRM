@@ -178,7 +178,7 @@
 		"tpl": "common_home.html"
 	}, {
 		"id": "appform",
-		"title": "清华大数据产业联合会申请表",
+		"title": "复旦微董会申请表",
 		"description": "",
 		"layout": "layout_common.html",
 		"tpl": "common_appform.html"

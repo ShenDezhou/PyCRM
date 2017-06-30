@@ -79,8 +79,8 @@ $(function(){
     var memberPersonInfo = function(person_info) {
         $('#weixin_group').val(person_info[0]['weixin_group']);
         var output = personInfoTitle();
-        output += "<tr><td>联合会微信群友推荐人1</td><td class='first_normal_recommend'></td></tr>";
-        output += "<tr><td>联合会微信群友推荐人2</td><td class='second_normal_recommend'></td></tr>";
+        output += "<tr><td>微董会微信群友推荐人1</td><td class='first_normal_recommend'></td></tr>";
+        output += "<tr><td>微董会微信群友推荐人2</td><td class='second_normal_recommend'></td></tr>";
         output += "<tr><td>期望获取哪些服务或资源</td><td class='expects'></td></tr>";
         output += "<tr><td>可提供哪些服务或资源</td><td class='wills'></td></tr>";     
         var tables = '';

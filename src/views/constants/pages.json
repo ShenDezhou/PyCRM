@@ -160,7 +160,7 @@
     },{
         "id": "form_normal",
         "title": "个人普通会员申请表",
-        "description": "请填写清华大数据产业联合会个人普通会员申请表格",
+        "description": "请填写复旦微董会个人普通会员申请表格",
         "layout": "layout_simple.html",
         "showTitleBar": false,
         "tpl": "simple_appform_person_normal.html",
@@ -186,7 +186,7 @@
     },{
         "id": "form_advanced",
         "title": "个人理事会员申请表",
-        "description": "请填写清华大数据产业联合会个人理事会员申请表格",
+        "description": "请填写复旦微董会个人理事会员申请表格",
         "layout": "layout_simple.html",
         "showTitleBar": false,
         "tpl": "simple_appform_person_normal.html",
@@ -212,7 +212,7 @@
     },  {
         "id": "org_form_normal",
         "title": "企业普通会员申请表",
-        "description": "请填写清华大数据产业联合会企业普通会员申请表格",
+        "description": "请填写复旦微董会企业普通会员申请表格",
         "layout": "layout_simple.html",
         "showTitleBar": false,
         "tpl": "simple_appform_org_normal.html",
@@ -239,7 +239,7 @@
     }, {
         "id": "org_form_advanced",
         "title": "企业理事会员申请表",
-        "description": "请填写清华大数据产业联合会企业理事会员申请表格",
+        "description": "请填写复旦微董会企业理事会员申请表格",
         "layout": "layout_simple.html",
         "showTitleBar": false,
         "tpl": "simple_appform_org_normal.html",
@@ -436,7 +436,7 @@
     },
     {
         "id": "appform",
-        "title": "清华大数据产业联合会申请表",
+        "title": "复旦微董会申请表",
         "description": "",
         "layout": "layout_common.html",
         "showTitleBar": false,

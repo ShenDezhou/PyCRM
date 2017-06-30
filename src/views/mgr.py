@@ -718,9 +718,9 @@ class _(MgrHandler):
 #     @coroutine
 #     def send_cancel_mail(self, email):
 #         if email:
-#             title = u'【活动取消通知】工业大数据采集与分析-清华大数据思享会'
+#             title = u'【活动取消通知】工业大数据采集与分析-复旦大数据思享会'
 #             content = self.config['event_cancel_msg']
-#             self.config['noreply_mail_name'] = u'清华大数据思享会'
+#             self.config['noreply_mail_name'] = u'复旦大数据思享会'
 #             try:
 #                 yield send_email(title, email, content, self.config)
 #             except Exception as e:
@@ -774,9 +774,9 @@ class _(MgrHandler):
 #     # msg = self.config['event_cancel_msg']
 #     # yield send_message(code, msg, self.config)
 #     # emails = ['xprobie@gmail.com','517450974@qq.com','xprobie@outlook.com']
-#     # title = u'【活动取消通知】工业大数据采集与分析-清华大数据思享会'
+#     # title = u'【活动取消通知】工业大数据采集与分析-复旦大数据思享会'
 #     # content = self.config['event_cancel_msg']
-#     # self.config['noreply_mail_name'] = u'清华大数据思享会'
+#     # self.config['noreply_mail_name'] = u'复旦大数据思享会'
 #     # send_more_email(title, emails, content, self.config)
 #     # send_email(title, email, content, self.config)
 #     email_list = list()
@@ -786,9 +786,9 @@ class _(MgrHandler):
 #             email_list.append(email)
 #         else:
 #             pass
-#     title = u'【活动取消通知】工业大数据采集与分析-清华大数据思享会'
+#     title = u'【活动取消通知】工业大数据采集与分析-复旦大数据思享会'
 #     content = self.config['event_cancel_msg']
-#     self.config['noreply_mail_name'] = u'清华大数据思享会'
+#     self.config['noreply_mail_name'] = u'复旦大数据思享会'
 #     try:
 #         yield send_more_email(title, email_list, content, self.config)
 #     except Exception as e:
@@ -1480,7 +1480,7 @@ class _(MgrHandler):
         group_res = yield self.fetchone_db("select * from t_group where group_id = %s and group_name = %s", group_id,
                                            group_name)
         if not group_res:
-            # TODO 现在代码写死parent_id（联合会）和level
+            # TODO 现在代码写死parent_id（微董会）和level
             group_args = {
                 'group_id': group_id,
                 'group_name': group_name,

@@ -431,7 +431,7 @@ $(function () {
             '<div class="col-md-8">' +
             '<div class="form-group block1">' +
             '<label>通讯地址 *</label>' +
-            '<input class="form-control" id="address' + counts + '" name="address' + counts + '" placeholder="请留下准确的通讯地址，以便联合会可以将证书等邮寄给您"  data-parsley-group="wizard-step-1" required value="" pattern="^[0-9a-zA-Z\u4e00-\u9fa5]{2,30}$" data-parsley-error-message="请填写通讯地址" /> ' +
+            '<input class="form-control" id="address' + counts + '" name="address' + counts + '" placeholder="请留下准确的通讯地址，以便微董会可以将证书等邮寄给您"  data-parsley-group="wizard-step-1" required value="" pattern="^[0-9a-zA-Z\u4e00-\u9fa5]{2,30}$" data-parsley-error-message="请填写通讯地址" /> ' +
             '</div>' +
             '</div>' +
             '</div>' +
