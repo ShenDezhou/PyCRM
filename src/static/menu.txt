@@ -1,0 +1,99 @@
+{
+    "menu": {
+        "button": [
+            {
+                "name": "关于我们", 
+                "sub_button": [
+                    {
+                        "type": "view", 
+                        "name": "活动", 
+                        "url": "http://wwwsto.com/common/events", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "官方发布会", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "双创空间", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "自媒体联盟", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "简介", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }
+                ]
+            }, 
+            {
+                "name": "原创精选", 
+                "sub_button": [
+                    {
+                        "type": "view", 
+                        "name": "微董汇.论坛", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "技术.前沿", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "应用.创新", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }
+                ]
+            }, 
+            {
+                "name": "微董汇", 
+                "sub_button": [
+                    {
+                        "type": "view", 
+                        "name": "志愿者招募", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "入群群规", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "会员活动", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "会员名录", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }, 
+                    {
+                        "type": "view", 
+                        "name": "入会章程", 
+                        "url": "http://wwwsto.com/", 
+                        "sub_button": [ ]
+                    }
+                ]
+            }
+        ]
+    }
+}
