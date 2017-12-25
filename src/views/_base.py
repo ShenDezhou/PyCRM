@@ -143,8 +143,6 @@ from lte_util import get_now_str
 
 class BaseHandler(tornado.web.RequestHandler):
 
-    # app_settings = settings
-
     def __init__(self,  *argc, **argkw):
         super(BaseHandler, self).__init__(*argc, **argkw)
         self.session = Session(self.application.session_manager, self)
@@ -155,16 +153,14 @@ class BaseHandler(tornado.web.RequestHandler):
         self.current_user_profile = None
         self.app_id = self.request.host.split(':')[0].lower()
         # if self.app_id not in DB_POOL:
-        config = settings['apps'][0]
-        self.app_id = config['app_id']
+        self.app_id = app_settings['app_id']
         # logging.info('APP:%s' % self.app_id)
         # if self.app_id and self.app_id in DB_POOL:
-        self.db_pool = ConnQueue(config) # DB_POOL[self.app_id]
+        self.db_pool = ConnQueue(settings['apps'][0]) # DB_POOL[self.app_id]
         # else:
         #     self.db_pool = None
         # logging.info(self.db_pool)
         self.config = app_settings
-        logging.info(self.config)
 
     def is_wechat(self):
         return self.request.headers['User-Agent'].find('MicroMessenger') > 0
