@@ -1,7 +1,7 @@
 #!/bin/bash
 # using git log to retrieve changed file and use scp to upload file and restart it.
 web_dir=/var/marsapp/web
-master_server=app.tsingdata.com
+master_server=wwwsto.com
 master_server_usr=root
 master_server_pwd=cdk@9MIU@#
 

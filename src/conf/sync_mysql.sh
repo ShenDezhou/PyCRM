@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh root@app.tsingdata.com "mysqldump --user=root --host=localhost --protocol=tcp --port=3306 --default-character-set=utf8 --skip-triggers -pmarsadmin marsapp" > marsapp.sql
+ssh root@wwwsto.com "mysqldump --user=root --host=localhost --protocol=tcp --port=3306 --default-character-set=utf8 --skip-triggers -pmarsadmin marsapp" > marsapp.sql
 
 echo "export done"
 

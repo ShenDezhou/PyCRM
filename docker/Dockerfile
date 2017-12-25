@@ -1,5 +1,5 @@
-from bangtech/crm_web
+from bangtech/crm_web:fudan
 
+RUN pip install pywxpay
 VOLUME ["/search"]
-EXPOSE 80
-CMD ["python /search/index.py --port=80"]
+CMD ["python /search/index.py --port=8890"]

@@ -2,9 +2,9 @@
 # ./auto_deplay_local.sh /project_web_root_pat
 #locate_web_root="/home/long/Workspaces/svn/python/asien/web"
 locate_web_root=$1
-master_server=app.tsingdata.com
+master_server=wwwsto.com
 master_server_usr=root
-master_server_pwd=C9v6zA9#WKh
+master_server_pwd=
 
 cd $locate_web_root
 
