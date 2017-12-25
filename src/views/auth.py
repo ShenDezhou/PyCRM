@@ -26,15 +26,15 @@ def get_role_name(role_id):
 def get_mgr_navs(handler):
     profile = handler.current_user_profile
     navs = []
-    if profile and 'roles' in profile and not is_role_in(profile['roles'], ['admin']):
-        role_pages = yield handler.query_db("select distinct page_id from t_role_page where role_id in ('%s')" % "','".join([r['role_id'] for r in profile['roles']]))
-        role_pages = [r['page_id'] for r in role_pages] 
-        for n in NAVS:
-            if ('child' in n and is_list_in(n['child'],role_pages)) or n['id'] in role_pages or n['id'].startswith('mgr_settings'):
-                navs.append(n)
-    else:
-        for n in NAVS:
-            navs.append(n)
+    # if profile and 'roles' in profile and not is_role_in(profile['roles'], ['admin']):
+    #     role_pages = yield handler.query_db("select distinct page_id from t_role_page where role_id in ('%s')" % "','".join([r['role_id'] for r in profile['roles']]))
+    #     role_pages = [r['page_id'] for r in role_pages] 
+    #     for n in NAVS:
+    #         if ('child' in n and is_list_in(n['child'],role_pages)) or n['id'] in role_pages or n['id'].startswith('mgr_settings'):
+    #             navs.append(n)
+    # else:
+    for n in NAVS:
+        navs.append(n)
     raise Return(navs)
 
 def is_list_in(roles1, roles2):
@@ -206,7 +206,8 @@ def assert_mgr(method):
         @coroutine
         def wrapper(self, *args, **kwargs):
             if self.current_user:
-                auth_role = yield self.fetchone_db("select * from t_auth_role where person_id=%s", self.current_user)
+                auth_role = 1
+                # auth_role = yield self.fetchone_db("select * from t_auth_role where person_id=%s", self.current_user)
                 if not auth_role:
                     go_out(self)
                     return

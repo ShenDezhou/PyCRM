@@ -3234,13 +3234,12 @@ class _(MgrHandler):
             where_cond = "and a.person_id in ('%s') " % res['person_ids']
 
         res = yield response_datatable_result(
-            columns="a.title|n.code_name as status|sum( case r.item_type when 'sign_up' then 1 else 0 end ) as sign_up|sum( case r.item_type when 'register' then 1 else 0 end ) as register|ifnull(v.visits, 0) as visits|a.activity_start_time|a.activity_end_time|a.activity_place|t1.code_name as activity_online_offline|t.code_name as activity_type|a.paid|g.fullname as name|a.id|a.sign_up_limit|a.sur_id|a.allow_onsite_checkin".split(
+            columns="a.title|n.code_name as status|0 as sign_up|0 as register|ifnull(v.visits, 0) as visits|a.activity_start_time|a.activity_end_time|a.activity_place|t1.code_name as activity_online_offline|t.code_name as activity_type|a.paid|g.fullname as name|a.id|a.sign_up_limit|a.sur_id|a.allow_onsite_checkin".split(
                 '|'),
             table='''t_news as a
             left join (select ifnull(count(v1.id), 0) as visits, 
                 visit_target from t_visit as v1, 
                 t_news as a where v1.visit_target=concat('/page/event/', a.id) group by visit_target) as v on v.visit_target=concat('/page/event/', a.id)
-            left join t_traffic as r on a.id = r.activity_id 
             left join t_codes as m on a.status = m.code_id  
             left join t_codes as t on a.activity_type = t.code_id 
             left join (select code_id,code_name from t_codes where code_type='activity_online_offline') as t1 on a.activity_online_offline = t1.code_id 
@@ -3249,7 +3248,7 @@ class _(MgrHandler):
             sortcol='a.published ASC',
             req=self,
             searchcolumns='a.title,activity_place,t1.code_name,t.code_name,m.code_name,g.fullname',
-            where="a.status !='deleted' and a.type='activity' %s group by a.id " % where_cond)
+            where="a.status !='deleted' and a.type='activity' %s" % where_cond)
 
 
 @Route(r"/rest/mgr/discussion/table")

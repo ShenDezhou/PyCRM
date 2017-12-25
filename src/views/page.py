@@ -737,9 +737,9 @@ class _(BasePage):
         wechat.parse_data(body_text)
         # 获得解析结果, message 为 WechatMessage 对象 (wechat_sdk.messages中定义)
         message = wechat.get_message()
-        response = None
         if message.type == 'subscribe':
             response = wechat.response_news(DEFAULT_NEW_RESPONSE)
+            return response
         # elif message.type == 'text':
         #     if message.content == 'wechat':
         #         response = wechat.response_text(u'^_^')
@@ -748,12 +748,13 @@ class _(BasePage):
         # elif message.type == 'image':
         #     response = wechat.response_text(u'图片')
         else:
-            # response = wechat.response_text(self.config['app_welcome'])
-            response = wechat.group_transfer_message()
+            response = wechat.response_text(self.config['app_welcome'])
+            return response
+            #response = wechat.group_transfer_message()
 
         # self.report_msg(message, wechat)
 
-        return response
+        
 
     def get(self):
         signature = self.get_argument('signature', '')
@@ -1036,7 +1037,7 @@ class _(BasePage):
         body = json.loads(resp.body)
         logging.info(body)
         openid = body['openid']
-       # unionid = body.get('unionid')
+        # unionid = body.get('unionid')
 
         accesstoken = body['access_token']
 
@@ -1050,61 +1051,35 @@ class _(BasePage):
         )
         resp = yield client.fetch(request)
         body = json.loads(resp.body)
-        #判断有没有unionid,只有服务号用服务号登录
-        if openid:
-            # 是否已经授权过
-            res = yield self.fetchone_db("""select * from t_person where auth_id=%s""", openid)
-            if not res:
-                # 尚未授权过，将用户信息插入授权用户表,同时跳到绑定会员页面
-                args = {
-                    'person_id': generate_uuid(),
-                    'auth_id': openid,
-                    'open_id': openid,
-                    'nick_name': body['nickname'],
-                    'head_img_url': body['headimgurl'],
-                    'gender': body['sex'],
-                    'province': body['province'],
-                    'city': body['city'],
-                    'country': body['country'],
-                    'auth_date': get_now_str()
-                }
-                yield self.insert_db_by_obj('t_person', args)
-            else:
-                yield self.update_db("""update t_person 
-                                        set auth_id = %s, auth_date = %s,
-                                        nick_name = %s, head_img_url = %s, province = %s, country = %s
-                                        where open_id = %s""",
-                                     openid, get_now_str(),
-                                     body['nickname'], body['headimgurl'], body['province'], body['country'],
-                                     openid)
-            yield auth.login_user(self, open_id=openid)
-        else:
-            # 是否已经授权过
-            res = yield self.fetchone_db("""select * from t_person where open_id=%s""", openid)
-            if not res:
-                # 尚未授权过，将用户信息插入授权用户表,同时跳到绑定会员页面
-                args = {
-                    'person_id': generate_uuid(),
-                    'open_id': openid,
-                    'nick_name': body['nickname'],
-                    'head_img_url': body['headimgurl'],
-                    'gender': body['sex'],
-                    'province': body['province'],
-                    'city': body['city'],
-                    'country': body['country'],
-                    'auth_date': get_now_str()
-                }
-                yield self.insert_db_by_obj('t_person', args)
-            else:
-                yield self.update_db("""update t_person 
-                                        set  auth_date = %s,
-                                        nick_name = %s, head_img_url = %s, province = %s, country = %s
-                                        where open_id = %s""",
-                                     get_now_str(),
-                                     body['nickname'], body['headimgurl'], body['province'], body['country'],
-                                     openid)
-            yield auth.login_user(self, open_id=openid)
+        logging.info(body)
+
         
+        #判断有没有unionid,只有服务号用服务号登录
+            # 是否已经授权过
+        res = yield self.fetchone_db("""select * from t_person where open_id=%s""", openid)
+        if not res:
+            # 尚未授权过，将用户信息插入授权用户表,同时跳到绑定会员页面
+            args = {
+                'person_id': generate_uuid(),
+                'auth_id': openid,
+                'open_id': openid,
+                'nick_name': body['nickname'],
+                'head_img_url': body['headimgurl'],
+                'gender': body['sex'],
+                'province': body['province'],
+                'city': body['city'],
+                'country': body['country'],
+                'auth_date': get_now_str()
+            }
+            yield self.insert_db_by_obj('t_person', args)
+        else:
+            yield self.update_db("""update t_person 
+                                    set auth_date = %s
+                                    where open_id = %s""",
+                                 get_now_str(),
+                                 openid)
+        yield auth.login_user(self, open_id=openid)
+    
 
         redirect_url = self.get_secure_cookie('redirect_url') or '/common'  #
         self.set_secure_cookie('redirect_url', '', 1)
@@ -1252,11 +1227,11 @@ class _(BasePage):
                     self.redirect(self.get_secure_cookie('redirect_url') or '/common')
 
         if self.is_wechat():
-            corp = self.config['wechat_corp_auth']
-            if corp == '1':
-                res = yield self.get_corp_login()
-            else:
-                res = yield self.get_wechat_login()
+            # corp = self.config['wechat_corp_auth']
+            # if corp == '1':
+            #     res = yield self.get_corp_login()
+            # else:
+            res = yield self.get_wechat_login()
         else:
             yield self.get_webscan_login()
 

@@ -46,7 +46,7 @@
                 <span class="semi-bold">活动</span>
             </a>
         </li>
-        {% end %} {% if handler.is_admin() %}
+        {% end %} {% if not handler.is_wechat() %}
         <li><a class="btn-floating btn-large modal-trigger orange" href="/console" target="dlab-console"><span class="semi-bold">管理</span></a></li>
         {% end %}
     </ul>

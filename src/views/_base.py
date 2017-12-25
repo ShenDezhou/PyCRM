@@ -70,17 +70,17 @@ class ConnQueue(object):
         for i in xrange(self.p_size):
             yield self.add_conn()
 
-DB_POOL = {}
-APP_SETTINGS = {}
+#DB_POOL = {}
+#db_pool = ConnQueue(config)
 
-for d in settings['apps']:
-    DB_POOL[d['app_id']] = ConnQueue(d)
-    db = torndb.Connection(d['mysql_host'], d['mysql_database'], d['mysql_user'], d['mysql_password'])
-    res = db.query("select * from t_settings")
-    APP_SETTINGS[d['app_id']] = {}
-    for r in res:
-        APP_SETTINGS[d['app_id']][r['st_id']] = r["st_value"]
-    db.close()
+# for d in settings['apps']:
+config = settings['apps'][0]
+app_settings = {}
+db = torndb.Connection(config['mysql_host'], config['mysql_database'], config['mysql_user'], config['mysql_password'])
+res = db.query("select * from t_settings")
+for r in res:
+    app_settings[r['st_id']] = r["st_value"]
+db.close()
 
 def genenate_file_key(content = None, filepath = None):
     if filepath:
@@ -143,7 +143,7 @@ from lte_util import get_now_str
 
 class BaseHandler(tornado.web.RequestHandler):
 
-    app_settings = settings
+    # app_settings = settings
 
     def __init__(self,  *argc, **argkw):
         super(BaseHandler, self).__init__(*argc, **argkw)
@@ -154,15 +154,17 @@ class BaseHandler(tornado.web.RequestHandler):
         self.conn_slave = None
         self.current_user_profile = None
         self.app_id = self.request.host.split(':')[0].lower()
-        if self.app_id not in DB_POOL:
-            self.app_id = settings['apps'][0]['app_id']
-        logging.info('APP:%s' % self.app_id)
-        if self.app_id and self.app_id in DB_POOL:
-            self.db_pool = DB_POOL[self.app_id]
-        else:
-            self.db_pool = None
-        logging.info(self.db_pool)
-        self.config = APP_SETTINGS[self.app_id]
+        # if self.app_id not in DB_POOL:
+        config = settings['apps'][0]
+        self.app_id = config['app_id']
+        # logging.info('APP:%s' % self.app_id)
+        # if self.app_id and self.app_id in DB_POOL:
+        self.db_pool = ConnQueue(config) # DB_POOL[self.app_id]
+        # else:
+        #     self.db_pool = None
+        # logging.info(self.db_pool)
+        self.config = app_settings
+        logging.info(self.config)
 
     def is_wechat(self):
         return self.request.headers['User-Agent'].find('MicroMessenger') > 0
@@ -171,7 +173,7 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.current_user_profile
 
     def is_admin(self):
-        return self.current_user_profile and self.current_user_profile['roles']
+        return self.current_user_profile
 
     def is_member(self):
         return self.current_user_profile and self.current_user_profile['member']
@@ -368,10 +370,10 @@ class BaseHandler(tornado.web.RequestHandler):
         k = self.app_id + '-app-config-refreshed'
         if not self.get_cache(k):
             res = yield self.query_db("select * from t_settings")
-            APP_SETTINGS[self.app_id] = {}
+            settings = {}
             for r in res:
-                APP_SETTINGS[self.app_id][r['st_id']] = r["st_value"]
-            self.config = APP_SETTINGS[self.app_id]
+                settings[r['st_id']] = r["st_value"]
+            self.config = settings
             self.set_cache(k, 1, 60)
             logging.info("refresh app config of %s" % self.app_id)
 
@@ -609,17 +611,17 @@ class BaseHandler(tornado.web.RequestHandler):
     
     def get_person_args(self):
         person_args = self.get_args({
-            'fullname': '*',
-            'gender': '*',
+            'fullname': '',
+            'gender': '',
             'birthday':'',
             'school':'',
             'school_start':'',
             'education':'',
-            'wechatid':'*',
+            'wechatid':'',
             'cellphone':'*',
             'cellphone1':'',
             'cellphone2':'',
-            'email': '*',
+            'email': '',
             'email1': '',
             'email2': '',
             'address': '',

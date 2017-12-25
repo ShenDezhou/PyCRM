@@ -10,7 +10,7 @@ settings = {
     "apps": [
         {
             # 应用唯一号
-            "app_id": "wwwsto.com",
+            "app_id": "fudan",
             # mysql 主服务器IP
             "mysql_host": '127.0.0.1',
             # mysql 从服务器IP
@@ -20,7 +20,7 @@ settings = {
             # mysql 用户名
             "mysql_user": 'root',
             # mysql 密码
-            "mysql_password": "Wwwsto@2017",
+            "mysql_password": "sogou",
             # mysql 数据库名
             "mysql_database": "fudan_it",
             "mysql_max_conn": 60,

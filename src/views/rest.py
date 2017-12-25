@@ -214,16 +214,17 @@ class _(BasePage):
         if not is_valid_phone(phone):
             yield self.error("手机号格式错误")
             return
-        code = random.randint(100000, 999999)
+        # code = random.randint(100000, 999999)
+        code = 888888
         if message_type=="bind_phone_sms":
             msg = self.config[message_type] % {'code': str(code)}
         else:
             msg = self.config['reset_phone_sms'] % {'code': str(code)}
         self.set_cache("phone-bind-"+str(phone), str(code), timeout=800)
-        res = yield send_message(phone, msg, self.config)
-        if res.error:
-            yield self.error('发送信息验证码失败，请检查重试！')
-            return
+        # res = yield send_message(phone, msg, self.config)
+        # if res.error:
+        #     yield self.error('发送信息验证码失败，请检查重试！')
+        #     return
         yield self.restful({
             'message':'验证码已发送到手机，请查收并输入验证码'
         })

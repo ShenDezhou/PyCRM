@@ -53,9 +53,10 @@
                 <i class="fa fa-newspaper-o fa-fw"></i> 文章
             </a>
         </li>
-        {% if handler.is_admin() %}
+        {% if not handler.is_wechat() %}
         <li><a href="/console" target="dlab-console"><i class="fa fa-dashboard fa-fw"></i> 内部管理</a></li>
-        {% end %} {% if handler.current_user %}
+        {% end %}
+        {% if handler.current_user %}
         <li class="dropdown navbar-user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-user fa-fw"></i> 我 <b class="caret"></b>
