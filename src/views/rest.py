@@ -21,6 +21,9 @@ import requests
 import mimetypes
 import pinyin
 import copy
+from pywxpay import WXPay
+import time
+import xml.etree.ElementTree as ET
 
 @Route(r"/fileupload/image")
 class ImageFileUploadHandler(BaseHandler):
@@ -1624,4 +1627,178 @@ class _(BaseHandler):
         yield self.restful({
             "message":"修改成功"
             })
+
+use_sandbox = False
+m_id = '1314306201'
+trade_key = '48888888888888888888888888888888'
+m_key = '48888888888888888888888888888888'
+
+@Route(r"/wechatpay/orderPrepay")
+class _(BaseHandler):
+
+    @assert_user
+    @coroutine
+    def post(self):
+        args = self.get_args({
+            "id": "",
+            "event_id":"*",
+            "paid_start_time":"*",
+            "paid_type":"*",
+            "id_who":"*",
+            "paid_money":"*",
+            "paid_remark":"",
+            "cash":"",
+            "nocash":""
+        })
         
+        logging.info(args) 
+        args["id"] = generate_uuid()[0:22]
+        global m_id
+        global m_key
+        if use_sandbox:
+            signkey = yield self.getsignkey(m_id,generate_uunum()[0:32],trade_key)
+            logging.info(signkey)
+            m_key = signkey["sandbox_signkey"]
+
+        logging.info(m_key)
+        wxpay = WXPay(app_id= self.config['wechat_appid'], 
+              mch_id= m_id,
+              key= m_key, 
+              cert_pem_path='',
+              key_pem_path='',
+              timeout=6000,
+              use_sandbox=use_sandbox)  # 毫秒
+
+        order = dict(device_info='WEB',
+                      body= args["event_id"],
+                      detail= args["paid_remark"],
+                      out_trade_no= args["id"],
+                      total_fee= args["paid_money"],
+                      fee_type='CNY',
+                      notify_url='http://wwwsto.com/wechatpay/orderNotify',
+                      openid=args["id_who"],
+                      spbill_create_ip='39.104.58.183',
+                      trade_type='JSAPI')
+
+        if args["cash"] != "0" and args["nocash"] != "0":
+            cash_fee = int(args["paid_money"]) - int(args["cash"]) - int(args["nocash"])
+            order["cash_fee"] = str(cash_fee)
+            coupon_fee = int(args["cash"]) + int(args["nocash"])
+            order["coupon_fee"] = str(coupon_fee)
+            order["coupon_count"] = "2"
+            order["coupon_type_0"] = "CASH"
+            order["coupon_fee_0"] = args["cash"]
+            order["coupon_type_1"] = "NOCASH"
+            order["coupon_fee_1"] = args["nocash"]
+
+
+        logging.info(order)
+        wxpay_resp_dict = wxpay.unifiedorder(order)
+
+        logging.info(wxpay_resp_dict)
+        contact_res = yield self.insert_db_by_obj('t_payment_record', args)  
+
+        prepay_req = {
+            "appId": wxpay_resp_dict["appid"],
+            "timeStamp":  str(time.time())[0:10],
+            "nonceStr":wxpay_resp_dict["nonce_str"],
+            "package":"prepay_id="+wxpay_resp_dict["prepay_id"],
+            "signType":"MD5"
+            }
+        prepay_req["paySign"] = self.createSign(prepay_req, m_key)
+        # prepay_req["signType"] ="MD5"
+          
+        logging.info(prepay_req)
+        
+        yield self.restful(prepay_req)
+        
+        
+#{'cash_fee_type': 'CNY', 'nonce_str': 'c5427f1cec6d11e7bc0f00163e000ab0', 'time_end': '20171229155628', 'sign': '66B61219575F2A3F8721798D0B1FCB76', 'fee_type': 'CNY', 'attach': 'sandbox_attach', 'device_info': 'WEB', 'out_trade_no': 'c3d61e04-ec6d-11e7-bc0', 'transaction_id': '100539073720171229155628733443', 'openid': 'o6xyUt3X6MGrekzQTwCWmtNpneu8', 'trade_type': 'JSAPI', 'return_code': 'SUCCESS', 'err_code_des': 'SUCCESS', 'mch_id': '1314306201', 'settlement_total_fee': '101', 'cash_fee': '101', 'is_subscribe': 'Y', 'return_msg': 'OK', 'bank_type': 'CMC', 'total_fee': '101', 'appid': 'wxc4aee3cd21013de2', 'result_code': 'SUCCESS', 'err_code': 'SUCCESS'}
+@Route(r"/wechatpay/orderNotify")
+class _(BaseHandler):
+    @coroutine
+    def post(self):
+        jsonbody = self.xmlToArray(self.request.body)
+        logging.info(jsonbody) 
+        payment = {}
+        if jsonbody.has_key("out_trade_no") and jsonbody.has_key("total_fee"):
+            if jsonbody.has_key("sign"):
+                requestsign = jsonbody["sign"]
+                del jsonbody["sign"]
+                global m_id
+                global m_key
+                logging.info(jsonbody)
+                verifiedSign =  self.createSign(jsonbody, m_key)
+                logging.info(requestsign)
+                logging.info(verifiedSign)
+                if requestsign != verifiedSign:
+                    xmlresponse = self.arrayToXml({"return_code":"FAIL","return_msg":"SIGNERROR"})
+                    logging.info(xmlresponse) 
+                    self.write(xmlresponse)
+                    self.finish()
+                    return
+
+            pay_rec = yield self.fetchone_db("select * from t_payment_record where id=%s",jsonbody["out_trade_no"])
+            if str(pay_rec["paid_money"]) != jsonbody["total_fee"]:
+                xmlresponse = self.arrayToXml({"return_code":"FAIL","return_msg":"TOTALFREE"})
+                logging.info(xmlresponse) 
+                self.write(xmlresponse)
+                self.finish()
+                return
+
+            payment["id"] = jsonbody["out_trade_no"]
+            payment["paid_end_time"] = jsonbody["time_end"]
+            payment["paid_number"] = jsonbody["total_fee"]
+            contact_res = yield self.update_db_by_obj('t_payment_record', payment,"id='%s'" % payment["id"])  
+
+        xmlresponse = self.arrayToXml({"return_code":"SUCCESS","return_msg":"OK"})
+        logging.info(xmlresponse) 
+        self.write(xmlresponse)
+        self.finish()
+        
+
+@Route(r"/wechatpay/orderQuery")
+class _(BaseHandler):
+    @assert_user
+    @coroutine
+    def post(self):
+        args = self.get_args({
+            "event_id":"*",
+            "id_who":"*"
+        })
+        pay_rec = yield self.fetchone_db("select * from t_payment_record where event_id=%s and id_who=%s and paid_number='' order by paid_start_time desc",args["event_id"],args["id_who"])
+        global m_id
+        global m_key
+                
+        # if use_sandbox:
+        #     signkey = yield self.getsignkey(m_id,generate_uunum()[0:32],trade_key)
+        #     logging.info(signkey)
+        #     m_key = signkey["sandbox_signkey"]
+        order = dict(app_id= self.config['wechat_appid'],
+                      mch_id= m_id,
+                      out_trade_no= pay_rec["id"],
+                      nonce_str = generate_uunum()[0:32]
+                      )
+        logging.info(m_key)
+        order["sign"] = self.createSign(order, m_key)
+        logging.info(order) 
+
+        wxpay = WXPay(app_id= self.config['wechat_appid'], 
+              mch_id= m_id,
+              key= m_key, 
+              cert_pem_path='',
+              key_pem_path='',
+              timeout=6000,
+              use_sandbox=use_sandbox)  # 毫秒
+
+        jsonbody = wxpay.orderquery(order)
+        logging.info(jsonbody)
+        payment = {}
+        if jsonbody.has_key("out_trade_no") and jsonbody.has_key("total_fee"):
+            payment["id"] = jsonbody["out_trade_no"]
+            payment["paid_end_time"] = jsonbody["time_end"]
+            payment["paid_number"] = jsonbody["total_fee"]
+            contact_res = yield self.update_db_by_obj('t_payment_record', payment,"id='%s'" % payment["id"])  
+            yield self.restful({"status":"ok"})
+        else:
+            yield self.restful({"status":"error"})

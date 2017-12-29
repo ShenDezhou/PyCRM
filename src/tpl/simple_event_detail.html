@@ -48,9 +48,9 @@
             <a type="button" id="sign_up" disabled="True" style="cursor: not-allowed" class="btn btn-primary btn-lg m-r-5 m-b-5" href="#"> <i class="fa fa-sign-in"></i> 活动已经结束 </a>
         </div>
         {% end %}
-        {% if context['activity']['paid'] and context['activity']['paid'] != '0' %}
+        {% if context['activity']['paid'] and '%0.2f' % context['activity']['paid'] != '0' %}
         <div class="news-date news-indent">
-            <i class="fa fa-jpy fa-lg"></i> {{ context['activity']['paid'] }} (费用)
+            <i class="fa fa-jpy fa-lg"></i> {{ '%0.2f' % context['activity']['paid'] }} (费用)
         </div>
         {% end %}
         {% if context['sign_up'] and not context['register'] %}
@@ -272,14 +272,51 @@
         {% end %} {% end %}
     </div>
 </div>
-{% if context['sign_up'] and context['sign_up']['status'] =='sign_up_success' and context['activity']['signup_content'] %}
+{% if context['sign_up'] and not context['register'] %}
 <div class="row" style="margin-bottom:60px;">
     <div class="col-md-12">
         <div class="news-content m-t-20">
             <h4 class="m-t-30">活动报名成功信息（仅供已报名成功用户查看）</h4>
             <hr class="m-t-1" />
             <p class="">
+                <header>
+                    <p>订单总金额（含邮）</p>
+                    <p>￥ {{ '%0.2f' % context['activity']['paid']}}</p>
+                </header>
+
+                <p>支付方式</p>
+                <div class="wx_pay">
+                    <div>
+                        <img src="../../../asset/imgs/wechat-pay-copy.svg" class="s_icon" alt=""/>
+                        <span>微信支付</span>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <input class="form-control" placeholder="支付附言" id="pay_remark" value="" />
+                </div>
+                <footer>
+                    <span>微信支付</span>
+                    <a href="javascript:;" class="btn btn-primary" onclick="$._wechatpay('{{context['activity']['id']}}','{{context['user_profile']['authorized']['open_id']}}','{{ '%0.2f' % context['activity']['paid']}}','{{ '%0.2f' % context['activity']['cash']}}','{{ '%0.2f' % context['activity']['nocash']}}')">去付款</a>
+                </footer>
+                <footer>
+                    <span>支付成功提示失败</span>
+                    <a href="javascript:;" class="btn btn-primary" onclick="$._wechatpayquery('{{context['activity']['id']}}','{{context['user_profile']['authorized']['open_id']}}')">查询付款状态</a>
+                </footer>
+            </p>
+        </div>
+    </div>
+</div>
+{% end %}
+{% if context['sign_up'] and context['sign_up']['status'] =='sign_up_success' and context['activity']['signup_content'] %}
+<div class="row" style="margin-bottom:60px;">
+    <div class="col-md-12">
+        <div class="news-content m-t-20">
+            <h4 class="m-t-30">活动支付成功信息（仅供已支付成功用户查看）</h4>
+            <hr class="m-t-1" />
+            <p class="">
+                
                 {% raw context['activity']['signup_content'] %}
+
             </p>
         </div>
     </div>

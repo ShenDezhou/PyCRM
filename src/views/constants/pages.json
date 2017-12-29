@@ -372,6 +372,7 @@
             "cav/console/assets/plugins/materialize/css/materialize.css"
             ],
         "js":[
+            "cav/js/wechatpay_event_detail.js",
             "cav/js/simple_appform_activity_detail.js",
             "cav/console/assets/plugins/materialize/js/materialize.js",
             "cav/js/common_materialize.js"

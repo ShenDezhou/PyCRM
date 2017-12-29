@@ -23,7 +23,7 @@ from lib import html2text
 import torndb
 import logging
 from lib import wechat_sign
-
+import xml.etree.ElementTree 
 
 class ConnQueue(object):
     """ Tornado future based deque. """
@@ -173,7 +173,58 @@ class BaseHandler(tornado.web.RequestHandler):
 
     def is_member(self):
         return self.current_user_profile and self.current_user_profile['member']
+    # 计算签名
+    def createSign(self, paramMap, secret):
+        codec = ''    
+        for key in sorted(paramMap.iterkeys()):
+            codec += ('%s=%s&' % (key, paramMap[key]))
+        codec += "key=%s" % secret
+        sign = (hashlib.md5(codec).hexdigest()).upper()
+        return sign
 
+    def arrayToXml(self, arr):
+        """array转xml"""
+        xml = ["<xml>"]
+        for k, v in arr.iteritems():
+            if v.isdigit():
+                xml.append("<{0}>{1}</{0}>".format(k, v))
+            else:
+                xml.append("<{0}><![CDATA[{1}]]></{0}>".format(k, v))
+        xml.append("</xml>")
+        return "".join(xml)
+
+    def xmlToArray(self, xmldata):
+        """将xml转为array"""
+        array_data = {}
+        root = xml.etree.ElementTree.fromstring(xmldata)
+        for child in root:
+            value = child.text
+            array_data[child.tag] = value
+        return array_data
+    
+    @tornado.gen.coroutine
+    def getsignkey(self, m_id, uuid, m_key):
+        sandbox = "https://api.mch.weixin.qq.com/sandboxnew/pay/getsignkey"
+        prepare = {"mch_id":m_id,
+                    "nonce_str": uuid}
+        prepare["sign"] = self.createSign(prepare, m_key)
+        xmlbody = self.arrayToXml(prepare)
+        # logging.info(xmlbody)
+
+        client = tornado.httpclient.AsyncHTTPClient()
+        request = tornado.httpclient.HTTPRequest(
+                url= sandbox,
+                method="POST",
+                validate_cert=False,
+                headers = '',
+                body = self.arrayToXml(prepare)
+        )
+        resp = yield client.fetch(request)
+        # logging.info(resp.body)
+
+        raise tornado.web.gen.Return(self.xmlToArray(resp.body))
+
+    
 
     #merge peron using cellphone
     @tornado.gen.coroutine
@@ -663,6 +714,7 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 
+
 class MgrHandler(BaseHandler):
 
     @tornado.gen.coroutine
@@ -690,5 +742,4 @@ class BasePage(BaseHandler):
 class MgrPage(MgrHandler):
     def prepare(self):
         self.xsrf_token
-
 
