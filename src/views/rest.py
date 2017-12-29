@@ -803,7 +803,7 @@ class _(BaseHandler):
                 args = mixin_json(args, {
                     'created': get_now_str(),
                     'person_id': person_id,
-                    'auth_id': ''
+                    'auth_id': self.current_user_profile['authorized']['open_id']
                 })
                 args['status'] = 'sign_up_success'
                 res=yield self.insert_db_by_obj('t_traffic', args)
@@ -836,7 +836,7 @@ class _(BaseHandler):
         args = mixin_json(args, {
             'created': get_now_str(),
             'person_id': person_id,
-            'auth_id':''
+            'auth_id': self.current_user_profile['authorized']['open_id']
         })
         res = yield self.insert_db_by_obj('t_traffic', args)
 
@@ -1750,6 +1750,10 @@ class _(BaseHandler):
             payment["paid_end_time"] = jsonbody["time_end"]
             payment["paid_number"] = jsonbody["total_fee"]
             contact_res = yield self.update_db_by_obj('t_payment_record', payment,"id='%s'" % payment["id"])  
+            pay_rec = yield self.fetchone_db("select * from t_payment_record where id=%s", payment["id"])
+            person_rec = yield self.fetchone_db("select * from t_person where open_id=%s", pay_rec['id_who'])
+            yield self.update_db("update t_traffic set status='sign_up_success' where activity_id=%s and person_id=%s",pay_rec['event_id'],person_rec["person_id"])
+
 
         xmlresponse = self.arrayToXml({"return_code":"SUCCESS","return_msg":"OK"})
         logging.info(xmlresponse) 
