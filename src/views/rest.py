@@ -229,7 +229,7 @@ class _(BasePage):
         #     yield self.error('发送信息验证码失败，请检查重试！')
         #     return
         yield self.restful({
-            'message':'验证码已发送到手机，请查收并输入验证码'
+            'message':'验证码是%d，请在填入验证码' % code
         })
 
 @Route(r"/rest/common/person")
@@ -1675,7 +1675,7 @@ class _(BaseHandler):
                       out_trade_no= args["id"],
                       total_fee= args["paid_money"],
                       fee_type='CNY',
-                      notify_url='http://wwwsto.com/wechatpay/orderNotify',
+                      notify_url="http://" + self.request.host + "/wechatpay/orderNotify",
                       openid=args["id_who"],
                       spbill_create_ip='39.104.58.183',
                       trade_type='JSAPI')
@@ -1753,7 +1753,7 @@ class _(BaseHandler):
             pay_rec = yield self.fetchone_db("select * from t_payment_record where id=%s", payment["id"])
             person_rec = yield self.fetchone_db("select * from t_person where open_id=%s", pay_rec['id_who'])
             yield self.update_db("update t_traffic set status='sign_up_success' where activity_id=%s and person_id=%s",pay_rec['event_id'],person_rec["person_id"])
-
+            yield send_message(person_rec["cellphone"], "支付成功，您的支付凭证是%s" % payment["id"], self.config)
 
         xmlresponse = self.arrayToXml({"return_code":"SUCCESS","return_msg":"OK"})
         logging.info(xmlresponse) 

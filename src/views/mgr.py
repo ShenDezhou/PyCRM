@@ -3339,34 +3339,25 @@ class _(MgrHandler):
         if status_type:
             condition += " and t.status = '%s'" % (status_type)
         if type == "sign_up":
-            condition += "and m.code_id = t.status and p.cellphone != '' group by person_id"
             yield response_datatable_result(
-                columns="p.fullname,t.created,m.code_name,GROUP_CONCAT(tc.code_name) as member_type,t.is_volunteer,p.cellphone,GROUP_CONCAT(o.org_name) as org_name,p.position,p.email,p.wechatid,p.attachment,t.contribution,t.auth_id,t.activity_id,p.person_id,t.reason,t.status,t_news.sur_id,s.sur_value".split(
+                columns='p.fullname,t.created,m.code_name,tc.code_name as member_type,t.is_volunteer,p.cellphone,o.org_name as org_name,p.position,p.email,p.wechatid,p.attachment,t.contribution,t.auth_id,t.activity_id,p.person_id,t.reason,t.status,t_news.sur_id'.split(
                     ','),
                 table='''t_traffic as t
-                                            left join t_person as p on p.person_id = t.person_id
-                                            left join t_member as tm on tm.person_id = p.person_id
-                                            left join t_codes as tc on tc.code_id=tm.member_type
-                                            left join t_org_person as op on op.person_id = p.person_id 
-                                            left join t_org as o on o.org_id = op.org_id
-                                            left join t_news on t_news.id = t.activity_id
-                                            left join t_codes as m on m.code_id = t.status
-                                            left join (select ss.auth_id,group_concat(ans_value) as sur_value from
-                                                        t_survey as s 
-                                                        left join t_survey_answer as sa on s.sur_id = sa.sur_id
-                                                        left join t_news on t_news.sur_id = s.sur_id
-                                                        left join t_survey_submit as ss on ss.submit_id = sa.submit_id
-                                                        where t_news.id = %s
-                                                        group by ss.auth_id) as s on p.person_id = s.auth_id
-                                            ''' % activity_id,
+                        left join t_person as p on p.person_id = t.person_id
+                        left join t_member as tm on tm.person_id = p.person_id
+                        left join t_codes as tc on tc.code_id=tm.member_type
+                        left join t_org_person as op on op.person_id = p.person_id 
+                        left join t_org as o on o.org_id = op.org_id
+                        left join t_news on t_news.id = t.activity_id
+                        left join t_codes as m on m.code_id = t.status
+                        ''',
                 sortcol='t.created ASC',
                 req=self,
                 searchcolumns='p.fullname,m.code_name,o.org_name,p.position,p.email,p.wechatid',
                 where=condition)
         elif type == "register":
-            condition += "group by person_id"
             yield response_datatable_result(
-                columns='p.fullname,p.cellphone,GROUP_CONCAT(distinct tc.code_name) as member_type,GROUP_CONCAT(distinct o.org_name) as org_name,p.position,t.created,p.email,p.wechatid,p.attachment,p.person_id,t.reason,t.status,t.activity_id,p.person_id,t.reason,t.status,t_news.sur_id,s.sur_value'.split(
+                columns='p.fullname,p.cellphone,tc.code_name as member_type,o.org_name as org_name,p.position,t.created,p.email,p.wechatid,p.attachment,p.person_id,t.reason,t.status,t.activity_id,p.person_id,t.reason,t.status,t_news.sur_id'.split(
                     ','),
                 table='''t_traffic as t 
                         left join t_person as p on p.person_id = t.person_id
@@ -3376,14 +3367,7 @@ class _(MgrHandler):
                         left join t_org as o on o.org_id = op.org_id
                         left join t_news on t_news.id = t.activity_id
                         left join t_codes as m on m.code_id = t.status
-                        left join (select ss.auth_id,group_concat(ans_value) as sur_value from
-                                t_survey as s 
-                                left join t_survey_answer as sa on s.sur_id = sa.sur_id
-                                left join t_news on t_news.sur_id = s.sur_id
-                                left join t_survey_submit as ss on ss.submit_id = sa.submit_id
-                                where t_news.id = %s
-                                group by ss.auth_id) as s on p.person_id = s.auth_id
-                        ''' % activity_id,
+                        ''',
                 sortcol='t.created ASC',
                 req=self,
                 searchcolumns='p.fullname,o.org_name,p.position,p.email,p.wechatid',
@@ -3402,9 +3386,9 @@ class _(MgrHandler):
         if status_type:
             condition += " and t.status = '%s'" % (status_type)
             
-        condition += "and m.code_id = t.status and p.cellphone != '' group by person_id"
+        condition += "and m.code_id = t.status and p.cellphone != ''"
         yield response_datatable_result(
-            columns="p.fullname,t.created,m.code_name,GROUP_CONCAT(distinct tc.code_name) as member_type,t.is_volunteer,p.cellphone,GROUP_CONCAT(distinct o.org_name) as org_name,p.position,p.email,p.wechatid,p.attachment,t.contribution,t.auth_id,t.activity_id,p.person_id,t.reason,t.status".split(
+            columns="p.fullname,t.created,m.code_name,tc.code_name as member_type,t.is_volunteer,p.cellphone,o.org_name as org_name,p.position,p.email,p.wechatid,p.attachment,t.contribution,t.auth_id,t.activity_id,p.person_id,t.reason,t.status".split(
                 ','),
             table='''t_traffic as t
                                         left join t_person as p on p.person_id = t.person_id
@@ -3800,6 +3784,41 @@ class _(MgrHandler):
             })
         else:
             yield self.error('保存失败')
+
+@Route(r"/rest/mgr/get/shorturl")
+class _(MgrHandler):
+    @coroutine
+    def get(self):
+        args = self.get_args({
+            'url': '*',
+        })
+        # 获取accesstoken与openid
+        client = tornado.httpclient.AsyncHTTPClient()
+        accesstoken = self.get_cache('weixin-access_token')
+        if not accesstoken:
+            request = tornado.httpclient.HTTPRequest(
+                url='https://api.weixin.qq.com/cgi-bin/token?' +
+                    urllib.urlencode({"appid": self.config['wechat_appid'], "secret": self.config['wechat_secret'],
+                                      "grant_type": "client_credential"}),
+                method="GET",
+                validate_cert=False
+            )
+            resp = yield client.fetch(request)
+            body = json.loads(resp.body)
+            accesstoken = body['access_token']
+            self.set_cache('weixin-access_token', accesstoken, 60)
+
+        request = tornado.httpclient.HTTPRequest(
+            url="https://api.weixin.qq.com/cgi-bin/shorturl?" +
+                urllib.urlencode({"access_token": accesstoken}),
+            body=dump_json({"action": "long2short", "long_url": args["url"]}),
+            method="POST",
+            validate_cert=False
+        )
+        resp = yield client.fetch(request)
+        body = json.loads(resp.body)
+        short_url = body['short_url']
+        raise Return(short_url)
 
 
 @Route(r"/rest/mgr/get/channel")

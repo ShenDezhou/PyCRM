@@ -23,7 +23,7 @@ settings = {
             "mysql_password": "sogou",
             # mysql 数据库名
             "mysql_database": "fudan_it",
-            "mysql_max_conn": 60,
+            "mysql_max_conn": 20,
             # mysql 字符编码
             "mysql_charset": "utf8",
         }
