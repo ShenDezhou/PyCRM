@@ -1,21 +1,5 @@
 
-{% if handler.is_wechat() %}
-    {% include 'wechat_js.html' %}
-{% end %}
+{% include 'wechat_js.html' %}
 
 
-<style type="text/css">
-span#cnzz_stat_icon_1257644283{
-display: none;
-}
-</style>
 
-<script type="text/javascript">
-(function(){
-    if(location.hostname.indexOf('.com') < 0){
-        return;
-    }
-    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cspan id='cnzz_stat_icon_1257644283'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257644283' type='text/javascript'%3E%3C/script%3E"));
-})();
-</script>

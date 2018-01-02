@@ -1443,7 +1443,7 @@ class _(BasePage):
 
         page['share_title'] = ctx['title']
         page['share_description'] = html2text.html2text(ctx['content']).strip()[:50].replace('\n', '')
-        page['share_icon'] = self.config['site_host_url'] + 'assets/ticket/image/' + str(ctx['pictures']).split(',')[0]
+        page['share_icon'] = self.config['site_host_url'] + 'static/cav/img/logo2.png'
 
         self.render(page['layout'],
                     entry=entry,
@@ -1534,11 +1534,8 @@ class _(BasePage):
             context['status']['register'] = False
 
         page['share_title'] = context['activity']['title']
-        page['share_description'] = html2text.html2text(context['activity']['content']).strip()[:50].replace('\n',
-                                                                                                             '').replace(
-            '#', '')
-        page['share_icon'] = self.config['site_host_url'] + 'assets/ticket/image/' + \
-                             str(context['activity']['pictures']).split(',')[0]
+        page['share_description'] = html2text.html2text(context['activity']['content']).strip()[:50].replace('\n','').replace('#', '')
+        page['share_icon'] = self.config['site_host_url'] + 'static/cav/img/logo2.png'
         context['user_profile'] = self.current_user_profile
         page['title'] = context['activity']['title']
         context['signin']=signin #用来控制授权后，是否还跳转到签到页
@@ -1631,8 +1628,8 @@ class _(BasePage):
 
         page['share_title'] = context['activity']['title']
         page['share_description'] = html2text.html2text(context['activity']['content']).strip()[:50].replace('\n','').replace('#', '')
-        page['share_icon'] = self.config['site_host_url'] + 'assets/ticket/image/' + \
-                             str(context['activity']['pictures']).split(',')[0]
+        page['share_icon'] = self.config['site_host_url'] + 'static/cav/img/logo2.png'
+
         context['user_profile'] = self.current_user_profile
         page['title'] = context['activity']['title']
 
@@ -1664,7 +1661,7 @@ class _(BasePage):
         page['share_description'] = html2text.html2text(survey['content'] or survey['title']).strip()[:50].replace('\n',
                                                                                                                    '').replace(
             '#', '')
-        page['share_icon'] = self.config['site_host_url'] + 'assets/ticket/image/' + str(survey['image']).split(',')[0]
+        page['share_icon'] = self.config['site_host_url'] + 'static/cav/img/logo2.png'
 
         context = {
             'survey': survey,

@@ -29,7 +29,7 @@ $(function(){
                 // 
                 var title = pageTitle || $('title').text(),
                     link = pageUrl || location.href,
-                    imgUrl = pageIcon || (location.protocol + '//' + location.hostname + '/static/cav/img/ico.png'),
+                    imgUrl = pageIcon || (location.protocol + '//' + location.hostname + '/static/cav/img/logo2.png'),
                     desc = pageDesc;
 
                 if(imgUrl.indexOf('http') != 0){
