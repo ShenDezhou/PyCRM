@@ -213,7 +213,7 @@ class _(CommonPage):
                                         case 
                                             when a.sign_up_limit = 1 then '截止报名'
                                             when t.status = 'sign_up_success' then '报名成功'
-                                            when t.status = 'sign_up_wait' then '正在审核'
+                                            when t.status = 'sign_up_wait' then '等待支付'
                                             when t.status = 'sign_up_full' then '人数已满'
                                             when t.status = 'sign_up_fail' then '报名未成功'
                                             else '正常报名' 
@@ -241,7 +241,7 @@ class _(CommonPage):
                                         case 
                                             when a.sign_up_limit = 1 then '截止报名'
                                             when t.status = 'sign_up_success' then '报名成功'
-                                            when t.status = 'sign_up_wait' then '正在审核'
+                                            when t.status = 'sign_up_wait' then '等待支付'
                                             when t.status = 'sign_up_full' then '人数已满'
                                             when t.status = 'sign_up_fail' then '报名未成功'
                                             else '正常报名' 

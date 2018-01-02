@@ -272,7 +272,7 @@
         {% end %} {% end %}
     </div>
 </div>
-{% if context['sign_up'] and not context['register'] %}
+{% if context['sign_up'] and not context['register'] and context['sign_up']['status'] =='sign_up_wait' %}
 <div class="row" style="margin-bottom:60px;">
     <div class="col-md-12">
         <div class="news-content m-t-20">
@@ -280,28 +280,27 @@
             <hr class="m-t-1" />
             <p class="">
                 <header>
-                    <p>订单总金额（含邮）</p>
+                    <p>订单总金额</p>
                     <p>￥ {{ '%0.2f' % context['activity']['paid']}}</p>
                 </header>
 
                 <p>支付方式</p>
-                <div class="wx_pay">
+                <div class="news-content m-t-20">
                     <div>
-                        <img src="../../../asset/imgs/wechat-pay-copy.svg" class="s_icon" alt=""/>
-                        <span>微信支付</span>
+                        <img src="/static/cav/img/wechatpay.png" class="s_icon" alt=""/>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="news-content m-t-20">
                     <input class="form-control" placeholder="支付附言" id="pay_remark" value="" />
                 </div>
-                <footer>
+                <div class="news-content m-t-20">
                     <span>微信支付</span>
                     <a href="javascript:;" class="btn btn-primary" onclick="$._wechatpay('{{context['activity']['id']}}','{{context['user_profile']['authorized']['open_id']}}','{{ '%0.2f' % context['activity']['paid']}}','{{ '%0.2f' % context['activity']['cash']}}','{{ '%0.2f' % context['activity']['nocash']}}')">去付款</a>
-                </footer>
-                <footer>
+                </div>
+                <div  class="news-content m-t-20">
                     <span>支付成功提示失败</span>
                     <a href="javascript:;" class="btn btn-primary" onclick="$._wechatpayquery('{{context['activity']['id']}}','{{context['user_profile']['authorized']['open_id']}}')">查询付款状态</a>
-                </footer>
+                </div>
             </p>
         </div>
     </div>

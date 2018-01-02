@@ -1806,3 +1806,59 @@ class _(BaseHandler):
             yield self.restful({"status":"ok"})
         else:
             yield self.restful({"status":"error"})
+
+@Route(r"/qr_corplogin")
+class _(BasePage):
+    @coroutine
+    def get(self):
+        logging.info(self.get_cache("key_code"))
+        str_key_code = self.get_cache("key_code")
+        if str_key_code:
+            cache_code = json.loads(str_key_code)
+            
+        else:
+            key_code = generate_uuid()
+            cache_code = {"key_code":key_code,"person_id":""}
+            self.set_cache("key_code", dump_json(cache_code), 60)
+        
+        ctx = {}  
+        ctx['url_for_qr'] = "/rest/qrcode?link=%sverify_corplogin?key_code=%s" % (self.config['site_host_url'],cache_code['key_code'])
+        entry = 'corplogin'
+        page = get_page_by_entry(entry)
+        
+        self.render(page['layout'], 
+                    entry = entry,
+                    page = page,
+                    page_config = map_config,
+                    context = ctx) 
+
+
+@Route(r"/verify_corplogin")
+class _(BasePage):
+    @coroutine
+    def get(self):
+        logging.info(self.get_cache("key_code"))
+        if not self.current_user:
+            redirect_url = self.get_secure_cookie('redirect_url') or '/login' # 
+            self.redirect(redirect_url)
+            return
+
+        scanned_code = self.get_argument('key_code', '')
+        str_key_code = self.get_cache("key_code")
+        if str_key_code:
+            cache_code = json.loads(str_key_code)
+            print self.current_user
+            print scanned_code,cache_code
+            if not scanned_code:
+                yield self.error("参数缺失")
+                return
+            
+
+            if scanned_code and cache_code and scanned_code==cache_code["key_code"]:
+                login_pair = {"key_code":scanned_code,"person_id":self.current_user}
+                self.set_cache("key_code", dump_json(login_pair), 60)
+
+                redirect_url = self.get_secure_cookie('redirect_url') or '/common' # 
+                self.redirect(redirect_url)
+        else:
+            self.redirect_unauth()
