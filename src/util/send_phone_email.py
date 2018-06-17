@@ -214,7 +214,7 @@ def send_message(phone, message, config):
     PASSWD = config['noreply_sms_password']
     url="https://api.infobip.com/sms/1/text/single"
     headers = {"Content-Type":"application/json","Accept":"application/json"}
-    data =json.dumps({"from":"106909001236282","to":"86%s" % phone,"text": message.encode('utf-8')})
+    data =json.dumps({"from":"Sectao","to":"86%s" % phone,"text": message.encode('utf-8')})
     print CDKET
     print PASSWD
     print url

@@ -229,7 +229,7 @@ class _(BasePage):
         #     yield self.error('发送信息验证码失败，请检查重试！')
         #     return
         yield self.restful({
-            'message':'验证码是%d，请在填入验证码' % code
+            'message':'验证码是%d，请在验证码输入框内填入。' % code
         })
 
 @Route(r"/rest/common/person")
@@ -1862,3 +1862,22 @@ class _(BasePage):
                 self.redirect(redirect_url)
         else:
             self.redirect_unauth()
+
+@Route(r"/backend/orderNotify")
+class _(BaseHandler):
+    @coroutine
+    def get(self):
+        person_rec = yield self.query_db("SELECT cellphone FROM t_traffic left join t_person on t_traffic.auth_id = t_person.open_id where cellphone=18612875955")
+        for person in person_rec:
+            yield send_message(person["cellphone"], """感谢参与复旦IT汇活动，感谢对IT技术的热爱！您已成功报名复旦IT汇讲坛|第1期-AI生态及行业应用前景
+讲座 时间：2018年1月6日10:00-12:00  
+ 午餐 时间：12:00-14：00 
+▣ 地点: 北京市朝阳区亮马桥DRC外交办公大楼3层3号会议厅（地铁10号线亮马桥站B口出）
+▣在线直播： 线上复旦IT汇直播群  复旦IT汇-人工智能直播群
+""", self.config)
+
+        xmlresponse = self.arrayToXml({"return_code":"SUCCESS","return_msg":"OK"})
+        logging.info(xmlresponse) 
+        self.write(xmlresponse)
+        self.finish()
+        

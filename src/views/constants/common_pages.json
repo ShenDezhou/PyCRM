@@ -42,7 +42,7 @@
 		]
 	}, {
 		"id": "common_events",
-		"title": "活动预告",
+		"title": "复旦IT汇活动预告",
 		"description": "活动，期待您的关注",
 		"layout": "layout_materialize.html",
 		"tpl": "common_events.html",
@@ -72,8 +72,8 @@
 		]
 	}, {
 		"id": "common_discussion",
-		"title": "",
-		"description": "讨论，从现在开始",
+		"title": "复旦IT汇活动预告",
+		"description": "活动，期待您的关注",
 		"layout": "layout_materialize.html",
 		"tpl": "common_discussion.html",
 		"css": [
